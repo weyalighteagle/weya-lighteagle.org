@@ -1,31 +1,25 @@
-import { writeFile, mkdir, appendFile } from "fs/promises";
-import path from "path";
-
-const LOG_DIR = path.resolve(process.cwd(), "conversation_logs");
-const LOG_FILE = path.join(LOG_DIR, "session_log.jsonl"); // JSON Lines format
+import { sql } from "@vercel/postgres";
+import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
   try {
     const { sender, message, timestamp } = await request.json();
 
     if (!sender || !message || !timestamp) {
-      return new Response(JSON.stringify({ error: "Missing fields" }), {
-        status: 400,
-      });
+      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    // Ensure directory exists
-    await mkdir(LOG_DIR, { recursive: true });
+    await sql`
+      INSERT INTO messages (sender, message, timestamp)
+      VALUES (${sender}, ${message}, ${timestamp});
+    `;
 
-    // Append to log file
-    const logEntry = JSON.stringify({ sender, message, timestamp }) + "\n";
-    await appendFile(LOG_FILE, logEntry, "utf8");
-
-    return new Response(JSON.stringify({ success: true }), { status: 200 });
+    return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
     console.error("Error saving message:", err);
-    return new Response(JSON.stringify({ error: "Failed to save message" }), {
-      status: 500,
-    });
+    return NextResponse.json(
+      { error: "Failed to save message" },
+      { status: 500 },
+    );
   }
 }
