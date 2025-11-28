@@ -9,7 +9,9 @@ export async function POST(request: Request) {
     const { sender, message, timestamp } = await request.json();
 
     if (!sender || !message || !timestamp) {
-      return new Response(JSON.stringify({ error: "Missing fields" }), { status: 400 });
+      return new Response(JSON.stringify({ error: "Missing fields" }), {
+        status: 400,
+      });
     }
 
     // Ensure directory exists

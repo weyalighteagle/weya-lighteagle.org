@@ -42,6 +42,9 @@ importers:
       prettier:
         specifier: ^3.6.2
         version: 3.6.2
+      rollup-plugin-polyfill-node:
+        specifier: ^0.13.0
+        version: 0.13.0(rollup@4.46.2)
       turbo:
         specifier: ^2.5.5
         version: 2.5.5
@@ -51,6 +54,9 @@ importers:
 
   apps/demo:
     dependencies:
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
       next:
         specifier: ^15.4.2
         version: 15.4.2(react-dom@19.1.0(react@19.1.0))(react@19.1.0)
@@ -60,6 +66,9 @@ importers:
       react-dom:
         specifier: ^19.1.0
         version: 19.1.0(react@19.1.0)
+      tailwind-merge:
+        specifier: ^3.4.0
+        version: 3.4.0
     devDependencies:
       '@heygen/liveavatar-web-sdk':
         specifier: workspace:*
@@ -680,6 +689,15 @@ packages:
       rollup:
         optional: true
 
+  '@rollup/plugin-inject@5.0.5':
+    resolution: {integrity: sha512-2+DEJbNBoPROPkgTDNe8/1YXWcqxbN5DTjASVIOx8HS+pITXushyNiBV56RB08zuptzz8gT3YfkqriTBVycepg==}
+    engines: {node: '>=14.0.0'}
+    peerDependencies:
+      rollup: ^1.20.0||^2.0.0||^3.0.0||^4.0.0
+    peerDependenciesMeta:
+      rollup:
+        optional: true
+
   '@rollup/plugin-json@6.1.0':
     resolution: {integrity: sha512-EGI2te5ENk1coGeADSIwZ7G2Q8CJS2sF120T7jLw4xFw9n7wIOXHo+kIYRAoVpJAN+kmqZSoO3Fp4JtoNF4ReA==}
     engines: {node: '>=14.0.0'}
@@ -1132,6 +1150,10 @@ packages:
 
   client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
+
+  clsx@2.1.1:
+    resolution: {integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==}
+    engines: {node: '>=6'}
 
   color-convert@2.0.1:
     resolution: {integrity: sha512-RRECPsj7iu/xb5oKYcsFHSppFNnsj/52OVTRKb4zP5onXwVF3zVmmToNcOfGC+CRDpfK/U584fMg38ZHCaElKQ==}
@@ -2073,6 +2095,11 @@ packages:
     resolution: {integrity: sha512-g6QUff04oZpHs0eG5p83rFLhHeV00ug/Yf9nZM6fLeUrPguBTkTQOdpAWWspMh55TZfVQDPaN3NQJfbVRAxdIw==}
     engines: {iojs: '>=1.0.0', node: '>=0.10.0'}
 
+  rollup-plugin-polyfill-node@0.13.0:
+    resolution: {integrity: sha512-FYEvpCaD5jGtyBuBFcQImEGmTxDTPbiHjJdrYIp+mFIwgXiXabxvKUK7ZT9P31ozu2Tqm9llYQMRWsfvTMTAOw==}
+    peerDependencies:
+      rollup: ^1.20.0 || ^2.0.0 || ^3.0.0 || ^4.0.0
+
   rollup@4.46.2:
     resolution: {integrity: sha512-WMmLFI+Boh6xbop+OAGo9cQ3OgX9MIg7xOQjn+pTCwOkk+FNDAeAemXkJ3HzDJrVXleLOFVa1ipuc1AmEx1Dwg==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
@@ -2241,6 +2268,9 @@ packages:
   supports-preserve-symlinks-flag@1.0.0:
     resolution: {integrity: sha512-ot0WnXS9fgdkgIcePe6RHNk1WA8+muPa6cSjeR3V8K27q9BB1rTE3R1p7Hv0z1ZyAc8s6Vvv8DIyWf681MAt0w==}
     engines: {node: '>= 0.4'}
+
+  tailwind-merge@3.4.0:
+    resolution: {integrity: sha512-uSaO4gnW+b3Y2aWoWfFpX62vn2sR3skfhbjsEnaBI81WD1wBLlHZe5sWf0AqjksNdYTbGBEd0UasQMT3SNV15g==}
 
   tailwindcss@3.4.17:
     resolution: {integrity: sha512-w33E2aCvSDP0tW9RZuNXadXlkHXqFzSkQew/aIa2i/Sj8fThxwovwlXHSPXTbAHwEIhBFXAedUhP2tueAKP8Og==}
@@ -2865,6 +2895,14 @@ snapshots:
     optionalDependencies:
       rollup: 4.46.2
 
+  '@rollup/plugin-inject@5.0.5(rollup@4.46.2)':
+    dependencies:
+      '@rollup/pluginutils': 5.2.0(rollup@4.46.2)
+      estree-walker: 2.0.2
+      magic-string: 0.30.21
+    optionalDependencies:
+      rollup: 4.46.2
+
   '@rollup/plugin-json@6.1.0(rollup@4.46.2)':
     dependencies:
       '@rollup/pluginutils': 5.2.0(rollup@4.46.2)
@@ -3437,6 +3475,8 @@ snapshots:
       fsevents: 2.3.3
 
   client-only@0.0.1: {}
+
+  clsx@2.1.1: {}
 
   color-convert@2.0.1:
     dependencies:
@@ -4506,6 +4546,11 @@ snapshots:
 
   reusify@1.1.0: {}
 
+  rollup-plugin-polyfill-node@0.13.0(rollup@4.46.2):
+    dependencies:
+      '@rollup/plugin-inject': 5.0.5(rollup@4.46.2)
+      rollup: 4.46.2
+
   rollup@4.46.2:
     dependencies:
       '@types/estree': 1.0.8
@@ -4762,6 +4807,8 @@ snapshots:
       has-flag: 4.0.0
 
   supports-preserve-symlinks-flag@1.0.0: {}
+
+  tailwind-merge@3.4.0: {}
 
   tailwindcss@3.4.17:
     dependencies:

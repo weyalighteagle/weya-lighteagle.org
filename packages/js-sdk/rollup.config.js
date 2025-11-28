@@ -2,9 +2,10 @@ import commonjs from "@rollup/plugin-commonjs";
 import resolve from "@rollup/plugin-node-resolve";
 import typescript from "@rollup/plugin-typescript";
 import json from "@rollup/plugin-json";
+import nodePolyfills from "rollup-plugin-polyfill-node";
 
 export default [
-  // Unbundled builds for npm (lib/)
+  // 1. Build: NPM (lib/)
   {
     input: "src/index.ts",
     output: [
@@ -34,14 +35,15 @@ export default [
       "typed-emitter",
     ],
   },
-  // Bundled builds for browser/CDN (dist/)
+
+  // 2. Build: Browser (dist/)
   {
     input: "src/index.ts",
     output: [
       {
         file: "dist/index.umd.js",
         format: "umd",
-        name: "LiveAvatarSDK", // Global variable name for browser
+        name: "LiveAvatarSDK",
         sourcemap: true,
       },
       {
@@ -52,13 +54,16 @@ export default [
     ],
     plugins: [
       json(),
-      resolve({ browser: true }), // Bundle dependencies
+      nodePolyfills(),
+      resolve({
+        browser: true,
+        preferBuiltins: false,
+      }),
       commonjs(),
       typescript({
-        declaration: false, // No need for .d.ts in bundled version
+        declaration: false,
         rootDir: "src",
       }),
     ],
-    // No external dependencies - bundle everything
   },
 ];

@@ -10,9 +10,7 @@ export default function RootLayout({
       {/* Eski sınıfları (bg-zinc-900, flex, items-center vs.) sildik.
         Artık kontrol tamamen senin css dosyalarında.
       */}
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
