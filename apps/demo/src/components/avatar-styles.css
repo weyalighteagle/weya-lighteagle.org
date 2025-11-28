@@ -277,119 +277,6 @@ body::after {
   transform: rotate(-45deg);
 }
 
-@media (max-width: 900px) {
-  .weya-navbar {
-    padding: 0 1.5rem;
-    height: 60px;
-    /* Slightly smaller height */
-    flex-direction: row;
-    background: rgba(2, 11, 9, 0.95);
-    align-items: center;
-  }
-
-  .weya-brand {
-    font-size: 1.5rem;
-    /* Smaller logo for mobile */
-  }
-
-  .weya-mobile-toggle {
-    display: block;
-    padding: 5px;
-  }
-
-  .weya-nav-menu {
-    position: fixed;
-    top: 60px;
-    /* Match navbar height */
-    left: 0;
-    width: 100%;
-    height: 0;
-    background: rgba(2, 11, 9, 0.98);
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 0;
-    gap: 2rem;
-    overflow: hidden;
-    transition: all 0.4s ease-in-out;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  .weya-nav-menu.active {
-    height: 100vh;
-    padding-top: 4rem;
-  }
-
-  .weya-nav-link {
-    font-size: 1.5rem;
-    opacity: 0;
-    transform: translateY(20px);
-    transition: all 0.3s ease;
-  }
-
-  .weya-nav-menu.active .weya-nav-link {
-    opacity: 1;
-    transform: translateY(0);
-  }
-
-  .weya-hero-container {
-    flex-direction: column-reverse;
-    text-align: center;
-    gap: 3rem;
-    padding-top: 2rem;
-  }
-
-  .weya-hero-text-side {
-    text-align: center;
-    padding: 0 1rem;
-  }
-
-  .weya-hero-title {
-    font-size: 3rem;
-  }
-
-  .weya-hero-text {
-    font-size: 1.1rem;
-    margin-bottom: 2.5rem;
-  }
-
-  .weya-avatar-img {
-    width: 280px;
-    height: 350px;
-  }
-
-  .weya-btn-aurora {
-    padding: 1rem 2.5rem;
-    font-size: 0.9rem;
-    width: 100%;
-    max-width: 300px;
-  }
-
-  .weya-card-grid {
-    grid-template-columns: 1fr;
-    padding: 0 1rem;
-  }
-
-  .weya-card {
-    padding: 2rem;
-  }
-
-  .weya-form-box {
-    padding: 2rem;
-    width: 90%;
-  }
-}
-
-@media (max-width: 480px) {
-  .weya-hero-title {
-    font-size: 2.5rem;
-  }
-
-  .weya-nav-link {
-    font-size: 0.75rem;
-  }
-}
-
 .weya-hero-title {
   font-family: var(--font-heading);
   font-size: 5rem;
@@ -637,4 +524,115 @@ body::after {
   border-radius: 40px;
   font-weight: 700;
   cursor: pointer;
+}
+
+/* MEDIA QUERIES MUST BE AT THE END TO OVERRIDE */
+@media (max-width: 1024px) {
+  .weya-navbar {
+    padding: 0 1.5rem;
+    height: 60px;
+    flex-direction: row;
+    background: rgba(2, 11, 9, 0.95);
+    align-items: center;
+  }
+
+  .weya-brand {
+    font-size: 1.5rem;
+  }
+
+  .weya-mobile-toggle {
+    display: block;
+    padding: 5px;
+  }
+
+  .weya-nav-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 0;
+    background: rgba(2, 11, 9, 0.98);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0;
+    gap: 2rem;
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .weya-nav-menu.active {
+    height: 100vh;
+    padding-top: 4rem;
+  }
+
+  .weya-nav-link {
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+  }
+
+  .weya-nav-menu.active .weya-nav-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .weya-hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 3rem;
+    padding-top: 2rem;
+  }
+
+  .weya-hero-text-side {
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .weya-hero-title {
+    font-size: 3rem;
+  }
+
+  .weya-hero-text {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .weya-avatar-img {
+    width: 280px;
+    height: 350px;
+  }
+
+  .weya-btn-aurora {
+    padding: 1rem 2.5rem;
+    font-size: 0.9rem;
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .weya-card-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .weya-card {
+    padding: 2rem;
+  }
+
+  .weya-form-box {
+    padding: 2rem;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .weya-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .weya-nav-link {
+    font-size: 0.75rem;
+  }
 }
