@@ -42,6 +42,10 @@ export const LiveAvatarDemo = () => {
     window.location.href = `mailto:gulfem@lighteagle.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
+
   return (
     <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
       {sessionToken ? (
@@ -57,14 +61,39 @@ export const LiveAvatarDemo = () => {
             <a href="#" className="weya-brand">
               WEYA
             </a>
-            <div className="weya-nav-menu">
-              <a href="#home" className="weya-nav-link">
+
+            <button
+              className="weya-mobile-toggle"
+              onClick={toggleMobileMenu}
+              aria-label="Toggle menu"
+            >
+              <span
+                className={`hamburger ${isMobileMenuOpen ? "open" : ""}`}
+              ></span>
+            </button>
+
+            <div
+              className={`weya-nav-menu ${isMobileMenuOpen ? "active" : ""}`}
+            >
+              <a
+                href="#home"
+                className="weya-nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 AI Companion
               </a>
-              <a href="#about" className="weya-nav-link">
+              <a
+                href="#about"
+                className="weya-nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 About
               </a>
-              <a href="#contact" className="weya-nav-link">
+              <a
+                href="#contact"
+                className="weya-nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
                 Contact
               </a>
             </div>
