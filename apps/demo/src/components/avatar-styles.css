@@ -214,19 +214,75 @@ body::after {
 }
 
 @media (max-width: 900px) {
+  .weya-navbar {
+    padding: 1rem;
+    flex-direction: column;
+    height: auto;
+    gap: 1rem;
+    background: rgba(2, 11, 9, 0.9);
+  }
+
+  .weya-nav-menu {
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .weya-hero-container {
     flex-direction: column-reverse;
     text-align: center;
-    gap: 2rem;
+    gap: 3rem;
+    padding-top: 2rem;
   }
   
   .weya-hero-text-side {
     text-align: center;
+    padding: 0 1rem;
+  }
+
+  .weya-hero-title {
+    font-size: 3rem; /* Smaller font for mobile */
+  }
+
+  .weya-hero-text {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
   }
   
   .weya-avatar-img {
-    width: 300px;
-    height: 380px;
+    width: 280px;
+    height: 350px;
+  }
+
+  .weya-btn-aurora {
+    padding: 1rem 2.5rem;
+    font-size: 0.9rem;
+    width: 100%; /* Full width button on mobile */
+    max-width: 300px;
+  }
+
+  .weya-card-grid {
+    grid-template-columns: 1fr; /* Stack cards */
+    padding: 0 1rem;
+  }
+
+  .weya-card {
+    padding: 2rem;
+  }
+
+  .weya-form-box {
+    padding: 2rem;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .weya-hero-title {
+    font-size: 2.5rem;
+  }
+  
+  .weya-nav-link {
+    font-size: 0.75rem;
   }
 }
 
