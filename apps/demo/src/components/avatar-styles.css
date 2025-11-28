@@ -1,0 +1,329 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  /* --- DARK PALETTE --- */
+  --bg-deep: #020b09;           
+  --bg-gradient: #0d2922;       
+  
+  --text-main: #e2e8f0;         
+  --text-muted: #94a3b8;        
+  
+  --brand-primary: #34d399;     
+  --brand-glow: rgba(52, 211, 153, 0.4); 
+  
+  --nav-height: 80px;
+  
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+/* --- 1. Background --- */
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0; padding: 0;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  overflow-x: hidden;
+  
+  background-color: var(--bg-deep);
+  background-image: radial-gradient(circle at 50% 0%, var(--bg-gradient) 0%, var(--bg-deep) 60%);
+  min-height: 100vh;
+}
+
+/* Aurora Lights */
+body::before {
+  content: '';
+  position: fixed;
+  top: -10%; left: -10%;
+  width: 60vw; height: 60vw;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.15) 0%, transparent 70%);
+  filter: blur(100px);
+  z-index: -2;
+  animation: pulseGlow 10s infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -10%; right: -10%;
+  width: 70vw; height: 70vw;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 60%);
+  filter: blur(120px);
+  z-index: -2;
+  animation: pulseGlow 15s infinite alternate-reverse;
+}
+
+@keyframes pulseGlow {
+  0% { opacity: 0.5; transform: scale(1); }
+  100% { opacity: 1; transform: scale(1.1); }
+}
+
+.weya-app::before {
+  content: "";
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none; z-index: -1;
+}
+
+/* --- 2. MOD Manegement --- */
+.weya-app.mode-landing { overflow-y: auto; }
+.weya-app.mode-chat { height: 100vh; overflow: hidden; background: black; }
+
+/* --- 3. NAVBAR (Dark Glass) --- */
+.weya-navbar {
+  position: fixed; top: 0; left: 0; width: 100%;
+  height: var(--nav-height);
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 5%; z-index: 1000;
+  
+  background: rgba(2, 11, 9, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* AURORA GRADIENT LOGO */
+.weya-brand {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+
+  background: linear-gradient(135deg, #ffffff 30%, var(--brand-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.3));
+}
+.weya-nav-menu { display: flex; gap: 2.5rem; }
+
+.weya-nav-link {
+  text-decoration: none;
+  color: var(--text-muted); 
+  font-size: 0.85rem; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.05em;
+  position: relative; transition: color 0.3s;
+}
+
+.weya-nav-link:hover { color: var(--brand-primary); }
+.weya-nav-link::after {
+  content: ''; position: absolute; bottom: -4px; left: 0; width: 0; height: 1px;
+  background: var(--brand-primary); transition: width 0.3s;
+}
+.weya-nav-link:hover::after { width: 100%; }
+
+/* --- 4. Section Styles --- */
+.weya-section {
+  width: 100%; min-height: 100vh;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  text-align: center;
+  padding: 1rem; padding-top: var(--nav-height);
+  box-sizing: border-box;
+}
+
+.weya-hero-title {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  color: white;
+  margin-bottom: 1.5rem; line-height: 1.1;
+}
+
+.weya-hero-title span {
+  /* Metin içi parlama */
+  color: var(--brand-primary);
+  text-shadow: 0 0 30px var(--brand-glow);
+}
+
+.weya-hero-text {
+  max-width: 680px; font-size: 1.3rem; line-height: 1.7;
+  color: var(--text-muted); margin-bottom: 3.5rem; font-weight: 300;
+}
+
+/* --- 5. AURORA BUTTON--- */
+.weya-btn-aurora {
+  background: linear-gradient(-45deg, #0f766e, #10b981, #34d399, #059669);
+  background-size: 300% 300%; 
+  animation: auroraBtnAnim 4s ease infinite; 
+  
+  color: #020b09; 
+  padding: 1.3rem 4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+@keyframes auroraBtnAnim {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.weya-btn-aurora:hover {
+  transform: translateY(-3px) scale(1.02);
+  /* Çok daha güçlü, çift katmanlı neon parlama */
+  box-shadow: 
+    0 0 30px var(--brand-primary), 
+    0 0 60px rgba(52, 211, 153, 0.5);
+  color: black;
+}
+
+.weya-btn-aurora:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px var(--brand-primary);
+}
+
+/* --- 6. AURORA GLASS CARDS --- */
+.weya-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px; width: 100%; padding: 0 20px;
+}
+
+.weya-card {
+
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 24px;
+  text-align: left;
+  
+
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+
+.weya-card:hover {
+  transform: translateY(-10px); 
+  background: rgba(255, 255, 255, 0.05); 
+  border-color: rgba(52, 211, 153, 0.5); 
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.15);
+}
+
+.weya-card h3 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.weya-card:hover h3 {
+  color: var(--brand-primary); 
+  text-shadow: 0 0 25px rgba(52, 211, 153, 0.6); 
+}
+
+.weya-card p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  transition: color 0.3s;
+}
+
+.weya-card:hover p {
+  color: #e2e8f0; 
+}
+
+.weya-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 100%; height: 3px;
+  /* Butondaki aurora renklerine atıf */
+  background: linear-gradient(90deg, transparent, #34d399, #10b981, transparent);
+  transform: scaleX(0); /* Başlangıçta gizli */
+  transform-origin: center;
+  transition: transform 0.5s ease;
+}
+
+.weya-card:hover::after {
+  transform: scaleX(1); 
+}
+
+.weya-form-box {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  padding: 3rem; border-radius: 20px;
+  width: 100%; max-width: 600px;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+
+.weya-input {
+  width: 100%; padding: 16px; margin-bottom: 1rem;
+  /* Koyu input */
+  background: rgba(0,0,0,0.3);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 12px;
+  color: white;
+  transition: 0.3s;
+}
+
+.weya-input:focus {
+  outline: none; border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.2);
+  background: rgba(0,0,0,0.5);
+}
+
+/* --- 8. CHAT SCREEN --- */
+.weya-session-container {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: black;
+  display: flex; justify-content: center; align-items: center;
+  z-index: 9999;
+}
+
+.weya-session-wrapper {
+  width: 100%; max-width: 1100px; padding: 20px;
+  display: flex; flex-direction: column; gap: 20px;
+}
+
+.weya-video-frame {
+  width: 100%; aspect-ratio: 16/9;
+  background: #111; border-radius: 20px; overflow: hidden; position: relative;
+  border: 1px solid #333;
+}
+.weya-video-element { width: 100%; height: 100%; object-fit: contain; }
+
+.weya-stop-btn {
+  position: absolute; top: 20px; right: 20px;
+  background: rgba(255, 255, 255, 0.1); color: white;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 10px 20px; border-radius: 8px; cursor: pointer; z-index: 10;
+}
+.weya-stop-btn:hover { background: rgba(220, 38, 38, 0.8); }
+
+.weya-chat-controls {
+  width: 100%; background: #1a1a1a; border-radius: 50px;
+  padding: 8px; display: flex; border: 1px solid #333;
+}
+
+.weya-input-field {
+  flex: 1; background: transparent; border: none;
+  color: white; padding: 0 20px; font-size: 1rem; outline: none;
+}
+.weya-send-btn {
+  background: var(--brand-primary); color: #020b09;
+  border: none; padding: 12px 32px; border-radius: 40px;
+  font-weight: 700; cursor: pointer;
+}
