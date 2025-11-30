@@ -39,7 +39,7 @@ export const LiveAvatarDemo = () => {
     const subject = `Weya Contact: Message from ${name}`;
     const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
 
-    window.location.href = `mailto:gulfem@lighteagle.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:weya@lighteagle.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
