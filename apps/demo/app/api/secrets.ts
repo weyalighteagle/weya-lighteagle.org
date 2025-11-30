@@ -1,3 +1,4 @@
+/* eslint-disable turbo/no-undeclared-env-vars */
 export const API_KEY =
   process.env.LIVEAVATAR_API_KEY ||
   process.env.NEXT_PUBLIC_LIVEAVATAR_API_KEY ||

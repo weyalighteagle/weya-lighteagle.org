@@ -46,6 +46,18 @@ export const LiveAvatarDemo = () => {
 
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
+  const scrollToSection = (id: string) => {
+    setIsMobileMenuOpen(false);
+    if (id === "top") {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
       {sessionToken ? (
@@ -58,9 +70,18 @@ export const LiveAvatarDemo = () => {
       ) : (
         <>
           <nav className="weya-navbar">
-            <a href="#" className="weya-brand">
+            <button
+              onClick={() => scrollToSection("top")}
+              className="weya-brand"
+              style={{
+                background: "none",
+                border: "none",
+                cursor: "pointer",
+                padding: 0,
+              }}
+            >
               WEYA
-            </a>
+            </button>
 
             <button
               className="weya-mobile-toggle"
@@ -75,27 +96,24 @@ export const LiveAvatarDemo = () => {
             <div
               className={`weya-nav-menu ${isMobileMenuOpen ? "active" : ""}`}
             >
-              <a
-                href="#home"
+              <button
+                onClick={() => scrollToSection("home")}
                 className="weya-nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 AI Companion
-              </a>
-              <a
-                href="#about"
+              </button>
+              <button
+                onClick={() => scrollToSection("about")}
                 className="weya-nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 About
-              </a>
-              <a
-                href="#contact"
+              </button>
+              <button
+                onClick={() => scrollToSection("contact")}
                 className="weya-nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact
-              </a>
+              </button>
             </div>
           </nav>
 
