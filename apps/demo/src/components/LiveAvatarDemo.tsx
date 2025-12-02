@@ -6,21 +6,29 @@ import "./avatar-styles.css";
 
 export const LiveAvatarDemo = () => {
   const [sessionToken, setSessionToken] = useState("");
+  const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // 🔥 SESSION TOKEN + SESSION ID BURADA GELİYOR
   const startInteraction = async () => {
     setIsLoading(true);
     setError(null);
+
     try {
       const res = await fetch("/api/start-session", { method: "POST" });
+
       if (!res.ok) {
         const errorData = await res.json();
         setError(errorData.error);
         return;
       }
-      const { session_token } = await res.json();
+
+      const { session_token, session_id } = await res.json();
+
       setSessionToken(session_token);
+      setSessionId(session_id); // 🔥 KAYDEDİLDİ
+      console.log("🔥 SESSION ID ALINDI:", session_id);
     } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
@@ -39,49 +47,34 @@ export const LiveAvatarDemo = () => {
     const subject = `Weya Contact: Message from ${name}`;
     const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
 
-    window.location.href = `mailto:weya@lighteagle.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.location.href = `mailto:gulfem@lighteagle.org?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
   };
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
-  const scrollToSection = (id: string) => {
-    setIsMobileMenuOpen(false);
-    if (id === "top") {
-      window.scrollTo({ top: 0, behavior: "smooth" });
-      return;
-    }
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
-  };
 
   return (
     <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
       {sessionToken ? (
         <div className="weya-session-container">
+          {/* 🔥 ARTIK SESSION_ID SESSION COMPONENT’E GEÇİYOR */}
           <LiveAvatarSession
             sessionAccessToken={sessionToken}
-            onSessionStopped={() => setSessionToken("")}
+            session_id={sessionId}
+            onSessionStopped={() => {
+              setSessionToken("");
+              setSessionId(null);
+            }}
           />
         </div>
       ) : (
         <>
           <nav className="weya-navbar">
-            <button
-              onClick={() => scrollToSection("top")}
-              className="weya-brand"
-              style={{
-                background: "none",
-                border: "none",
-                cursor: "pointer",
-                padding: 0,
-              }}
-            >
+            <a href="#" className="weya-brand">
               WEYA
-            </button>
+            </a>
 
             <button
               className="weya-mobile-toggle"
@@ -96,24 +89,27 @@ export const LiveAvatarDemo = () => {
             <div
               className={`weya-nav-menu ${isMobileMenuOpen ? "active" : ""}`}
             >
-              <button
-                onClick={() => scrollToSection("home")}
+              <a
+                href="#home"
                 className="weya-nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 AI Companion
-              </button>
-              <button
-                onClick={() => scrollToSection("about")}
+              </a>
+              <a
+                href="#about"
                 className="weya-nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 About
-              </button>
-              <button
-                onClick={() => scrollToSection("contact")}
+              </a>
+              <a
+                href="#contact"
                 className="weya-nav-link"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact
-              </button>
+              </a>
             </div>
           </nav>
 
@@ -145,7 +141,6 @@ export const LiveAvatarDemo = () => {
               </div>
 
               <div className="weya-hero-visual-side">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/weya.jpeg"
                   alt="Weya AI Avatar"

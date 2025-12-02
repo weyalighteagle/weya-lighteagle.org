@@ -111,7 +111,6 @@ body::after {
   text-decoration: none;
   letter-spacing: 0.05em;
   background: linear-gradient(135deg, #ffffff 30%, var(--brand-primary) 100%);
-  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.3));
@@ -131,11 +130,6 @@ body::after {
   letter-spacing: 0.05em;
   position: relative;
   transition: color 0.3s;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 0;
-  font-family: inherit;
 }
 
 .weya-nav-link:hover {

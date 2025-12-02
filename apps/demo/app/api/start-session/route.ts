@@ -17,8 +17,7 @@ export async function POST() {
       return NextResponse.json({ error: "API Key missing" }, { status: 500 });
     }
 
-    // console.log("✅ API Key found. Requesting token from LiveAvatar API...");
-
+    // HeyGen session token oluştur
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -47,14 +46,15 @@ export async function POST() {
       );
     }
 
+    // 🔥 Token ve Session ID başarıyla döndür
     return NextResponse.json({
       session_token: data.data.session_token,
       session_id: data.data.session_id,
     });
-  } catch (error) {
-    console.error("Server Error (route.ts):", error);
+  } catch (error: any) {
+    console.error("Server Error (start-session route):", error);
     return NextResponse.json(
-      { error: (error as Error).message },
+      { error: error.message || "Internal server error" },
       { status: 500 },
     );
   }

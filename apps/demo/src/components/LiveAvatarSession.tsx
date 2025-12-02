@@ -5,10 +5,12 @@ import {
   LiveAvatarContextProvider,
   useSession,
   useTextChat,
+  useLiveAvatarContext,
 } from "../liveavatar";
 import { SessionState } from "@heygen/liveavatar-web-sdk";
 import "./avatar-styles.css";
 
+// 💬 Bileşen: Chat + Video + State
 const LiveAvatarSessionComponent: React.FC<{
   onSessionStopped: () => void;
 }> = ({ onSessionStopped }) => {
@@ -22,6 +24,9 @@ const LiveAvatarSessionComponent: React.FC<{
   } = useSession();
   const { sendMessage } = useTextChat("FULL");
   const videoRef = useRef<HTMLVideoElement>(null);
+
+  // ✅ Context'ten sessionId'yi çek
+  const { sessionId } = useLiveAvatarContext();
 
   useEffect(() => {
     if (sessionState === SessionState.DISCONNECTED) {
@@ -41,6 +46,14 @@ const LiveAvatarSessionComponent: React.FC<{
       return () => clearTimeout(t);
     }
   }, [sessionState, startSession]);
+
+  // ✅ Mesaj gönderildiğinde hem avatar'a hem log'a git
+  const sendAndLog = () => {
+    if (!message.trim()) return;
+    sendMessage(message);
+    logMessage("user", message, sessionId); // ✅ sessionId ile logla
+    setMessage("");
+  };
 
   return (
     <div className="weya-session-wrapper">
@@ -66,20 +79,9 @@ const LiveAvatarSessionComponent: React.FC<{
           placeholder="Type your message..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => {
-            if (e.key === "Enter") {
-              sendMessage(message);
-              setMessage("");
-            }
-          }}
+          onKeyDown={(e) => e.key === "Enter" && sendAndLog()}
         />
-        <button
-          className="weya-send-btn"
-          onClick={() => {
-            sendMessage(message);
-            setMessage("");
-          }}
-        >
+        <button className="weya-send-btn" onClick={sendAndLog}>
           Send
         </button>
       </div>
@@ -87,12 +89,39 @@ const LiveAvatarSessionComponent: React.FC<{
   );
 };
 
+// ✅ Loglama fonksiyonu — mesajı /api/save-message ile kaydeder
+const logMessage = async (
+  sender: "user" | "avatar",
+  message: string,
+  session_id: string | null,
+) => {
+  try {
+    await fetch("/api/save-message", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        sender,
+        message,
+        timestamp: Date.now(),
+        session_id,
+      }),
+    });
+  } catch (err) {
+    console.error("Mesaj kaydedilemedi:", err);
+  }
+};
+
+// ✅ ANA EXPORT — Context Provider'a session_id geçirildi (kritik düzeltme)
 export const LiveAvatarSession: React.FC<{
   sessionAccessToken: string;
+  session_id: string | null; // <-- eklendi
   onSessionStopped: () => void;
-}> = ({ sessionAccessToken, onSessionStopped }) => {
+}> = ({ sessionAccessToken, session_id, onSessionStopped }) => {
   return (
-    <LiveAvatarContextProvider sessionAccessToken={sessionAccessToken}>
+    <LiveAvatarContextProvider
+      sessionAccessToken={sessionAccessToken}
+      session_id={session_id} // <-- 🔥 Artık context'e bu gidiyor
+    >
       <LiveAvatarSessionComponent onSessionStopped={onSessionStopped} />
     </LiveAvatarContextProvider>
   );
