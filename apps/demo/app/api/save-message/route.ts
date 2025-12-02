@@ -14,6 +14,16 @@ export async function POST(request: Request) {
       VALUES (${sender}, ${message}, ${timestamp});
     `;
 
+    try {
+      await fetch("https://lighteagle.app.n8n.cloud/webhook-test/weya-logs", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ sender, message, timestamp }),
+      });
+    } catch (webhookError) {
+      console.error("Error sending to webhook:", webhookError);
+    }
+
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
     console.error("Error saving message:", err);
