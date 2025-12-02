@@ -1,4 +1,11 @@
-import { createContext, useContext, useEffect, useRef, useState } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useRef,
+  useState,
+  useCallback,
+} from "react";
 import {
   ConnectionQuality,
   LiveAvatarSession,
@@ -32,7 +39,9 @@ type LiveAvatarContextProps = {
 
 // 🔌 Varsayılan context objesi
 export const LiveAvatarContext = createContext<LiveAvatarContextProps>({
-  sessionRef: { current: null } as any,
+  sessionRef: {
+    current: null,
+  } as unknown as React.RefObject<LiveAvatarSession>,
   sessionId: null,
   connectionQuality: ConnectionQuality.UNKNOWN,
   isMuted: true,
@@ -42,7 +51,7 @@ export const LiveAvatarContext = createContext<LiveAvatarContextProps>({
   isUserTalking: false,
   isAvatarTalking: false,
   messages: [],
-  addMessage: () => { },
+  addMessage: () => {},
 });
 
 // 🎯 GÜNCELLENEN: `session_id` prop olarak alınıyor
@@ -137,34 +146,37 @@ export const LiveAvatarContextProvider = ({
   // ---- messages ----
   const [messages, setMessages] = useState<LiveAvatarSessionMessage[]>([]);
 
-  const addMessage = async (sender: MessageSender, text: string) => {
-    setMessages((prev) => [
-      ...prev,
-      {
-        sender,
-        message: text,
-        timestamp: Date.now(),
-      },
-    ]);
-
-    // Map MessageSender to "user" | "avatar" for the API
-    const apiSender = sender === MessageSender.USER ? "user" : "avatar";
-
-    try {
-      await fetch("/api/save-message", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          sender: apiSender,
+  const addMessage = useCallback(
+    async (sender: MessageSender, text: string) => {
+      setMessages((prev) => [
+        ...prev,
+        {
+          sender,
           message: text,
           timestamp: Date.now(),
-          session_id: sessionId,
-        }),
-      });
-    } catch (err) {
-      console.error("Failed to save message:", err);
-    }
-  };
+        },
+      ]);
+
+      // Map MessageSender to "user" | "avatar" for the API
+      const apiSender = sender === MessageSender.USER ? "user" : "avatar";
+
+      try {
+        await fetch("/api/save-message", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            sender: apiSender,
+            message: text,
+            timestamp: Date.now(),
+            session_id: sessionId,
+          }),
+        });
+      } catch (err) {
+        console.error("Failed to save message:", err);
+      }
+    },
+    [sessionId],
+  );
 
   // 🔥 FULL TRANSCRIPT AUTO LOGGING
   useEffect(() => {
@@ -191,7 +203,7 @@ export const LiveAvatarContextProvider = ({
         handleAvatarTranscription,
       );
     };
-  }, [sessionRef, sessionId]);
+  }, [sessionRef, sessionId, addMessage]);
 
   return (
     <LiveAvatarContext.Provider

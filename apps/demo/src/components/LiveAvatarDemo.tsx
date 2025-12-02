@@ -141,6 +141,7 @@ export const LiveAvatarDemo = () => {
               </div>
 
               <div className="weya-hero-visual-side">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src="/weya.jpeg"
                   alt="Weya AI Avatar"
