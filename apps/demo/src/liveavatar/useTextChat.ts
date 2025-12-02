@@ -1,11 +1,13 @@
 import { useCallback } from "react";
 import { useLiveAvatarContext } from "./context";
+import { MessageSender } from "./types";
 
 export const useTextChat = (mode: "FULL" | "CUSTOM") => {
-  const { sessionRef } = useLiveAvatarContext();
+  const { sessionRef, addMessage } = useLiveAvatarContext();
 
   const sendMessage = useCallback(
     async (message: string) => {
+      addMessage(MessageSender.USER, message);
       if (mode === "FULL") {
         return sessionRef.current.message(message);
       } else if (mode === "CUSTOM") {
@@ -23,7 +25,7 @@ export const useTextChat = (mode: "FULL" | "CUSTOM") => {
         return sessionRef.current.repeatAudio(audio);
       }
     },
-    [sessionRef, mode],
+    [sessionRef, mode, addMessage],
   );
 
   return {

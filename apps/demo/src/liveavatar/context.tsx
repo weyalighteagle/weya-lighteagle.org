@@ -27,6 +27,7 @@ type LiveAvatarContextProps = {
   isAvatarTalking: boolean;
 
   messages: LiveAvatarSessionMessage[];
+  addMessage: (sender: MessageSender, text: string) => void;
 };
 
 // 🔌 Varsayılan context objesi
@@ -41,6 +42,7 @@ export const LiveAvatarContext = createContext<LiveAvatarContextProps>({
   isUserTalking: false,
   isAvatarTalking: false,
   messages: [],
+  addMessage: () => { },
 });
 
 // 🎯 GÜNCELLENEN: `session_id` prop olarak alınıyor
@@ -135,45 +137,61 @@ export const LiveAvatarContextProvider = ({
   // ---- messages ----
   const [messages, setMessages] = useState<LiveAvatarSessionMessage[]>([]);
 
-  useEffect(() => {
-    const session = sessionRef.current;
-    if (!session) return;
+  const addMessage = async (sender: MessageSender, text: string) => {
+    setMessages((prev) => [
+      ...prev,
+      {
+        sender,
+        message: text,
+        timestamp: Date.now(),
+      },
+    ]);
 
-    const saveToFile = async (sender: "user" | "avatar", message: string) => {
+    // Map MessageSender to "user" | "avatar" for the API
+    const apiSender = sender === MessageSender.USER ? "user" : "avatar";
+
+    try {
       await fetch("/api/save-message", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          sender,
-          message,
+          sender: apiSender,
+          message: text,
           timestamp: Date.now(),
           session_id: sessionId,
         }),
       });
+    } catch (err) {
+      console.error("Failed to save message:", err);
+    }
+  };
+
+  // 🔥 FULL TRANSCRIPT AUTO LOGGING
+  useEffect(() => {
+    const session = sessionRef.current;
+    if (!session) return;
+
+    const handleUserTranscription = (event: { text: string }) => {
+      if (!event?.text) return;
+      addMessage(MessageSender.USER, event.text);
     };
 
-    session.on(AgentEventsEnum.USER_TRANSCRIPTION, (event: any) => {
+    const handleAvatarTranscription = (event: { text: string }) => {
       if (!event?.text) return;
-      const userMessage = {
-        sender: MessageSender.USER,
-        message: event.text,
-        timestamp: Date.now(),
-      };
-      setMessages((prev) => [...prev, userMessage]);
-      saveToFile("user", event.text);
-    });
+      addMessage(MessageSender.AVATAR, event.text);
+    };
 
-    session.on(AgentEventsEnum.AVATAR_TRANSCRIPTION, (event: any) => {
-      if (!event?.text) return;
-      const avatarMessage = {
-        sender: MessageSender.AVATAR,
-        message: event.text,
-        timestamp: Date.now(),
-      };
-      setMessages((prev) => [...prev, avatarMessage]);
-      saveToFile("avatar", event.text);
-    });
-  }, [sessionId]);
+    session.on(AgentEventsEnum.USER_TRANSCRIPTION, handleUserTranscription);
+    session.on(AgentEventsEnum.AVATAR_TRANSCRIPTION, handleAvatarTranscription);
+
+    return () => {
+      session.off(AgentEventsEnum.USER_TRANSCRIPTION, handleUserTranscription);
+      session.off(
+        AgentEventsEnum.AVATAR_TRANSCRIPTION,
+        handleAvatarTranscription,
+      );
+    };
+  }, [sessionRef, sessionId]);
 
   return (
     <LiveAvatarContext.Provider
@@ -188,6 +206,7 @@ export const LiveAvatarContextProvider = ({
         isUserTalking,
         isAvatarTalking,
         messages,
+        addMessage,
       }}
     >
       {children}
