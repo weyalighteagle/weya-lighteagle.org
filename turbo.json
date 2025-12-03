@@ -31,7 +31,9 @@
     "PGDATABASE",
     "PGUSER",
     "POSTGRES_URL_NO_SSL",
-    "NEON_PROJECT_ID"
+    "NEON_PROJECT_ID",
+    "NEXT_PUBLIC_SUPABASE_URL",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY"
   ],
   "tasks": {
     "build": {

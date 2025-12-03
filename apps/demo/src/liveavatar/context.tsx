@@ -34,7 +34,11 @@ type LiveAvatarContextProps = {
   isAvatarTalking: boolean;
 
   messages: LiveAvatarSessionMessage[];
-  addMessage: (sender: MessageSender, text: string) => void;
+  addMessage: (
+    sender: MessageSender,
+    text: string,
+    inputType?: "text" | "voice",
+  ) => void;
 };
 
 // 🔌 Varsayılan context objesi
@@ -147,7 +151,11 @@ export const LiveAvatarContextProvider = ({
   const [messages, setMessages] = useState<LiveAvatarSessionMessage[]>([]);
 
   const addMessage = useCallback(
-    async (sender: MessageSender, text: string) => {
+    async (
+      sender: MessageSender,
+      text: string,
+      inputType: "text" | "voice" = "text",
+    ) => {
       setMessages((prev) => [
         ...prev,
         {
@@ -169,6 +177,7 @@ export const LiveAvatarContextProvider = ({
             message: text,
             timestamp: Date.now(),
             session_id: sessionId,
+            input_type: inputType,
           }),
         });
       } catch (err) {
@@ -185,12 +194,12 @@ export const LiveAvatarContextProvider = ({
 
     const handleUserTranscription = (event: { text: string }) => {
       if (!event?.text) return;
-      addMessage(MessageSender.USER, event.text);
+      addMessage(MessageSender.USER, event.text, "voice");
     };
 
     const handleAvatarTranscription = (event: { text: string }) => {
       if (!event?.text) return;
-      addMessage(MessageSender.AVATAR, event.text);
+      addMessage(MessageSender.AVATAR, event.text, "voice");
     };
 
     session.on(AgentEventsEnum.USER_TRANSCRIPTION, handleUserTranscription);

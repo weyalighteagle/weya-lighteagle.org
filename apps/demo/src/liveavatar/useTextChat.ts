@@ -7,7 +7,7 @@ export const useTextChat = (mode: "FULL" | "CUSTOM") => {
 
   const sendMessage = useCallback(
     async (message: string) => {
-      addMessage(MessageSender.USER, message);
+      addMessage(MessageSender.USER, message, "text");
       if (mode === "FULL") {
         return sessionRef.current.message(message);
       } else if (mode === "CUSTOM") {
