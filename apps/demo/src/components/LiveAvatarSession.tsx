@@ -5,7 +5,6 @@ import {
   LiveAvatarContextProvider,
   useSession,
   useTextChat,
-  useLiveAvatarContext,
 } from "../liveavatar";
 import { SessionState } from "@heygen/liveavatar-web-sdk";
 import "./avatar-styles.css";
@@ -24,9 +23,6 @@ const LiveAvatarSessionComponent: React.FC<{
   } = useSession();
   const { sendMessage } = useTextChat("FULL");
   const videoRef = useRef<HTMLVideoElement>(null);
-
-  // ✅ Context'ten sessionId'yi çek
-  const { sessionId } = useLiveAvatarContext();
 
   useEffect(() => {
     if (sessionState === SessionState.DISCONNECTED) {
@@ -51,7 +47,7 @@ const LiveAvatarSessionComponent: React.FC<{
   const sendAndLog = () => {
     if (!message.trim()) return;
     sendMessage(message);
-    logMessage("user", message, sessionId); // ✅ sessionId ile logla
+    // logMessage removed to prevent duplicate logging (handled in context)
     setMessage("");
   };
 
@@ -87,28 +83,6 @@ const LiveAvatarSessionComponent: React.FC<{
       </div>
     </div>
   );
-};
-
-// ✅ Loglama fonksiyonu — mesajı /api/save-message ile kaydeder
-const logMessage = async (
-  sender: "user" | "avatar",
-  message: string,
-  session_id: string | null,
-) => {
-  try {
-    await fetch("/api/save-message", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        sender,
-        message,
-        timestamp: Date.now(),
-        session_id,
-      }),
-    });
-  } catch (err) {
-    console.error("Mesaj kaydedilemedi:", err);
-  }
 };
 
 // ✅ ANA EXPORT — Context Provider'a session_id geçirildi (kritik düzeltme)
