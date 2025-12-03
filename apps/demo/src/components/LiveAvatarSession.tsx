@@ -23,6 +23,7 @@ const LiveAvatarSessionComponent: React.FC<{
   } = useSession();
   const { sendMessage } = useTextChat("FULL");
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isSending = useRef(false);
 
   useEffect(() => {
     if (sessionState === SessionState.DISCONNECTED) {
@@ -44,11 +45,17 @@ const LiveAvatarSessionComponent: React.FC<{
   }, [sessionState, startSession]);
 
   // ✅ Mesaj gönderildiğinde hem avatar'a hem log'a git
-  const sendAndLog = () => {
-    if (!message.trim()) return;
-    sendMessage(message);
-    // logMessage removed to prevent duplicate logging (handled in context)
-    setMessage("");
+  const sendAndLog = async () => {
+    if (!message.trim() || isSending.current) return;
+
+    isSending.current = true;
+    try {
+      await sendMessage(message);
+      // logMessage removed to prevent duplicate logging (handled in context)
+      setMessage("");
+    } finally {
+      isSending.current = false;
+    }
   };
 
   return (
@@ -75,7 +82,12 @@ const LiveAvatarSessionComponent: React.FC<{
           placeholder="Type your message..."
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          onKeyDown={(e) => e.key === "Enter" && sendAndLog()}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.repeat) {
+              e.preventDefault();
+              sendAndLog();
+            }
+          }}
         />
         <button className="weya-send-btn" onClick={sendAndLog}>
           Send
