@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@heygen/liveavatar-web-sdk": "workspace:*",
+    "@intercom/messenger-js-sdk": "^0.0.18",
     "@supabase/supabase-js": "^2.86.0",
     "@vercel/postgres": "^0.10.0",
     "clsx": "^2.1.1",

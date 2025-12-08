@@ -1,4 +1,5 @@
 import "./globals.css";
+import { IntercomProvider } from "../src/components/IntercomProvider";
 
 export default function RootLayout({
   children,
@@ -10,7 +11,9 @@ export default function RootLayout({
       {/* Eski sınıfları (bg-zinc-900, flex, items-center vs.) sildik.
         Artık kontrol tamamen senin css dosyalarında.
       */}
-      <body>{children}</body>
+      <body>
+        <IntercomProvider>{children}</IntercomProvider>
+      </body>
     </html>
   );
 }
