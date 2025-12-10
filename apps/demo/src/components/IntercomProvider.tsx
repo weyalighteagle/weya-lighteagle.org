@@ -10,57 +10,80 @@ export const IntercomProvider = ({
   children: React.ReactNode;
 }) => {
   React.useEffect(() => {
-    // Standard Intercom script injection - most reliable method
-    // This is the same code Intercom provides for "Code snippet" installation
+    // Standard Intercom script injection - compatible with all browsers including Safari
     /* eslint-disable @typescript-eslint/no-explicit-any */
     const w = window as any;
-    const ic = w.Intercom;
 
-    if (typeof ic === "function") {
-      ic("reattach_activator");
-      ic("update", w.intercomSettings);
+    // Set up intercomSettings first for Safari compatibility
+    w.intercomSettings = {
+      api_base: "https://api-iam.intercom.io",
+      app_id: INTERCOM_APP_ID,
+    };
+
+    // Check if Intercom is already loaded
+    if (typeof w.Intercom === "function") {
+      w.Intercom("reattach_activator");
+      w.Intercom("update", w.intercomSettings);
     } else {
-      const d = document;
-      const i = function (...args: any[]) {
-        i.c(args);
+      // Create Intercom function placeholder
+      const intercomPlaceholder = function (...args: any[]) {
+        intercomPlaceholder.c(args);
       } as any;
-      i.q = [] as any[];
-      i.c = function (args: any) {
-        i.q.push(args);
+      intercomPlaceholder.q = [] as any[];
+      intercomPlaceholder.c = function (args: any) {
+        intercomPlaceholder.q.push(args);
       };
-      w.Intercom = i;
+      w.Intercom = intercomPlaceholder;
 
-      const l = function () {
-        const s = d.createElement("script");
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = `https://widget.intercom.io/widget/${INTERCOM_APP_ID}`;
-        const x = d.getElementsByTagName("script")[0];
-        if (x && x.parentNode) {
-          x.parentNode.insertBefore(s, x);
+      // Load Intercom script - Safari compatible approach
+      const loadScript = () => {
+        const script = document.createElement("script");
+        script.type = "text/javascript";
+        script.async = true;
+        script.crossOrigin = "anonymous"; // Better CORS handling for Safari
+        script.src = `https://widget.intercom.io/widget/${INTERCOM_APP_ID}`;
+
+        // Error handling for script loading
+        script.onerror = () => {
+          console.warn("Intercom script failed to load");
+        };
+
+        // Insert script - Safari compatible method
+        const firstScript = document.getElementsByTagName("script")[0];
+        if (firstScript && firstScript.parentNode) {
+          firstScript.parentNode.insertBefore(script, firstScript);
         } else {
-          d.head.appendChild(s);
+          document.head.appendChild(script);
         }
       };
 
-      if (document.readyState === "complete") {
-        l();
-      } else if (w.attachEvent) {
-        w.attachEvent("onload", l);
+      // Use modern event listener only (attachEvent is IE-only, not Safari compatible)
+      if (
+        document.readyState === "complete" ||
+        document.readyState === "interactive"
+      ) {
+        // Document already loaded, load script immediately but with a small delay for Safari
+        setTimeout(loadScript, 0);
       } else {
-        w.addEventListener("load", l, false);
+        // Wait for DOM to be ready
+        document.addEventListener("DOMContentLoaded", loadScript, false);
       }
     }
 
-    // Boot Intercom
-    w.Intercom("boot", {
-      api_base: "https://api-iam.intercom.io",
-      app_id: INTERCOM_APP_ID,
-    });
+    // Boot Intercom after a small delay to ensure script is ready
+    // This timeout helps with Safari's stricter script loading
+    const bootTimeout = setTimeout(() => {
+      if (typeof w.Intercom === "function") {
+        w.Intercom("boot", {
+          api_base: "https://api-iam.intercom.io",
+          app_id: INTERCOM_APP_ID,
+        });
+      }
+    }, 100);
 
-    // Cleanup on unmount - don't shutdown to prevent widget disappearing
+    // Cleanup
     return () => {
-      // Intentionally not calling shutdown to keep widget visible during navigation
+      clearTimeout(bootTimeout);
     };
   }, []);
 
