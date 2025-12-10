@@ -46,10 +46,15 @@ const LiveAvatarSessionComponent: React.FC<{
 
   // ✅ Mesaj gönderildiğinde hem avatar'a hem log'a git
   const sendAndLog = async () => {
+    console.log("🚀 sendAndLog called", {
+      message,
+      isSending: isSending.current,
+    });
     if (!message.trim() || isSending.current) return;
 
     isSending.current = true;
     try {
+      console.log("🚀 calling sendMessage");
       await sendMessage(message);
       // logMessage removed to prevent duplicate logging (handled in context)
       setMessage("");

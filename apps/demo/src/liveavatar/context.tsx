@@ -149,6 +149,16 @@ export const LiveAvatarContextProvider = ({
 
   // ---- messages ----
   const [messages, setMessages] = useState<LiveAvatarSessionMessage[]>([]);
+  const lastUserMessageRef = useRef<string | null>(null);
+
+  // 🔄 DEDUP: Track last saved message to prevent Text vs Voice duplication
+  const lastSavedMessage = useRef<{
+    sender: MessageSender;
+    text: string;
+    // We intentionally store inputType but might ignore it for loose matching
+    inputType: "text" | "voice";
+    timestamp: number;
+  } | null>(null);
 
   const addMessage = useCallback(
     async (
@@ -156,12 +166,54 @@ export const LiveAvatarContextProvider = ({
       text: string,
       inputType: "text" | "voice" = "text",
     ) => {
+      console.log("🚀 addMessage called", { sender, text, inputType });
+
+      // --- DEDUPLICATION START ---
+      const now = Date.now();
+      const duplicateWindow = 2000; // 2 seconds window
+
+      if (lastSavedMessage.current) {
+        const last = lastSavedMessage.current;
+        const isSameSender = last.sender === sender;
+        const isSameText = last.text.trim() === text.trim();
+        const isRecent = now - last.timestamp < duplicateWindow;
+
+        // CRITICAL FIX: We ignore 'inputType' here.
+        // If the user sends "Hello" (text), and then we get "Hello" (voice) from the echo,
+        // we want to treat them as the same message and SKIP saving the second one.
+        if (isSameSender && isSameText && isRecent) {
+          console.warn(
+            "🚫 Skipping duplicate message log (Text+Voice overlap):",
+            {
+              text,
+              sender,
+              inputType,
+              lastInputType: last.inputType,
+            },
+          );
+          return;
+        }
+      }
+
+      // Update the last saved message ref
+      lastSavedMessage.current = {
+        sender,
+        text: text.trim(),
+        inputType,
+        timestamp: now,
+      };
+      // --- DEDUPLICATION END ---
+
+      if (sender === MessageSender.USER) {
+        lastUserMessageRef.current = text;
+      }
+
       setMessages((prev) => [
         ...prev,
         {
           sender,
           message: text,
-          timestamp: Date.now(),
+          timestamp: now,
         },
       ]);
 
@@ -175,9 +227,10 @@ export const LiveAvatarContextProvider = ({
           body: JSON.stringify({
             sender: apiSender,
             message: text,
-            timestamp: Date.now(),
+            timestamp: now,
             session_id: sessionId,
             input_type: inputType,
+            request_id: Math.random().toString(36).substring(7), // Trace duplicates
           }),
         });
       } catch (err) {
@@ -194,6 +247,22 @@ export const LiveAvatarContextProvider = ({
 
     const handleUserTranscription = (event: { text: string }) => {
       if (!event?.text) return;
+
+      // 🔍 DEDUP: Ignore if matches last sent text
+      const normalizedEvent = event.text.trim().toLowerCase();
+      const normalizedLast =
+        lastUserMessageRef.current?.trim().toLowerCase() || "";
+
+      // Check if the transcription is contained in the last message or vice versa (fuzzy match)
+      if (
+        normalizedLast &&
+        (normalizedEvent.includes(normalizedLast) ||
+          normalizedLast.includes(normalizedEvent))
+      ) {
+        console.log("🚫 Ignoring duplicate voice transcription:", event.text);
+        return;
+      }
+
       addMessage(MessageSender.USER, event.text, "voice");
     };
 

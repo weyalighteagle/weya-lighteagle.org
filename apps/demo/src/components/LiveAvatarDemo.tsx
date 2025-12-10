@@ -27,8 +27,7 @@ export const LiveAvatarDemo = () => {
       const { session_token, session_id } = await res.json();
 
       setSessionToken(session_token);
-      setSessionId(session_id); // 🔥 KAYDEDİLDİ
-      console.log("🔥 SESSION ID ALINDI:", session_id);
+      setSessionId(session_id);
     } catch (err: unknown) {
       setError((err as Error).message);
     } finally {
@@ -59,7 +58,6 @@ export const LiveAvatarDemo = () => {
     <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
       {sessionToken ? (
         <div className="weya-session-container">
-          {/* 🔥 ARTIK SESSION_ID SESSION COMPONENT’E GEÇİYOR */}
           <LiveAvatarSession
             sessionAccessToken={sessionToken}
             session_id={sessionId}
