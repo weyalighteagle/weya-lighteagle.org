@@ -1,22 +1,34 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { LiveAvatarSession } from "./LiveAvatarSession";
 import "./avatar-styles.css";
+import { useRouter } from "next/navigation";
 
-export const LiveAvatarDemo = () => {
+interface LiveAvatarDemoProps {
+  persona?: "weya_live" | "weya_startup";
+}
+
+export const LiveAvatarDemo = ({ persona }: LiveAvatarDemoProps) => {
   const [sessionToken, setSessionToken] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
 
   // 🔥 SESSION TOKEN + SESSION ID BURADA GELİYOR
-  const startInteraction = async () => {
+  const startInteraction = async (overridePersona?: string) => {
     setIsLoading(true);
     setError(null);
 
+    const activePersona = overridePersona || persona;
+
     try {
-      const res = await fetch("/api/start-session", { method: "POST" });
+      const res = await fetch("/api/start-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ persona: activePersona }),
+      });
 
       if (!res.ok) {
         const errorData = await res.json();
@@ -34,6 +46,14 @@ export const LiveAvatarDemo = () => {
       setIsLoading(false);
     }
   };
+
+  // Auto-start if persona is provided via prop (on specific route)
+  useEffect(() => {
+    if (persona && !sessionToken && !isLoading && !error) {
+      startInteraction();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [persona]);
 
   const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -64,6 +84,12 @@ export const LiveAvatarDemo = () => {
             onSessionStopped={() => {
               setSessionToken("");
               setSessionId(null);
+              // If we were on a specific persona page, maybe go back to home?
+              // For now, let's just clear state. If they want to talk again on same page,
+              // they might need to refresh or we add a "Restart" button logic.
+              if (persona) {
+                router.push('/');
+              }
             }}
           />
         </div>
@@ -129,13 +155,36 @@ export const LiveAvatarDemo = () => {
                   </div>
                 )}
 
-                <button
-                  className="weya-btn-aurora"
-                  onClick={startInteraction}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Connecting..." : "Talk to Weya"}
-                </button>
+                {/* If pure landing (no persona prop), show two buttons */}
+                {!persona && (
+                  <div style={{ display: "flex", gap: "1rem" }}>
+                    <button
+                      className="weya-btn-aurora"
+                      onClick={() => router.push("/talk/weya-live")}
+                      disabled={isLoading}
+                    >
+                      Talk to Weya
+                    </button>
+                    <button
+                      className="weya-btn-aurora"
+                      onClick={() => router.push("/talk/weya-startup")}
+                      disabled={isLoading}
+                    >
+                      Talk to Weya 2
+                    </button>
+                  </div>
+                )}
+
+                {/* If persona provided but session not started (loading/error state), show loading msg */}
+                {persona && (
+                  <div className="weya-loading-state">
+                    <p>{isLoading ? "Connecting to Weya..." : "Ready to start"}</p>
+                    {/* Optional: Retry button if error */}
+                    {error && <button className="weya-btn-aurora" onClick={() => startInteraction()}>Retry</button>}
+                  </div>
+                )}
+
+
               </div>
 
               <div className="weya-hero-visual-side">
