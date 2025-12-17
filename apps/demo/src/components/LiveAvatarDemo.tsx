@@ -1,22 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { LiveAvatarSession } from "./LiveAvatarSession";
 import "./avatar-styles.css";
 
-export const LiveAvatarDemo = () => {
+export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
   const [sessionToken, setSessionToken] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const router = useRouter();
+
+  // Auto-start if persona provided
+  useEffect(() => {
+    if (persona && !sessionToken && !isLoading && !error) {
+      startInteraction(persona);
+    }
+  }, [persona]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // 🔥 SESSION TOKEN + SESSION ID BURADA GELİYOR
-  const startInteraction = async () => {
+  const startInteraction = async (persona?: string) => {
     setIsLoading(true);
     setError(null);
 
     try {
-      const res = await fetch("/api/start-session", { method: "POST" });
+      const res = await fetch("/api/start-session", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ persona }),
+      });
 
       if (!res.ok) {
         const errorData = await res.json();
@@ -64,8 +78,31 @@ export const LiveAvatarDemo = () => {
             onSessionStopped={() => {
               setSessionToken("");
               setSessionId(null);
+              router.push("/");
             }}
           />
+        </div>
+      ) : persona ? (
+        <div
+          className="weya-session-container"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          {error ? (
+            <div style={{ color: "#ef4444", marginBottom: "1rem" }}>
+              {error}
+            </div>
+          ) : (
+            <div className="weya-loading">
+              Connecting to{" "}
+              {persona === "weya_live" ? "Weya Live" : "Weya Startup"}...
+            </div>
+          )}
         </div>
       ) : (
         <>
@@ -129,13 +166,14 @@ export const LiveAvatarDemo = () => {
                   </div>
                 )}
 
-                <button
-                  className="weya-btn-aurora"
-                  onClick={startInteraction}
-                  disabled={isLoading}
-                >
-                  {isLoading ? "Connecting..." : "Talk to Weya"}
-                </button>
+                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+                  <Link href="/talk/weya-live" className="weya-btn-aurora">
+                    Talk to Weya
+                  </Link>
+                  <Link href="/talk/weya-startup" className="weya-btn-aurora">
+                    Talk to Weya 2
+                  </Link>
+                </div>
               </div>
 
               <div className="weya-hero-visual-side">

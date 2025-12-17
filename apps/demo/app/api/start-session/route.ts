@@ -4,17 +4,46 @@ import {
   API_URL,
   AVATAR_ID,
   VOICE_ID,
-  CONTEXT_ID,
+  CONTEXT_ID_WEYA_LIVE,
+  CONTEXT_ID_WEYA_STARTUP,
   LANGUAGE,
 } from "../secrets";
 
-export async function POST() {
+export async function POST(request: Request) {
   try {
     if (!API_KEY) {
       console.error(
         "❌ API Key missing! Make sure LIVEAVATAR_API_KEY is set in apps/demo/.env.local",
       );
       return NextResponse.json({ error: "API Key missing" }, { status: 500 });
+    }
+
+    const body = await request.json().catch(() => ({}));
+    const { persona } = body;
+
+    let selectedContextId = "";
+
+    if (persona === "weya_live") {
+      selectedContextId = CONTEXT_ID_WEYA_LIVE;
+    } else if (persona === "weya_startup") {
+      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+    } else {
+      console.error("❌ Error: Invalid or missing persona:", persona);
+      return NextResponse.json(
+        { error: "Invalid persona. Must be 'weya_live' or 'weya_startup'" },
+        { status: 400 },
+      );
+    }
+
+    console.log("Debug: Persona:", persona);
+    console.log("Debug: Selected Context ID:", selectedContextId);
+
+    if (!selectedContextId) {
+      console.error("❌ Error: Context ID is missing for persona:", persona);
+      return NextResponse.json(
+        { error: "Context ID not configured for this persona" },
+        { status: 500 },
+      );
     }
 
     // HeyGen session token oluştur
@@ -30,7 +59,7 @@ export async function POST() {
         avatar_persona: {
           avatar_id: AVATAR_ID,
           voice_id: VOICE_ID,
-          context_id: CONTEXT_ID,
+          context_id: selectedContextId,
           language: LANGUAGE,
         },
       }),

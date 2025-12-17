@@ -317,6 +317,9 @@ body::after {
   position: relative;
   overflow: hidden;
   z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @keyframes auroraBtnAnim {
@@ -609,10 +612,10 @@ body::after {
   }
 
   .weya-btn-aurora {
-    padding: 1rem 2.5rem;
+    padding: 1rem 2rem;
     font-size: 0.9rem;
-    width: 100%;
-    max-width: 300px;
+    width: auto;
+    /* max-width: 300px; removed to let flex handle it */
   }
 
   .weya-card-grid {
