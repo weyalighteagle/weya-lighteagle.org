@@ -18,11 +18,6 @@ export const CONTEXT_ID =
   process.env.LIVEAVATAR_CONTEXT_ID ||
   process.env.NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID ||
   "";
-export const CONTEXT_ID_WEYA_LIVE =
-  process.env.LIVEAVATAR_CONTEXT_ID_WEYA_LIVE || "";
-
-export const CONTEXT_ID_WEYA_STARTUP =
-  process.env.LIVEAVATAR_CONTEXT_ID_WEYA_STARTUP || "";
 export const LANGUAGE =
   process.env.LIVEAVATAR_LANGUAGE ||
   process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE ||
