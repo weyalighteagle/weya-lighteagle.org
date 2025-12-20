@@ -8,7 +8,7 @@ import {
   CONTEXT_ID_WEYA_STARTUP,
   LANGUAGE,
 } from "../secrets";
-import { supabase } from "../../../src/utils/supabase"; // 👈 EKLENDİ
+import { supabase } from "../../../src/utils/supabase";
 
 export async function POST(request: Request) {
   try {
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { persona, firstName, lastName, email } = body; // 👈 EKLENDİ
+    const { persona, firstName, lastName, email } = body;
 
     let selectedContextId = "";
 
@@ -60,24 +60,25 @@ export async function POST(request: Request) {
 
     const sessionId = data.data.session_id;
 
-    // ================= METADATA → CHAT_TRANSCRIPTS =================
-    if (firstName || lastName || email) {
-      const { error: metaError } = await supabase
-        .from("chat_transcripts")
-        .insert({
-          session_id: sessionId,
-          sender: "system",
-          message: "user_metadata",
-          input_type: "meta",
-          client_timestamp: Date.now(),
-          user_name: `${firstName || ""} ${lastName || ""}`.trim() || null,
-          user_email: email || null,
-        });
+    // ================= META → CHAT_TRANSCRIPTS (HER ZAMAN) =================
+    const { error: metaError } = await supabase
+      .from("chat_transcripts")
+      .insert({
+        session_id: sessionId,
+        sender: "system",
+        message: "user_metadata",
+        input_type: "meta",
+        client_timestamp: Date.now(),
+        user_name:
+          firstName || lastName
+            ? `${firstName || ""} ${lastName || ""}`.trim()
+            : null,
+        user_email: email || null,
+      });
 
-      if (metaError) {
-        console.error("❌ Metadata insert failed:", metaError);
-        // ❗ session BOZULMAZ
-      }
+    if (metaError) {
+      console.error("❌ Metadata insert failed:", metaError);
+      // ❗ session BOZULMAZ
     }
 
     // ================= RESPONSE =================

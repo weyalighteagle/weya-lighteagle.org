@@ -15,9 +15,17 @@ export async function POST(request: Request) {
       user_email,
     } = body;
 
-    if (!sender || !message || !timestamp || !session_id) {
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+    // 🔒 Sert ama net validation
+    if (!sender || !message || !session_id) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
     }
+
+    // ⏱️ timestamp fallback (sessiz drop olmasın)
+    const finalTimestamp =
+      typeof timestamp === "number" ? timestamp : Date.now();
 
     let finalUserName = user_name || null;
     let finalUserEmail = user_email || null;
@@ -44,7 +52,7 @@ export async function POST(request: Request) {
       sender,
       message,
       input_type: input_type || "text",
-      client_timestamp: timestamp,
+      client_timestamp: finalTimestamp,
       user_name: finalUserName,
       user_email: finalUserEmail,
     });
