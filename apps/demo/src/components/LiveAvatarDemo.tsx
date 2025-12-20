@@ -21,8 +21,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
   /**
    * 🔥 AUTO-START
-   * /talk/weya-live gibi route'lardan persona gelirse
-   * eski sistem gibi otomatik başlatır
+   * /talk/weya-live veya /talk/weya-startup
    */
   useEffect(() => {
     if (persona && !sessionToken && !isLoading && !error) {
@@ -33,8 +32,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
   /**
    * 🔥 SESSION START
-   * - Landing'de: selectedPersona kullanır
-   * - Persona page'de: prop persona kullanır
+   * - Persona page'de otomatik çalışır
    */
   const startInteraction = async (forcedPersona?: string) => {
     const finalPersona = forcedPersona || selectedPersona;
@@ -42,14 +40,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
     if (!finalPersona) {
       setError("Please select a Weya experience.");
       return;
-    }
-
-    // Landing'deysek form validasyonu
-    if (!forcedPersona) {
-      if (!firstName || !lastName || !email) {
-        setError("Please fill in all fields.");
-        return;
-      }
     }
 
     setIsLoading(true);
@@ -81,22 +71,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
-
-    const subject = `Weya Contact: Message from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-
-    window.location.href = `mailto:gulfem@lighteagle.org?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
   };
 
   return (
@@ -210,12 +184,29 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                     <option value="weya_startup">Weya Startup</option>
                   </select>
 
+                  {/* 🔥 SADECE BURASI DEĞİŞTİ */}
                   <button
                     className="weya-btn-aurora"
-                    onClick={() => startInteraction()}
                     disabled={isLoading}
+                    onClick={() => {
+                      if (!firstName || !lastName || !email) {
+                        setError("Please fill in all fields.");
+                        return;
+                      }
+
+                      if (!selectedPersona) {
+                        setError("Please select a Weya experience.");
+                        return;
+                      }
+
+                      router.push(
+                        selectedPersona === "weya_live"
+                          ? "/talk/weya-live"
+                          : "/talk/weya-startup"
+                      );
+                    }}
                   >
-                    {isLoading ? "Starting session…" : "Start live session"}
+                    Start live session
                   </button>
                 </div>
               </div>
