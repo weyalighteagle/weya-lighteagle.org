@@ -65,7 +65,7 @@ export async function POST(request: Request) {
       .from("chat_transcripts")
       .insert({
         session_id: sessionId,
-        sender: "system",
+        sender: "user", // 🔥 KRİTİK DÜZELTME
         message: "user_metadata",
         input_type: "meta",
         client_timestamp: Date.now(),
@@ -78,7 +78,6 @@ export async function POST(request: Request) {
 
     if (metaError) {
       console.error("❌ Metadata insert failed:", metaError);
-      // ❗ session BOZULMAZ
     }
 
     // ================= RESPONSE =================
