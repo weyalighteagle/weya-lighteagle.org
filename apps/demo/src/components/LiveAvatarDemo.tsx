@@ -11,7 +11,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Pre-chat form state (landing için)
+  // Pre-chat form state
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -19,10 +19,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
   const router = useRouter();
 
-  /**
-   * 🔥 AUTO-START
-   * /talk/weya-live veya /talk/weya-startup
-   */
+  // AUTO START (persona page)
   useEffect(() => {
     if (persona && !sessionToken && !isLoading && !error) {
       startInteraction(persona);
@@ -30,10 +27,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [persona]);
 
-  /**
-   * 🔥 SESSION START
-   * - Persona page'de otomatik çalışır
-   */
   const startInteraction = async (forcedPersona?: string) => {
     const finalPersona = forcedPersona || selectedPersona;
 
@@ -76,7 +69,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
   return (
     <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
       {sessionToken ? (
-        /* ================= CHAT MODE ================= */
         <div className="weya-session-container">
           <LiveAvatarSession
             sessionAccessToken={sessionToken}
@@ -89,7 +81,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
           />
         </div>
       ) : persona ? (
-        /* ================= PERSONA AUTO-START LOADING ================= */
         <div
           className="weya-session-container"
           style={{
@@ -112,9 +103,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
           )}
         </div>
       ) : (
-        /* ================= LANDING (AYNI TASARIM) ================= */
         <>
-          {/* NAVBAR */}
           <nav className="weya-navbar">
             <a href="#" className="weya-brand">
               WEYA
@@ -132,7 +121,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             </div>
           </nav>
 
-          {/* PRODUCT ONBOARDING */}
           <section id="home" className="weya-section">
             <div className="weya-hero-container">
               <div className="weya-hero-text-side">
@@ -184,7 +172,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                     <option value="weya_startup">Weya Startup</option>
                   </select>
 
-                  {/* 🔥 SADECE BURASI DEĞİŞTİ */}
                   <button
                     className="weya-btn-aurora"
                     disabled={isLoading}
@@ -199,14 +186,10 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                         return;
                       }
 
-                      router.push(
-                        selectedPersona === "weya_live"
-                          ? "/talk/weya-live"
-                          : "/talk/weya-startup"
-                      );
+                      startInteraction(selectedPersona);
                     }}
                   >
-                    Start live session
+                    {isLoading ? "Starting…" : "Start live session"}
                   </button>
                 </div>
               </div>
@@ -220,8 +203,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
               </div>
             </div>
           </section>
-
-          {/* ABOUT + CONTACT AYNEN DEVAM */}
         </>
       )}
     </div>
