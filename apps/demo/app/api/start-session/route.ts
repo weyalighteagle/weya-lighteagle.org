@@ -8,6 +8,7 @@ import {
   CONTEXT_ID_WEYA_STARTUP,
   LANGUAGE,
 } from "../secrets";
+import { supabase } from "../../../src/utils/supabase"; // 👈 EKLENDİ
 
 export async function POST(request: Request) {
   try {
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { persona } = body;
+    const { persona, firstName, lastName, email } = body; // 👈 EKLENDİ
 
     let selectedContextId = "";
 
@@ -35,18 +36,14 @@ export async function POST(request: Request) {
       );
     }
 
-    console.log("Debug: Persona:", persona);
-    console.log("Debug: Selected Context ID:", selectedContextId);
-
     if (!selectedContextId) {
-      console.error("❌ Error: Context ID is missing for persona:", persona);
       return NextResponse.json(
         { error: "Context ID not configured for this persona" },
         { status: 500 },
       );
     }
 
-    // HeyGen session token oluştur
+    // ================= HEYGEN =================
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -75,10 +72,28 @@ export async function POST(request: Request) {
       );
     }
 
-    // 🔥 Token ve Session ID başarıyla döndür
+    const sessionId = data.data.session_id;
+
+    // ================= DB WRITE (EKLENDİ) =================
+    const { error: dbError } = await supabase
+      .from("weya_sessions")
+      .insert({
+        session_id: sessionId,
+        persona,
+        first_name: firstName || null,
+        last_name: lastName || null,
+        email: email || null,
+      });
+
+    if (dbError) {
+      console.error("❌ Supabase insert error:", dbError);
+      // ❗ session'ı bozmasın diye return etmiyoruz
+    }
+
+    // ================= RESPONSE (AYNI) =================
     return NextResponse.json({
       session_token: data.data.session_token,
-      session_id: data.data.session_id,
+      session_id: sessionId,
     });
   } catch (error: unknown) {
     console.error("Server Error (start-session route):", error);
