@@ -8,7 +8,6 @@ import {
   CONTEXT_ID_WEYA_STARTUP,
   LANGUAGE,
 } from "../secrets";
-import { supabase } from "../../../src/utils/supabase"; // 👈 EKLENDİ
 
 export async function POST(request: Request) {
   try {
@@ -20,7 +19,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { persona, firstName, lastName, email } = body; // 👈 EKLENDİ
+    const { persona } = body;
 
     let selectedContextId = "";
 
@@ -72,28 +71,10 @@ export async function POST(request: Request) {
       );
     }
 
-    const sessionId = data.data.session_id;
-
-    // ================= DB WRITE (EKLENDİ) =================
-    const { error: dbError } = await supabase
-      .from("weya_sessions")
-      .insert({
-        session_id: sessionId,
-        persona,
-        first_name: firstName || null,
-        last_name: lastName || null,
-        email: email || null,
-      });
-
-    if (dbError) {
-      console.error("❌ Supabase insert error:", dbError);
-      // ❗ session'ı bozmasın diye return etmiyoruz
-    }
-
-    // ================= RESPONSE (AYNI) =================
+    // ================= RESPONSE =================
     return NextResponse.json({
       session_token: data.data.session_token,
-      session_id: sessionId,
+      session_id: data.data.session_id,
     });
   } catch (error: unknown) {
     console.error("Server Error (start-session route):", error);

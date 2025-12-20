@@ -4,8 +4,17 @@ import { supabase } from "../../../src/utils/supabase";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { sender, message, timestamp, session_id, input_type, request_id } =
-      body;
+
+    const {
+      sender,
+      message,
+      timestamp,
+      session_id,
+      input_type,
+      request_id,
+      user_name,   // 👈 EKLENDİ
+      user_email,  // 👈 EKLENDİ
+    } = body;
 
     console.log("📝 save-message received:", {
       sender,
@@ -14,6 +23,8 @@ export async function POST(request: Request) {
       input_type,
       timestamp,
       request_id,
+      user_name,
+      user_email,
     });
 
     if (!sender || !message || !timestamp) {
@@ -25,8 +36,10 @@ export async function POST(request: Request) {
       session_id: session_id || "unknown",
       sender,
       message,
-      input_type: input_type || "text", // Default to text if not provided
+      input_type: input_type || "text",
       client_timestamp: timestamp,
+      user_name: user_name || null,     // 👈 EKLENDİ
+      user_email: user_email || null,   // 👈 EKLENDİ
     });
 
     if (error) {
