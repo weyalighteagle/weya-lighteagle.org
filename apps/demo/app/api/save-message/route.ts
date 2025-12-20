@@ -11,35 +11,42 @@ export async function POST(request: Request) {
       timestamp,
       session_id,
       input_type,
-      request_id,
-      user_name,   // 👈 EKLENDİ
-      user_email,  // 👈 EKLENDİ
-    } = body;
-
-    console.log("📝 save-message received:", {
-      sender,
-      message,
-      session_id,
-      input_type,
-      timestamp,
-      request_id,
       user_name,
       user_email,
-    });
+    } = body;
 
-    if (!sender || !message || !timestamp) {
-      console.warn("❌ Missing required fields:", body);
+    if (!sender || !message || !timestamp || !session_id) {
       return NextResponse.json({ error: "Missing fields" }, { status: 400 });
     }
 
-    const { data, error } = await supabase.from("chat_transcripts").insert({
-      session_id: session_id || "unknown",
+    let finalUserName = user_name || null;
+    let finalUserEmail = user_email || null;
+
+    // 🔥 FALLBACK: session metadata’dan çek
+    if (!finalUserName || !finalUserEmail) {
+      const { data: meta } = await supabase
+        .from("chat_transcripts")
+        .select("user_name, user_email")
+        .eq("session_id", session_id)
+        .eq("input_type", "meta")
+        .order("created_at", { ascending: true })
+        .limit(1)
+        .single();
+
+      if (meta) {
+        finalUserName = finalUserName || meta.user_name;
+        finalUserEmail = finalUserEmail || meta.user_email;
+      }
+    }
+
+    const { error } = await supabase.from("chat_transcripts").insert({
+      session_id,
       sender,
       message,
       input_type: input_type || "text",
       client_timestamp: timestamp,
-      user_name: user_name || null,     // 👈 EKLENDİ
-      user_email: user_email || null,   // 👈 EKLENDİ
+      user_name: finalUserName,
+      user_email: finalUserEmail,
     });
 
     if (error) {
@@ -47,10 +54,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    console.log("✅ Message saved successfully:", data);
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
-    console.error("❌ Unexpected server error in save-message:", err);
+    console.error("❌ save-message error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
