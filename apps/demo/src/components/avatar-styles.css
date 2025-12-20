@@ -642,3 +642,557 @@ body::after {
     font-size: 0.75rem;
   }
 }
+
+
+/* =========================================================
+   PRE-CHAT FORM – EXISTING WEYA STYLE EXTENSION
+   (Does NOT override brand colors or animations)
+   ========================================================= */
+
+/* Hero form spacing refinement */
+.weya-hero-text-side .weya-form-box {
+  margin-top: 1rem;
+  background: rgba(2, 11, 9, 0.55);
+  border: 1px solid rgba(52, 211, 153, 0.18);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+/* Inputs – align with existing glass style */
+.weya-hero-text-side .weya-input {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.95rem;
+}
+
+.weya-hero-text-side .weya-input::placeholder {
+  color: rgba(148, 163, 184, 0.7);
+}
+
+/* Focus state – same brand glow as buttons */
+.weya-hero-text-side .weya-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow:
+    0 0 0 2px rgba(52, 211, 153, 0.25),
+    0 0 20px rgba(52, 211, 153, 0.15);
+}
+
+/* Select arrow polish */
+.weya-hero-text-side select.weya-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--brand-primary) 50%),
+    linear-gradient(135deg, var(--brand-primary) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(1.1em),
+    calc(100% - 15px) calc(1.1em);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* Start button – slightly calmer than CTA buttons */
+.weya-hero-text-side .weya-btn-aurora {
+  width: 100%;
+  margin-top: 1.2rem;
+  padding: 1.1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  box-shadow:
+    0 0 25px rgba(16, 185, 129, 0.35);
+}
+
+.weya-hero-text-side .weya-btn-aurora:hover {
+  box-shadow:
+    0 0 35px rgba(52, 211, 153, 0.6),
+    0 0 60px rgba(16, 185, 129, 0.35);
+}
+
+/* Error message styling – subtle, not aggressive */
+.weya-hero-text-side > div[style*="color: #ef4444"] {
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+/* Mobile refinement – form doesn’t feel heavy */
+@media (max-width: 768px) {
+  .weya-hero-text-side .weya-form-box {
+    padding: 1.8rem;
+  }
+
+  .weya-hero-text-side .weya-btn-aurora {
+    font-size: 0.85rem;
+    padding: 1rem;
+  }
+}
+/* =========================================================
+   HERO FORM – INLINE / FLOW STYLE
+   ========================================================= */
+
+/* Kart hissini kır */
+.weya-hero-text-side .weya-form-box {
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  padding: 0;
+  box-shadow: none;
+  max-width: 480px;
+}
+
+/* Input’ları daha ince ve yatay algılat */
+.weya-hero-text-side .weya-input {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Placeholder daha zarif */
+.weya-hero-text-side .weya-input::placeholder {
+  color: rgba(148, 163, 184, 0.65);
+  font-weight: 400;
+}
+
+/* Focus daha sakin */
+.weya-hero-text-side .weya-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Select daha az “dropdown” gibi */
+.weya-hero-text-side select.weya-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--brand-primary) 50%),
+    linear-gradient(135deg, var(--brand-primary) 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) calc(1.2em),
+    calc(100% - 16px) calc(1.2em);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* Start butonu artık CTA değil, continuation */
+.weya-hero-text-side .weya-btn-aurora {
+  width: fit-content;
+  margin-top: 1.2rem;
+  padding: 0.9rem 2.8rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  align-self: flex-start;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+}
+
+/* Hover daha minimal */
+.weya-hero-text-side .weya-btn-aurora:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(52, 211, 153, 0.45);
+}
+
+/* Error mesajı formun parçası gibi */
+.weya-hero-text-side > div[style*="color: #ef4444"] {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: #fca5a5 !important;
+}
+
+/* Mobilde tam genişlik ama yine hafif */
+@media (max-width: 768px) {
+  .weya-hero-text-side .weya-form-box {
+    max-width: 100%;
+  }
+
+  .weya-hero-text-side .weya-btn-aurora {
+    align-self: center;
+  }
+}
+/* =========================================================
+   NAVBAR – SUBTLE PREMIUM POLISH
+   ========================================================= */
+
+/* Navbar daha “layered” hissetsin */
+.weya-navbar {
+  background: linear-gradient(
+    180deg,
+    rgba(2, 11, 9, 0.85),
+    rgba(2, 11, 9, 0.65)
+  );
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.15);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Brand: daha sakin ama premium */
+.weya-brand {
+  font-size: 1.9rem;
+  letter-spacing: 0.08em;
+  filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.35));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.weya-brand:hover {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 14px rgba(52, 211, 153, 0.55));
+}
+
+/* Menü linkleri biraz daha “buttery” */
+.weya-nav-link {
+  position: relative;
+  padding: 0.25rem 0;
+  color: rgba(226, 232, 240, 0.75);
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.weya-nav-link:hover {
+  color: var(--brand-primary);
+  transform: translateY(-1px);
+}
+
+/* Alt çizgi daha zarif */
+.weya-nav-link::after {
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand-primary),
+    transparent
+  );
+  opacity: 0.8;
+}
+
+/* Aktif section hissi (JS gerekmez) */
+.weya-nav-link:focus-visible {
+  outline: none;
+  color: var(--brand-primary);
+}
+
+/* Menü arası boşluk biraz daha rafine */
+.weya-nav-menu {
+  gap: 2.2rem;
+}
+
+/* Scroll hissi için mikro animasyon */
+.weya-navbar {
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Mobile menu – daha temiz */
+@media (max-width: 1024px) {
+  .weya-nav-menu {
+    background: linear-gradient(
+      180deg,
+      rgba(2, 11, 9, 0.98),
+      rgba(2, 11, 9, 0.95)
+    );
+  }
+
+  .weya-nav-link {
+    font-size: 1.3rem;
+    letter-spacing: 0.12em;
+  }
+}
+/* =========================================================
+   BRAINTRUST-LIKE PRODUCT FORM LAYOUT
+   (logic untouched, brand preserved)
+   ========================================================= */
+
+/* Hero text biraz geri çekilsin */
+.weya-hero-text-side {
+  max-width: 520px;
+}
+
+/* Başlık daha ürün-odaklı his */
+.weya-hero-title {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+}
+
+.weya-hero-text {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+}
+
+/* FORM = primary surface */
+.weya-hero-text-side .weya-form-box {
+  margin-top: 1.5rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  max-width: 480px;
+}
+
+/* Inputs = enterprise, flat */
+.weya-hero-text-side .weya-input {
+  background: #020b09;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  padding: 14px 14px;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.weya-hero-text-side .weya-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Focus = clean, no glow overload */
+.weya-hero-text-side .weya-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: none;
+  background: #020b09;
+}
+
+/* Select = same visual language */
+.weya-hero-text-side select.weya-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--brand-primary) 50%),
+    linear-gradient(135deg, var(--brand-primary) 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) 55%,
+    calc(100% - 11px) 55%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* CTA = Braintrust-style action */
+.weya-hero-text-side .weya-btn-aurora {
+  margin-top: 1.2rem;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  background: var(--brand-primary);
+  animation: none;
+  box-shadow: none;
+}
+
+.weya-hero-text-side .weya-btn-aurora:hover {
+  background: #10b981;
+  transform: none;
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.25);
+}
+
+/* Error = inline validation like Braintrust */
+.weya-hero-text-side > div[style*="color: #ef4444"] {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: #f87171 !important;
+}
+
+/* Avatar biraz geri planda kalsın */
+.weya-hero-visual-side {
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .weya-hero-container {
+    gap: 2rem;
+  }
+
+  .weya-hero-title {
+    font-size: 2.6rem;
+  }
+}
+
+/* =========================================================
+   WEYA – PREMIUM LIVING UI
+   (no layout / no JS changes)
+   ========================================================= */
+
+/* ---------- SOFT GLOBAL MOTION ---------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weya-hero-text-side,
+.weya-hero-visual-side {
+  animation: fadeUp 0.8s ease-out both;
+}
+
+.weya-hero-visual-side {
+  animation-delay: 0.15s;
+}
+
+/* ---------- HERO DEPTH ---------- */
+
+.weya-hero-container {
+  position: relative;
+}
+
+.weya-hero-container::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -15%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(
+    circle,
+    rgba(52, 211, 153, 0.12),
+    transparent 70%
+  );
+  filter: blur(80px);
+  z-index: 0;
+}
+
+/* ---------- FORM = GLASS SURFACE ---------- */
+
+.weya-hero-text-side .weya-form-box {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 1.75rem;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.weya-hero-text-side .weya-form-box:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 40px 120px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(52, 211, 153, 0.25);
+}
+
+/* ---------- INPUT MICRO INTERACTION ---------- */
+
+.weya-input {
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.weya-input:focus {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- BUTTON = PREMIUM CTA ---------- */
+
+.weya-btn-aurora {
+  position: relative;
+  overflow: hidden;
+}
+
+.weya-btn-aurora::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -30%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: rotate(12deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.weya-btn-aurora:hover::after {
+  opacity: 1;
+  animation: sheen 1.4s ease forwards;
+}
+
+@keyframes sheen {
+  from {
+    transform: translateX(-120%) rotate(12deg);
+  }
+  to {
+    transform: translateX(220%) rotate(12deg);
+  }
+}
+
+/* ---------- AVATAR = SOFT PRESENCE ---------- */
+
+.weya-avatar-img {
+  transition:
+    transform 0.6s ease,
+    box-shadow 0.6s ease;
+}
+
+.weya-avatar-img:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 50px rgba(52, 211, 153, 0.25);
+}
+
+/* ---------- NAVBAR DEPTH ---------- */
+
+.weya-navbar {
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- SECTION TRANSITION FEEL ---------- */
+
+.weya-section {
+  position: relative;
+}
+
+.weya-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: translateX(-50%);
+}
+
+/* ---------- MOBILE: LESS IS MORE ---------- */
+
+@media (max-width: 768px) {
+  .weya-hero-text-side .weya-form-box:hover {
+    transform: none;
+  }
+}
