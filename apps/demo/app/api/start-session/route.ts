@@ -10,10 +10,10 @@ import {
 } from "../secrets";
 import { createClient } from "@supabase/supabase-js";
 
-// 🔐 SERVICE ROLE CLIENT (SADECE SERVER)
+// 🔐 SERVER-ONLY SERVICE ROLE CLIENT
 const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL!,
-  process.env.SUPABASE_SERVICE_ROLE_KEY!
+  process.env.NEXT_PUBLIC_STORAGE_SUPABASE_PUBLISHABLE_KEY!,
+  process.env.STORAGE_SUPABASE_SERVICE_ROLE_KEY!
 );
 
 export async function POST(request: Request) {
@@ -67,7 +67,7 @@ export async function POST(request: Request) {
     const sessionId = data.data.session_id;
 
     // ================= SESSION HEADER ROW =================
-    // 🔥 FORM VERİSİ — SESSION LEVEL (GARANTİLİ WRITE)
+    // 🔥 FORM VERİSİ — SESSION LEVEL (RLS BYPASS)
     const { error: metaError } = await supabaseAdmin
       .from("chat_transcripts")
       .insert({
