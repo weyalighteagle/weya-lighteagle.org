@@ -29,6 +29,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
   /**
    * 1️⃣ FORM VERİSİNİ save-message'e YAZ
+   * (API validation ile birebir uyumlu)
    */
   const saveFormMessage = async (finalPersona: string) => {
     try {
@@ -36,17 +37,21 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
+          // 🔒 save-message'in zorunlu alanları
+          sender: "user",
+          message: "pre-chat form submitted",
+          session_id: "pre-session",
+
+          // 🔥 FORM DATASI
           input_type: "form",
-          firstName,
-          lastName,
-          email,
+          user_name: `${firstName} ${lastName}`.trim(),
+          user_email: email,
           persona: finalPersona,
         }),
       });
     } catch (err) {
       console.error("❌ save-message form error:", err);
-      // burada intentionally error fırlatmıyoruz
-      // live session akışı bozulmasın
+      // intentionally silent
     }
   };
 
