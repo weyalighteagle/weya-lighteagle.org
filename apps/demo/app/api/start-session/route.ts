@@ -8,13 +8,7 @@ import {
   CONTEXT_ID_WEYA_STARTUP,
   LANGUAGE,
 } from "../secrets";
-import { createClient } from "@supabase/supabase-js";
-
-// 🔐 SERVER-ONLY SERVICE ROLE CLIENT
-const supabaseAdmin = createClient(
-  process.env.NEXT_PUBLIC_STORAGE_SUPABASE_PUBLISHABLE_KEY!,
-  process.env.STORAGE_SUPABASE_SERVICE_ROLE_KEY!
-);
+import { supabase } from "../../../src/utils/supabase";
 
 export async function POST(request: Request) {
   try {
@@ -67,8 +61,8 @@ export async function POST(request: Request) {
     const sessionId = data.data.session_id;
 
     // ================= SESSION HEADER ROW =================
-    // 🔥 FORM VERİSİ — SESSION LEVEL (RLS BYPASS)
-    const { error: metaError } = await supabaseAdmin
+    // 🔥 FORM VERİSİ — MESSAGE DEĞİL, SESSION LEVEL
+    const { error: metaError } = await supabase
       .from("chat_transcripts")
       .insert({
         session_id: sessionId,
@@ -85,7 +79,7 @@ export async function POST(request: Request) {
 
     if (metaError) {
       console.error("❌ Session meta insert failed:", metaError);
-      // ❗ Session devam eder, chat bozulmaz
+      // ❗ session / chat BOZULMAZ
     }
 
     // ================= RESPONSE =================
