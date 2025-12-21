@@ -6,18 +6,18 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     const {
-      // chat için
+      // chat
       sender,
       message,
       session_id,
 
-      // form için
+      // form
       firstName,
       lastName,
       email,
       persona,
 
-      // ortak / opsiyonel
+      // meta
       timestamp,
       input_type,
     } = body;
@@ -27,7 +27,7 @@ export async function POST(request: Request) {
 
     /**
      * =========================
-     * 1️⃣ FORM SUBMIT AKIŞI
+     * 1️⃣ FORM SUBMIT
      * =========================
      */
     if (input_type === "form") {
@@ -38,14 +38,20 @@ export async function POST(request: Request) {
         );
       }
 
+      const finalUserName =
+        firstName && lastName ? `${firstName} ${lastName}` : null;
+
+      const finalUserEmail =
+        email && email.trim() !== "" ? email : null;
+
       const { error } = await supabase.from("chat_transcripts").insert({
         session_id: session_id || `form_${crypto.randomUUID()}`,
         sender: "user",
         message: `Form submitted – persona: ${persona}`,
         input_type: "form",
         client_timestamp: finalTimestamp,
-        user_name: `${firstName} ${lastName}`,
-        user_email: email,
+        user_name: finalUserName,
+        user_email: finalUserEmail,
       });
 
       if (error) {
@@ -58,7 +64,7 @@ export async function POST(request: Request) {
 
     /**
      * =========================
-     * 2️⃣ CHAT MESSAGE AKIŞI
+     * 2️⃣ CHAT MESSAGE
      * =========================
      */
     if (!sender || !message || !session_id) {
@@ -68,11 +74,13 @@ export async function POST(request: Request) {
       );
     }
 
-    let finalUserName = null;
-    let finalUserEmail = null;
+    let finalUserName: string | null = null;
+    let finalUserEmail: string | null = null;
 
-    // user meta fallback (ilk session mesajından çek)
-    const { data: meta } = await supabase
+    /**
+     * 🔎 Önce SESSION kaydından dene
+     */
+    const { data: sessionMeta } = await supabase
       .from("chat_transcripts")
       .select("user_name, user_email")
       .eq("session_id", session_id)
@@ -81,9 +89,28 @@ export async function POST(request: Request) {
       .limit(1)
       .single();
 
-    if (meta) {
-      finalUserName = meta.user_name;
-      finalUserEmail = meta.user_email;
+    if (sessionMeta) {
+      finalUserName = sessionMeta.user_name;
+      finalUserEmail = sessionMeta.user_email;
+    }
+
+    /**
+     * 🔎 Session yoksa FORM kaydından dene
+     */
+    if (!finalUserName || !finalUserEmail) {
+      const { data: formMeta } = await supabase
+        .from("chat_transcripts")
+        .select("user_name, user_email")
+        .eq("session_id", session_id)
+        .eq("input_type", "form")
+        .order("created_at", { ascending: true })
+        .limit(1)
+        .single();
+
+      if (formMeta) {
+        finalUserName = finalUserName || formMeta.user_name;
+        finalUserEmail = finalUserEmail || formMeta.user_email;
+      }
     }
 
     const { error } = await supabase.from("chat_transcripts").insert({
