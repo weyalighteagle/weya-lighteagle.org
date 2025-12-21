@@ -13,7 +13,6 @@ import { supabase } from "../../../src/utils/supabase";
 export async function POST(request: Request) {
   try {
     if (!API_KEY) {
-      console.error("❌ API Key missing!");
       return NextResponse.json({ error: "API Key missing" }, { status: 500 });
     }
 
@@ -21,16 +20,13 @@ export async function POST(request: Request) {
     const { persona, firstName, lastName, email } = body;
 
     let selectedContextId = "";
-
-    if (persona === "weya_live") {
-      selectedContextId = CONTEXT_ID_WEYA_LIVE;
-    } else if (persona === "weya_startup") {
+    if (persona === "weya_live") selectedContextId = CONTEXT_ID_WEYA_LIVE;
+    else if (persona === "weya_startup")
       selectedContextId = CONTEXT_ID_WEYA_STARTUP;
-    } else {
+    else
       return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
-    }
 
-    // ================= HEYGEN =================
+    // ===== HEYGEN SESSION =====
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -50,7 +46,6 @@ export async function POST(request: Request) {
     });
 
     const data = await res.json();
-
     if (!res.ok) {
       return NextResponse.json(
         { error: data.message || "Failed to get token" },
@@ -60,35 +55,24 @@ export async function POST(request: Request) {
 
     const sessionId = data.data.session_id;
 
-    // ================= SESSION HEADER ROW =================
-    // 🔥 FORM VERİSİ — MESSAGE DEĞİL, SESSION LEVEL
-    const { error: metaError } = await supabase
-      .from("chat_transcripts")
-      .insert({
-        session_id: sessionId,
-        sender: "user",
-        input_type: "session",
-        message: "__SESSION_META__",
-        client_timestamp: Date.now(),
-        user_name:
-          firstName || lastName
-            ? `${firstName || ""} ${lastName || ""}`.trim()
-            : null,
-        user_email: email || null,
-      });
+    // ===== SESSION META (CANONICAL) =====
+    await supabase.from("chat_transcripts").insert({
+      session_id: sessionId,
+      sender: "system",
+      input_type: "session",
+      message: "__SESSION_INIT__",
+      client_timestamp: Date.now(),
+      user_name:
+        firstName && lastName ? `${firstName} ${lastName}` : null,
+      user_email: email && email.trim() !== "" ? email : null,
+    });
 
-    if (metaError) {
-      console.error("❌ Session meta insert failed:", metaError);
-      // ❗ session / chat BOZULMAZ
-    }
-
-    // ================= RESPONSE =================
     return NextResponse.json({
       session_token: data.data.session_token,
       session_id: sessionId,
     });
-  } catch (error: unknown) {
-    console.error("Server Error (start-session):", error);
+  } catch (err) {
+    console.error("start-session fatal:", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },

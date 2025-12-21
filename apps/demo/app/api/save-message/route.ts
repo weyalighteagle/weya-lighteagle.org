@@ -6,18 +6,13 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     const {
-      // chat
       sender,
       message,
       session_id,
-
-      // form
       firstName,
       lastName,
       email,
       persona,
-
-      // meta
       timestamp,
       input_type,
     } = body;
@@ -25,112 +20,68 @@ export async function POST(request: Request) {
     const finalTimestamp =
       typeof timestamp === "number" ? timestamp : Date.now();
 
-    /**
-     * =========================
-     * 1️⃣ FORM SUBMIT
-     * =========================
-     */
+    // ================= FORM =================
     if (input_type === "form") {
-      if (!firstName || !lastName || !email || !persona) {
+      if (!session_id || !firstName || !lastName || !email || !persona) {
         return NextResponse.json(
-          { error: "Missing required form fields" },
+          { error: "Missing form fields" },
           { status: 400 },
         );
       }
 
-      const finalUserName =
-        firstName && lastName ? `${firstName} ${lastName}` : null;
-
-      const finalUserEmail =
-        email && email.trim() !== "" ? email : null;
-
-      const { error } = await supabase.from("chat_transcripts").insert({
-        session_id: session_id || `form_${crypto.randomUUID()}`,
+      await supabase.from("chat_transcripts").insert({
+        session_id,
         sender: "user",
-        message: `Form submitted – persona: ${persona}`,
         input_type: "form",
+        message: `Form submitted – persona: ${persona}`,
         client_timestamp: finalTimestamp,
-        user_name: finalUserName,
-        user_email: finalUserEmail,
+        user_name: `${firstName} ${lastName}`,
+        user_email: email.trim(),
       });
 
-      if (error) {
-        console.error("❌ Supabase form insert error:", error);
-        return NextResponse.json({ error: error.message }, { status: 500 });
-      }
-
-      return NextResponse.json({ success: true }, { status: 200 });
+      return NextResponse.json({ success: true });
     }
 
-    /**
-     * =========================
-     * 2️⃣ CHAT MESSAGE
-     * =========================
-     */
+    // ================= TEXT =================
     if (!sender || !message || !session_id) {
       return NextResponse.json(
-        { error: "Missing required chat fields" },
+        { error: "Missing chat fields" },
         { status: 400 },
       );
     }
 
-    let finalUserName: string | null = null;
-    let finalUserEmail: string | null = null;
-
-    /**
-     * 🔎 Önce SESSION kaydından dene
-     */
+    // 🔒 SESSION META GUARD (KRİTİK)
     const { data: sessionMeta } = await supabase
       .from("chat_transcripts")
       .select("user_name, user_email")
       .eq("session_id", session_id)
       .eq("input_type", "session")
-      .order("created_at", { ascending: true })
       .limit(1)
       .single();
 
-    if (sessionMeta) {
-      finalUserName = sessionMeta.user_name;
-      finalUserEmail = sessionMeta.user_email;
+    if (!sessionMeta) {
+      return NextResponse.json(
+        { error: "Session not initialized yet" },
+        { status: 409 },
+      );
     }
 
-    /**
-     * 🔎 Session yoksa FORM kaydından dene
-     */
-    if (!finalUserName || !finalUserEmail) {
-      const { data: formMeta } = await supabase
-        .from("chat_transcripts")
-        .select("user_name, user_email")
-        .eq("session_id", session_id)
-        .eq("input_type", "form")
-        .order("created_at", { ascending: true })
-        .limit(1)
-        .single();
-
-      if (formMeta) {
-        finalUserName = finalUserName || formMeta.user_name;
-        finalUserEmail = finalUserEmail || formMeta.user_email;
-      }
-    }
-
-    const { error } = await supabase.from("chat_transcripts").insert({
+    await supabase.from("chat_transcripts").insert({
       session_id,
       sender,
       message,
       input_type: input_type || "text",
       client_timestamp: finalTimestamp,
-      user_name: finalUserName,
-      user_email: finalUserEmail,
+      user_name: sessionMeta.user_name,
+      user_email: sessionMeta.user_email,
     });
 
-    if (error) {
-      console.error("❌ Supabase chat insert error:", error);
-      return NextResponse.json({ error: error.message }, { status: 500 });
-    }
-
-    return NextResponse.json({ success: true }, { status: 200 });
+    return NextResponse.json({ success: true });
   } catch (err) {
-    console.error("❌ save-message fatal error:", err);
-    return NextResponse.json({ error: "Server error" }, { status: 500 });
+    console.error("save-message fatal:", err);
+    return NextResponse.json(
+      { error: "Server error" },
+      { status: 500 },
+    );
   }
 }
