@@ -6,45 +6,84 @@ export async function POST(request: Request) {
     const body = await request.json();
 
     const {
+      // chat için
       sender,
       message,
-      timestamp,
       session_id,
+
+      // form için
+      firstName,
+      lastName,
+      email,
+      persona,
+
+      // ortak / opsiyonel
+      timestamp,
       input_type,
-      user_name,
-      user_email,
     } = body;
 
-    // 🔒 Sert ama net validation
+    const finalTimestamp =
+      typeof timestamp === "number" ? timestamp : Date.now();
+
+    /**
+     * =========================
+     * 1️⃣ FORM SUBMIT AKIŞI
+     * =========================
+     */
+    if (input_type === "form") {
+      if (!firstName || !lastName || !email || !persona) {
+        return NextResponse.json(
+          { error: "Missing required form fields" },
+          { status: 400 },
+        );
+      }
+
+      const { error } = await supabase.from("chat_transcripts").insert({
+        session_id: session_id || `form_${crypto.randomUUID()}`,
+        sender: "user",
+        message: `Form submitted – persona: ${persona}`,
+        input_type: "form",
+        client_timestamp: finalTimestamp,
+        user_name: `${firstName} ${lastName}`,
+        user_email: email,
+      });
+
+      if (error) {
+        console.error("❌ Supabase form insert error:", error);
+        return NextResponse.json({ error: error.message }, { status: 500 });
+      }
+
+      return NextResponse.json({ success: true }, { status: 200 });
+    }
+
+    /**
+     * =========================
+     * 2️⃣ CHAT MESSAGE AKIŞI
+     * =========================
+     */
     if (!sender || !message || !session_id) {
       return NextResponse.json(
-        { error: "Missing required fields" },
+        { error: "Missing required chat fields" },
         { status: 400 },
       );
     }
 
-    // ⏱️ timestamp fallback (sessiz drop olmasın)
-    const finalTimestamp =
-      typeof timestamp === "number" ? timestamp : Date.now();
+    let finalUserName = null;
+    let finalUserEmail = null;
 
-    let finalUserName = user_name || null;
-    let finalUserEmail = user_email || null;
+    // user meta fallback (ilk session mesajından çek)
+    const { data: meta } = await supabase
+      .from("chat_transcripts")
+      .select("user_name, user_email")
+      .eq("session_id", session_id)
+      .eq("input_type", "session")
+      .order("created_at", { ascending: true })
+      .limit(1)
+      .single();
 
-    // 🔥 FALLBACK: session-level metadata’dan çek
-    if (!finalUserName || !finalUserEmail) {
-      const { data: meta } = await supabase
-        .from("chat_transcripts")
-        .select("user_name, user_email")
-        .eq("session_id", session_id)
-        .eq("input_type", "session") // ✅ KRİTİK DÜZELTME
-        .order("created_at", { ascending: true })
-        .limit(1)
-        .single();
-
-      if (meta) {
-        finalUserName = finalUserName || meta.user_name;
-        finalUserEmail = finalUserEmail || meta.user_email;
-      }
+    if (meta) {
+      finalUserName = meta.user_name;
+      finalUserEmail = meta.user_email;
     }
 
     const { error } = await supabase.from("chat_transcripts").insert({
@@ -58,13 +97,13 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error("❌ Supabase error:", error);
+      console.error("❌ Supabase chat insert error:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
-    console.error("❌ save-message error:", err);
+    console.error("❌ save-message fatal error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
