@@ -60,14 +60,15 @@ export async function POST(request: Request) {
 
     const sessionId = data.data.session_id;
 
-    // ================= META → CHAT_TRANSCRIPTS (HER ZAMAN) =================
+    // ================= SESSION HEADER ROW =================
+    // 🔥 FORM VERİSİ — MESSAGE DEĞİL, SESSION LEVEL
     const { error: metaError } = await supabase
       .from("chat_transcripts")
       .insert({
         session_id: sessionId,
-        sender: "user", // 🔥 KRİTİK DÜZELTME
-        message: "user_metadata",
-        input_type: "meta",
+        sender: "user",
+        input_type: "session",
+        message: "__SESSION_META__",
         client_timestamp: Date.now(),
         user_name:
           firstName || lastName
@@ -77,7 +78,8 @@ export async function POST(request: Request) {
       });
 
     if (metaError) {
-      console.error("❌ Metadata insert failed:", metaError);
+      console.error("❌ Session meta insert failed:", metaError);
+      // ❗ session / chat BOZULMAZ
     }
 
     // ================= RESPONSE =================
