@@ -27,37 +27,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [persona]);
 
-  /**
-   * 1️⃣ FORM VERİSİNİ save-message'e YAZ
-   * (API validation ile birebir uyumlu)
-   */
-  const saveFormMessage = async (finalPersona: string) => {
-    try {
-      await fetch("/api/save-message", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          // 🔒 save-message'in zorunlu alanları
-          sender: "user",
-          message: "pre-chat form submitted",
-          session_id: "pre-session",
-
-          // 🔥 FORM DATASI
-          input_type: "form",
-          user_name: `${firstName} ${lastName}`.trim(),
-          user_email: email,
-          persona: finalPersona,
-        }),
-      });
-    } catch (err) {
-      console.error("❌ save-message form error:", err);
-      // intentionally silent
-    }
-  };
-
-  /**
-   * 2️⃣ LIVE SESSION BAŞLAT
-   */
   const startInteraction = async (forcedPersona?: string) => {
     const finalPersona = forcedPersona || selectedPersona;
 
@@ -70,10 +39,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
     setError(null);
 
     try {
-      // 🔥 ÖNCE FORMU KAYDET
-      await saveFormMessage(finalPersona);
-
-      // 🔥 SONRA SESSION BAŞLAT
       const res = await fetch("/api/start-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
