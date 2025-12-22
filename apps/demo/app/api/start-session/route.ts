@@ -8,17 +8,18 @@ import {
   CONTEXT_ID_WEYA_STARTUP,
   LANGUAGE,
 } from "../secrets";
-import { supabase } from "../../../src/utils/supabase";
 
 export async function POST(request: Request) {
   try {
     if (!API_KEY) {
-      console.error("❌ API Key missing!");
+      console.error(
+        "❌ API Key missing! Make sure LIVEAVATAR_API_KEY is set in apps/demo/.env.local",
+      );
       return NextResponse.json({ error: "API Key missing" }, { status: 500 });
     }
 
     const body = await request.json().catch(() => ({}));
-    const { persona, firstName, lastName, email } = body;
+    const { persona } = body;
 
     let selectedContextId = "";
 
@@ -27,10 +28,25 @@ export async function POST(request: Request) {
     } else if (persona === "weya_startup") {
       selectedContextId = CONTEXT_ID_WEYA_STARTUP;
     } else {
-      return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
+      console.error("❌ Error: Invalid or missing persona:", persona);
+      return NextResponse.json(
+        { error: "Invalid persona. Must be 'weya_live' or 'weya_startup'" },
+        { status: 400 },
+      );
     }
 
-    // ================= HEYGEN =================
+    console.log("Debug: Persona:", persona);
+    console.log("Debug: Selected Context ID:", selectedContextId);
+
+    if (!selectedContextId) {
+      console.error("❌ Error: Context ID is missing for persona:", persona);
+      return NextResponse.json(
+        { error: "Context ID not configured for this persona" },
+        { status: 500 },
+      );
+    }
+
+    // HeyGen session token oluştur
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -52,46 +68,22 @@ export async function POST(request: Request) {
     const data = await res.json();
 
     if (!res.ok) {
+      console.error("LiveAvatar API Error:", data);
       return NextResponse.json(
         { error: data.message || "Failed to get token" },
         { status: res.status },
       );
     }
 
-    const sessionId = data.data.session_id;
-
-    // ================= SESSION HEADER ROW =================
-    // 🔥 FORM VERİSİ — MESSAGE DEĞİL, SESSION LEVEL
-    const { error: metaError } = await supabase
-      .from("chat_transcripts")
-      .insert({
-        session_id: sessionId,
-        sender: "user",
-        input_type: "session",
-        message: "__SESSION_META__",
-        client_timestamp: Date.now(),
-        user_name:
-          firstName || lastName
-            ? `${firstName || ""} ${lastName || ""}`.trim()
-            : null,
-        user_email: email || null,
-      });
-
-    if (metaError) {
-      console.error("❌ Session meta insert failed:", metaError);
-      // ❗ session / chat BOZULMAZ
-    }
-
-    // ================= RESPONSE =================
+    // 🔥 Token ve Session ID başarıyla döndür
     return NextResponse.json({
       session_token: data.data.session_token,
-      session_id: sessionId,
+      session_id: data.data.session_id,
     });
   } catch (error: unknown) {
-    console.error("Server Error (start-session):", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 },
-    );
+    console.error("Server Error (start-session route):", error);
+    const errorMessage =
+      error instanceof Error ? error.message : "Internal server error";
+    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
 }
