@@ -1,25 +1,26 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { LiveAvatarSession } from "./LiveAvatarSession";
 import "./avatar-styles.css";
 
-export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
+type Props = {
+  persona?: string;
+};
+
+export const LiveAvatarDemo = ({ persona }: Props) => {
   const [sessionToken, setSessionToken] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 🔒 session manuel kapandı mı?
   const sessionEndedRef = useRef(false);
 
-  // Pre-chat form state
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedPersona, setSelectedPersona] = useState("");
 
-  // AUTO START (persona page) — SADECE İLK GİRİŞTE
   useEffect(() => {
     if (
       persona &&
@@ -102,6 +103,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
         <>
           <nav className="weya-navbar">
             <a href="#" className="weya-brand">WEYA</a>
+
             <div className="weya-nav-menu">
               <a href="#home" className="weya-nav-link">AI Companion</a>
               <a href="#about" className="weya-nav-link">About</a>
@@ -124,19 +126,20 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                 {error && <div className="weya-error">{error}</div>}
 
                 <div className="weya-form-box">
-                  <input
-                    className="weya-input"
-                    placeholder="First name"
-                    value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-
-                  <input
-                    className="weya-input"
-                    placeholder="Last name"
-                    value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
+                  <div className="weya-form-row">
+                    <input
+                      className="weya-input"
+                      placeholder="First name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                    <input
+                      className="weya-input"
+                      placeholder="Last name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </div>
 
                   <input
                     className="weya-input"
@@ -151,15 +154,20 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                     value={selectedPersona}
                     onChange={(e) => setSelectedPersona(e.target.value)}
                   >
-                    <option value="">Select the model for your interview</option>
+                    <option value="">
+                      Select the model for your interview
+                    </option>
                     <option value="family_offices">
-                      Family offices and LPs
+                      Family offices and LPs — seeking to place capital with
+                      clarity, timing, and systemic leverage
                     </option>
                     <option value="fund_builders">
-                      Fund builders and conveners
+                      Fund builders and conveners — seeking to scale trust,
+                      alignment, and momentum
                     </option>
                     <option value="impact_startups">
-                      Impact startups
+                      Impact startups — seeking capital that understands their
+                      context
                     </option>
                     <option value="light_eagle">
                       Learn more about Light Eagle
@@ -174,12 +182,14 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                         setError("Please fill in all fields.");
                         return;
                       }
+
                       if (!selectedPersona) {
                         setError("Please select an interview type.");
                         return;
                       }
 
                       let url = "";
+
                       switch (selectedPersona) {
                         case "family_offices":
                           url = "/interview/family-offices-lps";
@@ -208,18 +218,21 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
               {/* RIGHT */}
               <div className="weya-hero-right">
                 <h2 className="weya-hero-subtitle">
-                  Weya<br />
+                  Weya
+                  <br />
                   A system-intelligence layer for capital, trust, and coordination.
                 </h2>
 
                 <p className="weya-hero-text">
                   Weya is an AI-enabled system that listens, learns, and connects —
-                  transforming conversations into shared intelligence.
+                  transforming conversations into shared intelligence for
+                  impact-driven capital.
                 </p>
 
                 <p className="weya-hero-text">
-                  We are inviting a small group of allocators and builders to
-                  shape Weya’s next phase.
+                  We are inviting a small group of capital allocators and
+                  ecosystem builders to participate in foundational interviews
+                  shaping Weya’s next phase.
                 </p>
               </div>
             </div>
