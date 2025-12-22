@@ -1522,8 +1522,7 @@ body::after {
 }
 
 /* avatar-styles.css */
-/* SADECE ŞEKİL – BOYUT – HİZALAMA – BOŞLUK */
-/* RENK / TON / GÖLGE / GRADIENT YOK */
+/* ES K I  (ilk verdiğim) layout + sadece sol üst WEYA biraz büyük */
 
 .weya-app {
   min-height: 100vh;
@@ -1532,184 +1531,138 @@ body::after {
   flex-direction: column;
 }
 
-/* NAV */
+/* NAVBAR */
 .weya-navbar {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: 28px 72px;
+  align-items: center;
+  padding: 28px 64px;
 }
 
 .weya-brand {
-  font-size: 16px;
+  font-size: 22px;          /* sadece burayı büyüttüm */
   font-weight: 700;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;   /* opsiyonel: daha “logo” gibi dursun */
   text-decoration: none;
 }
 
 .weya-nav-menu {
   display: flex;
-  align-items: center;
-  gap: 44px;
+  gap: 32px;
 }
 
 .weya-nav-link {
-  font-size: 13px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
+  font-size: 14px;
   text-decoration: none;
 }
 
-/* SECTION */
+/* HERO GRID */
 .weya-section {
   flex: 1;
   display: flex;
   align-items: center;
-  padding: 56px 72px 72px;
+  padding: 40px 64px;
 }
 
 .weya-hero-grid {
   width: 100%;
-  max-width: 1320px;
+  max-width: 1280px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 560px 1fr; /* sol daha “form panel” gibi */
-  column-gap: 96px;
-  align-items: start;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
 }
 
-/* LEFT */
+/* LEFT PANEL (FORM CARD) */
 .weya-hero-left {
-  width: 100%;
+  max-width: 520px;
 }
 
 .weya-hero-title {
-  font-size: 40px;
-  line-height: 1.15;
-  font-weight: 650;
-  margin: 0 0 10px 0;
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
 }
 
 .weya-hero-text {
   font-size: 15px;
   line-height: 1.6;
-  margin: 0 0 26px 0;
-  max-width: 520px;
+  margin-bottom: 20px;
 }
 
-/* FORM CARD */
+/* FORM CONTAINER = CARD */
 .weya-form-box {
-  width: 100%;
-  border-radius: 18px;
-  border-width: 1px;
-  border-style: solid;
-  padding: 26px;
+  margin-top: 24px;
+  padding: 32px;
+  border-radius: 16px;
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
 }
 
+/* ROW */
 .weya-form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
+  display: flex;
+  gap: 16px;
 }
 
-/* INPUT / SELECT */
+/* INPUTS */
 .weya-input {
   width: 100%;
-  height: 54px;                 /* daha “premium” form yüksekliği */
-  padding: 0 16px;
+  height: 48px;
+  padding: 0 14px;
   font-size: 14px;
-  line-height: 1;
-  border-radius: 12px;
+  border-radius: 10px;
   border-width: 1px;
-  border-style: solid;
   outline: none;
-  box-sizing: border-box;
 }
 
 .weya-input::placeholder {
   font-size: 13px;
 }
 
-/* SELECT aynı ölçüde dursun */
-select.weya-input {
+/* SELECT */
+.weya-input select {
   appearance: none;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  padding-right: 44px; /* ok için alan */
-  background-repeat: no-repeat;
-  background-position: right 16px center;
-  background-size: 12px 12px;
-}
-
-/* (Renk yok) sadece ikon şekli için inline SVG — currentColor kullanır */
-select.weya-input {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
 }
 
 /* BUTTON */
 .weya-btn-aurora {
-  height: 56px;
-  border-radius: 14px;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  padding: 0 22px;
-  width: 320px;              /* referanstaki gibi “kısa pill” */
-  max-width: 100%;
-  align-self: flex-start;    /* solda hizalı */
+  margin-top: 12px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
   border: none;
 }
 
-.weya-btn-aurora:disabled {
-  cursor: not-allowed;
-}
-
-/* ERROR / LOADING */
-.weya-error {
-  font-size: 13px;
-  line-height: 1.4;
-  margin: 10px 0 0;
-}
-
-.weya-loading-screen {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-  padding: 40px;
-}
-
-.weya-loading {
-  font-size: 14px;
-}
-
-/* RIGHT */
+/* RIGHT PANEL */
 .weya-hero-right {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* sağ blok ortalı */
-  padding-top: 18px;
+  max-width: 520px;
 }
 
 .weya-hero-subtitle {
-  margin: 0 0 18px 0;
-  text-align: center;
-  font-size: 34px;
-  line-height: 1.22;
-  font-weight: 650;
-  max-width: 640px;
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
 }
 
-.weya-hero-right .weya-hero-text {
-  text-align: center;
-  max-width: 640px;
-  margin: 0 0 18px 0;
+/* STATES */
+.weya-error {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.weya-loading-screen,
+.weya-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  font-size: 14px;
 }
 
 /* CHAT MODE */
@@ -1720,44 +1673,20 @@ select.weya-input {
 .weya-session-container {
   flex: 1;
   display: flex;
-  min-height: 0;
 }
 
 /* RESPONSIVE */
-@media (max-width: 1100px) {
-  .weya-navbar {
-    padding: 22px 28px;
+@media (max-width: 960px) {
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
   }
 
   .weya-section {
-    padding: 42px 28px 56px;
+    padding: 32px;
   }
 
-  .weya-hero-grid {
-    grid-template-columns: 1fr;
-    row-gap: 54px;
-  }
-
-  .weya-hero-right {
-    align-items: flex-start;
-  }
-
-  .weya-hero-subtitle,
-  .weya-hero-right .weya-hero-text {
-    text-align: left;
-  }
-}
-
-@media (max-width: 560px) {
-  .weya-form-row {
-    grid-template-columns: 1fr;
-  }
-
-  .weya-hero-title {
-    font-size: 34px;
-  }
-
-  .weya-hero-subtitle {
-    font-size: 28px;
+  .weya-navbar {
+    padding: 24px 32px;
   }
 }
