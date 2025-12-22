@@ -10,13 +10,16 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // 🔒 session manuel kapandı mı?
   const sessionEndedRef = useRef(false);
 
+  // Pre-chat form state
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedPersona, setSelectedPersona] = useState("");
 
+  // AUTO START (persona page) — SADECE İLK GİRİŞTE
   useEffect(() => {
     if (
       persona &&
@@ -84,12 +87,44 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             }}
           />
         </div>
+      ) : persona ? (
+        <div
+          className="weya-session-container"
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            height: "100vh",
+          }}
+        >
+          {error ? (
+            <div style={{ color: "#ef4444", marginBottom: "1rem" }}>
+              {error}
+            </div>
+          ) : (
+            <div className="weya-loading">
+              Connecting to {persona}…
+            </div>
+          )}
+        </div>
       ) : (
         <>
           <nav className="weya-navbar">
             <a href="#" className="weya-brand">
               WEYA
             </a>
+            <div className="weya-nav-menu">
+              <a href="#home" className="weya-nav-link">
+                AI Companion
+              </a>
+              <a href="#about" className="weya-nav-link">
+                About
+              </a>
+              <a href="#contact" className="weya-nav-link">
+                Contact
+              </a>
+            </div>
           </nav>
 
           <section id="home" className="weya-section">
@@ -140,21 +175,21 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                   >
                     <option value="">Select the model for your interview</option>
 
-                    <option value="lp_interview">
+                    <option value="family_offices">
                       Family offices and LPs — seeking to place capital with clarity,
                       timing, and systemic leverage
                     </option>
 
-                    <option value="fund_builder_interview">
+                    <option value="fund_builders">
                       Fund builders and conveners — seeking to scale trust,
                       alignment, and momentum
                     </option>
 
-                    <option value="startup_interview">
+                    <option value="impact_startups">
                       Impact startups — seeking capital that understands their context
                     </option>
 
-                    <option value="learn_light_eagle">
+                    <option value="light_eagle">
                       Learn more about Light Eagle
                     </option>
                   </select>
@@ -174,10 +209,10 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                       }
 
                       const urlMap: Record<string, string> = {
-                        lp_interview: "/interview/family-offices-lps",
-                        fund_builder_interview: "/interview/fund-builders",
-                        startup_interview: "/interview/impact-startups",
-                        learn_light_eagle: "/light-eagle",
+                        family_offices: "/interview/family-offices-lps",
+                        fund_builders: "/interview/fund-builders",
+                        impact_startups: "/interview/impact-startups",
+                        light_eagle: "/light-eagle",
                       };
 
                       window.location.href = urlMap[selectedPersona];
@@ -191,7 +226,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
               {/* SAĞ TARAF */}
               <div className="weya-hero-visual-side">
                 <h2 className="weya-hero-title" style={{ fontSize: "1.5rem" }}>
-                  Weya  
+                  Weya
                   <br />
                   A system-intelligence layer for capital, trust, and coordination.
                 </h2>
