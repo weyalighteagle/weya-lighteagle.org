@@ -1808,3 +1808,44 @@ body::after {
 .weya-hero-right .weya-hero-text:first-of-type {
   margin-top: 8px;
 }
+
+/* =========================================
+   FORM BAŞLIĞINI KARTIN İÇİNE AL (CSS HİLESİ)
+   ========================================= */
+
+/* Sol kolon */
+.weya-hero-left {
+  position: relative;
+}
+
+/* Başlık + açıklama */
+.weya-hero-title,
+.weya-hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Kart */
+.weya-form-box {
+  position: relative;
+  margin-top: -72px; /* başlığı kartın içine çeker */
+  padding-top: 96px; /* başlık için içeride yer açar */
+}
+
+/* Başlık kart içi hizalama */
+.weya-hero-title {
+  margin-bottom: 8px;
+}
+
+/* Açıklama */
+.weya-hero-text {
+  margin-bottom: 24px;
+}
+
+/* Mobilde daha az bindir */
+@media (max-width: 640px) {
+  .weya-form-box {
+    margin-top: -48px;
+    padding-top: 72px;
+  }
+}
