@@ -1690,3 +1690,26 @@ body::after {
     padding: 24px 32px;
   }
 }
+
+/* TEK DEĞİŞİKLİK: HİÇBİR METİN ORTALANMIYOR */
+
+/* sağ bloktaki metinleri açıkça sola hizala */
+.weya-hero-right {
+  max-width: 520px;
+  text-align: left;
+}
+
+.weya-hero-subtitle {
+  text-align: left;
+}
+
+.weya-hero-right .weya-hero-text {
+  text-align: left;
+}
+
+/* TEK EK DEĞİŞİKLİK: Start interview butonu ortalansın */
+
+.weya-btn-aurora {
+  display: block;
+  margin: 12px auto 0; /* yatayda ortalar */
+}
