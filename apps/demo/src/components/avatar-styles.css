@@ -1239,3 +1239,113 @@ body::after {
     gap: 2.5rem;
   }
 }
+
+
+/* =========================
+   LAYOUT DENGE AYARLARI
+   ========================= */
+
+.weya-section {
+  padding: 80px 96px;
+}
+
+.weya-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(420px, 1fr);
+  gap: 96px;
+  align-items: flex-start;
+}
+
+/* =========================
+   SOL TARAF (FORM)
+   ========================= */
+
+.weya-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.weya-hero-title {
+  max-width: 520px;
+  margin-bottom: 16px;
+}
+
+.weya-hero-text {
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+
+.weya-form-box {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* First + Last name yan yana */
+.weya-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.weya-input {
+  width: 100%;
+}
+
+/* =========================
+   BUTON
+   ========================= */
+
+.weya-btn-aurora {
+  margin-top: 12px;
+  align-self: flex-start;
+}
+
+/* =========================
+   SAĞ TARAF (METİN)
+   ========================= */
+
+.weya-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.weya-hero-subtitle {
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+
+.weya-hero-right .weya-hero-text {
+  max-width: 520px;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   RESPONSIVE (MOBİL)
+   ========================= */
+
+@media (max-width: 1024px) {
+  .weya-section {
+    padding: 64px 40px;
+  }
+
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .weya-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .weya-section {
+    padding: 48px 24px;
+  }
+}
