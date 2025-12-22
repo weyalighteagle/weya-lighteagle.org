@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { LiveAvatarSession } from "./LiveAvatarSession";
 import "./avatar-styles.css";
 
@@ -16,8 +15,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedPersona, setSelectedPersona] = useState("");
-
-  const router = useRouter();
 
   // AUTO START (persona page)
   useEffect(() => {
@@ -76,7 +73,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             onSessionStopped={() => {
               setSessionToken("");
               setSessionId(null);
-              router.push("/");
             }}
           />
         </div>
