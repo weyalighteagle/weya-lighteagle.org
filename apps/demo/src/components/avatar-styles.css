@@ -1801,3 +1801,10 @@ body::after {
     grid-template-columns: 1fr;
   }
 }
+.weya-hero-subtitle {
+  margin-top: 40px;
+}
+
+.weya-hero-right .weya-hero-text:first-of-type {
+  margin-top: 8px;
+}
