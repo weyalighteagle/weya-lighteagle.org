@@ -10,16 +10,13 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // 🔒 session manuel kapandı mı?
   const sessionEndedRef = useRef(false);
 
-  // Pre-chat form state
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedPersona, setSelectedPersona] = useState("");
 
-  // AUTO START (persona page) — SADECE İLK GİRİŞTE
   useEffect(() => {
     if (
       persona &&
@@ -37,14 +34,12 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
     const finalPersona = forcedPersona || selectedPersona;
 
     if (!finalPersona) {
-      setError("Please select a Weya experience.");
+      setError("Please select an interview type.");
       return;
     }
 
     setIsLoading(true);
     setError(null);
-
-    // yeni session başlıyorsa resetle
     sessionEndedRef.current = false;
 
     try {
@@ -83,34 +78,11 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             sessionAccessToken={sessionToken}
             session_id={sessionId}
             onSessionStopped={() => {
-              // 🔴 AUTO-RESTART ENGELLENİYOR
               sessionEndedRef.current = true;
               setSessionToken("");
               setSessionId(null);
             }}
           />
-        </div>
-      ) : persona ? (
-        <div
-          className="weya-session-container"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100vh",
-          }}
-        >
-          {error ? (
-            <div style={{ color: "#ef4444", marginBottom: "1rem" }}>
-              {error}
-            </div>
-          ) : (
-            <div className="weya-loading">
-              Connecting to{" "}
-              {persona === "weya_live" ? "Weya Live" : "Weya Startup"}…
-            </div>
-          )}
         </div>
       ) : (
         <>
@@ -118,29 +90,18 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             <a href="#" className="weya-brand">
               WEYA
             </a>
-            <div className="weya-nav-menu">
-              <a href="#home" className="weya-nav-link">
-                AI Companion
-              </a>
-              <a href="#about" className="weya-nav-link">
-                About
-              </a>
-              <a href="#contact" className="weya-nav-link">
-                Contact
-              </a>
-            </div>
           </nav>
 
           <section id="home" className="weya-section">
             <div className="weya-hero-container">
+              {/* SOL TARAF */}
               <div className="weya-hero-text-side">
                 <h1 className="weya-hero-title">
-                  Start a conversation with <span>Weya</span>
+                  Participate in a foundational interview
                 </h1>
 
                 <p className="weya-hero-text">
-                  Experience a live AI companion designed for impact investing
-                  and systemic change. Fill out the form to begin.
+                  Fill out the form to start.
                 </p>
 
                 {error && (
@@ -166,7 +127,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
                   <input
                     className="weya-input"
-                    placeholder="Email address"
+                    placeholder="Email"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -177,9 +138,25 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                     value={selectedPersona}
                     onChange={(e) => setSelectedPersona(e.target.value)}
                   >
-                    <option value="">Select a Weya experience</option>
-                    <option value="weya_live">Weya Live</option>
-                    <option value="weya_startup">Weya Startup</option>
+                    <option value="">Select the model for your interview</option>
+
+                    <option value="lp_interview">
+                      Family offices and LPs — seeking to place capital with clarity,
+                      timing, and systemic leverage
+                    </option>
+
+                    <option value="fund_builder_interview">
+                      Fund builders and conveners — seeking to scale trust,
+                      alignment, and momentum
+                    </option>
+
+                    <option value="startup_interview">
+                      Impact startups — seeking capital that understands their context
+                    </option>
+
+                    <option value="learn_light_eagle">
+                      Learn more about Light Eagle
+                    </option>
                   </select>
 
                   <button
@@ -192,29 +169,44 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                       }
 
                       if (!selectedPersona) {
-                        setError("Please select a Weya experience.");
+                        setError("Please select an interview type.");
                         return;
                       }
 
-                      const url =
-                        selectedPersona === "weya_live"
-                          ? "/talk/weya-live"
-                          : "/talk/weya-startup";
+                      const urlMap: Record<string, string> = {
+                        lp_interview: "/interview/family-offices-lps",
+                        fund_builder_interview: "/interview/fund-builders",
+                        startup_interview: "/interview/impact-startups",
+                        learn_light_eagle: "/light-eagle",
+                      };
 
-                      window.location.href = url;
+                      window.location.href = urlMap[selectedPersona];
                     }}
                   >
-                    Start live session
+                    Start interview
                   </button>
                 </div>
               </div>
 
+              {/* SAĞ TARAF */}
               <div className="weya-hero-visual-side">
-                <img
-                  src="/weya.jpeg"
-                  alt="Weya AI Avatar"
-                  className="weya-avatar-img"
-                />
+                <h2 className="weya-hero-title" style={{ fontSize: "1.5rem" }}>
+                  Weya  
+                  <br />
+                  A system-intelligence layer for capital, trust, and coordination.
+                </h2>
+
+                <p className="weya-hero-text">
+                  Weya is an AI-enabled system that listens, learns, and connects —
+                  transforming conversations into shared intelligence for
+                  impact-driven capital.
+                </p>
+
+                <p className="weya-hero-text">
+                  We are inviting a small group of capital allocators and ecosystem
+                  builders to participate in foundational interviews shaping Weya’s
+                  next phase.
+                </p>
               </div>
             </div>
           </section>
