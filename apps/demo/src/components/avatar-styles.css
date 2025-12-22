@@ -1521,3 +1521,243 @@ body::after {
   }
 }
 
+/* avatar-styles.css */
+/* SADECE ŞEKİL – BOYUT – HİZALAMA – BOŞLUK */
+/* RENK / TON / GÖLGE / GRADIENT YOK */
+
+.weya-app {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAV */
+.weya-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 72px;
+}
+
+.weya-brand {
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-decoration: none;
+}
+
+.weya-nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 44px;
+}
+
+.weya-nav-link {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+
+/* SECTION */
+.weya-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 56px 72px 72px;
+}
+
+.weya-hero-grid {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 560px 1fr; /* sol daha “form panel” gibi */
+  column-gap: 96px;
+  align-items: start;
+}
+
+/* LEFT */
+.weya-hero-left {
+  width: 100%;
+}
+
+.weya-hero-title {
+  font-size: 40px;
+  line-height: 1.15;
+  font-weight: 650;
+  margin: 0 0 10px 0;
+}
+
+.weya-hero-text {
+  font-size: 15px;
+  line-height: 1.6;
+  margin: 0 0 26px 0;
+  max-width: 520px;
+}
+
+/* FORM CARD */
+.weya-form-box {
+  width: 100%;
+  border-radius: 18px;
+  border-width: 1px;
+  border-style: solid;
+  padding: 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.weya-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+/* INPUT / SELECT */
+.weya-input {
+  width: 100%;
+  height: 54px;                 /* daha “premium” form yüksekliği */
+  padding: 0 16px;
+  font-size: 14px;
+  line-height: 1;
+  border-radius: 12px;
+  border-width: 1px;
+  border-style: solid;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.weya-input::placeholder {
+  font-size: 13px;
+}
+
+/* SELECT aynı ölçüde dursun */
+select.weya-input {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  padding-right: 44px; /* ok için alan */
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 12px 12px;
+}
+
+/* (Renk yok) sadece ikon şekli için inline SVG — currentColor kullanır */
+select.weya-input {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none'%3E%3Cpath d='M6 9l6 6 6-6' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+
+/* BUTTON */
+.weya-btn-aurora {
+  height: 56px;
+  border-radius: 14px;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0 22px;
+  width: 320px;              /* referanstaki gibi “kısa pill” */
+  max-width: 100%;
+  align-self: flex-start;    /* solda hizalı */
+  cursor: pointer;
+  border: none;
+}
+
+.weya-btn-aurora:disabled {
+  cursor: not-allowed;
+}
+
+/* ERROR / LOADING */
+.weya-error {
+  font-size: 13px;
+  line-height: 1.4;
+  margin: 10px 0 0;
+}
+
+.weya-loading-screen {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  padding: 40px;
+}
+
+.weya-loading {
+  font-size: 14px;
+}
+
+/* RIGHT */
+.weya-hero-right {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* sağ blok ortalı */
+  padding-top: 18px;
+}
+
+.weya-hero-subtitle {
+  margin: 0 0 18px 0;
+  text-align: center;
+  font-size: 34px;
+  line-height: 1.22;
+  font-weight: 650;
+  max-width: 640px;
+}
+
+.weya-hero-right .weya-hero-text {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 0 18px 0;
+}
+
+/* CHAT MODE */
+.mode-chat {
+  height: 100vh;
+}
+
+.weya-session-container {
+  flex: 1;
+  display: flex;
+  min-height: 0;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .weya-navbar {
+    padding: 22px 28px;
+  }
+
+  .weya-section {
+    padding: 42px 28px 56px;
+  }
+
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    row-gap: 54px;
+  }
+
+  .weya-hero-right {
+    align-items: flex-start;
+  }
+
+  .weya-hero-subtitle,
+  .weya-hero-right .weya-hero-text {
+    text-align: left;
+  }
+}
+
+@media (max-width: 560px) {
+  .weya-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .weya-hero-title {
+    font-size: 34px;
+  }
+
+  .weya-hero-subtitle {
+    font-size: 28px;
+  }
+}
