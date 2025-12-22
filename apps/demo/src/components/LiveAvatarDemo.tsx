@@ -182,10 +182,15 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                         return;
                       }
 
-                      startInteraction(selectedPersona);
+                      const url =
+                        selectedPersona === "weya_live"
+                          ? "/talk/weya-live"
+                          : "/talk/weya-startup";
+
+                      window.location.href = url;
                     }}
                   >
-                    {isLoading ? "Starting…" : "Start live session"}
+                    Start live session
                   </button>
                 </div>
               </div>
