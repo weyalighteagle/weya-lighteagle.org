@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { LiveAvatarSession } from "./LiveAvatarSession";
 import "./avatar-styles.css";
 
@@ -10,15 +10,24 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // 🔒 session manuel kapandı mı?
+  const sessionEndedRef = useRef(false);
+
   // Pre-chat form state
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedPersona, setSelectedPersona] = useState("");
 
-  // AUTO START (persona page)
+  // AUTO START (persona page) — SADECE İLK GİRİŞTE
   useEffect(() => {
-    if (persona && !sessionToken && !isLoading && !error) {
+    if (
+      persona &&
+      !sessionToken &&
+      !isLoading &&
+      !error &&
+      !sessionEndedRef.current
+    ) {
       startInteraction(persona);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,6 +43,9 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
     setIsLoading(true);
     setError(null);
+
+    // yeni session başlıyorsa resetle
+    sessionEndedRef.current = false;
 
     try {
       const res = await fetch("/api/start-session", {
@@ -71,6 +83,8 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             sessionAccessToken={sessionToken}
             session_id={sessionId}
             onSessionStopped={() => {
+              // 🔴 AUTO-RESTART ENGELLENİYOR
+              sessionEndedRef.current = true;
               setSessionToken("");
               setSessionId(null);
             }}
