@@ -1713,3 +1713,11 @@ body::after {
   display: block;
   margin: 12px auto 0; /* yatayda ortalar */
 }
+/* BUTON YAZISI ORTADA (yatay + dikey) */
+
+.weya-btn-aurora {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
