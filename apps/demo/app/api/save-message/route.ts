@@ -30,13 +30,13 @@ export async function POST(request: Request) {
     let finalUserName = user_name || null;
     let finalUserEmail = user_email || null;
 
-    // 🔥 FALLBACK: session metadata’dan çek
+    // 🔥 FALLBACK: session-level metadata’dan çek
     if (!finalUserName || !finalUserEmail) {
       const { data: meta } = await supabase
         .from("chat_transcripts")
         .select("user_name, user_email")
         .eq("session_id", session_id)
-        .eq("input_type", "meta")
+        .eq("input_type", "session") // ✅ KRİTİK DÜZELTME
         .order("created_at", { ascending: true })
         .limit(1)
         .single();
