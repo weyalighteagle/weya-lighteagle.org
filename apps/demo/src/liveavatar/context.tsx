@@ -41,9 +41,11 @@ type LiveAvatarContextProps = {
   ) => void;
 };
 
-// 🔌 Varsayılan context
+// 🔌 Varsayılan context objesi
 export const LiveAvatarContext = createContext<LiveAvatarContextProps>({
-  sessionRef: { current: null } as unknown as React.RefObject<LiveAvatarSession>,
+  sessionRef: {
+    current: null,
+  } as unknown as React.RefObject<LiveAvatarSession>,
   sessionId: null,
   connectionQuality: ConnectionQuality.UNKNOWN,
   isMuted: true,
@@ -56,7 +58,7 @@ export const LiveAvatarContext = createContext<LiveAvatarContextProps>({
   addMessage: () => {},
 });
 
-// 🎯 Provider props
+// 🎯 GÜNCELLENEN: `session_id` prop olarak alınıyor
 type LiveAvatarContextProviderProps = {
   children: React.ReactNode;
   sessionAccessToken: string;
@@ -77,7 +79,7 @@ export const LiveAvatarContextProvider = ({
     new LiveAvatarSession(sessionAccessToken, config),
   );
 
-  // 🔑 Session ID (backend’den gelen)
+  // ✅ Artık state ile uğraşmadan doğrudan kullan
   const sessionId = session_id ?? null;
 
   // ----- session state -----
@@ -125,7 +127,7 @@ export const LiveAvatarContextProvider = ({
     voiceChat.on(VoiceChatEvent.STATE_CHANGED, setVoiceChatState);
   }, []);
 
-  // ----- talking state -----
+  // ----- talking -----
   const [isUserTalking, setIsUserTalking] = useState(false);
   const [isAvatarTalking, setIsAvatarTalking] = useState(false);
 
@@ -135,9 +137,7 @@ export const LiveAvatarContextProvider = ({
     session.on(AgentEventsEnum.USER_SPEAK_STARTED, () =>
       setIsUserTalking(true),
     );
-    session.on(AgentEventsEnum.USER_SPEAK_ENDED, () =>
-      setIsUserTalking(false),
-    );
+    session.on(AgentEventsEnum.USER_SPEAK_ENDED, () => setIsUserTalking(false));
 
     session.on(AgentEventsEnum.AVATAR_SPEAK_STARTED, () =>
       setIsAvatarTalking(true),
@@ -147,14 +147,15 @@ export const LiveAvatarContextProvider = ({
     );
   }, []);
 
-  // ----- messages -----
+  // ---- messages ----
   const [messages, setMessages] = useState<LiveAvatarSessionMessage[]>([]);
   const lastUserMessageRef = useRef<string | null>(null);
 
-  // 🔄 Deduplication
+  // 🔄 DEDUP: Track last saved message to prevent Text vs Voice duplication
   const lastSavedMessage = useRef<{
     sender: MessageSender;
     text: string;
+    // We intentionally store inputType but might ignore it for loose matching
     inputType: "text" | "voice";
     timestamp: number;
   } | null>(null);
@@ -165,25 +166,43 @@ export const LiveAvatarContextProvider = ({
       text: string,
       inputType: "text" | "voice" = "text",
     ) => {
-      const now = Date.now();
+      console.log("🚀 addMessage called", { sender, text, inputType });
 
-      // ---- DEDUP ----
+      // --- DEDUPLICATION START ---
+      const now = Date.now();
+      const duplicateWindow = 2000; // 2 seconds window
+
       if (lastSavedMessage.current) {
         const last = lastSavedMessage.current;
-        const isSame =
-          last.sender === sender &&
-          last.text.trim() === text.trim() &&
-          now - last.timestamp < 2000;
+        const isSameSender = last.sender === sender;
+        const isSameText = last.text.trim() === text.trim();
+        const isRecent = now - last.timestamp < duplicateWindow;
 
-        if (isSame) return;
+        // CRITICAL FIX: We ignore 'inputType' here.
+        // If the user sends "Hello" (text), and then we get "Hello" (voice) from the echo,
+        // we want to treat them as the same message and SKIP saving the second one.
+        if (isSameSender && isSameText && isRecent) {
+          console.warn(
+            "🚫 Skipping duplicate message log (Text+Voice overlap):",
+            {
+              text,
+              sender,
+              inputType,
+              lastInputType: last.inputType,
+            },
+          );
+          return;
+        }
       }
 
+      // Update the last saved message ref
       lastSavedMessage.current = {
         sender,
         text: text.trim(),
         inputType,
         timestamp: now,
       };
+      // --- DEDUPLICATION END ---
 
       if (sender === MessageSender.USER) {
         lastUserMessageRef.current = text;
@@ -191,15 +210,14 @@ export const LiveAvatarContextProvider = ({
 
       setMessages((prev) => [
         ...prev,
-        { sender, message: text, timestamp: now },
+        {
+          sender,
+          message: text,
+          timestamp: now,
+        },
       ]);
 
-      // 🔴 KRİTİK DÜZELTME: sessionId yoksa backend’e vurma
-      if (!sessionId) {
-        console.warn("⚠️ sessionId missing, skipping save-message");
-        return;
-      }
-
+      // Map MessageSender to "user" | "avatar" for the API
       const apiSender = sender === MessageSender.USER ? "user" : "avatar";
 
       try {
@@ -212,7 +230,7 @@ export const LiveAvatarContextProvider = ({
             timestamp: now,
             session_id: sessionId,
             input_type: inputType,
-            request_id: Math.random().toString(36).substring(7),
+            request_id: Math.random().toString(36).substring(7), // Trace duplicates
           }),
         });
       } catch (err) {
@@ -222,7 +240,7 @@ export const LiveAvatarContextProvider = ({
     [sessionId],
   );
 
-  // ----- auto transcript logging -----
+  // 🔥 FULL TRANSCRIPT AUTO LOGGING
   useEffect(() => {
     const session = sessionRef.current;
     if (!session) return;
@@ -230,15 +248,18 @@ export const LiveAvatarContextProvider = ({
     const handleUserTranscription = (event: { text: string }) => {
       if (!event?.text) return;
 
+      // 🔍 DEDUP: Ignore if matches last sent text
       const normalizedEvent = event.text.trim().toLowerCase();
       const normalizedLast =
         lastUserMessageRef.current?.trim().toLowerCase() || "";
 
+      // Check if the transcription is contained in the last message or vice versa (fuzzy match)
       if (
         normalizedLast &&
         (normalizedEvent.includes(normalizedLast) ||
           normalizedLast.includes(normalizedEvent))
       ) {
+        console.log("🚫 Ignoring duplicate voice transcription:", event.text);
         return;
       }
 
@@ -260,7 +281,7 @@ export const LiveAvatarContextProvider = ({
         handleAvatarTranscription,
       );
     };
-  }, [addMessage]);
+  }, [sessionRef, sessionId, addMessage]);
 
   return (
     <LiveAvatarContext.Provider
