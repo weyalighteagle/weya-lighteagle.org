@@ -1849,3 +1849,28 @@ body::after {
     padding-top: 72px;
   }
 }
+/* =====================================
+   BRAINTRUST GİBİ: FORM BAŞLIĞIN ALTINA GİRER
+   ===================================== */
+
+/* Sol kolon normal akışta kalsın */
+.weya-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Başlıklar normal yerinde */
+.weya-hero-title {
+  margin-bottom: 8px;
+}
+
+.weya-hero-left > .weya-hero-text {
+  margin-bottom: 24px;
+}
+
+/* FORM kartı yukarı alınır */
+.weya-form-box {
+  margin-top: -12px; /* kritik nokta */
+  padding-top: 32px;
+}
