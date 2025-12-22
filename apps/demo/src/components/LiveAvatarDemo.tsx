@@ -101,16 +101,16 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
         </div>
       ) : (
         <>
+          {/* NAVBAR */}
           <nav className="weya-navbar">
             <a href="#" className="weya-brand">WEYA</a>
 
             <div className="weya-nav-menu">
               <a href="#home" className="weya-nav-link">AI Companion</a>
-              <a href="#about" className="weya-nav-link">About</a>
-              <a href="#contact" className="weya-nav-link">Contact</a>
             </div>
           </nav>
 
+          {/* HERO */}
           <section id="home" className="weya-section">
             <div className="weya-hero-grid">
               {/* LEFT */}
@@ -237,6 +237,12 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               </div>
             </div>
           </section>
+
+          {/* FOOTER */}
+          <footer className="weya-footer">
+            <a href="#about" className="weya-footer-link">About</a>
+            <a href="#contact" className="weya-footer-link">Contact</a>
+          </footer>
         </>
       )}
     </div>
