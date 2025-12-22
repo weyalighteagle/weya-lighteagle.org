@@ -1349,3 +1349,98 @@ body::after {
     padding: 48px 24px;
   }
 }
+
+/* =========================
+   ANA SAYFA DENGESİ
+   ========================= */
+
+.weya-section {
+  padding: 72px 80px;
+}
+
+.weya-hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* =========================
+   SOL TARAF
+   ========================= */
+
+.weya-hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.weya-hero-title {
+  margin-bottom: 12px;
+}
+
+.weya-hero-text {
+  margin-bottom: 20px;
+}
+
+.weya-form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 480px;
+}
+
+/* İsimler yan yana ama taşmıyor */
+.weya-form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.weya-input {
+  width: 100%;
+}
+
+/* =========================
+   BUTON
+   ========================= */
+
+.weya-btn-aurora {
+  margin-top: 8px;
+}
+
+/* =========================
+   SAĞ TARAF
+   ========================= */
+
+.weya-hero-right {
+  display: flex;
+  flex-direction: column;
+}
+
+.weya-hero-subtitle {
+  margin-bottom: 20px;
+}
+
+.weya-hero-right .weya-hero-text {
+  margin-bottom: 16px;
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 900px) {
+  .weya-section {
+    padding: 48px 32px;
+  }
+
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .weya-form-row {
+    flex-direction: column;
+  }
+}
