@@ -4,29 +4,57 @@ import { supabase } from "../../../src/utils/supabase";
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { sender, message, timestamp, session_id, input_type, request_id } =
-      body;
 
-    console.log("📝 save-message received:", {
+    const {
       sender,
       message,
+      timestamp,
       session_id,
       input_type,
-      timestamp,
-      request_id,
-    });
+      user_name,
+      user_email,
+    } = body;
 
-    if (!sender || !message || !timestamp) {
-      console.warn("❌ Missing required fields:", body);
-      return NextResponse.json({ error: "Missing fields" }, { status: 400 });
+    // 🔒 Sert ama net validation
+    if (!sender || !message || !session_id) {
+      return NextResponse.json(
+        { error: "Missing required fields" },
+        { status: 400 },
+      );
     }
 
-    const { data, error } = await supabase.from("chat_transcripts").insert({
-      session_id: session_id || "unknown",
+    // ⏱️ timestamp fallback (sessiz drop olmasın)
+    const finalTimestamp =
+      typeof timestamp === "number" ? timestamp : Date.now();
+
+    let finalUserName = user_name || null;
+    let finalUserEmail = user_email || null;
+
+    // 🔥 FALLBACK: session metadata’dan çek
+    if (!finalUserName || !finalUserEmail) {
+      const { data: meta } = await supabase
+        .from("chat_transcripts")
+        .select("user_name, user_email")
+        .eq("session_id", session_id)
+        .eq("input_type", "meta")
+        .order("created_at", { ascending: true })
+        .limit(1)
+        .single();
+
+      if (meta) {
+        finalUserName = finalUserName || meta.user_name;
+        finalUserEmail = finalUserEmail || meta.user_email;
+      }
+    }
+
+    const { error } = await supabase.from("chat_transcripts").insert({
+      session_id,
       sender,
       message,
-      input_type: input_type || "text", // Default to text if not provided
-      client_timestamp: timestamp,
+      input_type: input_type || "text",
+      client_timestamp: finalTimestamp,
+      user_name: finalUserName,
+      user_email: finalUserEmail,
     });
 
     if (error) {
@@ -34,10 +62,9 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    console.log("✅ Message saved successfully:", data);
     return NextResponse.json({ success: true }, { status: 200 });
   } catch (err) {
-    console.error("❌ Unexpected server error in save-message:", err);
+    console.error("❌ save-message error:", err);
     return NextResponse.json({ error: "Server error" }, { status: 500 });
   }
 }
