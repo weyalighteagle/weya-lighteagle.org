@@ -101,148 +101,139 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
         </div>
       ) : (
         <>
-          {/* NAVBAR */}
           <nav className="weya-navbar">
-            <div className="weya-navbar-inner">
-              <a href="#" className="weya-brand">WEYA</a>
+            <a href="#" className="weya-brand">WEYA</a>
 
-              <div className="weya-nav-menu">
-                <a href="#home" className="weya-nav-link">AI Companion</a>
-                <a href="#about" className="weya-nav-link">About</a>
-                <a href="#contact" className="weya-nav-link">Contact</a>
-              </div>
+            <div className="weya-nav-menu">
+              <a href="#home" className="weya-nav-link">AI Companion</a>
+              <a href="#about" className="weya-nav-link">About</a>
+              <a href="#contact" className="weya-nav-link">Contact</a>
             </div>
           </nav>
 
-          {/* HERO */}
-          <section id="home" className="weya-hero">
-            <div className="weya-hero-container">
-              <div className="weya-hero-grid">
+          <section id="home" className="weya-section">
+            <div className="weya-hero-grid">
+              {/* LEFT */}
+              <div className="weya-hero-left">
+                <h1 className="weya-hero-title">
+                  Participate in a foundational interview
+                </h1>
 
-                {/* LEFT – FORM CARD */}
-                <div className="weya-hero-left">
-                  <div className="weya-form-card">
-                    <h1 className="weya-form-title">
-                      Participate in a foundational interview
-                    </h1>
+                <p className="weya-hero-text">
+                  Fill out the form to start.
+                </p>
 
-                    <p className="weya-form-subtitle">
-                      Fill out the form to start.
-                    </p>
+                {error && <div className="weya-error">{error}</div>}
 
-                    {error && <div className="weya-error">{error}</div>}
-
-                    <div className="weya-form-row">
-                      <input
-                        className="weya-input"
-                        placeholder="First name"
-                        value={firstName}
-                        onChange={(e) => setFirstName(e.target.value)}
-                      />
-                      <input
-                        className="weya-input"
-                        placeholder="Last name"
-                        value={lastName}
-                        onChange={(e) => setLastName(e.target.value)}
-                      />
-                    </div>
-
+                <div className="weya-form-box">
+                  <div className="weya-form-row">
                     <input
                       className="weya-input"
-                      placeholder="Email"
-                      type="email"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="First name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
                     />
-
-                    <select
+                    <input
                       className="weya-input"
-                      value={selectedPersona}
-                      onChange={(e) => setSelectedPersona(e.target.value)}
-                    >
-                      <option value="">
-                        Select the model for your interview
-                      </option>
-                      <option value="family_offices">
-                        Family offices and LPs
-                      </option>
-                      <option value="fund_builders">
-                        Fund builders and conveners
-                      </option>
-                      <option value="impact_startups">
-                        Impact startups
-                      </option>
-                      <option value="light_eagle">
-                        Learn more about Light Eagle
-                      </option>
-                    </select>
-
-                    <button
-                      className="weya-btn-primary"
-                      disabled={isLoading}
-                      onClick={() => {
-                        if (!firstName || !lastName || !email) {
-                          setError("Please fill in all fields.");
-                          return;
-                        }
-
-                        if (!selectedPersona) {
-                          setError("Please select an interview type.");
-                          return;
-                        }
-
-                        let url = "";
-
-                        switch (selectedPersona) {
-                          case "family_offices":
-                            url = "/interview/family-offices-lps";
-                            break;
-                          case "fund_builders":
-                            url = "/interview/fund-builders";
-                            break;
-                          case "impact_startups":
-                            url = "/interview/impact-startups";
-                            break;
-                          case "light_eagle":
-                            url = "/light-eagle";
-                            break;
-                          default:
-                            return;
-                        }
-
-                        window.location.href = url;
-                      }}
-                    >
-                      Start interview
-                    </button>
+                      placeholder="Last name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
                   </div>
+
+                  <input
+                    className="weya-input"
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+
+                  <select
+                    className="weya-input"
+                    value={selectedPersona}
+                    onChange={(e) => setSelectedPersona(e.target.value)}
+                  >
+                    <option value="">
+                      Select the model for your interview
+                    </option>
+                    <option value="family_offices">
+                      Family offices and LPs — seeking to place capital with
+                      clarity, timing, and systemic leverage
+                    </option>
+                    <option value="fund_builders">
+                      Fund builders and conveners — seeking to scale trust,
+                      alignment, and momentum
+                    </option>
+                    <option value="impact_startups">
+                      Impact startups — seeking capital that understands their
+                      context
+                    </option>
+                    <option value="light_eagle">
+                      Learn more about Light Eagle
+                    </option>
+                  </select>
+
+                  <button
+                    className="weya-btn-aurora"
+                    disabled={isLoading}
+                    onClick={() => {
+                      if (!firstName || !lastName || !email) {
+                        setError("Please fill in all fields.");
+                        return;
+                      }
+
+                      if (!selectedPersona) {
+                        setError("Please select an interview type.");
+                        return;
+                      }
+
+                      let url = "";
+
+                      switch (selectedPersona) {
+                        case "family_offices":
+                          url = "/interview/family-offices-lps";
+                          break;
+                        case "fund_builders":
+                          url = "/interview/fund-builders";
+                          break;
+                        case "impact_startups":
+                          url = "/interview/impact-startups";
+                          break;
+                        case "light_eagle":
+                          url = "/light-eagle";
+                          break;
+                        default:
+                          return;
+                      }
+
+                      window.location.href = url;
+                    }}
+                  >
+                    Start interview
+                  </button>
                 </div>
+              </div>
 
-                {/* RIGHT – COPY */}
-                <div className="weya-hero-right">
-                  <h2 className="weya-hero-heading">
-                    Try a live Weya Interview
-                  </h2>
+              {/* RIGHT */}
+              <div className="weya-hero-right">
+                <h2 className="weya-hero-subtitle">
+                  Weya
+                  <br />
+                  A system-intelligence layer for capital, trust, and coordination.
+                </h2>
 
-                  <p className="weya-hero-text">
-                    Weya is an AI-enabled system that listens, learns, and connects —
-                    transforming conversations into shared intelligence for
-                    impact-driven capital.
-                  </p>
+                <p className="weya-hero-text">
+                  Weya is an AI-enabled system that listens, learns, and connects —
+                  transforming conversations into shared intelligence for
+                  impact-driven capital.
+                </p>
 
-                  <ul className="weya-hero-list">
-                    <li>Automated, human-centered interviews</li>
-                    <li>Consistent signal across conversations</li>
-                    <li>Designed for trust, clarity, and alignment</li>
-                  </ul>
-
-                  <p className="weya-hero-text">
-                    We are inviting a small group of capital allocators and
-                    ecosystem builders to participate in foundational interviews
-                    shaping Weya’s next phase.
-                  </p>
-                </div>
-
+                <p className="weya-hero-text">
+                  We are inviting a small group of capital allocators and
+                  ecosystem builders to participate in foundational interviews
+                  shaping Weya’s next phase.
+                </p>
               </div>
             </div>
           </section>
