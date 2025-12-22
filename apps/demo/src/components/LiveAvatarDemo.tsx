@@ -43,6 +43,8 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
     setIsLoading(true);
     setError(null);
+
+    // yeni session başlıyorsa resetle
     sessionEndedRef.current = false;
 
     try {
@@ -81,6 +83,7 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             sessionAccessToken={sessionToken}
             session_id={sessionId}
             onSessionStopped={() => {
+              // 🔴 AUTO-RESTART ENGELLENİYOR
               sessionEndedRef.current = true;
               setSessionToken("");
               setSessionId(null);
@@ -104,7 +107,8 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             </div>
           ) : (
             <div className="weya-loading">
-              Connecting to {persona}…
+              Connecting to{" "}
+              {persona === "weya_live" ? "Weya Live" : "Weya Startup"}…
             </div>
           )}
         </div>
@@ -129,15 +133,12 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
           <section id="home" className="weya-section">
             <div className="weya-hero-container">
-              {/* SOL TARAF */}
               <div className="weya-hero-text-side">
                 <h1 className="weya-hero-title">
                   Participate in a foundational interview
                 </h1>
 
-                <p className="weya-hero-text">
-                  Fill out the form to start.
-                </p>
+                <p className="weya-hero-text">Fill out the form to start.</p>
 
                 {error && (
                   <div style={{ color: "#ef4444", marginBottom: "0.75rem" }}>
@@ -176,8 +177,8 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                     <option value="">Select the model for your interview</option>
 
                     <option value="family_offices">
-                      Family offices and LPs — seeking to place capital with clarity,
-                      timing, and systemic leverage
+                      Family offices and LPs — seeking to place capital with
+                      clarity, timing, and systemic leverage
                     </option>
 
                     <option value="fund_builders">
@@ -186,12 +187,11 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                     </option>
 
                     <option value="impact_startups">
-                      Impact startups — seeking capital that understands their context
+                      Impact startups — seeking capital that understands their
+                      context
                     </option>
 
-                    <option value="light_eagle">
-                      Learn more about Light Eagle
-                    </option>
+                    <option value="light_eagle">Learn more about Light Eagle</option>
                   </select>
 
                   <button
@@ -208,14 +208,26 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                         return;
                       }
 
-                      const urlMap: Record<string, string> = {
-                        family_offices: "/interview/family-offices-lps",
-                        fund_builders: "/interview/fund-builders",
-                        impact_startups: "/interview/impact-startups",
-                        light_eagle: "/light-eagle",
-                      };
+                      let url = "";
+                      switch (selectedPersona) {
+                        case "family_offices":
+                          url = "/interview/family-offices-lps";
+                          break;
+                        case "fund_builders":
+                          url = "/interview/fund-builders";
+                          break;
+                        case "impact_startups":
+                          url = "/interview/impact-startups";
+                          break;
+                        case "light_eagle":
+                          url = "/light-eagle";
+                          break;
+                        default:
+                          setError("Please select an interview type.");
+                          return;
+                      }
 
-                      window.location.href = urlMap[selectedPersona];
+                      window.location.href = url;
                     }}
                   >
                     Start interview
@@ -223,25 +235,27 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                 </div>
               </div>
 
-              {/* SAĞ TARAF */}
               <div className="weya-hero-visual-side">
-                <h2 className="weya-hero-title" style={{ fontSize: "1.5rem" }}>
-                  Weya
-                  <br />
-                  A system-intelligence layer for capital, trust, and coordination.
-                </h2>
+                <div style={{ maxWidth: 520 }}>
+                  <h2 className="weya-hero-title" style={{ fontSize: "1.5rem" }}>
+                    Weya
+                    <br />
+                    A system-intelligence layer for capital, trust, and
+                    coordination.
+                  </h2>
 
-                <p className="weya-hero-text">
-                  Weya is an AI-enabled system that listens, learns, and connects —
-                  transforming conversations into shared intelligence for
-                  impact-driven capital.
-                </p>
+                  <p className="weya-hero-text">
+                    Weya is an AI-enabled system that listens, learns, and connects
+                    — transforming conversations into shared intelligence for
+                    impact-driven capital.
+                  </p>
 
-                <p className="weya-hero-text">
-                  We are inviting a small group of capital allocators and ecosystem
-                  builders to participate in foundational interviews shaping Weya’s
-                  next phase.
-                </p>
+                  <p className="weya-hero-text">
+                    We are inviting a small group of capital allocators and
+                    ecosystem builders to participate in foundational interviews
+                    shaping Weya’s next phase.
+                  </p>
+                </div>
               </div>
             </div>
           </section>
