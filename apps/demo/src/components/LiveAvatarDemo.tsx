@@ -43,8 +43,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
 
     setIsLoading(true);
     setError(null);
-
-    // yeni session başlıyorsa resetle
     sessionEndedRef.current = false;
 
     try {
@@ -83,7 +81,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
             sessionAccessToken={sessionToken}
             session_id={sessionId}
             onSessionStopped={() => {
-              // 🔴 AUTO-RESTART ENGELLENİYOR
               sessionEndedRef.current = true;
               setSessionToken("");
               setSessionId(null);
@@ -91,20 +88,9 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
           />
         </div>
       ) : persona ? (
-        <div
-          className="weya-session-container"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100vh",
-          }}
-        >
+        <div className="weya-loading-screen">
           {error ? (
-            <div style={{ color: "#ef4444", marginBottom: "1rem" }}>
-              {error}
-            </div>
+            <div className="weya-error">{error}</div>
           ) : (
             <div className="weya-loading">
               Connecting to{" "}
@@ -115,38 +101,29 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
       ) : (
         <>
           <nav className="weya-navbar">
-            <a href="#" className="weya-brand">
-              WEYA
-            </a>
+            <a href="#" className="weya-brand">WEYA</a>
             <div className="weya-nav-menu">
-              <a href="#home" className="weya-nav-link">
-                AI Companion
-              </a>
-              <a href="#about" className="weya-nav-link">
-                About
-              </a>
-              <a href="#contact" className="weya-nav-link">
-                Contact
-              </a>
+              <a href="#home" className="weya-nav-link">AI Companion</a>
+              <a href="#about" className="weya-nav-link">About</a>
+              <a href="#contact" className="weya-nav-link">Contact</a>
             </div>
           </nav>
 
           <section id="home" className="weya-section">
-            <div className="weya-hero-container">
-              <div className="weya-hero-text-side">
+            <div className="weya-hero-grid">
+              {/* LEFT */}
+              <div className="weya-hero-left">
                 <h1 className="weya-hero-title">
                   Participate in a foundational interview
                 </h1>
 
-                <p className="weya-hero-text">Fill out the form to start.</p>
+                <p className="weya-hero-text">
+                  Fill out the form to start.
+                </p>
 
-                {error && (
-                  <div style={{ color: "#ef4444", marginBottom: "0.75rem" }}>
-                    {error}
-                  </div>
-                )}
+                {error && <div className="weya-error">{error}</div>}
 
-                <div className="weya-form-box" style={{ maxWidth: 420 }}>
+                <div className="weya-form-box">
                   <input
                     className="weya-input"
                     placeholder="First name"
@@ -175,23 +152,18 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                     onChange={(e) => setSelectedPersona(e.target.value)}
                   >
                     <option value="">Select the model for your interview</option>
-
                     <option value="family_offices">
-                      Family offices and LPs — seeking to place capital with
-                      clarity, timing, and systemic leverage
+                      Family offices and LPs
                     </option>
-
                     <option value="fund_builders">
-                      Fund builders and conveners — seeking to scale trust,
-                      alignment, and momentum
+                      Fund builders and conveners
                     </option>
-
                     <option value="impact_startups">
-                      Impact startups — seeking capital that understands their
-                      context
+                      Impact startups
                     </option>
-
-                    <option value="light_eagle">Learn more about Light Eagle</option>
+                    <option value="light_eagle">
+                      Learn more about Light Eagle
+                    </option>
                   </select>
 
                   <button
@@ -202,7 +174,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                         setError("Please fill in all fields.");
                         return;
                       }
-
                       if (!selectedPersona) {
                         setError("Please select an interview type.");
                         return;
@@ -223,7 +194,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                           url = "/light-eagle";
                           break;
                         default:
-                          setError("Please select an interview type.");
                           return;
                       }
 
@@ -235,27 +205,22 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
                 </div>
               </div>
 
-              <div className="weya-hero-visual-side">
-                <div style={{ maxWidth: 520 }}>
-                  <h2 className="weya-hero-title" style={{ fontSize: "1.5rem" }}>
-                    Weya
-                    <br />
-                    A system-intelligence layer for capital, trust, and
-                    coordination.
-                  </h2>
+              {/* RIGHT */}
+              <div className="weya-hero-right">
+                <h2 className="weya-hero-subtitle">
+                  Weya<br />
+                  A system-intelligence layer for capital, trust, and coordination.
+                </h2>
 
-                  <p className="weya-hero-text">
-                    Weya is an AI-enabled system that listens, learns, and connects
-                    — transforming conversations into shared intelligence for
-                    impact-driven capital.
-                  </p>
+                <p className="weya-hero-text">
+                  Weya is an AI-enabled system that listens, learns, and connects —
+                  transforming conversations into shared intelligence.
+                </p>
 
-                  <p className="weya-hero-text">
-                    We are inviting a small group of capital allocators and
-                    ecosystem builders to participate in foundational interviews
-                    shaping Weya’s next phase.
-                  </p>
-                </div>
+                <p className="weya-hero-text">
+                  We are inviting a small group of allocators and builders to
+                  shape Weya’s next phase.
+                </p>
               </div>
             </div>
           </section>
