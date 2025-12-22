@@ -1721,3 +1721,83 @@ body::after {
   justify-content: center;
   text-align: center;
 }
+
+
+/* ================================
+   LAYOUT FIX — RENKLERİNE DOKUNMADAN
+   ================================ */
+
+/* HERO GRID – Braintrust oranları */
+.weya-hero-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(420px, 1fr);
+  gap: 96px;
+  align-items: flex-start;
+}
+
+/* SOL TARAF (FORM) */
+.weya-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.weya-form-box {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* First + Last name yan yana */
+.weya-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* BUTON – form içinde dengeli */
+.weya-btn-aurora {
+  margin-top: 12px;
+  align-self: flex-start;
+}
+
+/* SAĞ TARAF (METİN BLOĞU) */
+.weya-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 4px;
+  text-align: left;
+}
+
+.weya-hero-subtitle,
+.weya-hero-right .weya-hero-text {
+  max-width: 520px;
+  text-align: left;
+}
+
+/* NAVBAR – sadece hizalama */
+.weya-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 1024px) {
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .weya-form-row {
+    grid-template-columns: 1fr;
+  }
+}
