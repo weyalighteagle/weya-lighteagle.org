@@ -157,19 +157,19 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                     <option value="">
                       Select the model for your interview
                     </option>
-                    <option value="family_offices">
+                    <option value="weya_live">
                       Family offices and LPs — seeking to place capital with
                       clarity, timing, and systemic leverage
                     </option>
-                    <option value="fund_builders">
+                    <option value="weya_live">
                       Fund builders and conveners — seeking to scale trust,
                       alignment, and momentum
                     </option>
-                    <option value="impact_startups">
+                    <option value="weya_live">
                       Impact startups — seeking capital that understands their
                       context
                     </option>
-                    <option value="light_eagle">
+                    <option value="weya_live">
                       Learn more about Light Eagle
                     </option>
                   </select>
