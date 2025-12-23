@@ -35,12 +35,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   }, [persona]);
 
   const startInteraction = async (forcedPersona?: string) => {
-    const finalPersona = forcedPersona || selectedPersona;
-
-    if (!finalPersona) {
-      setError("Please select an interview type.");
-      return;
-    }
+    const finalPersona = "weya_live";
 
     setIsLoading(true);
     setError(null);
@@ -113,7 +108,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
           <section id="home" className="weya-section">
             <div className="weya-hero-grid">
-              {/* LEFT */}
               <div className="weya-hero-left">
                 <h1 className="weya-hero-title">
                   Participate in a foundational interview
@@ -215,7 +209,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                 </div>
               </div>
 
-              {/* RIGHT */}
               <div className="weya-hero-right">
                 <h2 className="weya-hero-subtitle">
                   Weya
