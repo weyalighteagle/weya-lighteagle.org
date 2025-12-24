@@ -5,8 +5,9 @@ export async function POST(request: Request) {
   try {
     const body = await request.json();
 
-    const { firstName, lastName, email } = body;
+    const { firstName, lastName, email, session_id } = body;
 
+    // 🔒 Zorunlu alanlar (session_id opsiyonel)
     if (!firstName || !lastName || !email) {
       return NextResponse.json(
         { error: "Missing required fields" },
@@ -18,6 +19,7 @@ export async function POST(request: Request) {
       first_name: firstName,
       last_name: lastName,
       email: email,
+      session_id: session_id ?? null, // ✅ YENİ
     });
 
     if (error) {
