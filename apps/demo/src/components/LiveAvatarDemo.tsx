@@ -206,16 +206,16 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
                       switch (selectedPersona) {
                         case "family_offices":
-                          url = "/interview/family-offices-lps";
+                          url = "/interview/knowledgebase1";
                           break;
                         case "fund_builders":
-                          url = "/interview/fund-builders";
+                          url = "/interview/knowledgebase2";
                           break;
                         case "impact_startups":
-                          url = "/interview/impact-startups";
+                          url = "/interview/knowledgebase3";
                           break;
                         case "light_eagle":
-                          url = "/light-eagle";
+                          url = "/interview/knowledgebase4";
                           break;
                         default:
                           return;
