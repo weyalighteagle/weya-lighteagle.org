@@ -220,14 +220,16 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                       }
 
                       // 🔹 EKLENEN TEK ŞEY: SADECE FORM BİLGİLERİ AYRI YERE
-                      navigator.sendBeacon(
-                        "/api/form-lead",
-                        JSON.stringify({
-                          firstName,
-                          lastName,
-                          email,
-                        })
-                      );
+                      if (typeof navigator !== "undefined" && navigator.sendBeacon) {
+                        navigator.sendBeacon(
+                          "/api/form-lead",
+                          JSON.stringify({
+                            firstName,
+                            lastName,
+                            email,
+                          })
+                        );
+                      }
 
 
                       let url = "";
