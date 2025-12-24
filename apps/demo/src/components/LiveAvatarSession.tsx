@@ -75,8 +75,7 @@ const LiveAvatarSessionComponent: React.FC<{
         <button
           className="weya-stop-btn"
           onClick={() => {
-            // ❗ Parent'i burada kapatma. Sadece SDK'yi durdur.
-            // onSessionStopped() DISCONNECTED olunca effect'ten gelecek.
+
             stopSession();
           }}
         >
@@ -107,7 +106,7 @@ const LiveAvatarSessionComponent: React.FC<{
   );
 };
 
-// ✅ ANA EXPORT — Context Provider'a session_id geçirildi
+
 export const LiveAvatarSession: React.FC<{
   sessionAccessToken: string;
   session_id: string | null;
