@@ -104,25 +104,27 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           />
         </div>
       ) : persona ? (
-        <div className="weya-loading-screen">
-          {error ? (
-            <div className="weya-error">{error}</div>
-          ) : (
-            <div className="weya-loading">
-              Connecting to{" "}
-              {persona === "family_offices"
-                ? "Family Offices & LPs"
-                : persona === "fund_builders"
-                ? "Fund Builders"
-                : persona === "impact_startups"
-                ? "Impact Startups"
-                : persona === "light_eagle"
-                ? "Light Eagle"
-                : "Weya"}
-              …
-            </div>
-          )}
-        </div>
+        sessionEndedRef.current ? null : (
+          <div className="weya-loading-screen">
+            {error ? (
+              <div className="weya-error">{error}</div>
+            ) : (
+              <div className="weya-loading">
+                Connecting to{" "}
+                {persona === "family_offices"
+                  ? "Family Offices & LPs"
+                  : persona === "fund_builders"
+                  ? "Fund Builders"
+                  : persona === "impact_startups"
+                  ? "Impact Startups"
+                  : persona === "light_eagle"
+                  ? "Light Eagle"
+                  : "Weya"}
+                …
+              </div>
+            )}
+          </div>
+        )
       ) : (
         <>
           <nav className="weya-navbar">
