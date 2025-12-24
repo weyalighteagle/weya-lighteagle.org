@@ -280,27 +280,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           </section>
 
           <section id="about" className="weya-section">
-            <div className="weya-content-narrow">
-              <h2 className="weya-section-title">
-                Why these interviews matter
-              </h2>
-
-              <p className="weya-hero-text">
-                Conversations about capital and impact are usually fragmented —
-                spread across private rooms, decks, and informal networks.
-              </p>
-
-              <p className="weya-hero-text">
-                These interviews are an attempt to listen across roles and
-                contexts, and surface how people actually reason and decide.
-              </p>
-
-              <p className="weya-hero-text">
-                Not pitches. Not surveys.
-                <br />
-                Just structured listening.
-              </p>
-            </div>
           </section>
 
           <section className="weya-section">
