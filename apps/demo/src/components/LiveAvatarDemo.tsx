@@ -104,10 +104,11 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           {/* NAV */}
           <nav className="weya-navbar">
             <a href="#" className="weya-brand">WEYA</a>
+
             <div className="weya-nav-menu">
-              <a href="#home" className="weya-nav-link">Interview</a>
-              <a href="#process" className="weya-nav-link">Process</a>
-              <a href="#who" className="weya-nav-link">Who it’s for</a>
+              <a href="#home" className="weya-nav-link">AI Companion</a>
+              <a href="#about" className="weya-nav-link">About</a>
+              <a href="#contact" className="weya-nav-link">Contact</a>
             </div>
           </nav>
 
@@ -120,8 +121,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                 </h1>
 
                 <p className="weya-hero-text">
-                  A short, reflective conversation designed to surface how you
-                  think about capital, trust, and coordination.
+                  Fill out the form to start.
                 </p>
 
                 {error && <div className="weya-error">{error}</div>}
@@ -159,16 +159,19 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                       Select the model for your interview
                     </option>
                     <option value="family_offices">
-                      Family offices & LPs
+                      Family offices and LPs — seeking to place capital with
+                      clarity, timing, and systemic leverage
                     </option>
                     <option value="fund_builders">
-                      Fund builders & conveners
+                      Fund builders and conveners — seeking to scale trust,
+                      alignment, and momentum
                     </option>
                     <option value="impact_startups">
-                      Impact startups
+                      Impact startups — seeking capital that understands their
+                      context
                     </option>
                     <option value="light_eagle">
-                      Learn about Light Eagle
+                      Learn more about Light Eagle
                     </option>
                   </select>
 
@@ -217,77 +220,93 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                 <h2 className="weya-hero-subtitle">
                   Weya
                   <br />
-                  A system-intelligence layer
+                  A system-intelligence layer for capital, trust, and coordination.
                 </h2>
 
                 <p className="weya-hero-text">
-                  Weya listens across conversations and contexts — transforming
-                  fragmented signals into shared intelligence.
+                  Weya is an AI-enabled system that listens, learns, and connects —
+                  transforming conversations into shared intelligence for
+                  impact-driven capital.
+                </p>
+
+                <p className="weya-hero-text">
+                  We are inviting a small group of capital allocators and
+                  ecosystem builders to participate in foundational interviews
+                  shaping Weya’s next phase.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* PROCESS */}
-          <section id="process" className="weya-section">
-            <h2 className="weya-section-title">How the interview works</h2>
+          {/* ABOUT */}
+          <section id="about" className="weya-section">
+            <div className="weya-content-narrow">
+              <h2 className="weya-section-title">
+                Why these interviews matter
+              </h2>
+
+              <p className="weya-hero-text">
+                Conversations about capital and impact are usually fragmented —
+                spread across private rooms, decks, and informal networks.
+              </p>
+
+              <p className="weya-hero-text">
+                These interviews are an attempt to listen across roles and
+                contexts, and surface how people actually reason and decide.
+              </p>
+
+              <p className="weya-hero-text">
+                Not pitches. Not surveys.  
+                Just structured listening.
+              </p>
+            </div>
+          </section>
+
+          {/* HOW IT WORKS */}
+          <section className="weya-section">
             <div className="weya-card-grid">
               <div className="weya-card">
                 <h3>1. Guided conversation</h3>
                 <p>
-                  You speak freely with Weya in a structured but open-ended
-                  interview.
+                  You speak with Weya in a reflective, open-ended interview
+                  tailored to your role.
                 </p>
               </div>
               <div className="weya-card">
-                <h3>2. Signal extraction</h3>
+                <h3>2. Pattern recognition</h3>
                 <p>
-                  Weya identifies patterns around incentives, alignment, and
-                  systemic constraints.
+                  Weya identifies recurring themes around incentives, timing,
+                  and coordination.
                 </p>
               </div>
               <div className="weya-card">
-                <h3>3. System learning</h3>
+                <h3>3. Shared intelligence</h3>
                 <p>
-                  Your conversation contributes to a broader intelligence
-                  layer shaping future coordination.
+                  Insights contribute to a growing system-level understanding
+                  of impact capital.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* WHO */}
-          <section id="who" className="weya-section">
-            <h2 className="weya-section-title">Who this is for</h2>
-            <div className="weya-card-grid">
-              <div className="weya-card">
-                <h3>Capital allocators</h3>
-                <p>
-                  Navigating complexity, timing, and long-term impact.
-                </p>
-              </div>
-              <div className="weya-card">
-                <h3>Fund builders</h3>
-                <p>
-                  Coordinating trust, governance, and capital flows.
-                </p>
-              </div>
-              <div className="weya-card">
-                <h3>Impact founders</h3>
-                <p>
-                  Seeking capital that understands real-world context.
-                </p>
-              </div>
-            </div>
-          </section>
+          {/* CONTACT */}
+          <section id="contact" className="weya-section">
+            <div className="weya-content-narrow">
+              <h2 className="weya-section-title">Contact</h2>
 
-          {/* FOOT */}
-          <section className="weya-section">
-            <p className="weya-hero-text" style={{ maxWidth: 720 }}>
-              These interviews are part of an early research phase. Selected
-              participants may be invited into deeper collaboration as Weya
-              evolves.
-            </p>
+              <p className="weya-hero-text">
+                If you’re interested in learning more or participating beyond
+                the interview, you can reach us at:
+              </p>
+
+              <p className="weya-hero-text">
+                <strong>hello@lighteagle.org</strong>
+              </p>
+
+              <p className="weya-hero-text" style={{ opacity: 0.6 }}>
+                © 2025 Light Eagle. All rights reserved.
+              </p>
+            </div>
           </section>
         </>
       )}
