@@ -60,7 +60,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
       if (!res.ok) {
         const errorData = await res.json();
-        setError(errorData.error || "Failed to start session");
+        setError(errorData.error);
         return;
       }
 
@@ -106,7 +106,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
             <a href="#" className="weya-brand">WEYA</a>
             <div className="weya-nav-menu">
               <a href="#home" className="weya-nav-link">Interview</a>
-              <a href="#how" className="weya-nav-link">How it works</a>
+              <a href="#process" className="weya-nav-link">Process</a>
               <a href="#who" className="weya-nav-link">Who it’s for</a>
             </div>
           </nav>
@@ -120,8 +120,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                 </h1>
 
                 <p className="weya-hero-text">
-                  A 1:1 conversation designed to surface how you think about
-                  capital, trust, and systemic change.
+                  A short, reflective conversation designed to surface how you
+                  think about capital, trust, and coordination.
                 </p>
 
                 {error && <div className="weya-error">{error}</div>}
@@ -155,11 +155,21 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                     value={selectedPersona}
                     onChange={(e) => setSelectedPersona(e.target.value)}
                   >
-                    <option value="">Select interview type</option>
-                    <option value="family_offices">Family offices & LPs</option>
-                    <option value="fund_builders">Fund builders & conveners</option>
-                    <option value="impact_startups">Impact startups</option>
-                    <option value="light_eagle">Learn about Light Eagle</option>
+                    <option value="">
+                      Select the model for your interview
+                    </option>
+                    <option value="family_offices">
+                      Family offices & LPs
+                    </option>
+                    <option value="fund_builders">
+                      Fund builders & conveners
+                    </option>
+                    <option value="impact_startups">
+                      Impact startups
+                    </option>
+                    <option value="light_eagle">
+                      Learn about Light Eagle
+                    </option>
                   </select>
 
                   <button
@@ -170,19 +180,32 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         setError("Please fill in all fields.");
                         return;
                       }
+
                       if (!selectedPersona) {
                         setError("Please select an interview type.");
                         return;
                       }
 
-                      const routes: Record<string, string> = {
-                        family_offices: "/interview/family-offices-lps",
-                        fund_builders: "/interview/fund-builders",
-                        impact_startups: "/interview/impact-startups",
-                        light_eagle: "/light-eagle",
-                      };
+                      let url = "";
 
-                      window.location.href = routes[selectedPersona];
+                      switch (selectedPersona) {
+                        case "family_offices":
+                          url = "/interview/family-offices-lps";
+                          break;
+                        case "fund_builders":
+                          url = "/interview/fund-builders";
+                          break;
+                        case "impact_startups":
+                          url = "/interview/impact-startups";
+                          break;
+                        case "light_eagle":
+                          url = "/light-eagle";
+                          break;
+                        default:
+                          return;
+                      }
+
+                      window.location.href = url;
                     }}
                   >
                     Start interview
@@ -194,79 +217,76 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                 <h2 className="weya-hero-subtitle">
                   Weya
                   <br />
-                  System intelligence for capital & coordination
+                  A system-intelligence layer
                 </h2>
 
                 <p className="weya-hero-text">
-                  Weya listens across conversations and contexts — turning
+                  Weya listens across conversations and contexts — transforming
                   fragmented signals into shared intelligence.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* HOW IT WORKS */}
-          <section id="how" className="weya-section">
-            <h2 className="weya-section-title">How this works</h2>
+          {/* PROCESS */}
+          <section id="process" className="weya-section">
+            <h2 className="weya-section-title">How the interview works</h2>
             <div className="weya-card-grid">
               <div className="weya-card">
-                <h3>1. Conversation</h3>
+                <h3>1. Guided conversation</h3>
                 <p>
-                  You speak with Weya in a guided, reflective interview tailored
-                  to your role in the ecosystem.
+                  You speak freely with Weya in a structured but open-ended
+                  interview.
                 </p>
               </div>
               <div className="weya-card">
                 <h3>2. Signal extraction</h3>
                 <p>
-                  Weya identifies patterns around incentives, trust, timing,
-                  and decision-making.
+                  Weya identifies patterns around incentives, alignment, and
+                  systemic constraints.
                 </p>
               </div>
               <div className="weya-card">
-                <h3>3. Shared intelligence</h3>
+                <h3>3. System learning</h3>
                 <p>
-                  Insights contribute to a growing system-level understanding
-                  of impact capital flows.
+                  Your conversation contributes to a broader intelligence
+                  layer shaping future coordination.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* WHO IT’S FOR */}
+          {/* WHO */}
           <section id="who" className="weya-section">
             <h2 className="weya-section-title">Who this is for</h2>
             <div className="weya-card-grid">
               <div className="weya-card">
                 <h3>Capital allocators</h3>
                 <p>
-                  Family offices and LPs navigating complexity, timing, and
-                  long-term alignment.
+                  Navigating complexity, timing, and long-term impact.
                 </p>
               </div>
               <div className="weya-card">
                 <h3>Fund builders</h3>
                 <p>
-                  People convening capital and trust across fragmented systems.
+                  Coordinating trust, governance, and capital flows.
                 </p>
               </div>
               <div className="weya-card">
-                <h3>Founders</h3>
+                <h3>Impact founders</h3>
                 <p>
-                  Impact-driven teams seeking capital that understands context,
-                  not just metrics.
+                  Seeking capital that understands real-world context.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* WHAT NEXT */}
+          {/* FOOT */}
           <section className="weya-section">
-            <h2 className="weya-section-title">What happens next</h2>
             <p className="weya-hero-text" style={{ maxWidth: 720 }}>
-              These interviews shape Weya’s evolution and inform future
-              collaborations, research, and capital alignment initiatives.
-              Selected participants may be invited into deeper conversations.
+              These interviews are part of an early research phase. Selected
+              participants may be invited into deeper collaboration as Weya
+              evolves.
             </p>
           </section>
         </>
