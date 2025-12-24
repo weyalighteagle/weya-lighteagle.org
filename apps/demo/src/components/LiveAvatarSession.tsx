@@ -25,12 +25,8 @@ const LiveAvatarSessionComponent: React.FC<{
   const videoRef = useRef<HTMLVideoElement>(null);
   const isSending = useRef(false);
 
-  // 🔒 onSessionStopped sadece 1 kez çağrılsın
-  const stoppedRef = useRef(false);
-
   useEffect(() => {
-    if (sessionState === SessionState.DISCONNECTED && !stoppedRef.current) {
-      stoppedRef.current = true;
+    if (sessionState === SessionState.DISCONNECTED) {
       onSessionStopped();
     }
   }, [sessionState, onSessionStopped]);
@@ -48,13 +44,19 @@ const LiveAvatarSessionComponent: React.FC<{
     }
   }, [sessionState, startSession]);
 
-  // ✅ Mesaj gönder
+  // ✅ Mesaj gönderildiğinde hem avatar'a hem log'a git
   const sendAndLog = async () => {
+    console.log("🚀 sendAndLog called", {
+      message,
+      isSending: isSending.current,
+    });
     if (!message.trim() || isSending.current) return;
 
     isSending.current = true;
     try {
+      console.log("🚀 calling sendMessage");
       await sendMessage(message);
+      // logMessage removed to prevent duplicate logging (handled in context)
       setMessage("");
     } finally {
       isSending.current = false;
@@ -72,13 +74,7 @@ const LiveAvatarSessionComponent: React.FC<{
           muted={false}
           className="weya-video-element"
         />
-        <button
-          className="weya-stop-btn"
-          onClick={() => {
-
-            stopSession();
-          }}
-        >
+        <button className="weya-stop-btn" onClick={stopSession}>
           End Session
         </button>
       </div>
@@ -106,16 +102,16 @@ const LiveAvatarSessionComponent: React.FC<{
   );
 };
 
-
+// ✅ ANA EXPORT — Context Provider'a session_id geçirildi (kritik düzeltme)
 export const LiveAvatarSession: React.FC<{
   sessionAccessToken: string;
-  session_id: string | null;
+  session_id: string | null; // <-- eklendi
   onSessionStopped: () => void;
 }> = ({ sessionAccessToken, session_id, onSessionStopped }) => {
   return (
     <LiveAvatarContextProvider
       sessionAccessToken={sessionAccessToken}
-      session_id={session_id}
+      session_id={session_id} // <-- 🔥 Artık context'e bu gidiyor
     >
       <LiveAvatarSessionComponent onSessionStopped={onSessionStopped} />
     </LiveAvatarContextProvider>
