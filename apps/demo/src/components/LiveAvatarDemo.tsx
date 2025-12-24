@@ -81,8 +81,23 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           <LiveAvatarSession
             sessionAccessToken={sessionToken}
             session_id={sessionId}
-            onSessionStopped={() => {
+            onSessionStopped={async () => {
               sessionEndedRef.current = true;
+
+              // 🔥 EKLENEN TEK PARÇA — GERÇEK SESSION KAPATMA
+              try {
+                await fetch("/api/stop-session", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    session_token: sessionToken,
+                  }),
+                });
+              } catch (e) {
+                console.error("Failed to stop remote session", e);
+              }
+              // 🔥 EK BURADA BİTİYOR
+
               setSessionToken("");
               setSessionId(null);
             }}
