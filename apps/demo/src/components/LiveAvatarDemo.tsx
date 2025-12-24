@@ -44,7 +44,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
     setIsLoading(true);
     setError(null);
-    sessionEndedRef.current = false;
+    // sessionEndedRef.current = false;
 
     try {
       const res = await fetch("/api/start-session", {
