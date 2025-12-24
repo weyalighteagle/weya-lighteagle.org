@@ -1,35 +1,64 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import { LiveAvatarSession } from "./LiveAvatarSession";
 import "./avatar-styles.css";
+import { useRouter } from "next/navigation";
 
-export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
+type Props = {
+  persona?: string;
+};
+
+export const LiveAvatarDemo = ({ persona }: Props) => {
   const [sessionToken, setSessionToken] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+
+  const sessionEndedRef = useRef(false);
+
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [selectedPersona, setSelectedPersona] = useState("");
   const router = useRouter();
 
-  // Auto-start if persona provided
+
   useEffect(() => {
-    if (persona && !sessionToken && !isLoading && !error) {
+    if (
+      persona &&
+      !sessionToken &&
+      !isLoading &&
+      !error &&
+      !sessionEndedRef.current
+    ) {
       startInteraction(persona);
     }
-  }, [persona]); // eslint-disable-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [persona]);
 
-  // 🔥 SESSION TOKEN + SESSION ID BURADA GELİYOR
-  const startInteraction = async (persona?: string) => {
+  const startInteraction = async (forcedPersona?: string) => {
+    const finalPersona = forcedPersona || selectedPersona;
+
+    if (!finalPersona) {
+      setError("Please select an interview type.");
+      return;
+    }
+
     setIsLoading(true);
     setError(null);
+    // sessionEndedRef.current = false;
 
     try {
       const res = await fetch("/api/start-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ persona }),
+        body: JSON.stringify({
+          persona: finalPersona,
+          firstName,
+          lastName,
+          email,
+        }),
       });
 
       if (!res.ok) {
@@ -39,7 +68,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
       }
 
       const { session_token, session_id } = await res.json();
-
       setSessionToken(session_token);
       setSessionId(session_id);
     } catch (err: unknown) {
@@ -49,25 +77,6 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
     }
   };
 
-  const handleContactSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.currentTarget);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const message = formData.get("message");
-
-    const subject = `Weya Contact: Message from ${name}`;
-    const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-
-    window.location.href = `mailto:gulfem@lighteagle.org?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
-  };
-
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
-
   return (
     <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
       {sessionToken ? (
@@ -75,7 +84,23 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
           <LiveAvatarSession
             sessionAccessToken={sessionToken}
             session_id={sessionId}
-            onSessionStopped={() => {
+            onSessionStopped={async () => {
+              sessionEndedRef.current = true;
+
+              // 🔥 EKLENEN TEK PARÇA — GERÇEK SESSION KAPATMA
+              try {
+                await fetch("/api/stop-session", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    session_token: sessionToken,
+                  }),
+                });
+              } catch (e) {
+                console.error("Failed to stop remote session", e);
+              }
+              // 🔥 EK BURADA BİTİYOR
+
               setSessionToken("");
               setSessionId(null);
               router.push("/");
@@ -83,27 +108,27 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
           />
         </div>
       ) : persona ? (
-        <div
-          className="weya-session-container"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            height: "100vh",
-          }}
-        >
-          {error ? (
-            <div style={{ color: "#ef4444", marginBottom: "1rem" }}>
-              {error}
-            </div>
-          ) : (
-            <div className="weya-loading">
-              Connecting to{" "}
-              {persona === "weya_live" ? "Weya Live" : "Weya Startup"}...
-            </div>
-          )}
-        </div>
+        sessionEndedRef.current ? null : (
+          <div className="weya-loading-screen">
+            {error ? (
+              <div className="weya-error">{error}</div>
+            ) : (
+              <div className="weya-loading">
+                Connecting to{" "}
+                {persona === "family_offices"
+                  ? "Family Offices & LPs"
+                  : persona === "fund_builders"
+                  ? "Fund Builders"
+                  : persona === "impact_startups"
+                  ? "Impact Startups"
+                  : persona === "light_eagle"
+                  ? "Light Eagle"
+                  : "Weya"}
+                …
+              </div>
+            )}
+          </div>
+        )
       ) : (
         <>
           <nav className="weya-navbar">
@@ -111,162 +136,210 @@ export const LiveAvatarDemo = ({ persona }: { persona?: string }) => {
               WEYA
             </a>
 
-            <button
-              className="weya-mobile-toggle"
-              onClick={toggleMobileMenu}
-              aria-label="Toggle menu"
-            >
-              <span
-                className={`hamburger ${isMobileMenuOpen ? "open" : ""}`}
-              ></span>
-            </button>
-
-            <div
-              className={`weya-nav-menu ${isMobileMenuOpen ? "active" : ""}`}
-            >
-              <a
-                href="#home"
-                className="weya-nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
+            <div className="weya-nav-menu">
+              <a href="#home" className="weya-nav-link">
                 AI Companion
               </a>
-              <a
-                href="#about"
-                className="weya-nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
+              <a href="#about" className="weya-nav-link">
                 About
               </a>
-              <a
-                href="#contact"
-                className="weya-nav-link"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
+              <a href="#contact" className="weya-nav-link">
                 Contact
               </a>
             </div>
           </nav>
 
           <section id="home" className="weya-section">
-            <div className="weya-hero-container">
-              <div className="weya-hero-text-side">
+            <div className="weya-hero-grid">
+              <div className="weya-hero-left">
                 <h1 className="weya-hero-title">
-                  Meet <span>Weya</span>
+                  Participate in a foundational interview
                 </h1>
-                <p className="weya-hero-text">
-                  Your intelligent guide to impact investing and systemic
-                  change. Experience the digital embodiment of Light
-                  Eagle&apos;s vision.
-                </p>
 
-                {error && (
-                  <div style={{ color: "#ef4444", marginBottom: "1rem" }}>
-                    {error}
+                <p className="weya-hero-text">Fill out the form to start.</p>
+
+                {error && <div className="weya-error">{error}</div>}
+
+                <div className="weya-form-box">
+                  <div className="weya-form-row">
+                    <input
+                      className="weya-input"
+                      placeholder="First name"
+                      value={firstName}
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                    <input
+                      className="weya-input"
+                      placeholder="Last name"
+                      value={lastName}
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
                   </div>
-                )}
 
-                <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-                  <Link href="/talk/weya-live" className="weya-btn-aurora">
-                    Talk to Weya
-                  </Link>
-                  <Link href="/talk/weya-startup" className="weya-btn-aurora">
-                    Talk to Weya 2
-                  </Link>
+                  <input
+                    className="weya-input"
+                    placeholder="Email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+
+                  <select
+                    className="weya-input"
+                    value={selectedPersona}
+                    onChange={(e) => setSelectedPersona(e.target.value)}
+                  >
+                    <option value="">
+                      Select the model for your interview
+                    </option>
+                    <option value="family_offices">
+                      Family offices and LPs — seeking to place capital with
+                      clarity, timing, and systemic leverage
+                    </option>
+                    <option value="fund_builders">
+                      Fund builders and conveners — seeking to scale trust,
+                      alignment, and momentum
+                    </option>
+                    <option value="impact_startups">
+                      Impact startups — seeking capital that understands their
+                      context
+                    </option>
+                    <option value="light_eagle">
+                      Learn more about Light Eagle
+                    </option>
+                  </select>
+
+                  <button
+                    className="weya-btn-aurora"
+                    disabled={isLoading}
+                    onClick={() => {
+                      if (!firstName || !lastName || !email) {
+                        setError("Please fill in all fields.");
+                        return;
+                      }
+
+                      if (!selectedPersona) {
+                        setError("Please select an interview type.");
+                        return;
+                      }
+
+                      let url = "";
+
+                      switch (selectedPersona) {
+                        case "family_offices":
+                          url = "/interview/family-offices";
+                          break;
+                        case "fund_builders":
+                          url = "/interview/fund-builders";
+                          break;
+                        case "impact_startups":
+                          url = "/interview/impact-startups";
+                          break;
+                        case "light_eagle":
+                          url = "/interview/light-eagle";
+                          break;
+                        default:
+                          return;
+                      }
+
+                      window.location.href = url;
+                    }}
+                  >
+                    Start interview
+                  </button>
                 </div>
               </div>
 
-              <div className="weya-hero-visual-side">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src="/weya.jpeg"
-                  alt="Weya AI Avatar"
-                  className="weya-avatar-img"
-                />
+              <div className="weya-hero-right">
+                <h2 className="weya-hero-subtitle">
+                  Weya
+                  <br />
+                  A system-intelligence layer for capital, trust, and
+                  coordination.
+                </h2>
+
+                <p className="weya-hero-text">
+                  Weya is an AI-enabled system that listens, learns, and connects
+                  — transforming conversations into shared intelligence for
+                  impact-driven capital.
+                </p>
+
+                <p className="weya-hero-text">
+                  We are inviting a small group of capital allocators and
+                  ecosystem builders to participate in foundational interviews
+                  shaping Weya’s next phase.
+                </p>
               </div>
             </div>
           </section>
 
           <section id="about" className="weya-section">
-            <h2 className="weya-hero-title" style={{ fontSize: "3rem" }}>
-              Redefining Impact
-            </h2>
+            <div className="weya-content-narrow">
+              <h2 className="weya-section-title">
+                Why these interviews matter
+              </h2>
+
+              <p className="weya-hero-text">
+                Conversations about capital and impact are usually fragmented —
+                spread across private rooms, decks, and informal networks.
+              </p>
+
+              <p className="weya-hero-text">
+                These interviews are an attempt to listen across roles and
+                contexts, and surface how people actually reason and decide.
+              </p>
+
+              <p className="weya-hero-text">
+                Not pitches. Not surveys.
+                <br />
+                Just structured listening.
+              </p>
+            </div>
+          </section>
+
+          <section className="weya-section">
             <div className="weya-card-grid">
               <div className="weya-card">
-                <h3>Invest</h3>
+                <h3>1. Guided conversation</h3>
                 <p>
-                  We invest directly in impact startups and funds to support
-                  leaders transforming the world.
+                  You speak with Weya in a reflective, open-ended interview
+                  tailored to your role.
                 </p>
               </div>
               <div className="weya-card">
-                <h3>Co-Create</h3>
+                <h3>2. Pattern recognition</h3>
                 <p>
-                  We move as a community, transparently collaborating with
-                  partners to improve efficiency.
+                  Weya identifies recurring themes around incentives, timing, and
+                  coordination.
                 </p>
               </div>
               <div className="weya-card">
-                <h3>Build</h3>
+                <h3>3. Shared intelligence</h3>
                 <p>
-                  We build and scale technical and operational teams where
-                  capacity is lacking.
+                  Insights contribute to a growing system-level understanding of
+                  impact capital.
                 </p>
               </div>
             </div>
           </section>
 
           <section id="contact" className="weya-section">
-            <h2 className="weya-hero-title" style={{ fontSize: "3rem" }}>
-              Get In Touch
-            </h2>
+            <div className="weya-content-narrow">
+              <h2 className="weya-section-title">Contact</h2>
 
-            <form className="weya-form-box" onSubmit={handleContactSubmit}>
-              <input
-                type="text"
-                name="name"
-                placeholder="Name"
-                className="weya-input"
-                required
-              />
+              <p className="weya-hero-text">
+                If you’re interested in learning more or participating beyond
+                the interview, you can reach us at:
+              </p>
 
-              <input
-                type="email"
-                name="email"
-                placeholder="Email (example@domain.com)"
-                className="weya-input"
-                pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
-                title="Please enter a valid email address (e.g. user@example.com)"
-                required
-              />
+              <p className="weya-hero-text">
+                <strong>weya@lighteagle.org</strong>
+              </p>
 
-              <textarea
-                name="message"
-                placeholder="Message..."
-                className="weya-input"
-                rows={4}
-                style={{ resize: "vertical" }}
-                required
-              />
-              <button
-                type="submit"
-                className="weya-btn-aurora"
-                style={{ width: "100%", padding: "1rem" }}
-              >
-                Send Message
-              </button>
-            </form>
-
-            <footer
-              style={{
-                marginTop: "3rem",
-                opacity: 0.5,
-                fontSize: "0.8rem",
-                color: "#94a3b8",
-              }}
-            >
-              © 2025 Light Eagle AG. All rights reserved.
-            </footer>
+              <p className="weya-hero-text" style={{ opacity: 0.6 }}>
+                © 2025 Light Eagle. All rights reserved.
+              </p>
+            </div>
           </section>
         </>
       )}
