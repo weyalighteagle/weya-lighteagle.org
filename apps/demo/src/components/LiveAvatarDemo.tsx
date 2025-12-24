@@ -219,7 +219,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         return;
                       }
 
-                      // 🔹 EKLENEN TEK SATIR: SADECE FORM BİLGİLERİ AYRI YERE
+                      // 🔹 EKLENEN TEK ŞEY: SADECE FORM BİLGİLERİ AYRI YERE
                       fetch("/api/form-lead", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
