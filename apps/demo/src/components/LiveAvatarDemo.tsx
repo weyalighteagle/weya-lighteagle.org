@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { LiveAvatarSession } from "./LiveAvatarSession";
 import "./avatar-styles.css";
+import { useRouter } from "next/navigation";
 
 type Props = {
   persona?: string;
@@ -20,6 +21,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [selectedPersona, setSelectedPersona] = useState("");
+  const router = useRouter();
+
 
   useEffect(() => {
     if (
@@ -100,6 +103,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
               setSessionToken("");
               setSessionId(null);
+              router.push("/");
             }}
           />
         </div>
