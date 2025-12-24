@@ -1,7 +1,5 @@
 import { NextResponse } from "next/server";
-
-// 🔴 anon yerine SERVER client
-import { supabaseServer as supabase } from "../../../src/utils/supabase-server";
+import { supabase } from "../../../src/utils/supabase";
 
 export async function POST(request: Request) {
   try {
@@ -25,7 +23,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // ⏱️ timestamp fallback
+    // ⏱️ timestamp fallback (sessiz drop olmasın)
     const finalTimestamp =
       typeof timestamp === "number" ? timestamp : Date.now();
 
@@ -34,18 +32,14 @@ export async function POST(request: Request) {
 
     // 🔥 FALLBACK: session-level metadata’dan çek
     if (!finalUserName || !finalUserEmail) {
-      const { data: meta, error: metaError } = await supabase
+      const { data: meta } = await supabase
         .from("chat_transcripts")
         .select("user_name, user_email")
         .eq("session_id", session_id)
-        .eq("input_type", "session")
+        .eq("input_type", "session") // ✅ KRİTİK DÜZELTME
         .order("created_at", { ascending: true })
         .limit(1)
         .single();
-
-      if (metaError) {
-        console.error("⚠️ Session meta fetch failed:", metaError);
-      }
 
       if (meta) {
         finalUserName = finalUserName || meta.user_name;
@@ -53,7 +47,6 @@ export async function POST(request: Request) {
       }
     }
 
-    // ✅ ARTIK HER ZAMAN YAZILIR
     const { error } = await supabase.from("chat_transcripts").insert({
       session_id,
       sender,
@@ -65,7 +58,7 @@ export async function POST(request: Request) {
     });
 
     if (error) {
-      console.error("❌ Supabase insert error:", error);
+      console.error("❌ Supabase error:", error);
       return NextResponse.json({ error: error.message }, { status: 500 });
     }
 

@@ -12,9 +12,7 @@ import {
   CONTEXT_ID_LIGHT_EAGLE,
   LANGUAGE,
 } from "../secrets";
-
-// 🔴 ÖNEMLİ: anon yerine SERVER client
-import { supabaseServer as supabase } from "../../../src/utils/supabase-server";
+import { supabase } from "../../../src/utils/supabase";
 
 export async function POST(request: Request) {
   try {
@@ -44,7 +42,6 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
-    // 🎭 LiveAvatar session token al
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -74,7 +71,6 @@ export async function POST(request: Request) {
 
     const sessionId = data.data.session_id;
 
-    // ✅ SESSION META — ARTIK GERÇEKTEN YAZILIR
     const { error: metaError } = await supabase
       .from("chat_transcripts")
       .insert({
@@ -92,10 +88,6 @@ export async function POST(request: Request) {
 
     if (metaError) {
       console.error("❌ Session meta insert failed:", metaError);
-      return NextResponse.json(
-        { error: "Failed to save session metadata" },
-        { status: 500 },
-      );
     }
 
     return NextResponse.json({
