@@ -278,10 +278,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               </div>
             </div>
           </section>
-
-          <section id="about" className="weya-section">
-          </section>
-
           <section className="weya-section">
             <div className="weya-card-grid">
               <div className="weya-card">
