@@ -1,43 +1,34 @@
 import { NextResponse } from "next/server";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "../../../src/utils/supabase";
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const { firstName, lastName, email } = body;
+    const { session_id, firstName, lastName, email } = await req.json();
 
-    if (!firstName || !lastName || !email) {
-      return NextResponse.json(
-        { error: "Missing fields" },
-        { status: 400 }
-      );
+    if (!session_id) {
+      return NextResponse.json({ error: "no session_id" }, { status: 400 });
     }
 
-    const { error } = await supabase
-      .from("form_leads")
-      .insert([
-        {
-          first_name: firstName,
-          last_name: lastName,
-          email: email,
-        },
-      ]);
+    const { error } = await supabase.from("chat_transcripts").insert({
+      session_id,
+      sender: "user",
+      input_type: "session",
+      message: "__SESSION_META__",
+      client_timestamp: Date.now(),
+      user_name:
+        firstName || lastName
+          ? `${firstName || ""} ${lastName || ""}`.trim()
+          : null,
+      user_email: email || null,
+    });
 
     if (error) {
-      console.error("Supabase insert error:", error);
-      return NextResponse.json(
-        { error: "Insert failed" },
-        { status: 500 }
-      );
+      console.error("save-session-meta error:", error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
     }
 
-    // fire-and-forget uyumlu
-    return NextResponse.json({ ok: true });
-  } catch (err) {
-    console.error("Form lead error:", err);
-    return NextResponse.json(
-      { error: "Invalid request" },
-      { status: 400 }
-    );
+    return NextResponse.json({ success: true });
+  } catch {
+    return NextResponse.json({ error: "server error" }, { status: 500 });
   }
 }

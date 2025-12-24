@@ -241,6 +241,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         default:
                           return;
                       }
+                      
 
                       window.location.href = url;
                     }}
