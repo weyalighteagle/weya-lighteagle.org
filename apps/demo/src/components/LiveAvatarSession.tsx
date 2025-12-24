@@ -29,10 +29,7 @@ const LiveAvatarSessionComponent: React.FC<{
   const stoppedRef = useRef(false);
 
   useEffect(() => {
-    if (
-      sessionState === SessionState.DISCONNECTED &&
-      !stoppedRef.current
-    ) {
+    if (sessionState === SessionState.DISCONNECTED && !stoppedRef.current) {
       stoppedRef.current = true;
       onSessionStopped();
     }
@@ -78,10 +75,9 @@ const LiveAvatarSessionComponent: React.FC<{
         <button
           className="weya-stop-btn"
           onClick={() => {
-            if (stoppedRef.current) return;
-            stoppedRef.current = true;
-            stopSession();        // SDK durur
-            onSessionStopped();   // 🔥 Parent kesin bilgilendirilir
+            // ❗ Parent'i burada kapatma. Sadece SDK'yi durdur.
+            // onSessionStopped() DISCONNECTED olunca effect'ten gelecek.
+            stopSession();
           }}
         >
           End Session
