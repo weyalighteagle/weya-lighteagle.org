@@ -1881,3 +1881,7 @@ body::after {
   letter-spacing: 0.08em;   /* opsiyonel: daha “logo” gibi dursun */
   text-decoration: none;
 }
+
+.weya-nav-link.active {
+  opacity: 1;
+}
