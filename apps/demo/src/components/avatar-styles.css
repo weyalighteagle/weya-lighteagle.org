@@ -1875,3 +1875,9 @@ body::after {
   padding-top: 32px;
 }
 
+.weya-brand {
+  font-size: 30px;          /* sadece burayı büyüttüm */
+  font-weight: 700;
+  letter-spacing: 0.08em;   /* opsiyonel: daha “logo” gibi dursun */
+  text-decoration: none;
+}
