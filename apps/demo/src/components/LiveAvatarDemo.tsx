@@ -23,7 +23,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [selectedPersona, setSelectedPersona] = useState("");
   const router = useRouter();
 
-
   useEffect(() => {
     if (
       persona &&
@@ -47,7 +46,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
     setIsLoading(true);
     setError(null);
-    // sessionEndedRef.current = false;
 
     try {
       const res = await fetch("/api/start-session", {
@@ -87,7 +85,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
             onSessionStopped={async () => {
               sessionEndedRef.current = true;
 
-              // 🔥 EKLENEN TEK PARÇA — GERÇEK SESSION KAPATMA
               try {
                 await fetch("/api/stop-session", {
                   method: "POST",
@@ -99,7 +96,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               } catch (e) {
                 console.error("Failed to stop remote session", e);
               }
-              // 🔥 EK BURADA BİTİYOR
 
               setSessionToken("");
               setSessionId(null);
@@ -223,6 +219,16 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         return;
                       }
 
+                      // ✅ EKLENEN TEK ŞEY — FORM LEAD SAKLAMA
+                      sessionStorage.setItem(
+                        "form_lead",
+                        JSON.stringify({
+                          firstName,
+                          lastName,
+                          email,
+                        })
+                      );
+
                       let url = "";
 
                       switch (selectedPersona) {
@@ -241,7 +247,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         default:
                           return;
                       }
-                      
 
                       window.location.href = url;
                     }}
