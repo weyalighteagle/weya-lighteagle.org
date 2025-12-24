@@ -48,6 +48,28 @@ const LiveAvatarSessionComponent: React.FC<{
     }
   }, [sessionState, startSession]);
 
+  // ✅ FORM LEAD GÖNDERİMİ (SADECE 1 KEZ)
+  useEffect(() => {
+    const raw = sessionStorage.getItem("form_lead");
+    if (!raw) return;
+
+    try {
+      const { firstName, lastName, email } = JSON.parse(raw);
+
+      fetch("/api/form-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+        }),
+      }).catch(() => {});
+    } finally {
+      sessionStorage.removeItem("form_lead");
+    }
+  }, []);
+
   // ✅ Mesaj gönder
   const sendAndLog = async () => {
     if (!message.trim() || isSending.current) return;
@@ -75,7 +97,6 @@ const LiveAvatarSessionComponent: React.FC<{
         <button
           className="weya-stop-btn"
           onClick={() => {
-
             stopSession();
           }}
         >
@@ -105,7 +126,6 @@ const LiveAvatarSessionComponent: React.FC<{
     </div>
   );
 };
-
 
 export const LiveAvatarSession: React.FC<{
   sessionAccessToken: string;
