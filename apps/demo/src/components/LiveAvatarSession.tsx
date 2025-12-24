@@ -11,8 +11,9 @@ import "./avatar-styles.css";
 
 // 💬 Bileşen: Chat + Video + State
 const LiveAvatarSessionComponent: React.FC<{
+  session_id: string | null;
   onSessionStopped: () => void;
-}> = ({ onSessionStopped }) => {
+}> = ({ session_id, onSessionStopped }) => {
   const [message, setMessage] = useState("");
   const {
     sessionState,
@@ -48,8 +49,10 @@ const LiveAvatarSessionComponent: React.FC<{
     }
   }, [sessionState, startSession]);
 
-  // ✅ FORM LEAD GÖNDERİMİ (SADECE 1 KEZ)
+  // ✅ FORM LEAD + SESSION_ID (SADECE 1 KEZ)
   useEffect(() => {
+    if (!session_id) return;
+
     const raw = sessionStorage.getItem("form_lead");
     if (!raw) return;
 
@@ -63,12 +66,13 @@ const LiveAvatarSessionComponent: React.FC<{
           firstName,
           lastName,
           email,
+          session_id, // ✅ EKLENDİ
         }),
       }).catch(() => {});
     } finally {
       sessionStorage.removeItem("form_lead");
     }
-  }, []);
+  }, [session_id]);
 
   // ✅ Mesaj gönder
   const sendAndLog = async () => {
@@ -137,7 +141,10 @@ export const LiveAvatarSession: React.FC<{
       sessionAccessToken={sessionAccessToken}
       session_id={session_id}
     >
-      <LiveAvatarSessionComponent onSessionStopped={onSessionStopped} />
+      <LiveAvatarSessionComponent
+        session_id={session_id}
+        onSessionStopped={onSessionStopped}
+      />
     </LiveAvatarContextProvider>
   );
 };
