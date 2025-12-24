@@ -95,24 +95,39 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           ) : (
             <div className="weya-loading">
               Connecting to{" "}
-              {persona === "weya_live" ? "Weya Live" : "Weya Startup"}…
+              {persona === "family_offices"
+                ? "Family Offices & LPs"
+                : persona === "fund_builders"
+                ? "Fund Builders"
+                : persona === "impact_startups"
+                ? "Impact Startups"
+                : persona === "light_eagle"
+                ? "Light Eagle"
+                : "Weya"}
+              …
             </div>
           )}
         </div>
       ) : (
         <>
-          {/* NAV */}
           <nav className="weya-navbar">
-            <a href="#" className="weya-brand">WEYA</a>
+            <a href="#" className="weya-brand">
+              WEYA
+            </a>
 
             <div className="weya-nav-menu">
-              <a href="#home" className="weya-nav-link">AI Companion</a>
-              <a href="#about" className="weya-nav-link">About</a>
-              <a href="#contact" className="weya-nav-link">Contact</a>
+              <a href="#home" className="weya-nav-link">
+                AI Companion
+              </a>
+              <a href="#about" className="weya-nav-link">
+                About
+              </a>
+              <a href="#contact" className="weya-nav-link">
+                Contact
+              </a>
             </div>
           </nav>
 
-          {/* HERO */}
           <section id="home" className="weya-section">
             <div className="weya-hero-grid">
               <div className="weya-hero-left">
@@ -120,9 +135,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                   Participate in a foundational interview
                 </h1>
 
-                <p className="weya-hero-text">
-                  Fill out the form to start.
-                </p>
+                <p className="weya-hero-text">Fill out the form to start.</p>
 
                 {error && <div className="weya-error">{error}</div>}
 
@@ -220,12 +233,13 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                 <h2 className="weya-hero-subtitle">
                   Weya
                   <br />
-                  A system-intelligence layer for capital, trust, and coordination.
+                  A system-intelligence layer for capital, trust, and
+                  coordination.
                 </h2>
 
                 <p className="weya-hero-text">
-                  Weya is an AI-enabled system that listens, learns, and connects —
-                  transforming conversations into shared intelligence for
+                  Weya is an AI-enabled system that listens, learns, and connects
+                  — transforming conversations into shared intelligence for
                   impact-driven capital.
                 </p>
 
@@ -238,7 +252,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
             </div>
           </section>
 
-          {/* ABOUT */}
           <section id="about" className="weya-section">
             <div className="weya-content-narrow">
               <h2 className="weya-section-title">
@@ -256,13 +269,13 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               </p>
 
               <p className="weya-hero-text">
-                Not pitches. Not surveys.  
+                Not pitches. Not surveys.
+                <br />
                 Just structured listening.
               </p>
             </div>
           </section>
 
-          {/* HOW IT WORKS */}
           <section className="weya-section">
             <div className="weya-card-grid">
               <div className="weya-card">
@@ -275,21 +288,20 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               <div className="weya-card">
                 <h3>2. Pattern recognition</h3>
                 <p>
-                  Weya identifies recurring themes around incentives, timing,
-                  and coordination.
+                  Weya identifies recurring themes around incentives, timing, and
+                  coordination.
                 </p>
               </div>
               <div className="weya-card">
                 <h3>3. Shared intelligence</h3>
                 <p>
-                  Insights contribute to a growing system-level understanding
-                  of impact capital.
+                  Insights contribute to a growing system-level understanding of
+                  impact capital.
                 </p>
               </div>
             </div>
           </section>
 
-          {/* CONTACT */}
           <section id="contact" className="weya-section">
             <div className="weya-content-narrow">
               <h2 className="weya-section-title">Contact</h2>
@@ -300,7 +312,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               </p>
 
               <p className="weya-hero-text">
-                <strong>hello@lighteagle.org</strong>
+                <strong>weya@lighteagle.org</strong>
               </p>
 
               <p className="weya-hero-text" style={{ opacity: 0.6 }}>

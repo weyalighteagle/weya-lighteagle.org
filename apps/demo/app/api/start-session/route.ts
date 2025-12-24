@@ -6,6 +6,10 @@ import {
   VOICE_ID,
   CONTEXT_ID_WEYA_LIVE,
   CONTEXT_ID_WEYA_STARTUP,
+  CONTEXT_ID_FAMILY_OFFICES,
+  CONTEXT_ID_FUND_BUILDERS,
+  CONTEXT_ID_IMPACT_STARTUPS,
+  CONTEXT_ID_LIGHT_EAGLE,
   LANGUAGE,
 } from "../secrets";
 import { supabase } from "../../../src/utils/supabase";
@@ -26,11 +30,18 @@ export async function POST(request: Request) {
       selectedContextId = CONTEXT_ID_WEYA_LIVE;
     } else if (persona === "weya_startup") {
       selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+    } else if (persona === "family_offices") {
+      selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
+    } else if (persona === "fund_builders") {
+      selectedContextId = CONTEXT_ID_FUND_BUILDERS;
+    } else if (persona === "impact_startups") {
+      selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
+    } else if (persona === "light_eagle") {
+      selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
     } else {
       return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
-    // ================= HEYGEN =================
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -60,8 +71,6 @@ export async function POST(request: Request) {
 
     const sessionId = data.data.session_id;
 
-    // ================= SESSION HEADER ROW =================
-    // 🔥 FORM VERİSİ — MESSAGE DEĞİL, SESSION LEVEL
     const { error: metaError } = await supabase
       .from("chat_transcripts")
       .insert({
@@ -79,10 +88,8 @@ export async function POST(request: Request) {
 
     if (metaError) {
       console.error("❌ Session meta insert failed:", metaError);
-      // ❗ session / chat BOZULMAZ
     }
 
-    // ================= RESPONSE =================
     return NextResponse.json({
       session_token: data.data.session_token,
       session_id: sessionId,
