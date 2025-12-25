@@ -20,7 +20,7 @@ import {
 export default function AdminKnowledgePage() {
     const [password, setPassword] = useState("")
     const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const [selectedPersonaId, setSelectedPersonaId] = useState(personas[0].id)
+    const [selectedPersonaId, setSelectedPersonaId] = useState(personas[0]?.id || "")
     const [content, setContent] = useState("")
     const [isLoading, setIsLoading] = useState(false)
     const [isSaving, setIsSaving] = useState(false)
