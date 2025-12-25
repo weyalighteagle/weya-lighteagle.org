@@ -46,7 +46,6 @@
     "tailwindcss-animate": "^1.0.7",
     "zod": "3.25.76",
     "@supabase/supabase-js": "^2.86.0",
-    "@vercel/postgres": "^0.10.0",
     "clsx": "^2.1.1",
     "next": "15.4.8",
     "react": "19.1.2",
