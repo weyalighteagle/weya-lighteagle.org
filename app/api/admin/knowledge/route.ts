@@ -7,6 +7,12 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const personaId = searchParams.get("personaId")
 
+    // Security Check
+    const authHeader = request.headers.get("x-admin-password")
+    if (authHeader !== process.env.ADMIN_PASSWORD) {
+        return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+    }
+
     if (!personaId) {
         return NextResponse.json({ error: "Missing personaId" }, { status: 400 })
     }

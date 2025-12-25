@@ -36,7 +36,9 @@ export default function AdminKnowledgePage() {
     const fetchContent = async () => {
         setIsLoading(true)
         try {
-            const res = await fetch(`/api/admin/knowledge?personaId=${selectedPersonaId}`)
+            const res = await fetch(`/api/admin/knowledge?personaId=${selectedPersonaId}`, {
+                headers: { "x-admin-password": password }
+            })
             const data = await res.json()
             setContent(data.content || "")
         } catch (error) {
@@ -74,9 +76,25 @@ export default function AdminKnowledgePage() {
         }
     }
 
-    const handleLogin = (e: React.FormEvent) => {
+    const handleLogin = async (e: React.FormEvent) => {
         e.preventDefault()
-        if (password) setIsAuthenticated(true)
+        setIsLoading(true)
+        try {
+            // Verify password by trying to fetch current persona
+            const res = await fetch(`/api/admin/knowledge?personaId=${selectedPersonaId}`, {
+                headers: { "x-admin-password": password }
+            })
+
+            if (res.ok) {
+                setIsAuthenticated(true)
+            } else {
+                alert("Invalid Password")
+            }
+        } catch (e) {
+            alert("Connection Error")
+        } finally {
+            setIsLoading(false)
+        }
     }
 
     // LOGIN SCREEN
@@ -130,8 +148,8 @@ export default function AdminKnowledgePage() {
                                 key={persona.id}
                                 onClick={() => { setSelectedPersonaId(persona.id); setStatus(null); }}
                                 className={`group flex w-full items-center justify-between rounded-md px-3 py-2 text-sm transition-colors ${selectedPersonaId === persona.id
-                                        ? "bg-emerald-50 text-emerald-700 font-medium"
-                                        : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900"
+                                    ? "bg-emerald-50 text-emerald-700 font-medium"
+                                    : "text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900"
                                     }`}
                             >
                                 <div className="flex items-center gap-3">
@@ -173,8 +191,8 @@ export default function AdminKnowledgePage() {
                     <div className="flex items-center gap-4">
                         {status && (
                             <div className={`flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium animate-in fade-in slide-in-from-top-2 ${status.type === "success"
-                                    ? "bg-emerald-100 text-emerald-700"
-                                    : "bg-red-100 text-red-700 border border-red-200"
+                                ? "bg-emerald-100 text-emerald-700"
+                                : "bg-red-100 text-red-700 border border-red-200"
                                 }`}>
                                 {status.type === "success" ? <CheckCircle className="h-3 w-3" /> : <AlertCircle className="h-3 w-3" />}
                                 {status.message}
