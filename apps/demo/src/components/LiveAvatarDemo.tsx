@@ -10,6 +10,9 @@ type Props = {
 };
 
 export const LiveAvatarDemo = ({ persona }: Props) => {
+  // 🔒 SABİT PERSONA
+  const FIXED_PERSONA = "weya_live";
+
   const [sessionToken, setSessionToken] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -20,7 +23,10 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-  const [selectedPersona, setSelectedPersona] = useState("");
+
+  // persona artık sabit
+  const [selectedPersona] = useState(FIXED_PERSONA);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -38,11 +44,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
   const startInteraction = async (forcedPersona?: string) => {
     const finalPersona = forcedPersona || selectedPersona;
-
-    if (!finalPersona) {
-      setError("Please select an interview type.");
-      return;
-    }
 
     setIsLoading(true);
     setError(null);
@@ -103,28 +104,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
             }}
           />
         </div>
-      ) : persona ? (
-        sessionEndedRef.current ? null : (
-          <div className="weya-loading-screen">
-            {error ? (
-              <div className="weya-error">{error}</div>
-            ) : (
-              <div className="weya-loading">
-                Connecting to{" "}
-                {persona === "family_offices"
-                  ? "Family Offices & LPs"
-                  : persona === "fund_builders"
-                  ? "Fund Builders"
-                  : persona === "impact_startups"
-                  ? "Impact Startups"
-                  : persona === "light_eagle"
-                  ? "Light Eagle"
-                  : "Weya"}
-                …
-              </div>
-            )}
-          </div>
-        )
       ) : (
         <>
           <nav className="weya-navbar">
@@ -180,29 +159,15 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
 
+                  {/* 👻 SELECT KORUNDU AMA KİLİTLİ + GİZLİ */}
                   <select
                     className="weya-input"
                     value={selectedPersona}
-                    onChange={(e) => setSelectedPersona(e.target.value)}
+                    disabled
+                    aria-hidden="true"
+                    style={{ display: "none" }}
                   >
-                    <option value="">
-                      Select the model for your interview
-                    </option>
-                    <option value="family_offices">
-                      Family offices and LPs — seeking to place capital with
-                      clarity, timing, and systemic leverage
-                    </option>
-                    <option value="fund_builders">
-                      Fund builders and conveners — seeking to scale trust,
-                      alignment, and momentum
-                    </option>
-                    <option value="impact_startups">
-                      Impact startups — seeking capital that understands their
-                      context
-                    </option>
-                    <option value="light_eagle">
-                      Learn more about Light Eagle
-                    </option>
+                    <option value="weya_live">Weya Live</option>
                   </select>
 
                   <button
@@ -214,12 +179,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         return;
                       }
 
-                      if (!selectedPersona) {
-                        setError("Please select an interview type.");
-                        return;
-                      }
-
-                      // ✅ EKLENEN TEK ŞEY — FORM LEAD SAKLAMA
+                      // ✅ form lead saklama (aynen korunuyor)
                       sessionStorage.setItem(
                         "form_lead",
                         JSON.stringify({
@@ -229,26 +189,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         })
                       );
 
-                      let url = "";
-
-                      switch (selectedPersona) {
-                        case "family_offices":
-                          url = "/interview/family-offices";
-                          break;
-                        case "fund_builders":
-                          url = "/interview/fund-builders";
-                          break;
-                        case "impact_startups":
-                          url = "/interview/impact-startups";
-                          break;
-                        case "light_eagle":
-                          url = "/interview/light-eagle";
-                          break;
-                        default:
-                          return;
-                      }
-
-                      window.location.href = url;
+                      // 🔥 TEK ROUTE
+                      window.location.href = "/interview/weya-live";
                     }}
                   >
                     Start interview
@@ -278,6 +220,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               </div>
             </div>
           </section>
+
           <section className="weya-section">
             <div className="weya-card-grid">
               <div className="weya-card">
