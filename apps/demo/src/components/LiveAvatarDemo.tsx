@@ -20,12 +20,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-
-  // ✅ Tek buton: persona seçimi sabit
-  // Burayı değiştirerek default interview tipini seçebilirsin:
-  // "family_offices" | "fund_builders" | "impact_startups" | "light_eagle"
-  const DEFAULT_PERSONA = "family_offices";
-
+  const [selectedPersona, setSelectedPersona] = useState("");
   const router = useRouter();
 
   useEffect(() => {
@@ -42,7 +37,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   }, [persona]);
 
   const startInteraction = async (forcedPersona?: string) => {
-    const finalPersona = forcedPersona || DEFAULT_PERSONA;
+    const finalPersona = forcedPersona || selectedPersona;
 
     if (!finalPersona) {
       setError("Please select an interview type.");
@@ -78,46 +73,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
     } finally {
       setIsLoading(false);
     }
-  };
-
-  // ✅ Tek butonla interview route’una git
-  const goToInterview = () => {
-    if (!firstName || !lastName || !email) {
-      setError("Please fill in all fields.");
-      return;
-    }
-
-    // Form lead saklama aynı kalsın
-    sessionStorage.setItem(
-      "form_lead",
-      JSON.stringify({
-        firstName,
-        lastName,
-        email,
-      })
-    );
-
-    let url = "";
-
-    switch (DEFAULT_PERSONA) {
-      case "family_offices":
-        url = "/interview/family-offices";
-        break;
-      case "fund_builders":
-        url = "/interview/fund-builders";
-        break;
-      case "impact_startups":
-        url = "/interview/impact-startups";
-        break;
-      case "light_eagle":
-        url = "/interview/light-eagle";
-        break;
-      default:
-        url = "/interview/family-offices";
-        break;
-    }
-
-    window.location.href = url;
   };
 
   return (
@@ -225,14 +180,14 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
 
-                  {/* ✅ Sayfayı bozmamak için select'i kaldırmıyorum; sadece gizliyorum */}
                   <select
                     className="weya-input"
-                    value={DEFAULT_PERSONA}
-                    readOnly
-                    aria-hidden="true"
-                    style={{ display: "none" }}
+                    value={selectedPersona}
+                    onChange={(e) => setSelectedPersona(e.target.value)}
                   >
+                    <option value="">
+                      Select the model for your interview
+                    </option>
                     <option value="family_offices">
                       Family offices and LPs — seeking to place capital with
                       clarity, timing, and systemic leverage
@@ -253,7 +208,48 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                   <button
                     className="weya-btn-aurora"
                     disabled={isLoading}
-                    onClick={goToInterview}
+                    onClick={() => {
+                      if (!firstName || !lastName || !email) {
+                        setError("Please fill in all fields.");
+                        return;
+                      }
+
+                      if (!selectedPersona) {
+                        setError("Please select an interview type.");
+                        return;
+                      }
+
+                      // ✅ EKLENEN TEK ŞEY — FORM LEAD SAKLAMA
+                      sessionStorage.setItem(
+                        "form_lead",
+                        JSON.stringify({
+                          firstName,
+                          lastName,
+                          email,
+                        })
+                      );
+
+                      let url = "";
+
+                      switch (selectedPersona) {
+                        case "family_offices":
+                          url = "/interview/family-offices";
+                          break;
+                        case "fund_builders":
+                          url = "/interview/fund-builders";
+                          break;
+                        case "impact_startups":
+                          url = "/interview/impact-startups";
+                          break;
+                        case "light_eagle":
+                          url = "/interview/light-eagle";
+                          break;
+                        default:
+                          return;
+                      }
+
+                      window.location.href = url;
+                    }}
                   >
                     Start interview
                   </button>
@@ -282,7 +278,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               </div>
             </div>
           </section>
-
           <section className="weya-section">
             <div className="weya-card-grid">
               <div className="weya-card">
