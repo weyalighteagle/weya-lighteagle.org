@@ -4,7 +4,7 @@ import { NextResponse } from "next/server"
 import OpenAI from "openai"
 import { basePrompts } from "./prompts"
 
-
+export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
