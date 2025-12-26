@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const LiveAvatarDemo = ({ persona }: Props) => {
-  // 🔒 SABİT PERSONA
+  // 🔒 DEFAULT PERSONA (fallback)
   const FIXED_PERSONA = "weya_live";
 
   const [sessionToken, setSessionToken] = useState("");
@@ -24,8 +24,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
-  // persona artık sabit
-  const [selectedPersona] = useState(FIXED_PERSONA);
+  // ✅ TEK KRİTİK DÜZELTME (SATIR SİLİNMEDİ)
+  const selectedPersona = persona || FIXED_PERSONA;
 
   const router = useRouter();
 
@@ -159,7 +159,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
 
-                  {/* 👻 SELECT KORUNDU AMA KİLİTLİ + GİZLİ */}
+                  {/* 👻 SELECT AYNI, KİLİTLİ */}
                   <select
                     className="weya-input"
                     value={selectedPersona}
@@ -179,7 +179,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         return;
                       }
 
-                      // ✅ form lead saklama (aynen korunuyor)
                       sessionStorage.setItem(
                         "form_lead",
                         JSON.stringify({
@@ -189,7 +188,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         })
                       );
 
-                      // 🔥 TEK ROUTE
                       window.location.href = "/interview/weya-live";
                     }}
                   >
