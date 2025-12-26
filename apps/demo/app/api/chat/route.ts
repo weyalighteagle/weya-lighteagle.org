@@ -78,7 +78,7 @@ export async function POST(request: Request) {
       temperature: 0.7,
     })
 
-    const assistantText = completion.choices[0].message.content || "I'm sorry, I couldn't generate a response."
+    const assistantText = completion.choices?.[0]?.message?.content || "I'm sorry, I couldn't generate a response."
 
     // --- LOGGING TO SUPABASE ---
     const endTime = Date.now()
