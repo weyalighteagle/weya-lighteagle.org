@@ -10,9 +10,6 @@ type Props = {
 };
 
 export const LiveAvatarDemo = ({ persona }: Props) => {
-  // 🔒 DEFAULT PERSONA (fallback)
-  const FIXED_PERSONA = "weya_live";
-
   const [sessionToken, setSessionToken] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,9 +20,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
-
-  // ✅ persona Talk’tan gelirse onu kullanır, yoksa weya_live
-  const selectedPersona = persona || FIXED_PERSONA;
 
   const router = useRouter();
 
@@ -43,7 +37,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   }, [persona]);
 
   const startInteraction = async (forcedPersona?: string) => {
-    const finalPersona = forcedPersona || selectedPersona;
+    const finalPersona = forcedPersona || "weya_live";
 
     setIsLoading(true);
     setError(null);
@@ -159,17 +153,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
 
-                  {/* 👻 select KORUNDU */}
-                  <select
-                    className="weya-input"
-                    value={selectedPersona}
-                    disabled
-                    aria-hidden="true"
-                    style={{ display: "none" }}
-                  >
-                    <option value="weya_live">Weya Live</option>
-                  </select>
-
                   <button
                     className="weya-btn-aurora"
                     disabled={isLoading}
@@ -179,6 +162,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         return;
                       }
 
+                      // form lead saklama AYNEN KALIYOR
                       sessionStorage.setItem(
                         "form_lead",
                         JSON.stringify({
@@ -188,8 +172,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         })
                       );
 
-                      // ✅ 404 FIX BURADA
-                      window.location.href = "/interview/weya_live";
+                      // 🔒 SADECE weya_live
+                      startInteraction("weya_live");
                     }}
                   >
                     Start interview
@@ -201,46 +185,19 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                 <h2 className="weya-hero-subtitle">
                   Weya
                   <br />
-                  A system-intelligence layer for capital, trust, and
-                  coordination.
+                  A system-intelligence layer for capital, trust, and coordination.
                 </h2>
 
                 <p className="weya-hero-text">
-                  Weya is an AI-enabled system that listens, learns, and connects
-                  — transforming conversations into shared intelligence for
+                  Weya is an AI-enabled system that listens, learns, and connects —
+                  transforming conversations into shared intelligence for
                   impact-driven capital.
                 </p>
 
                 <p className="weya-hero-text">
-                  We are inviting a small group of capital allocators and
-                  ecosystem builders to participate in foundational interviews
-                  shaping Weya’s next phase.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section className="weya-section">
-            <div className="weya-card-grid">
-              <div className="weya-card">
-                <h3>1. Guided conversation</h3>
-                <p>
-                  You speak with Weya in a reflective, open-ended interview
-                  tailored to your role.
-                </p>
-              </div>
-              <div className="weya-card">
-                <h3>2. Pattern recognition</h3>
-                <p>
-                  Weya identifies recurring themes around incentives, timing, and
-                  coordination.
-                </p>
-              </div>
-              <div className="weya-card">
-                <h3>3. Shared intelligence</h3>
-                <p>
-                  Insights contribute to a growing system-level understanding of
-                  impact capital.
+                  We are inviting a small group of capital allocators and ecosystem
+                  builders to participate in foundational interviews shaping
+                  Weya’s next phase.
                 </p>
               </div>
             </div>
@@ -251,8 +208,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               <h2 className="weya-section-title">Contact</h2>
 
               <p className="weya-hero-text">
-                If you’re interested in learning more or participating beyond
-                the interview, you can reach us at:
+                If you’re interested in learning more or participating beyond the
+                interview, you can reach us at:
               </p>
 
               <p className="weya-hero-text">
