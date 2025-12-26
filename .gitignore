@@ -1,0 +1,12 @@
+node_modules
+.next
+.DS_Store
+.env
+.env.local
+build
+dist
+.vercel
+apps/demo/.next
+.turbo/
+**/.turbo/
+packages/js-sdk/lib/

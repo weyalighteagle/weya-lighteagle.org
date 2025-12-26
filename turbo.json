@@ -20,45 +20,76 @@
     "NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID_WEYA_STARTUP",
     "ELEVENLABS_API_KEY",
     "OPENAI_API_KEY",
-    "POSTGRES_URL",
-    "POSTGRES_PRISMA_URL",
-    "POSTGRES_URL_NON_POOLING",
-    "POSTGRES_USER",
-    "POSTGRES_HOST",
-    "POSTGRES_PASSWORD",
-    "POSTGRES_DATABASE",
-    "DATABASE_URL",
-    "DATABASE_URL_UNPOOLED",
-    "PGHOST",
-    "PGHOST_UNPOOLED",
-    "PGPASSWORD",
-    "PGDATABASE",
-    "PGUSER",
-    "POSTGRES_URL_NO_SSL",
-    "NEON_PROJECT_ID",
     "NEXT_PUBLIC_SUPABASE_URL",
     "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+    "ADMIN_PASSWORD",
+    "ELEVENLABS_VOICE_ID",
+    "SUPABASE_SERVICE_ROLE_KEY",
     "STORAGE_SUPABASE_URL",
-    "STORAGE_SUPABASE_ANON_KEY"
+    "STORAGE_SUPABASE_PUBLISHABLE_KEY",
+    "STORAGE_POSTGRES_URL_NON_POOLING",
+    "STORAGE_SUPABASE_JWT_SECRET",
+    "STORAGE_POSTGRES_USER",
+    "STORAGE_POSTGRES_PASSWORD",
+    "STORAGE_POSTGRES_DATABASE",
+    "STORAGE_SUPABASE_SERVICE_ROLE_KEY",
+    "STORAGE_SUPABASE_SECRET_KEY",
+    "STORAGE_POSTGRES_HOST",
+    "STORAGE_SUPABASE_ANON_KEY",
+    "POSTGRES_PASSWORD",
+    "POSTGRES_DATABASE",
+    "PGPASSWORD",
+    "PGDATABASE",
+    "PGHOST_UNPOOLED",
+    "PGUSER",
+    "POSTGRES_URL_NO_SSL",
+    "POSTGRES_HOST",
+    "NEON_PROJECT_ID",
+    "STORAGE_POSTGRES_URL",
+    "STORAGE_POSTGRES_PRISMA_URL",
+    "PGHOST",
+    "POSTGRES_USER",
+    "DATABASE_URL",
+    "POSTGRES_URL",
+    "POSTGRES_PRISMA_URL",
+    "DATABASE_URL_UNPOOLED",
+    "POSTGRES_URL_NON_POOLING"
   ],
   "tasks": {
     "build": {
-      "dependsOn": ["^build"],
-      "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "lib/**", "dist/**"]
+      "dependsOn": [
+        "^build"
+      ],
+      "inputs": [
+        "$TURBO_DEFAULT$",
+        ".env*"
+      ],
+      "outputs": [
+        ".next/**",
+        "!.next/cache/**",
+        "lib/**",
+        "dist/**"
+      ]
     },
     "lint": {
-      "dependsOn": ["^lint"]
+      "dependsOn": [
+        "^lint"
+      ]
     },
     "typecheck": {
-      "dependsOn": ["^build", "^typecheck"]
+      "dependsOn": [
+        "^build",
+        "^typecheck"
+      ]
     },
     "dev": {
       "cache": false,
       "persistent": true
     },
     "test": {
-      "dependsOn": ["^test"]
+      "dependsOn": [
+        "^test"
+      ]
     }
   }
 }

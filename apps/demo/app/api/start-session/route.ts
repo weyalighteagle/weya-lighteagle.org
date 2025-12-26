@@ -14,6 +14,8 @@ import {
 } from "../secrets";
 import { supabase } from "../../../src/utils/supabase";
 
+export const dynamic = "force-dynamic";
+
 export async function POST(request: Request) {
   try {
     if (!API_KEY) {
