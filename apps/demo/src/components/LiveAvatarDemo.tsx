@@ -23,6 +23,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
   const router = useRouter();
 
+  // ✅ Route üzerinden persona gelince session otomatik başlar
   useEffect(() => {
     if (
       persona &&
@@ -98,10 +99,21 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
             }}
           />
         </div>
+      ) : persona ? (
+        // ✅ /talk/weya-live açılınca loading ekranı
+        <div className="weya-loading-screen">
+          {error ? (
+            <div className="weya-error">{error}</div>
+          ) : (
+            <div className="weya-loading">
+              Connecting to Weya…
+            </div>
+          )}
+        </div>
       ) : (
         <>
           <nav className="weya-navbar">
-            <a href="#" className="weya-brand">
+            <a href="/" className="weya-brand">
               WEYA
             </a>
 
@@ -162,7 +174,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         return;
                       }
 
-                      // form lead saklama AYNEN KALIYOR
                       sessionStorage.setItem(
                         "form_lead",
                         JSON.stringify({
@@ -172,8 +183,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         })
                       );
 
-                      // 🔒 SADECE weya_live
-                      startInteraction("weya_live");
+                      // ✅ URL GÖRÜNECEK — /talk klasörü altında
+                      router.push("/talk/weya-live");
                     }}
                   >
                     Start interview
