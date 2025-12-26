@@ -24,7 +24,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
-  // ✅ TEK KRİTİK DÜZELTME (SATIR SİLİNMEDİ)
+  // ✅ persona Talk’tan gelirse onu kullanır, yoksa weya_live
   const selectedPersona = persona || FIXED_PERSONA;
 
   const router = useRouter();
@@ -159,7 +159,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                     onChange={(e) => setEmail(e.target.value)}
                   />
 
-                  {/* 👻 SELECT AYNI, KİLİTLİ */}
+                  {/* 👻 select KORUNDU */}
                   <select
                     className="weya-input"
                     value={selectedPersona}
@@ -188,7 +188,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         })
                       );
 
-                      window.location.href = "/interview/weya-live";
+                      // ✅ 404 FIX BURADA
+                      window.location.href = "/interview/weya_live";
                     }}
                   >
                     Start interview
