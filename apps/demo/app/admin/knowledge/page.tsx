@@ -90,8 +90,8 @@ export default function AdminKnowledgePage() {
             } else {
                 alert("Invalid Password")
             }
-        } catch (e) {
-            alert("Connection Error")
+        } catch (e: any) {
+            alert("Connection Error: " + (e.message || JSON.stringify(e)))
         } finally {
             setIsLoading(false)
         }
