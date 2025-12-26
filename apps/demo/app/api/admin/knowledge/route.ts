@@ -50,11 +50,40 @@ export async function GET(request: Request) {
 export async function POST(request: Request) {
     try {
         const body = await request.json()
-        const { personaId, content, password } = body
+        const { personaId, content, password, validateOnly } = body
 
         if (password !== process.env.ADMIN_PASSWORD) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
         }
+
+        if (validateOnly) {
+            return NextResponse.json({ success: true, message: "Authorized" })
+        }
+
+        if (body.action === 'read') {
+            if (!personaId) return NextResponse.json({ error: "Missing personaId" }, { status: 400 })
+
+            // 1. Try fetching from Supabase
+            const { data } = await supabase
+                .from("weya_voicechat_kb")
+                .select("content")
+                .eq("persona_id", personaId)
+                .single()
+
+            if (data && data.content) {
+                return NextResponse.json({ content: data.content })
+            }
+
+            // 2. Fallback to local file
+            const filePath = path.join(process.cwd(), "data", "knowledge", `${personaId}.md`)
+            try {
+                const fileContent = await readFile(filePath, "utf-8")
+                return NextResponse.json({ content: fileContent })
+            } catch (fsError) {
+                return NextResponse.json({ content: "" })
+            }
+        }
+
 
         if (!personaId || typeof content !== "string") {
             return NextResponse.json({ error: "Invalid payload" }, { status: 400 })

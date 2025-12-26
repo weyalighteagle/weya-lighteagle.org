@@ -36,8 +36,15 @@ export default function AdminKnowledgePage() {
     const fetchContent = async () => {
         setIsLoading(true)
         try {
-            const res = await fetch(`/api/admin/knowledge?personaId=${selectedPersonaId}`, {
-                headers: { "x-admin-password": password }
+            // Use POST to fetch content to avoid header encoding issues with password
+            const res = await fetch("/api/admin/knowledge", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    password,
+                    personaId: selectedPersonaId,
+                    action: 'read'
+                })
             })
             const data = await res.json()
             setContent(data.content || "")
@@ -80,13 +87,23 @@ export default function AdminKnowledgePage() {
         e.preventDefault()
         setIsLoading(true)
         try {
-            // Verify password by trying to fetch current persona
-            const res = await fetch(`/api/admin/knowledge?personaId=${selectedPersonaId}`, {
-                headers: { "x-admin-password": password }
+            // Verify password using POST (safer for special chars than headers)
+            const res = await fetch("/api/admin/knowledge", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    password,
+                    validateOnly: true
+                })
             })
 
             if (res.ok) {
                 setIsAuthenticated(true)
+                // Initial content fetch will happen via useEffect, but we need to pass password
+                // However, the GET request still uses header. We should probably update fetchContent too
+                // or just rely on the first successful login to mean we are good, 
+                // but subsequent GETs might fail if we don't fix them too.
+                // For now, let's just fix the Login check.
             } else {
                 alert("Invalid Password")
             }
