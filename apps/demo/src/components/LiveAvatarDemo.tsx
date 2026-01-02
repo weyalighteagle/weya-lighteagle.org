@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from "react";
 import { LiveAvatarSession } from "./LiveAvatarSession";
-import "./avatar-styles.css";
 import { useRouter } from "next/navigation";
 
 type Props = {
