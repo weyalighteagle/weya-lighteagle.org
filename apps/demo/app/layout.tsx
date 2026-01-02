@@ -1,5 +1,6 @@
 import "./globals.css";
 import { IntercomProvider } from "../src/components/IntercomProvider";
+import "./avatar-styles.css";
 
 export default function RootLayout({
   children,
