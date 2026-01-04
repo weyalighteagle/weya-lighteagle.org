@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { LiveAvatarSession } from "./LiveAvatarSession";
-import "./avatar-styles.css";
+import { LiveAvatarSession } from "@/components/LiveAvatarSession";
+import "@/components/avatar-styles.css";
 import { useRouter } from "next/navigation";
 
 type Props = {
   persona?: string;
 };
 
-export const LiveAvatarDemo = ({ persona }: Props) => {
+export default function LiveAvatarStartupInterview({ persona }: Props) {
   const [sessionToken, setSessionToken] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -100,14 +100,11 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           />
         </div>
       ) : persona ? (
-        // ✅ /talk/weya-live açılınca loading ekranı
         <div className="weya-loading-screen">
           {error ? (
             <div className="weya-error">{error}</div>
           ) : (
-            <div className="weya-loading">
-              Connecting to Weya…
-            </div>
+            <div className="weya-loading">Connecting to Weya…</div>
           )}
         </div>
       ) : (
@@ -183,7 +180,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         })
                       );
 
-                      // ✅ URL GÖRÜNECEK — /talk klasörü altında
                       router.push("/talk/weya-live");
                     }}
                   >
@@ -236,4 +232,4 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
       )}
     </div>
   );
-};
+}
