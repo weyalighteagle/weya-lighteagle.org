@@ -1,0 +1,1887 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+:root {
+  --bg-deep: #020b09;
+  --bg-gradient: #0d2922;
+  --text-main: #e2e8f0;
+  --text-muted: #94a3b8;
+  --brand-primary: #34d399;
+  --brand-glow: rgba(52, 211, 153, 0.4);
+  --nav-height: 80px;
+  --font-heading: 'Playfair Display', serif;
+  --font-body: 'Inter', sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-body);
+  color: var(--text-main);
+  overflow-x: hidden;
+  background-color: var(--bg-deep);
+  background-image: radial-gradient(circle at 50% 0%, var(--bg-gradient) 0%, var(--bg-deep) 60%);
+  min-height: 100vh;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: -10%;
+  left: -10%;
+  width: 60vw;
+  height: 60vw;
+  background: radial-gradient(circle, rgba(52, 211, 153, 0.15) 0%, transparent 70%);
+  filter: blur(100px);
+  z-index: -2;
+  animation: pulseGlow 10s infinite alternate;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  bottom: -10%;
+  right: -10%;
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 60%);
+  filter: blur(120px);
+  z-index: -2;
+  animation: pulseGlow 15s infinite alternate-reverse;
+}
+
+@keyframes pulseGlow {
+  0% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+.weya-app::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: -1;
+}
+
+.weya-app.mode-landing {
+  overflow-y: auto;
+}
+
+.weya-app.mode-chat {
+  height: 100vh;
+  overflow: hidden;
+  background: black;
+}
+
+.weya-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--nav-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 5%;
+  z-index: 1000;
+  background: rgba(2, 11, 9, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.weya-brand {
+  font-family: var(--font-heading);
+  font-size: 2.2rem;
+  font-weight: 800;
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  background: linear-gradient(135deg, #ffffff 30%, var(--brand-primary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(52, 211, 153, 0.3));
+}
+
+.weya-nav-menu {
+  display: flex;
+  gap: 2.5rem;
+}
+
+.weya-nav-link {
+  text-decoration: none;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  position: relative;
+  transition: color 0.3s;
+}
+
+.weya-nav-link:hover {
+  color: var(--brand-primary);
+}
+
+.weya-nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--brand-primary);
+  transition: width 0.3s;
+}
+
+.weya-nav-link:hover::after {
+  width: 100%;
+}
+
+.weya-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1rem;
+  padding-top: var(--nav-height);
+  box-sizing: border-box;
+}
+
+.weya-hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4rem;
+  width: 100%;
+  max-width: 1200px;
+  position: relative;
+  z-index: 1;
+}
+
+.weya-hero-text-side {
+  flex: 1;
+  text-align: left;
+}
+
+.weya-hero-visual-side {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.weya-avatar-img {
+  width: 400px;
+  height: 500px;
+  object-fit: cover;
+  border-radius: 40px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(52, 211, 153, 0.2);
+  animation: floatAvatar 6s ease-in-out infinite;
+  position: relative;
+  z-index: 2;
+}
+
+.weya-hero-visual-side::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  background: radial-gradient(circle, rgba(234, 179, 8, 0.2) 0%, rgba(52, 211, 153, 0.1) 50%, transparent 70%);
+  filter: blur(60px);
+  z-index: 1;
+}
+
+@keyframes floatAvatar {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-20px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* Mobile Menu Toggle */
+.weya-mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 10px;
+  z-index: 1001;
+}
+
+.hamburger {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: white;
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before,
+.hamburger::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background: white;
+  transition: all 0.3s ease-in-out;
+}
+
+.hamburger::before {
+  transform: translateY(-8px);
+}
+
+.hamburger::after {
+  transform: translateY(8px);
+}
+
+.hamburger.open {
+  background: transparent;
+}
+
+.hamburger.open::before {
+  transform: rotate(45deg);
+}
+
+.hamburger.open::after {
+  transform: rotate(-45deg);
+}
+
+.weya-hero-title {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  color: white;
+  margin-bottom: 1.5rem;
+  line-height: 1.1;
+}
+
+.weya-hero-title span {
+  color: var(--brand-primary);
+  text-shadow: 0 0 30px var(--brand-glow);
+}
+
+.weya-hero-text {
+  max-width: 680px;
+  font-size: 1.3rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  margin-bottom: 3.5rem;
+  font-weight: 300;
+}
+
+.weya-btn-aurora {
+  background: linear-gradient(-45deg, #0f766e, #10b981, #34d399, #059669);
+  background-size: 300% 300%;
+  animation: auroraBtnAnim 4s ease infinite;
+  color: #020b09;
+  padding: 1.3rem 4rem;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: 100px;
+  cursor: pointer;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@keyframes auroraBtnAnim {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.weya-btn-aurora:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 0 30px var(--brand-primary), 0 0 60px rgba(52, 211, 153, 0.5);
+  color: black;
+}
+
+.weya-btn-aurora:active {
+  transform: translateY(-1px);
+  box-shadow: 0 0 20px var(--brand-primary);
+}
+
+.weya-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  max-width: 1200px;
+  width: 100%;
+  padding: 0 20px;
+}
+
+.weya-card {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 3rem;
+  border-radius: 24px;
+  text-align: left;
+  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.weya-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(52, 211, 153, 0.5);
+  box-shadow: 0 20px 60px rgba(16, 185, 129, 0.15);
+}
+
+.weya-card h3 {
+  font-family: var(--font-heading);
+  font-size: 2rem;
+  color: white;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.weya-card:hover h3 {
+  color: var(--brand-primary);
+  text-shadow: 0 0 25px rgba(52, 211, 153, 0.6);
+}
+
+.weya-card p {
+  color: var(--text-muted);
+  line-height: 1.6;
+  transition: color 0.3s;
+}
+
+.weya-card:hover p {
+  color: #e2e8f0;
+}
+
+.weya-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #34d399, #10b981, transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.5s ease;
+}
+
+.weya-card:hover::after {
+  transform: scaleX(1);
+}
+
+.weya-form-box {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  padding: 3rem;
+  border-radius: 20px;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.weya-input {
+  width: 100%;
+  padding: 16px;
+  margin-bottom: 1rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  color: white;
+  transition: 0.3s;
+}
+
+.weya-input:focus {
+  outline: none;
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.2);
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.weya-session-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.weya-session-wrapper {
+  width: 100%;
+  max-width: 1100px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.weya-video-frame {
+  width: 100%;
+  aspect-ratio: 16/9;
+  background: #111;
+  border-radius: 20px;
+  overflow: hidden;
+  position: relative;
+  border: 1px solid #333;
+}
+
+.weya-video-element {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.weya-stop-btn {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.weya-stop-btn:hover {
+  background: rgba(220, 38, 38, 0.8);
+}
+
+.weya-chat-controls {
+  width: 100%;
+  background: #1a1a1a;
+  border-radius: 50px;
+  padding: 8px;
+  display: flex;
+  border: 1px solid #333;
+}
+
+.weya-input-field {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 0 20px;
+  font-size: 1rem;
+  outline: none;
+}
+
+.weya-send-btn {
+  background: var(--brand-primary);
+  color: #020b09;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 40px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+/* MEDIA QUERIES MUST BE AT THE END TO OVERRIDE */
+@media (max-width: 1024px) {
+  .weya-navbar {
+    padding: 0 1.5rem;
+    height: 60px;
+    flex-direction: row;
+    background: rgba(2, 11, 9, 0.95);
+    align-items: center;
+  }
+
+  .weya-brand {
+    font-size: 1.5rem;
+  }
+
+  .weya-mobile-toggle {
+    display: block;
+    padding: 5px;
+  }
+
+  .weya-nav-menu {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(2, 11, 9, 0.98);
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 4rem;
+    gap: 2rem;
+
+    /* Hide by default */
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  .weya-nav-menu.active {
+    /* Show when active */
+    display: flex;
+    opacity: 1;
+  }
+
+  .weya-nav-link {
+    font-size: 1.5rem;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
+  }
+
+  .weya-nav-menu.active .weya-nav-link {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .weya-hero-container {
+    flex-direction: column-reverse;
+    text-align: center;
+    gap: 3rem;
+    padding-top: 2rem;
+  }
+
+  .weya-hero-text-side {
+    text-align: center;
+    padding: 0 1rem;
+  }
+
+  .weya-hero-title {
+    font-size: 3rem;
+  }
+
+  .weya-hero-text {
+    font-size: 1.1rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .weya-avatar-img {
+    width: 280px;
+    height: 350px;
+  }
+
+  .weya-btn-aurora {
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    width: auto;
+    /* max-width: 300px; removed to let flex handle it */
+  }
+
+  .weya-card-grid {
+    grid-template-columns: 1fr;
+    padding: 0 1rem;
+  }
+
+  .weya-card {
+    padding: 2rem;
+  }
+
+  .weya-form-box {
+    padding: 2rem;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .weya-hero-title {
+    font-size: 2.5rem;
+  }
+
+  .weya-nav-link {
+    font-size: 0.75rem;
+  }
+}
+
+
+/* =========================================================
+   PRE-CHAT FORM – EXISTING WEYA STYLE EXTENSION
+   (Does NOT override brand colors or animations)
+   ========================================================= */
+
+/* Hero form spacing refinement */
+.weya-hero-text-side .weya-form-box {
+  margin-top: 1rem;
+  background: rgba(2, 11, 9, 0.55);
+  border: 1px solid rgba(52, 211, 153, 0.18);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02);
+}
+
+/* Inputs – align with existing glass style */
+.weya-hero-text-side .weya-input {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 0.95rem;
+}
+
+.weya-hero-text-side .weya-input::placeholder {
+  color: rgba(148, 163, 184, 0.7);
+}
+
+/* Focus state – same brand glow as buttons */
+.weya-hero-text-side .weya-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow:
+    0 0 0 2px rgba(52, 211, 153, 0.25),
+    0 0 20px rgba(52, 211, 153, 0.15);
+}
+
+/* Select arrow polish */
+.weya-hero-text-side select.weya-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--brand-primary) 50%),
+    linear-gradient(135deg, var(--brand-primary) 50%, transparent 50%);
+  background-position:
+    calc(100% - 20px) calc(1.1em),
+    calc(100% - 15px) calc(1.1em);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* Start button – slightly calmer than CTA buttons */
+.weya-hero-text-side .weya-btn-aurora {
+  width: 100%;
+  margin-top: 1.2rem;
+  padding: 1.1rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.12em;
+  box-shadow:
+    0 0 25px rgba(16, 185, 129, 0.35);
+}
+
+.weya-hero-text-side .weya-btn-aurora:hover {
+  box-shadow:
+    0 0 35px rgba(52, 211, 153, 0.6),
+    0 0 60px rgba(16, 185, 129, 0.35);
+}
+
+/* Error message styling – subtle, not aggressive */
+.weya-hero-text-side > div[style*="color: #ef4444"] {
+  background: rgba(220, 38, 38, 0.12);
+  border: 1px solid rgba(220, 38, 38, 0.3);
+  padding: 0.75rem 1rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+}
+
+/* Mobile refinement – form doesn’t feel heavy */
+@media (max-width: 768px) {
+  .weya-hero-text-side .weya-form-box {
+    padding: 1.8rem;
+  }
+
+  .weya-hero-text-side .weya-btn-aurora {
+    font-size: 0.85rem;
+    padding: 1rem;
+  }
+}
+/* =========================================================
+   HERO FORM – INLINE / FLOW STYLE
+   ========================================================= */
+
+/* Kart hissini kır */
+.weya-hero-text-side .weya-form-box {
+  background: transparent;
+  border: none;
+  backdrop-filter: none;
+  padding: 0;
+  box-shadow: none;
+  max-width: 480px;
+}
+
+/* Input’ları daha ince ve yatay algılat */
+.weya-hero-text-side .weya-input {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 14px;
+  padding: 0.9rem 1rem;
+  margin-bottom: 0.75rem;
+}
+
+/* Placeholder daha zarif */
+.weya-hero-text-side .weya-input::placeholder {
+  color: rgba(148, 163, 184, 0.65);
+  font-weight: 400;
+}
+
+/* Focus daha sakin */
+.weya-hero-text-side .weya-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: 0 0 0 1px rgba(52, 211, 153, 0.35);
+  background: rgba(0, 0, 0, 0.35);
+}
+
+/* Select daha az “dropdown” gibi */
+.weya-hero-text-side select.weya-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--brand-primary) 50%),
+    linear-gradient(135deg, var(--brand-primary) 50%, transparent 50%);
+  background-position:
+    calc(100% - 22px) calc(1.2em),
+    calc(100% - 16px) calc(1.2em);
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* Start butonu artık CTA değil, continuation */
+.weya-hero-text-side .weya-btn-aurora {
+  width: fit-content;
+  margin-top: 1.2rem;
+  padding: 0.9rem 2.8rem;
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  align-self: flex-start;
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.35);
+}
+
+/* Hover daha minimal */
+.weya-hero-text-side .weya-btn-aurora:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 28px rgba(52, 211, 153, 0.45);
+}
+
+/* Error mesajı formun parçası gibi */
+.weya-hero-text-side > div[style*="color: #ef4444"] {
+  background: transparent;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.75rem;
+  font-size: 0.85rem;
+  color: #fca5a5 !important;
+}
+
+/* Mobilde tam genişlik ama yine hafif */
+@media (max-width: 768px) {
+  .weya-hero-text-side .weya-form-box {
+    max-width: 100%;
+  }
+
+  .weya-hero-text-side .weya-btn-aurora {
+    align-self: center;
+  }
+}
+/* =========================================================
+   NAVBAR – SUBTLE PREMIUM POLISH
+   ========================================================= */
+
+/* Navbar daha “layered” hissetsin */
+.weya-navbar {
+  background: linear-gradient(
+    180deg,
+    rgba(2, 11, 9, 0.85),
+    rgba(2, 11, 9, 0.65)
+  );
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid rgba(52, 211, 153, 0.15);
+  box-shadow:
+    0 10px 30px rgba(0, 0, 0, 0.35);
+}
+
+/* Brand: daha sakin ama premium */
+.weya-brand {
+  font-size: 1.9rem;
+  letter-spacing: 0.08em;
+  filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.35));
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+
+.weya-brand:hover {
+  transform: translateY(-1px);
+  filter: drop-shadow(0 0 14px rgba(52, 211, 153, 0.55));
+}
+
+/* Menü linkleri biraz daha “buttery” */
+.weya-nav-link {
+  position: relative;
+  padding: 0.25rem 0;
+  color: rgba(226, 232, 240, 0.75);
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.weya-nav-link:hover {
+  color: var(--brand-primary);
+  transform: translateY(-1px);
+}
+
+/* Alt çizgi daha zarif */
+.weya-nav-link::after {
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand-primary),
+    transparent
+  );
+  opacity: 0.8;
+}
+
+/* Aktif section hissi (JS gerekmez) */
+.weya-nav-link:focus-visible {
+  outline: none;
+  color: var(--brand-primary);
+}
+
+/* Menü arası boşluk biraz daha rafine */
+.weya-nav-menu {
+  gap: 2.2rem;
+}
+
+/* Scroll hissi için mikro animasyon */
+.weya-navbar {
+  transition:
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+/* Mobile menu – daha temiz */
+@media (max-width: 1024px) {
+  .weya-nav-menu {
+    background: linear-gradient(
+      180deg,
+      rgba(2, 11, 9, 0.98),
+      rgba(2, 11, 9, 0.95)
+    );
+  }
+
+  .weya-nav-link {
+    font-size: 1.3rem;
+    letter-spacing: 0.12em;
+  }
+}
+/* =========================================================
+   BRAINTRUST-LIKE PRODUCT FORM LAYOUT
+   (logic untouched, brand preserved)
+   ========================================================= */
+
+/* Hero text biraz geri çekilsin */
+.weya-hero-text-side {
+  max-width: 520px;
+}
+
+/* Başlık daha ürün-odaklı his */
+.weya-hero-title {
+  font-size: 3.2rem;
+  margin-bottom: 1rem;
+}
+
+.weya-hero-text {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  color: var(--text-muted);
+}
+
+/* FORM = primary surface */
+.weya-hero-text-side .weya-form-box {
+  margin-top: 1.5rem;
+  background: transparent;
+  border: none;
+  padding: 0;
+  box-shadow: none;
+  max-width: 480px;
+}
+
+/* Inputs = enterprise, flat */
+.weya-hero-text-side .weya-input {
+  background: #020b09;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  padding: 14px 14px;
+  font-size: 0.95rem;
+  margin-bottom: 0.75rem;
+}
+
+.weya-hero-text-side .weya-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Focus = clean, no glow overload */
+.weya-hero-text-side .weya-input:focus {
+  border-color: var(--brand-primary);
+  box-shadow: none;
+  background: #020b09;
+}
+
+/* Select = same visual language */
+.weya-hero-text-side select.weya-input {
+  appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--brand-primary) 50%),
+    linear-gradient(135deg, var(--brand-primary) 50%, transparent 50%);
+  background-position:
+    calc(100% - 16px) 55%,
+    calc(100% - 11px) 55%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+/* CTA = Braintrust-style action */
+.weya-hero-text-side .weya-btn-aurora {
+  margin-top: 1.2rem;
+  width: 100%;
+  padding: 14px;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  letter-spacing: 0.08em;
+  text-transform: none;
+  background: var(--brand-primary);
+  animation: none;
+  box-shadow: none;
+}
+
+.weya-hero-text-side .weya-btn-aurora:hover {
+  background: #10b981;
+  transform: none;
+  box-shadow: 0 0 0 2px rgba(52, 211, 153, 0.25);
+}
+
+/* Error = inline validation like Braintrust */
+.weya-hero-text-side > div[style*="color: #ef4444"] {
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: #f87171 !important;
+}
+
+/* Avatar biraz geri planda kalsın */
+.weya-hero-visual-side {
+  opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+  .weya-hero-container {
+    gap: 2rem;
+  }
+
+  .weya-hero-title {
+    font-size: 2.6rem;
+  }
+}
+
+/* =========================================================
+   WEYA – PREMIUM LIVING UI
+   (no layout / no JS changes)
+   ========================================================= */
+
+/* ---------- SOFT GLOBAL MOTION ---------- */
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.weya-hero-text-side,
+.weya-hero-visual-side {
+  animation: fadeUp 0.8s ease-out both;
+}
+
+.weya-hero-visual-side {
+  animation-delay: 0.15s;
+}
+
+/* ---------- HERO DEPTH ---------- */
+
+.weya-hero-container {
+  position: relative;
+}
+
+.weya-hero-container::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  left: -15%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(
+    circle,
+    rgba(52, 211, 153, 0.12),
+    transparent 70%
+  );
+  filter: blur(80px);
+  z-index: 0;
+}
+
+/* ---------- FORM = GLASS SURFACE ---------- */
+
+.weya-hero-text-side .weya-form-box {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.015)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  padding: 1.75rem;
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.45),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+  transition:
+    transform 0.4s ease,
+    box-shadow 0.4s ease;
+}
+
+.weya-hero-text-side .weya-form-box:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 40px 120px rgba(0, 0, 0, 0.6),
+    0 0 40px rgba(52, 211, 153, 0.25);
+}
+
+/* ---------- INPUT MICRO INTERACTION ---------- */
+
+.weya-input {
+  transition:
+    border-color 0.25s ease,
+    background-color 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.weya-input:focus {
+  background: rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- BUTTON = PREMIUM CTA ---------- */
+
+.weya-btn-aurora {
+  position: relative;
+  overflow: hidden;
+}
+
+.weya-btn-aurora::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -30%;
+  width: 60%;
+  height: 200%;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: rotate(12deg);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.weya-btn-aurora:hover::after {
+  opacity: 1;
+  animation: sheen 1.4s ease forwards;
+}
+
+@keyframes sheen {
+  from {
+    transform: translateX(-120%) rotate(12deg);
+  }
+  to {
+    transform: translateX(220%) rotate(12deg);
+  }
+}
+
+/* ---------- AVATAR = SOFT PRESENCE ---------- */
+
+.weya-avatar-img {
+  transition:
+    transform 0.6s ease,
+    box-shadow 0.6s ease;
+}
+
+.weya-avatar-img:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 30px 80px rgba(0, 0, 0, 0.6),
+    0 0 50px rgba(52, 211, 153, 0.25);
+}
+
+/* ---------- NAVBAR DEPTH ---------- */
+
+.weya-navbar {
+  box-shadow:
+    0 10px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- SECTION TRANSITION FEEL ---------- */
+
+.weya-section {
+  position: relative;
+}
+
+.weya-section::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 70%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  transform: translateX(-50%);
+}
+
+/* ---------- MOBILE: LESS IS MORE ---------- */
+
+@media (max-width: 768px) {
+  .weya-hero-text-side .weya-form-box:hover {
+    transform: none;
+  }
+}
+
+
+.weya-hero-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+}
+
+.weya-hero-left,
+.weya-hero-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.weya-form-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 420px;
+}
+
+.weya-error {
+  color: #ef4444;
+  margin-bottom: 0.75rem;
+}
+
+.weya-loading-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 900px) {
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+}
+
+
+/* =========================
+   LAYOUT DENGE AYARLARI
+   ========================= */
+
+.weya-section {
+  padding: 80px 96px;
+}
+
+.weya-hero-grid {
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(420px, 1fr);
+  gap: 96px;
+  align-items: flex-start;
+}
+
+/* =========================
+   SOL TARAF (FORM)
+   ========================= */
+
+.weya-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.weya-hero-title {
+  max-width: 520px;
+  margin-bottom: 16px;
+}
+
+.weya-hero-text {
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+
+.weya-form-box {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* First + Last name yan yana */
+.weya-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.weya-input {
+  width: 100%;
+}
+
+/* =========================
+   BUTON
+   ========================= */
+
+.weya-btn-aurora {
+  margin-top: 12px;
+  align-self: flex-start;
+}
+
+/* =========================
+   SAĞ TARAF (METİN)
+   ========================= */
+
+.weya-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 4px;
+}
+
+.weya-hero-subtitle {
+  max-width: 520px;
+  margin-bottom: 24px;
+}
+
+.weya-hero-right .weya-hero-text {
+  max-width: 520px;
+  margin-bottom: 20px;
+}
+
+/* =========================
+   RESPONSIVE (MOBİL)
+   ========================= */
+
+@media (max-width: 1024px) {
+  .weya-section {
+    padding: 64px 40px;
+  }
+
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .weya-form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .weya-section {
+    padding: 48px 24px;
+  }
+}
+
+
+/* avatar-styles.css */
+/* SADECE ŞEKİL – DÜZEN – BOYUT – HİYERARŞİ */
+/* RENK / TON / GRADIENT / GÖLGE YOK */
+
+.weya-app {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.weya-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 64px;
+}
+
+.weya-brand {
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.weya-nav-menu {
+  display: flex;
+  gap: 32px;
+}
+
+.weya-nav-link {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* HERO GRID */
+.weya-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 40px 64px;
+}
+
+.weya-hero-grid {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* LEFT PANEL (FORM CARD) */
+.weya-hero-left {
+  max-width: 520px;
+}
+
+.weya-hero-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.weya-hero-text {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* FORM CONTAINER = CARD */
+.weya-form-box {
+  margin-top: 24px;
+  padding: 32px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ROW */
+.weya-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+/* INPUTS */
+.weya-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  font-size: 14px;
+  border-radius: 10px;
+  border-width: 1px;
+  outline: none;
+}
+
+.weya-input::placeholder {
+  font-size: 13px;
+}
+
+/* SELECT */
+.weya-input select {
+  appearance: none;
+}
+
+/* BUTTON */
+.weya-btn-aurora {
+  margin-top: 12px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+/* RIGHT PANEL */
+.weya-hero-right {
+  max-width: 520px;
+}
+
+.weya-hero-subtitle {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+/* STATES */
+.weya-error {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.weya-loading-screen,
+.weya-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  font-size: 14px;
+}
+
+/* CHAT MODE */
+.mode-chat {
+  height: 100vh;
+}
+
+.weya-session-container {
+  flex: 1;
+  display: flex;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .weya-section {
+    padding: 32px;
+  }
+
+  .weya-navbar {
+    padding: 24px 32px;
+  }
+}
+
+/* avatar-styles.css */
+/* ES K I  (ilk verdiğim) layout + sadece sol üst WEYA biraz büyük */
+
+.weya-app {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* NAVBAR */
+.weya-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 64px;
+}
+
+.weya-brand {
+  font-size: 22px;          /* sadece burayı büyüttüm */
+  font-weight: 700;
+  letter-spacing: 0.08em;   /* opsiyonel: daha “logo” gibi dursun */
+  text-decoration: none;
+}
+
+.weya-nav-menu {
+  display: flex;
+  gap: 32px;
+}
+
+.weya-nav-link {
+  font-size: 14px;
+  text-decoration: none;
+}
+
+/* HERO GRID */
+.weya-section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding: 40px 64px;
+}
+
+.weya-hero-grid {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* LEFT PANEL (FORM CARD) */
+.weya-hero-left {
+  max-width: 520px;
+}
+
+.weya-hero-title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.weya-hero-text {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* FORM CONTAINER = CARD */
+.weya-form-box {
+  margin-top: 24px;
+  padding: 32px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ROW */
+.weya-form-row {
+  display: flex;
+  gap: 16px;
+}
+
+/* INPUTS */
+.weya-input {
+  width: 100%;
+  height: 48px;
+  padding: 0 14px;
+  font-size: 14px;
+  border-radius: 10px;
+  border-width: 1px;
+  outline: none;
+}
+
+.weya-input::placeholder {
+  font-size: 13px;
+}
+
+/* SELECT */
+.weya-input select {
+  appearance: none;
+}
+
+/* BUTTON */
+.weya-btn-aurora {
+  margin-top: 12px;
+  height: 48px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+}
+
+/* RIGHT PANEL */
+.weya-hero-right {
+  max-width: 520px;
+}
+
+.weya-hero-subtitle {
+  font-size: 26px;
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 20px;
+}
+
+/* STATES */
+.weya-error {
+  font-size: 13px;
+  margin-bottom: 12px;
+}
+
+.weya-loading-screen,
+.weya-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60vh;
+  font-size: 14px;
+}
+
+/* CHAT MODE */
+.mode-chat {
+  height: 100vh;
+}
+
+.weya-session-container {
+  flex: 1;
+  display: flex;
+}
+
+/* RESPONSIVE */
+@media (max-width: 960px) {
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+
+  .weya-section {
+    padding: 32px;
+  }
+
+  .weya-navbar {
+    padding: 24px 32px;
+  }
+}
+
+/* TEK DEĞİŞİKLİK: HİÇBİR METİN ORTALANMIYOR */
+
+/* sağ bloktaki metinleri açıkça sola hizala */
+.weya-hero-right {
+  max-width: 520px;
+  text-align: left;
+}
+
+.weya-hero-subtitle {
+  text-align: left;
+}
+
+.weya-hero-right .weya-hero-text {
+  text-align: left;
+}
+
+/* TEK EK DEĞİŞİKLİK: Start interview butonu ortalansın */
+
+.weya-btn-aurora {
+  display: block;
+  margin: 12px auto 0; /* yatayda ortalar */
+}
+/* BUTON YAZISI ORTADA (yatay + dikey) */
+
+.weya-btn-aurora {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+
+/* ================================
+   LAYOUT FIX — RENKLERİNE DOKUNMADAN
+   ================================ */
+
+/* HERO GRID – Braintrust oranları */
+.weya-hero-grid {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 1.5rem;
+  display: grid;
+  grid-template-columns: minmax(420px, 1fr) minmax(420px, 1fr);
+  gap: 96px;
+  align-items: flex-start;
+}
+
+/* SOL TARAF (FORM) */
+.weya-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.weya-form-box {
+  width: 100%;
+  max-width: 520px;
+}
+
+/* First + Last name yan yana */
+.weya-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+/* BUTON – form içinde dengeli */
+.weya-btn-aurora {
+  margin-top: 12px;
+  align-self: flex-start;
+}
+
+/* SAĞ TARAF (METİN BLOĞU) */
+.weya-hero-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding-top: 4px;
+  text-align: left;
+}
+
+.weya-hero-subtitle,
+.weya-hero-right .weya-hero-text {
+  max-width: 520px;
+  text-align: left;
+}
+
+/* NAVBAR – sadece hizalama */
+.weya-navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ================================
+   RESPONSIVE
+   ================================ */
+
+@media (max-width: 1024px) {
+  .weya-hero-grid {
+    grid-template-columns: 1fr;
+    gap: 64px;
+  }
+}
+
+@media (max-width: 640px) {
+  .weya-form-row {
+    grid-template-columns: 1fr;
+  }
+}
+.weya-hero-subtitle {
+  margin-top: 40px;
+}
+
+.weya-hero-right .weya-hero-text:first-of-type {
+  margin-top: 8px;
+}
+
+/* =========================================
+   FORM BAŞLIĞINI KARTIN İÇİNE AL (CSS HİLESİ)
+   ========================================= */
+
+/* Sol kolon */
+.weya-hero-left {
+  position: relative;
+}
+
+/* Başlık + açıklama */
+.weya-hero-title,
+.weya-hero-text {
+  position: relative;
+  z-index: 2;
+}
+
+/* Kart */
+.weya-form-box {
+  position: relative;
+  margin-top: -72px; /* başlığı kartın içine çeker */
+  padding-top: 96px; /* başlık için içeride yer açar */
+}
+
+/* Başlık kart içi hizalama */
+.weya-hero-title {
+  margin-bottom: 8px;
+}
+
+/* Açıklama */
+.weya-hero-text {
+  margin-bottom: 24px;
+}
+
+/* Mobilde daha az bindir */
+@media (max-width: 640px) {
+  .weya-form-box {
+    margin-top: -48px;
+    padding-top: 72px;
+  }
+}
+/* =====================================
+   BRAINTRUST GİBİ: FORM BAŞLIĞIN ALTINA GİRER
+   ===================================== */
+
+/* Sol kolon normal akışta kalsın */
+.weya-hero-left {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+/* Başlıklar normal yerinde */
+.weya-hero-title {
+  margin-bottom: 8px;
+}
+
+.weya-hero-left > .weya-hero-text {
+  margin-bottom: 24px;
+}
+
+/* FORM kartı yukarı alınır */
+.weya-form-box {
+  margin-top: -12px; /* kritik nokta */
+  padding-top: 32px;
+}
+
+.weya-brand {
+  font-size: 30px;          /* sadece burayı büyüttüm */
+  font-weight: 700;
+  letter-spacing: 0.08em;   /* opsiyonel: daha “logo” gibi dursun */
+  text-decoration: none;
+}
+
+.weya-nav-link.active {
+  opacity: 1;
+}
