@@ -18,26 +18,19 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
-    /* --------------------------------------------------
-       1️⃣ Guard: API key
-    -------------------------------------------------- */
+    /* -------------------- 1️⃣ Guard -------------------- */
     if (!API_KEY) {
-      console.error("❌ API Key missing!");
       return NextResponse.json(
         { error: "API Key missing" },
         { status: 500 }
       );
     }
 
-    /* --------------------------------------------------
-       2️⃣ Parse body
-    -------------------------------------------------- */
+    /* -------------------- 2️⃣ Body -------------------- */
     const body = await request.json().catch(() => ({}));
-    const { persona, firstName, lastName, email } = body;
+    const { persona } = body;
 
-    /* --------------------------------------------------
-       3️⃣ Persona → Context mapping
-    -------------------------------------------------- */
+    /* -------------------- 3️⃣ Persona → Context -------------------- */
     let selectedContextId: string | null = null;
 
     switch (persona) {
@@ -66,16 +59,7 @@ export async function POST(request: Request) {
         );
     }
 
-    if (!selectedContextId) {
-      return NextResponse.json(
-        { error: "Context ID not configured" },
-        { status: 500 }
-      );
-    }
-
-    /* --------------------------------------------------
-       4️⃣ Create LiveAvatar session
-    -------------------------------------------------- */
+    /* -------------------- 4️⃣ Create session -------------------- */
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -97,7 +81,6 @@ export async function POST(request: Request) {
     const data = await res.json();
 
     if (!res.ok || !data?.data?.session_id) {
-      console.error("❌ LiveAvatar session error:", data);
       return NextResponse.json(
         { error: data?.message || "Failed to create session" },
         { status: res.status || 500 }
@@ -106,40 +89,32 @@ export async function POST(request: Request) {
 
     const sessionId = data.data.session_id;
 
-    /* --------------------------------------------------
-       5️⃣ Insert SESSION META (DB-safe)
-    -------------------------------------------------- */
-    const fullName =
-      firstName || lastName
-        ? `${firstName || ""} ${lastName || ""}`.trim()
-        : null;
+    /* -------------------- 5️⃣ SESSION META INSERT -------------------- */
+    // ⚠️ Bu kayıt SADECE session marker
+    // Avatar / voice mesajları buradan gelmiyor, sistem bozulmaz
 
-    const { error: metaError } = await supabase
+    const { error } = await supabase
       .from("chat_transcripts")
       .insert({
         session_id: sessionId,
-        sender: "system",                 // ✅ NOT user
-        input_type: "system",             // ✅ CHECK-constraint safe
-        message: "__SESSION_META__",       // ✅ marker
+        sender: "system",
+        input_type: "system",
+        message: "__SESSION_START__",
         client_timestamp: Date.now(),
-        user_name: fullName,
-        user_email: email || null,
       });
 
-    if (metaError) {
-      console.error("❌ Session meta insert failed:", metaError);
-      // deliberately NOT failing request
+    if (error) {
+      console.error("❌ Session meta insert failed:", error);
+      // session yine de devam eder
     }
 
-    /* --------------------------------------------------
-       6️⃣ Return token
-    -------------------------------------------------- */
+    /* -------------------- 6️⃣ Return -------------------- */
     return NextResponse.json({
       session_token: data.data.session_token,
       session_id: sessionId,
     });
-  } catch (error) {
-    console.error("❌ Server Error (start-session):", error);
+  } catch (err) {
+    console.error("❌ Server error (start-session):", err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 }
