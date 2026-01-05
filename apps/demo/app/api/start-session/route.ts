@@ -74,7 +74,7 @@ export async function POST(request: Request) {
 
     if (!tokenRes.ok) {
       return NextResponse.json(
-        { error: tokenData.message || "Failed to create session token" },
+        { error: tokenData?.message || "Failed to create session token" },
         { status: tokenRes.status },
       );
     }
@@ -82,27 +82,33 @@ export async function POST(request: Request) {
     const { session_id, session_token } = tokenData.data;
 
     /* -------------------------------------------------
-       2️⃣ START SESSION (KRİTİK EKSİK PARÇA)
+       2️⃣ START SESSION (FIXLİ)
     -------------------------------------------------- */
     const startRes = await fetch(`${API_URL}/v1/sessions/start`, {
       method: "POST",
       headers: {
         Authorization: `Bearer ${session_token}`,
+        "Content-Type": "application/json",
         Accept: "application/json",
       },
     });
 
-    const startData = await startRes.json();
+    let startData: any = null;
+    try {
+      startData = await startRes.json();
+    } catch {
+      startData = null; // 👈 bazen body boş geliyor
+    }
 
     if (!startRes.ok) {
       return NextResponse.json(
-        { error: startData.message || "Failed to start session" },
+        { error: startData?.message || "Failed to start session" },
         { status: startRes.status },
       );
     }
 
     /* -------------------------------------------------
-       3️⃣ METADATA INSERT (AYNI)
+       3️⃣ METADATA INSERT
     -------------------------------------------------- */
     const { error: metaError } = await supabase
       .from("chat_transcripts")
@@ -124,7 +130,7 @@ export async function POST(request: Request) {
     }
 
     /* -------------------------------------------------
-       4️⃣ FRONTEND’E DÖN
+       4️⃣ RETURN
     -------------------------------------------------- */
     return NextResponse.json({
       session_token,
