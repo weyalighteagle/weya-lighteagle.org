@@ -1,4 +1,6 @@
 import "./globals.css";
+import { IntercomProvider } from "../src/components/IntercomProvider";
+
 
 export default function RootLayout({
   children,
@@ -7,8 +9,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="bg-zinc-900 flex flex-col min-h-screen text-white justify-center items-center">
-        {children}
+      {/* Eski sınıfları (bg-zinc-900, flex, items-center vs.) sildik.
+        Artık kontrol tamamen senin css dosyalarında.
+      */}
+      <body>
+        <IntercomProvider>{children}</IntercomProvider>
       </body>
     </html>
   );

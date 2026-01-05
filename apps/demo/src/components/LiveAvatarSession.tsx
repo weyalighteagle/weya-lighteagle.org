@@ -5,61 +5,33 @@ import {
   LiveAvatarContextProvider,
   useSession,
   useTextChat,
-  useVoiceChat,
 } from "../liveavatar";
 import { SessionState } from "@heygen/liveavatar-web-sdk";
-import { useAvatarActions } from "../liveavatar/useAvatarActions";
+import "./avatar-styles.css";
 
-const Button: React.FC<{
-  onClick: () => void;
-  disabled?: boolean;
-  children: React.ReactNode;
-}> = ({ onClick, disabled, children }) => {
-  return (
-    <button
-      onClick={onClick}
-      disabled={disabled}
-      className="bg-white text-black px-4 py-2 rounded-md"
-    >
-      {children}
-    </button>
-  );
-};
-
+// 💬 Bileşen: Chat + Video + State
 const LiveAvatarSessionComponent: React.FC<{
-  mode: "FULL" | "CUSTOM";
+  session_id: string | null;
   onSessionStopped: () => void;
-}> = ({ mode, onSessionStopped }) => {
+}> = ({ session_id, onSessionStopped }) => {
   const [message, setMessage] = useState("");
   const {
     sessionState,
     isStreamReady,
     startSession,
     stopSession,
-    connectionQuality,
-    keepAlive,
     attachElement,
   } = useSession();
-  const {
-    isAvatarTalking,
-    isUserTalking,
-    isMuted,
-    isActive,
-    isLoading,
-    start,
-    stop,
-    mute,
-    unmute,
-  } = useVoiceChat();
-
-  const { interrupt, repeat, startListening, stopListening } =
-    useAvatarActions(mode);
-
-  const { sendMessage } = useTextChat(mode);
+  const { sendMessage } = useTextChat("FULL");
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isSending = useRef(false);
+
+  // 🔒 onSessionStopped sadece 1 kez çağrılsın
+  const stoppedRef = useRef(false);
 
   useEffect(() => {
-    if (sessionState === SessionState.DISCONNECTED) {
+    if (sessionState === SessionState.DISCONNECTED && !stoppedRef.current) {
+      stoppedRef.current = true;
       onSessionStopped();
     }
   }, [sessionState, onSessionStopped]);
@@ -68,139 +40,109 @@ const LiveAvatarSessionComponent: React.FC<{
     if (isStreamReady && videoRef.current) {
       attachElement(videoRef.current);
     }
-  }, [attachElement, isStreamReady]);
+  }, [isStreamReady, attachElement]);
 
   useEffect(() => {
-    if (sessionState === SessionState.INACTIVE) {
-      startSession();
+    if (sessionState === SessionState.INACTIVE && videoRef.current) {
+      const t = setTimeout(() => startSession(), 150);
+      return () => clearTimeout(t);
     }
-  }, [startSession, sessionState]);
+  }, [sessionState, startSession]);
 
-  const VoiceChatComponents = (
-    <>
-      <p>Voice Chat Active: {isActive ? "true" : "false"}</p>
-      <p>Voice Chat Loading: {isLoading ? "true" : "false"}</p>
-      {isActive && <p>Muted: {isMuted ? "true" : "false"}</p>}
-      <Button
-        onClick={() => {
-          if (isActive) {
-            stop();
-          } else {
-            start();
-          }
-        }}
-        disabled={isLoading}
-      >
-        {isActive ? "Stop Voice Chat" : "Start Voice Chat"}
-      </Button>
-      {isActive && (
-        <Button
-          onClick={() => {
-            if (isMuted) {
-              unmute();
-            } else {
-              mute();
-            }
-          }}
-        >
-          {isMuted ? "Unmute" : "Mute"}
-        </Button>
-      )}
-    </>
-  );
+  // ✅ FORM LEAD + SESSION_ID (SADECE 1 KEZ)
+  useEffect(() => {
+    if (!session_id) return;
+
+    const raw = sessionStorage.getItem("form_lead");
+    if (!raw) return;
+
+    try {
+      const { firstName, lastName, email } = JSON.parse(raw);
+
+      fetch("/api/form-lead", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          session_id, // ✅ EKLENDİ
+        }),
+      }).catch(() => {});
+    } finally {
+      sessionStorage.removeItem("form_lead");
+    }
+  }, [session_id]);
+
+  // ✅ Mesaj gönder
+  const sendAndLog = async () => {
+    if (!message.trim() || isSending.current) return;
+
+    isSending.current = true;
+    try {
+      await sendMessage(message);
+      setMessage("");
+    } finally {
+      isSending.current = false;
+    }
+  };
 
   return (
-    <div className="w-[1080px] max-w-full h-full flex flex-col items-center justify-center gap-4 py-4">
-      <div className="relative w-full aspect-video overflow-hidden flex flex-col items-center justify-center">
+    <div className="weya-session-wrapper">
+      {/* Video Area */}
+      <div className="weya-video-frame">
         <video
           ref={videoRef}
           autoPlay
           playsInline
-          className="w-full h-full object-contain"
+          muted={false}
+          className="weya-video-element"
         />
         <button
-          className="absolute bottom-4 right-4 bg-white text-black px-4 py-2 rounded-md"
-          onClick={() => stopSession()}
-        >
-          Stop
-        </button>
-      </div>
-      <div className="w-full h-full flex flex-col items-center justify-center gap-4">
-        <p>Session state: {sessionState}</p>
-        <p>Connection quality: {connectionQuality}</p>
-        {mode === "FULL" && (
-          <p>User talking: {isUserTalking ? "true" : "false"}</p>
-        )}
-        <p>Avatar talking: {isAvatarTalking ? "true" : "false"}</p>
-        {mode === "FULL" && VoiceChatComponents}
-        <Button
+          className="weya-stop-btn"
           onClick={() => {
-            keepAlive();
+            stopSession();
           }}
         >
-          Keep Alive
-        </Button>
-        <div className="w-full h-full flex flex-row items-center justify-center gap-4">
-          <Button
-            onClick={() => {
-              startListening();
-            }}
-          >
-            Start Listening
-          </Button>
-          <Button
-            onClick={() => {
-              stopListening();
-            }}
-          >
-            Stop Listening
-          </Button>
-          <Button
-            onClick={() => {
-              interrupt();
-            }}
-          >
-            Interrupt
-          </Button>
-        </div>
-        <div className="w-full h-full flex flex-row items-center justify-center gap-4">
-          <input
-            type="text"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="w-[400px] bg-white text-black px-4 py-2 rounded-md"
-          />
-          <Button
-            onClick={() => {
-              sendMessage(message);
-              setMessage("");
-            }}
-          >
-            Send
-          </Button>
-          <Button
-            onClick={() => {
-              repeat(message);
-              setMessage("");
-            }}
-          >
-            Repeat
-          </Button>
-        </div>
+          End Session
+        </button>
+      </div>
+
+      {/* Chat Controls */}
+      <div className="weya-chat-controls">
+        <input
+          type="text"
+          className="weya-input-field"
+          placeholder="Type your message..."
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && !e.repeat) {
+              e.preventDefault();
+              sendAndLog();
+            }
+          }}
+        />
+        <button className="weya-send-btn" onClick={sendAndLog}>
+          Send
+        </button>
       </div>
     </div>
   );
 };
 
 export const LiveAvatarSession: React.FC<{
-  mode: "FULL" | "CUSTOM";
   sessionAccessToken: string;
+  session_id: string | null;
   onSessionStopped: () => void;
-}> = ({ mode, sessionAccessToken, onSessionStopped }) => {
+}> = ({ sessionAccessToken, session_id, onSessionStopped }) => {
   return (
-    <LiveAvatarContextProvider sessionAccessToken={sessionAccessToken}>
+    <LiveAvatarContextProvider
+      sessionAccessToken={sessionAccessToken}
+      session_id={session_id}
+    >
       <LiveAvatarSessionComponent
-        mode={mode}
+        session_id={session_id}
         onSessionStopped={onSessionStopped}
       />
     </LiveAvatarContextProvider>
