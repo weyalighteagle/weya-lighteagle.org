@@ -26,35 +26,41 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => ({}));
     const { persona, firstName, lastName, email } = body;
 
-    let selectedContextId = "";
+    let selectedContextId: string | null = null;
 
-    if (persona === "weya_live") {
-      selectedContextId = CONTEXT_ID_WEYA_LIVE;
-    } else if (persona === "weya_startup") {
-      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
-    } else if (persona === "family_offices") {
-      selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
-    } else if (persona === "fund_builders") {
-      selectedContextId = CONTEXT_ID_FUND_BUILDERS;
-    } else if (persona === "impact_startups") {
-      selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
-    } else if (persona === "light_eagle") {
-      selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
-    } else {
-      return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
+    switch (persona) {
+      case "weya_live":
+        selectedContextId = CONTEXT_ID_WEYA_LIVE;
+        break;
+      case "weya_startup":
+        selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+        break;
+      case "family_offices":
+        selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
+        break;
+      case "fund_builders":
+        selectedContextId = CONTEXT_ID_FUND_BUILDERS;
+        break;
+      case "impact_startups":
+        selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
+        break;
+      case "light_eagle":
+        selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
+        break;
+      default:
+        return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
-        "X-Api-Key": API_KEY,
+        "X-API-KEY": API_KEY, // ✅ baseline ile birebir
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         mode: "FULL",
         avatar_id: AVATAR_ID,
         avatar_persona: {
-          avatar_id: AVATAR_ID,
           voice_id: VOICE_ID,
           context_id: selectedContextId,
           language: LANGUAGE,
@@ -66,7 +72,7 @@ export async function POST(request: Request) {
 
     if (!res.ok) {
       return NextResponse.json(
-        { error: data.message || "Failed to get token" },
+        { error: data?.data?.[0]?.message || "Failed to get token" },
         { status: res.status },
       );
     }
@@ -96,7 +102,7 @@ export async function POST(request: Request) {
       session_token: data.data.session_token,
       session_id: sessionId,
     });
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Server Error (start-session):", error);
     return NextResponse.json(
       { error: "Internal server error" },
