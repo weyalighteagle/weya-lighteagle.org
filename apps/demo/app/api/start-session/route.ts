@@ -19,6 +19,7 @@ export const dynamic = "force-dynamic";
 export async function POST(request: Request) {
   try {
     if (!API_KEY) {
+      console.error("❌ API Key missing!");
       return NextResponse.json({ error: "API Key missing" }, { status: 500 });
     }
 
@@ -26,33 +27,24 @@ export async function POST(request: Request) {
     const { persona, firstName, lastName, email } = body;
 
     let selectedContextId = "";
-    switch (persona) {
-      case "weya_live":
-        selectedContextId = CONTEXT_ID_WEYA_LIVE;
-        break;
-      case "weya_startup":
-        selectedContextId = CONTEXT_ID_WEYA_STARTUP;
-        break;
-      case "family_offices":
-        selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
-        break;
-      case "fund_builders":
-        selectedContextId = CONTEXT_ID_FUND_BUILDERS;
-        break;
-      case "impact_startups":
-        selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
-        break;
-      case "light_eagle":
-        selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
-        break;
-      default:
-        return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
+
+    if (persona === "weya_live") {
+      selectedContextId = CONTEXT_ID_WEYA_LIVE;
+    } else if (persona === "weya_startup") {
+      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+    } else if (persona === "family_offices") {
+      selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
+    } else if (persona === "fund_builders") {
+      selectedContextId = CONTEXT_ID_FUND_BUILDERS;
+    } else if (persona === "impact_startups") {
+      selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
+    } else if (persona === "light_eagle") {
+      selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
+    } else {
+      return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
-    /* -------------------------------------------------
-       1️⃣ CREATE SESSION TOKEN
-    -------------------------------------------------- */
-    const tokenRes = await fetch(`${API_URL}/v1/sessions/token`, {
+    const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
         "X-Api-Key": API_KEY,
@@ -70,50 +62,21 @@ export async function POST(request: Request) {
       }),
     });
 
-    const tokenData = await tokenRes.json();
+    const data = await res.json();
 
-    if (!tokenRes.ok) {
+    if (!res.ok) {
       return NextResponse.json(
-        { error: tokenData?.message || "Failed to create session token" },
-        { status: tokenRes.status },
+        { error: data.message || "Failed to get token" },
+        { status: res.status },
       );
     }
 
-    const { session_id, session_token } = tokenData.data;
+    const sessionId = data.data.session_id;
 
-    /* -------------------------------------------------
-       2️⃣ START SESSION (FIXLİ)
-    -------------------------------------------------- */
-    const startRes = await fetch(`${API_URL}/v1/sessions/start`, {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${session_token}`,
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-    });
-
-    let startData: any = null;
-    try {
-      startData = await startRes.json();
-    } catch {
-      startData = null; // 👈 bazen body boş geliyor
-    }
-
-    if (!startRes.ok) {
-      return NextResponse.json(
-        { error: startData?.message || "Failed to start session" },
-        { status: startRes.status },
-      );
-    }
-
-    /* -------------------------------------------------
-       3️⃣ METADATA INSERT
-    -------------------------------------------------- */
     const { error: metaError } = await supabase
       .from("chat_transcripts")
       .insert({
-        session_id,
+        session_id: sessionId,
         sender: "user",
         input_type: "session",
         message: "__SESSION_META__",
@@ -126,18 +89,15 @@ export async function POST(request: Request) {
       });
 
     if (metaError) {
-      console.error("Session meta insert failed:", metaError);
+      console.error("❌ Session meta insert failed:", metaError);
     }
 
-    /* -------------------------------------------------
-       4️⃣ RETURN
-    -------------------------------------------------- */
     return NextResponse.json({
-      session_token,
-      session_id,
+      session_token: data.data.session_token,
+      session_id: sessionId,
     });
-  } catch (err) {
-    console.error("Server Error (start-session):", err);
+  } catch (error: unknown) {
+    console.error("Server Error (start-session):", error);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
