@@ -1,6 +1,7 @@
 import "./globals.css";
 import { IntercomProvider } from "../src/components/IntercomProvider";
 
+
 export default function RootLayout({
   children,
 }: Readonly<{
