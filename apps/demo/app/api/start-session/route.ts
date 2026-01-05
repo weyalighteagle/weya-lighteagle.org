@@ -17,108 +17,90 @@ import { supabase } from "../../../src/utils/supabase";
 export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
-  let session_token = "";
-  let session_id = "";
-
   try {
-    /* -------------------- 1️⃣ Body -------------------- */
-    const body = await request.json().catch(() => ({}));
-    const { persona } = body;
-
-    /* -------------------- 2️⃣ Persona → Context -------------------- */
-    let context_id: string | null = null;
-
-    switch (persona) {
-      case "weya_live":
-        context_id = CONTEXT_ID_WEYA_LIVE;
-        break;
-      case "weya_startup":
-        context_id = CONTEXT_ID_WEYA_STARTUP;
-        break;
-      case "family_offices":
-        context_id = CONTEXT_ID_FAMILY_OFFICES;
-        break;
-      case "fund_builders":
-        context_id = CONTEXT_ID_FUND_BUILDERS;
-        break;
-      case "impact_startups":
-        context_id = CONTEXT_ID_IMPACT_STARTUPS;
-        break;
-      case "light_eagle":
-        context_id = CONTEXT_ID_LIGHT_EAGLE;
-        break;
-      default:
-        return NextResponse.json(
-          { error: "Invalid persona" },
-          { status: 400 }
-        );
+    if (!API_KEY) {
+      console.error("❌ API Key missing!");
+      return NextResponse.json({ error: "API Key missing" }, { status: 500 });
     }
 
-    /* -------------------- 3️⃣ Create session (baseline logic) -------------------- */
+    const body = await request.json().catch(() => ({}));
+    const { persona, firstName, lastName, email } = body;
+
+    let selectedContextId = "";
+
+    if (persona === "weya_live") {
+      selectedContextId = CONTEXT_ID_WEYA_LIVE;
+    } else if (persona === "weya_startup") {
+      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+    } else if (persona === "family_offices") {
+      selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
+    } else if (persona === "fund_builders") {
+      selectedContextId = CONTEXT_ID_FUND_BUILDERS;
+    } else if (persona === "impact_startups") {
+      selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
+    } else if (persona === "light_eagle") {
+      selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
+    } else {
+      return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
+    }
+
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
-        "X-API-KEY": API_KEY,
+        "X-Api-Key": API_KEY,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         mode: "FULL",
         avatar_id: AVATAR_ID,
         avatar_persona: {
+          avatar_id: AVATAR_ID,
           voice_id: VOICE_ID,
-          context_id,
+          context_id: selectedContextId,
           language: LANGUAGE,
         },
       }),
     });
 
+    const data = await res.json();
+
     if (!res.ok) {
-      const resp = await res.json();
-      const errorMessage =
-        resp?.data?.[0]?.message ?? "Failed to retrieve session token";
       return NextResponse.json(
-        { error: errorMessage },
-        { status: res.status }
+        { error: data.message || "Failed to get token" },
+        { status: res.status },
       );
     }
 
-    const data = await res.json();
-    session_token = data.data.session_token;
-    session_id = data.data.session_id;
-  } catch (error) {
-    console.error("Error retrieving session token:", error);
-    return NextResponse.json(
-      { error: (error as Error).message },
-      { status: 500 }
-    );
-  }
+    const sessionId = data.data.session_id;
 
-  if (!session_token || !session_id) {
-    return NextResponse.json(
-      { error: "Failed to retrieve session token" },
-      { status: 500 }
-    );
-  }
+    const { error: metaError } = await supabase
+      .from("chat_transcripts")
+      .insert({
+        session_id: sessionId,
+        sender: "user",
+        input_type: "session",
+        message: "__SESSION_META__",
+        client_timestamp: Date.now(),
+        user_name:
+          firstName || lastName
+            ? `${firstName || ""} ${lastName || ""}`.trim()
+            : null,
+        user_email: email || null,
+      });
 
-  /* -------------------- 4️⃣ SESSION START MARKER -------------------- */
-  // Sadece sistem işareti – gerçek konuşmalar etkilenmez
-  const { error: dbError } = await supabase
-    .from("chat_transcripts")
-    .insert({
-      session_id,
-      sender: "system",
-      input_type: "text", // constraint-safe
-      message: "__SESSION_START__",
-      client_timestamp: Date.now(),
+    if (metaError) {
+      console.error("❌ Session meta insert failed:", metaError);
+    }
+
+    return NextResponse.json({
+      session_token: data.data.session_token,
+      session_id: sessionId,
     });
-
-  if (dbError) {
-    console.error("❌ Session meta insert failed:", dbError);
+  } catch (error: unknown) {
+    console.error("Server Error (start-session):", error);
+    return NextResponse.json(
+      { error: "Internal server error" },
+      { status: 500 },
+    );
   }
-
-  /* -------------------- 5️⃣ Return (baseline response shape) -------------------- */
-  return NextResponse.json(
-    { session_token, session_id },
-    { status: 200 }
-  );
 }
