@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { persona, firstName, lastName, email } = body;
+    const { persona, firstName, lastName } = body;
 
     let selectedContextId = "";
 
