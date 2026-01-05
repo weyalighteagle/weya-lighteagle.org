@@ -1,238 +1,79 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import { LiveAvatarSession } from "./LiveAvatarSession";
-import "./avatar-styles.css";
-import { useRouter } from "next/navigation";
 
-type Props = {
-  persona?: string;
-};
-
-export const LiveAvatarDemo = ({ persona }: Props) => {
+export const LiveAvatarDemo = () => {
   const [sessionToken, setSessionToken] = useState("");
-  const [sessionId, setSessionId] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [mode, setMode] = useState<"FULL" | "CUSTOM">("FULL");
   const [error, setError] = useState<string | null>(null);
 
-  const sessionEndedRef = useRef(false);
-
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-
-  const router = useRouter();
-
-  // ✅ Route üzerinden persona gelince session otomatik başlar
-  useEffect(() => {
-    if (
-      persona &&
-      !sessionToken &&
-      !isLoading &&
-      !error &&
-      !sessionEndedRef.current
-    ) {
-      startInteraction(persona);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [persona]);
-
-  const startInteraction = async (forcedPersona?: string) => {
-    const finalPersona = forcedPersona || "weya_live";
-
-    setIsLoading(true);
-    setError(null);
-
+  const handleStart = async () => {
     try {
       const res = await fetch("/api/start-session", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          persona: finalPersona,
-          firstName,
-          lastName,
-          email,
-        }),
       });
-
       if (!res.ok) {
-        const errorData = await res.json();
-        setError(errorData.error);
+        const error = await res.json();
+        setError(error.error);
         return;
       }
-
-      const { session_token, session_id } = await res.json();
+      const { session_token } = await res.json();
       setSessionToken(session_token);
-      setSessionId(session_id);
-    } catch (err: unknown) {
-      setError((err as Error).message);
-    } finally {
-      setIsLoading(false);
+      setMode("FULL");
+    } catch (error: unknown) {
+      setError((error as Error).message);
     }
   };
 
+  const handleStartCustom = async () => {
+    const res = await fetch("/api/start-custom-session", {
+      method: "POST",
+    });
+    if (!res.ok) {
+      const error = await res.json();
+      setError(error.error);
+      return;
+    }
+    const { session_token } = await res.json();
+    setSessionToken(session_token);
+    setMode("CUSTOM");
+  };
+
+  const onSessionStopped = () => {
+    // Reset the FE state
+    setSessionToken("");
+  };
+
   return (
-    <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
-      {sessionToken ? (
-        <div className="weya-session-container">
-          <LiveAvatarSession
-            sessionAccessToken={sessionToken}
-            session_id={sessionId}
-            onSessionStopped={async () => {
-              sessionEndedRef.current = true;
-
-              try {
-                await fetch("/api/stop-session", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    session_token: sessionToken,
-                  }),
-                });
-              } catch (e) {
-                console.error("Failed to stop remote session", e);
-              }
-
-              setSessionToken("");
-              setSessionId(null);
-              router.push("/");
-            }}
-          />
-        </div>
-      ) : persona ? (
-        // ✅ /talk/weya-live açılınca loading ekranı
-        <div className="weya-loading-screen">
-          {error ? (
-            <div className="weya-error">{error}</div>
-          ) : (
-            <div className="weya-loading">
-              Connecting to Weya…
+    <div className="w-full h-full flex flex-col items-center justify-center gap-4">
+      {!sessionToken ? (
+        <>
+          {error && (
+            <div className="text-red-500">
+              {"Error getting session token: " + error}
             </div>
           )}
-        </div>
-      ) : (
-        <>
-          <nav className="weya-navbar">
-            <a href="/" className="weya-brand">
-              WEYA
-            </a>
+          <button
+            onClick={handleStart}
+            className="w-fit bg-white text-black px-4 py-2 rounded-md"
+          >
+            Start Full Avatar Session
+          </button>
 
-            <div className="weya-nav-menu">
-              <a href="#home" className="weya-nav-link">
-                AI Companion
-              </a>
-              <a href="#about" className="weya-nav-link">
-                About
-              </a>
-              <a href="#contact" className="weya-nav-link">
-                Contact
-              </a>
-            </div>
-          </nav>
-
-          <section id="home" className="weya-section">
-            <div className="weya-hero-grid">
-              <div className="weya-hero-left">
-                <h1 className="weya-hero-title">
-                  Participate in a foundational interview
-                </h1>
-
-                <p className="weya-hero-text">Fill out the form to start.</p>
-
-                {error && <div className="weya-error">{error}</div>}
-
-                <div className="weya-form-box">
-                  <div className="weya-form-row">
-                    <input
-                      className="weya-input"
-                      placeholder="First name"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
-                    <input
-                      className="weya-input"
-                      placeholder="Last name"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </div>
-
-                  <input
-                    className="weya-input"
-                    placeholder="Email"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-
-                  <button
-                    className="weya-btn-aurora"
-                    disabled={isLoading}
-                    onClick={() => {
-                      if (!firstName || !lastName || !email) {
-                        setError("Please fill in all fields.");
-                        return;
-                      }
-
-                      sessionStorage.setItem(
-                        "form_lead",
-                        JSON.stringify({
-                          firstName,
-                          lastName,
-                          email,
-                        })
-                      );
-
-                      // ✅ URL GÖRÜNECEK — /talk klasörü altında
-                      router.push("/talk/weya-live");
-                    }}
-                  >
-                    Start interview
-                  </button>
-                </div>
-              </div>
-
-              <div className="weya-hero-right">
-                <h2 className="weya-hero-subtitle">
-                  Weya
-                  <br />
-                  A system-intelligence layer for capital, trust, and coordination.
-                </h2>
-
-                <p className="weya-hero-text">
-                  Weya is an AI-enabled system that listens, learns, and connects —
-                  transforming conversations into shared intelligence for
-                  impact-driven capital.
-                </p>
-
-                <p className="weya-hero-text">
-                  We are inviting a small group of capital allocators and ecosystem
-                  builders to participate in foundational interviews shaping
-                  Weya’s next phase.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          <section id="contact" className="weya-section">
-            <div className="weya-content-narrow">
-              <h2 className="weya-section-title">Contact</h2>
-
-              <p className="weya-hero-text">
-                If you’re interested in learning more or participating beyond the
-                interview, you can reach us at:
-              </p>
-
-              <p className="weya-hero-text">
-                <strong>weya@lighteagle.org</strong>
-              </p>
-
-              <p className="weya-hero-text" style={{ opacity: 0.6 }}>
-                © 2025 Light Eagle. All rights reserved.
-              </p>
-            </div>
-          </section>
+          <button
+            onClick={handleStartCustom}
+            className="w-fit bg-white text-black px-4 py-2 rounded-md"
+          >
+            Start Custom Avatar Session
+          </button>
         </>
+      ) : (
+        <LiveAvatarSession
+          mode={mode}
+          sessionAccessToken={sessionToken}
+          onSessionStopped={onSessionStopped}
+        />
       )}
     </div>
   );
