@@ -1,51 +1,11 @@
 {
   "$schema": "https://turborepo.com/schema.json",
   "ui": "tui",
-  "globalEnv": [
-    "LIVEAVATAR_API_KEY",
-    "LIVEAVATAR_API_URL",
-    "LIVEAVATAR_AVATAR_ID",
-    "LIVEAVATAR_VOICE_ID",
-    "LIVEAVATAR_CONTEXT_ID",
-    "LIVEAVATAR_LANGUAGE",
-    "NEXT_PUBLIC_LIVEAVATAR_API_KEY",
-    "NEXT_PUBLIC_LIVEAVATAR_API_URL",
-    "NEXT_PUBLIC_LIVEAVATAR_AVATAR_ID",
-    "NEXT_PUBLIC_LIVEAVATAR_VOICE_ID",
-    "NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID",
-    "NEXT_PUBLIC_LIVEAVATAR_LANGUAGE",
-    "LIVEAVATAR_CONTEXT_ID_WEYA_LIVE",
-    "LIVEAVATAR_CONTEXT_ID_WEYA_STARTUP",
-    "NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID_WEYA_LIVE",
-    "NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID_WEYA_STARTUP",
-    "ELEVENLABS_API_KEY",
-    "OPENAI_API_KEY",
-    "POSTGRES_URL",
-    "POSTGRES_PRISMA_URL",
-    "POSTGRES_URL_NON_POOLING",
-    "POSTGRES_USER",
-    "POSTGRES_HOST",
-    "POSTGRES_PASSWORD",
-    "POSTGRES_DATABASE",
-    "DATABASE_URL",
-    "DATABASE_URL_UNPOOLED",
-    "PGHOST",
-    "PGHOST_UNPOOLED",
-    "PGPASSWORD",
-    "PGDATABASE",
-    "PGUSER",
-    "POSTGRES_URL_NO_SSL",
-    "NEON_PROJECT_ID",
-    "NEXT_PUBLIC_SUPABASE_URL",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY",
-    "STORAGE_SUPABASE_URL",
-    "STORAGE_SUPABASE_ANON_KEY"
-  ],
   "tasks": {
     "build": {
       "dependsOn": ["^build"],
       "inputs": ["$TURBO_DEFAULT$", ".env*"],
-      "outputs": [".next/**", "!.next/cache/**", "lib/**", "dist/**"]
+      "outputs": [".next/**", "!.next/cache/**"]
     },
     "lint": {
       "dependsOn": ["^lint"]

@@ -1,89 +1,60 @@
-import { NextResponse } from "next/server";
 import {
   API_KEY,
   API_URL,
   AVATAR_ID,
   VOICE_ID,
-  CONTEXT_ID_WEYA_LIVE,
-  CONTEXT_ID_WEYA_STARTUP,
+  CONTEXT_ID,
   LANGUAGE,
 } from "../secrets";
 
-export async function POST(request: Request) {
+export async function POST() {
+  let session_token = "";
+  let session_id = "";
   try {
-    if (!API_KEY) {
-      console.error(
-        "❌ API Key missing! Make sure LIVEAVATAR_API_KEY is set in apps/demo/.env.local",
-      );
-      return NextResponse.json({ error: "API Key missing" }, { status: 500 });
-    }
-
-    const body = await request.json().catch(() => ({}));
-    const { persona } = body;
-
-    let selectedContextId = "";
-
-    if (persona === "weya_live") {
-      selectedContextId = CONTEXT_ID_WEYA_LIVE;
-    } else if (persona === "weya_startup") {
-      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
-    } else {
-      console.error("❌ Error: Invalid or missing persona:", persona);
-      return NextResponse.json(
-        { error: "Invalid persona. Must be 'weya_live' or 'weya_startup'" },
-        { status: 400 },
-      );
-    }
-
-    console.log("Debug: Persona:", persona);
-    console.log("Debug: Selected Context ID:", selectedContextId);
-
-    if (!selectedContextId) {
-      console.error("❌ Error: Context ID is missing for persona:", persona);
-      return NextResponse.json(
-        { error: "Context ID not configured for this persona" },
-        { status: 500 },
-      );
-    }
-
-    // HeyGen session token oluştur
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
-        "X-Api-Key": API_KEY,
+        "X-API-KEY": API_KEY,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         mode: "FULL",
         avatar_id: AVATAR_ID,
         avatar_persona: {
-          avatar_id: AVATAR_ID,
           voice_id: VOICE_ID,
-          context_id: selectedContextId,
+          context_id: CONTEXT_ID,
           language: LANGUAGE,
         },
       }),
     });
-
+    if (!res.ok) {
+      const resp = await res.json();
+      const errorMessage =
+        resp.data[0].message ?? "Failed to retrieve session token";
+      return new Response(JSON.stringify({ error: errorMessage }), {
+        status: res.status,
+      });
+    }
     const data = await res.json();
 
-    if (!res.ok) {
-      console.error("LiveAvatar API Error:", data);
-      return NextResponse.json(
-        { error: data.message || "Failed to get token" },
-        { status: res.status },
-      );
-    }
-
-    // 🔥 Token ve Session ID başarıyla döndür
-    return NextResponse.json({
-      session_token: data.data.session_token,
-      session_id: data.data.session_id,
+    session_token = data.data.session_token;
+    session_id = data.data.session_id;
+  } catch (error) {
+    console.error("Error retrieving session token:", error);
+    return new Response(JSON.stringify({ error: (error as Error).message }), {
+      status: 500,
     });
-  } catch (error: unknown) {
-    console.error("Server Error (start-session route):", error);
-    const errorMessage =
-      error instanceof Error ? error.message : "Internal server error";
-    return NextResponse.json({ error: errorMessage }, { status: 500 });
   }
+
+  if (!session_token) {
+    return new Response("Failed to retrieve session token", {
+      status: 500,
+    });
+  }
+  return new Response(JSON.stringify({ session_token, session_id }), {
+    status: 200,
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
 }

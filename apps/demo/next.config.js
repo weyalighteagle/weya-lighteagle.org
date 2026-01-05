@@ -1,6 +1,4 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {
-  transpilePackages: ["@heygen/liveavatar-web-sdk"],
-};
+const nextConfig = {};
 
 export default nextConfig;
