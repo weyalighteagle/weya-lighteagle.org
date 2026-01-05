@@ -28,23 +28,18 @@ export async function POST(request: Request) {
 
     let selectedContextId = "";
 
-    if (persona === "weya_live") {
-      selectedContextId = CONTEXT_ID_WEYA_LIVE;
-    } else if (persona === "weya_startup") {
-      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
-    } else if (persona === "family_offices") {
-      selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
-    } else if (persona === "fund_builders") {
-      selectedContextId = CONTEXT_ID_FUND_BUILDERS;
-    } else if (persona === "impact_startups") {
-      selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
-    } else if (persona === "light_eagle") {
-      selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
-    } else {
+    if (persona === "weya_live") selectedContextId = CONTEXT_ID_WEYA_LIVE;
+    else if (persona === "weya_startup") selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+    else if (persona === "family_offices") selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
+    else if (persona === "fund_builders") selectedContextId = CONTEXT_ID_FUND_BUILDERS;
+    else if (persona === "impact_startups") selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
+    else if (persona === "light_eagle") selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
+    else {
       return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
-    const res = await fetch(`${API_URL}/v1/sessions/token`, {
+    /* 1️⃣ CREATE SESSION TOKEN */
+    const tokenRes = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
         "X-Api-Key": API_KEY,
@@ -54,7 +49,6 @@ export async function POST(request: Request) {
         mode: "FULL",
         avatar_id: AVATAR_ID,
         avatar_persona: {
-          avatar_id: AVATAR_ID,
           voice_id: VOICE_ID,
           context_id: selectedContextId,
           language: LANGUAGE,
@@ -62,17 +56,38 @@ export async function POST(request: Request) {
       }),
     });
 
-    const data = await res.json();
+    const tokenData = await tokenRes.json();
 
-    if (!res.ok) {
+    if (!tokenRes.ok) {
       return NextResponse.json(
-        { error: data.message || "Failed to get token" },
-        { status: res.status },
+        { error: tokenData.message || "Failed to create session token" },
+        { status: tokenRes.status },
       );
     }
 
-    const sessionId = data.data.session_id;
+    const sessionToken = tokenData.data.session_token;
 
+    /* 2️⃣ START SESSION (KRİTİK EKSİK OLAN KISIM) */
+    const startRes = await fetch(`${API_URL}/v1/sessions/start`, {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${sessionToken}`,
+        Accept: "application/json",
+      },
+    });
+
+    const startData = await startRes.json();
+
+    if (!startRes.ok) {
+      return NextResponse.json(
+        { error: startData.message || "Failed to start session" },
+        { status: startRes.status },
+      );
+    }
+
+    const sessionId = startData.data.session_id;
+
+    /* 3️⃣ SESSION META INSERT (ARTIK GERÇEKTEN BAŞLAMIŞ SESSION) */
     const { error: metaError } = await supabase
       .from("chat_transcripts")
       .insert({
@@ -92,11 +107,18 @@ export async function POST(request: Request) {
       console.error("❌ Session meta insert failed:", metaError);
     }
 
+    /* 4️⃣ CLIENT'E DÖN */
     return NextResponse.json({
-      session_token: data.data.session_token,
       session_id: sessionId,
+      session_token: sessionToken,
+      livekit: {
+        url: startData.data.livekit_url,
+        token: startData.data.livekit_client_token,
+      },
+      ws_url: startData.data.ws_url,
+      max_session_duration: startData.data.max_session_duration,
     });
-  } catch (error: unknown) {
+  } catch (error) {
     console.error("Server Error (start-session):", error);
     return NextResponse.json(
       { error: "Internal server error" },
