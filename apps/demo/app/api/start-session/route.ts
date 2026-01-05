@@ -18,48 +18,32 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
-    /* 1️⃣ Guard */
     if (!API_KEY) {
-      return NextResponse.json(
-        { error: "API Key missing" },
-        { status: 500 }
-      );
+      console.error("❌ API Key missing!");
+      return NextResponse.json({ error: "API Key missing" }, { status: 500 });
     }
 
-    /* 2️⃣ Body */
     const body = await request.json().catch(() => ({}));
-    const { persona } = body;
+    const { persona, firstName, lastName, email } = body;
 
-    /* 3️⃣ Persona → Context */
-    let selectedContextId: string | null = null;
+    let selectedContextId = "";
 
-    switch (persona) {
-      case "weya_live":
-        selectedContextId = CONTEXT_ID_WEYA_LIVE;
-        break;
-      case "weya_startup":
-        selectedContextId = CONTEXT_ID_WEYA_STARTUP;
-        break;
-      case "family_offices":
-        selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
-        break;
-      case "fund_builders":
-        selectedContextId = CONTEXT_ID_FUND_BUILDERS;
-        break;
-      case "impact_startups":
-        selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
-        break;
-      case "light_eagle":
-        selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
-        break;
-      default:
-        return NextResponse.json(
-          { error: "Invalid persona" },
-          { status: 400 }
-        );
+    if (persona === "weya_live") {
+      selectedContextId = CONTEXT_ID_WEYA_LIVE;
+    } else if (persona === "weya_startup") {
+      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+    } else if (persona === "family_offices") {
+      selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
+    } else if (persona === "fund_builders") {
+      selectedContextId = CONTEXT_ID_FUND_BUILDERS;
+    } else if (persona === "impact_startups") {
+      selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
+    } else if (persona === "light_eagle") {
+      selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
+    } else {
+      return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
-    /* 4️⃣ Create LiveAvatar session */
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -68,8 +52,9 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         mode: "FULL",
-        avatar_id: AVATAR_ID,          // ✅ sadece burada
+        avatar_id: AVATAR_ID,
         avatar_persona: {
+          avatar_id: AVATAR_ID,
           voice_id: VOICE_ID,
           context_id: selectedContextId,
           language: LANGUAGE,
@@ -79,34 +64,43 @@ export async function POST(request: Request) {
 
     const data = await res.json();
 
-    if (!res.ok || !data?.data?.session_id) {
+    if (!res.ok) {
       return NextResponse.json(
-        { error: data?.message || "Failed to get token" },
-        { status: res.status || 500 }
+        { error: data.message || "Failed to get token" },
+        { status: res.status },
       );
     }
 
     const sessionId = data.data.session_id;
 
-    /* 5️⃣ SESSION START META (SYSTEM) */
-    await supabase.from("chat_transcripts").insert({
-      session_id: sessionId,
-      sender: "system",          // ❗ user DEĞİL
-      input_type: "system",      // ya da "text"
-      message: "__SESSION_START__",
-      client_timestamp: Date.now(),
-    });
+    const { error: metaError } = await supabase
+      .from("chat_transcripts")
+      .insert({
+        session_id: sessionId,
+        sender: "user",
+        input_type: "session",
+        message: "__SESSION_META__",
+        client_timestamp: Date.now(),
+        user_name:
+          firstName || lastName
+            ? `${firstName || ""} ${lastName || ""}`.trim()
+            : null,
+        user_email: email || null,
+      });
 
-    /* 6️⃣ Return */
+    if (metaError) {
+      console.error("❌ Session meta insert failed:", metaError);
+    }
+
     return NextResponse.json({
       session_token: data.data.session_token,
       session_id: sessionId,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error("Server Error (start-session):", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
