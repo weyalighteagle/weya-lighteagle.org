@@ -27,27 +27,20 @@ export async function POST(request: Request) {
 
     let selectedContextId = "";
 
-    switch (persona) {
-      case "weya_live":
-        selectedContextId = CONTEXT_ID_WEYA_LIVE;
-        break;
-      case "weya_startup":
-        selectedContextId = CONTEXT_ID_WEYA_STARTUP;
-        break;
-      case "family_offices":
-        selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
-        break;
-      case "fund_builders":
-        selectedContextId = CONTEXT_ID_FUND_BUILDERS;
-        break;
-      case "impact_startups":
-        selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
-        break;
-      case "light_eagle":
-        selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
-        break;
-      default:
-        return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
+    if (persona === "weya_live") {
+      selectedContextId = CONTEXT_ID_WEYA_LIVE;
+    } else if (persona === "weya_startup") {
+      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+    } else if (persona === "family_offices") {
+      selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
+    } else if (persona === "fund_builders") {
+      selectedContextId = CONTEXT_ID_FUND_BUILDERS;
+    } else if (persona === "impact_startups") {
+      selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
+    } else if (persona === "light_eagle") {
+      selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
+    } else {
+      return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
@@ -72,19 +65,20 @@ export async function POST(request: Request) {
 
     if (!res.ok) {
       return NextResponse.json(
-        { error: data.message || "Failed to get session token" },
-        { status: res.status },
+        { error: data?.message || "Failed to get token" },
+        { status: res.status }
       );
     }
 
     return NextResponse.json({
       session_token: data.data.session_token,
+      session_id: data.data.session_id,
     });
   } catch (error) {
-    console.error("Server Error (create-session-token):", error);
+    console.error("Server Error (start-session):", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
