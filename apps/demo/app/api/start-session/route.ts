@@ -18,32 +18,64 @@ export const dynamic = "force-dynamic";
 
 export async function POST(request: Request) {
   try {
+    /* --------------------------------------------------
+       1️⃣ Guard: API key
+    -------------------------------------------------- */
     if (!API_KEY) {
       console.error("❌ API Key missing!");
-      return NextResponse.json({ error: "API Key missing" }, { status: 500 });
+      return NextResponse.json(
+        { error: "API Key missing" },
+        { status: 500 }
+      );
     }
 
+    /* --------------------------------------------------
+       2️⃣ Parse body
+    -------------------------------------------------- */
     const body = await request.json().catch(() => ({}));
     const { persona, firstName, lastName, email } = body;
 
-    let selectedContextId = "";
+    /* --------------------------------------------------
+       3️⃣ Persona → Context mapping
+    -------------------------------------------------- */
+    let selectedContextId: string | null = null;
 
-    if (persona === "weya_live") {
-      selectedContextId = CONTEXT_ID_WEYA_LIVE;
-    } else if (persona === "weya_startup") {
-      selectedContextId = CONTEXT_ID_WEYA_STARTUP;
-    } else if (persona === "family_offices") {
-      selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
-    } else if (persona === "fund_builders") {
-      selectedContextId = CONTEXT_ID_FUND_BUILDERS;
-    } else if (persona === "impact_startups") {
-      selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
-    } else if (persona === "light_eagle") {
-      selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
-    } else {
-      return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
+    switch (persona) {
+      case "weya_live":
+        selectedContextId = CONTEXT_ID_WEYA_LIVE;
+        break;
+      case "weya_startup":
+        selectedContextId = CONTEXT_ID_WEYA_STARTUP;
+        break;
+      case "family_offices":
+        selectedContextId = CONTEXT_ID_FAMILY_OFFICES;
+        break;
+      case "fund_builders":
+        selectedContextId = CONTEXT_ID_FUND_BUILDERS;
+        break;
+      case "impact_startups":
+        selectedContextId = CONTEXT_ID_IMPACT_STARTUPS;
+        break;
+      case "light_eagle":
+        selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
+        break;
+      default:
+        return NextResponse.json(
+          { error: "Invalid persona" },
+          { status: 400 }
+        );
     }
 
+    if (!selectedContextId) {
+      return NextResponse.json(
+        { error: "Context ID not configured" },
+        { status: 500 }
+      );
+    }
+
+    /* --------------------------------------------------
+       4️⃣ Create LiveAvatar session
+    -------------------------------------------------- */
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -64,43 +96,53 @@ export async function POST(request: Request) {
 
     const data = await res.json();
 
-    if (!res.ok) {
+    if (!res.ok || !data?.data?.session_id) {
+      console.error("❌ LiveAvatar session error:", data);
       return NextResponse.json(
-        { error: data.message || "Failed to get token" },
-        { status: res.status },
+        { error: data?.message || "Failed to create session" },
+        { status: res.status || 500 }
       );
     }
 
     const sessionId = data.data.session_id;
 
+    /* --------------------------------------------------
+       5️⃣ Insert SESSION META (DB-safe)
+    -------------------------------------------------- */
+    const fullName =
+      firstName || lastName
+        ? `${firstName || ""} ${lastName || ""}`.trim()
+        : null;
+
     const { error: metaError } = await supabase
       .from("chat_transcripts")
       .insert({
         session_id: sessionId,
-        sender: "user",
-        input_type: "session",
-        message: "__SESSION_META__",
+        sender: "system",                 // ✅ NOT user
+        input_type: "system",             // ✅ CHECK-constraint safe
+        message: "__SESSION_META__",       // ✅ marker
         client_timestamp: Date.now(),
-        user_name:
-          firstName || lastName
-            ? `${firstName || ""} ${lastName || ""}`.trim()
-            : null,
+        user_name: fullName,
         user_email: email || null,
       });
 
     if (metaError) {
       console.error("❌ Session meta insert failed:", metaError);
+      // deliberately NOT failing request
     }
 
+    /* --------------------------------------------------
+       6️⃣ Return token
+    -------------------------------------------------- */
     return NextResponse.json({
       session_token: data.data.session_token,
       session_id: sessionId,
     });
-  } catch (error: unknown) {
-    console.error("Server Error (start-session):", error);
+  } catch (error) {
+    console.error("❌ Server Error (start-session):", error);
     return NextResponse.json(
       { error: "Internal server error" },
-      { status: 500 },
+      { status: 500 }
     );
   }
 }
