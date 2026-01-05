@@ -73,21 +73,6 @@ export async function POST(request: Request) {
 
     const sessionId = data.data.session_id;
 
-    const { error: metaError } = await supabase
-      .from("chat_transcripts")
-      .insert({
-        session_id: sessionId,
-        sender: "user",
-        input_type: "session",
-        message: "__SESSION_META__",
-        client_timestamp: Date.now(),
-        user_name:
-          firstName || lastName
-            ? `${firstName || ""} ${lastName || ""}`.trim()
-            : null,
-        user_email: email || null,
-      });
-
     if (metaError) {
       console.error("❌ Session meta insert failed:", metaError);
     }
