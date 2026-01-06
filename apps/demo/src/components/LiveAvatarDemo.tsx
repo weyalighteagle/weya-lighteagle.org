@@ -29,12 +29,7 @@ export const LiveAvatarDemo = () => {
       const res = await fetch("/api/start-session", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          persona: "weya_live",
-          firstName,
-          lastName,
-          email,
-        }),
+        body: JSON.stringify({}), // ✅ server body kullanmıyor
       });
 
       if (!res.ok) {
@@ -55,7 +50,6 @@ export const LiveAvatarDemo = () => {
 
   return (
     <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
-      {/* ================= SESSION ================= */}
       {sessionToken && (
         <div className="weya-session-container">
           <LiveAvatarSession
@@ -83,14 +77,12 @@ export const LiveAvatarDemo = () => {
         </div>
       )}
 
-      {/* ================= LOADING ================= */}
       {!sessionToken && isLoading && (
         <div className="weya-loading-screen">
           <div className="weya-loading">Connecting to Weya…</div>
         </div>
       )}
 
-      {/* ================= LANDING ================= */}
       {!sessionToken && !isLoading && (
         <>
           <nav className="weya-navbar">

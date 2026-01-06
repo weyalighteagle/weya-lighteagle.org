@@ -1,16 +1,21 @@
-import {
-  API_KEY,
-  API_URL,
-  AVATAR_ID,
-  VOICE_ID,
-  CONTEXT_ID,
-  LANGUAGE,
-} from "../secrets";
+function getEnv(name: string): string {
+  const value = process.env[name];
+  if (!value) {
+    throw new Error(`Missing required environment variable: ${name}`);
+  }
+  return value;
+}
 
 export async function POST() {
-  let session_token = "";
-  let session_id = "";
   try {
+    const API_KEY = getEnv("API_KEY");
+    const API_URL = getEnv("API_URL");
+    const AVATAR_ID = getEnv("AVATAR_ID");
+    const VOICE_ID = getEnv("VOICE_ID");
+    const CONTEXT_ID = getEnv("CONTEXT_ID_WEYA_LIVE");
+    // gerekiyorsa: LIVEAVATAR_CONTEXT_ID_FUND_BUILDERS
+    const LANGUAGE = process.env.LANGUAGE ?? "en";
+
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -27,34 +32,33 @@ export async function POST() {
         },
       }),
     });
+
     if (!res.ok) {
       const resp = await res.json();
       const errorMessage =
-        resp.data[0].message ?? "Failed to retrieve session token";
+        resp?.data?.[0]?.message ?? "Failed to retrieve session token";
       return new Response(JSON.stringify({ error: errorMessage }), {
         status: res.status,
       });
     }
+
     const data = await res.json();
 
-    session_token = data.data.session_token;
-    session_id = data.data.session_id;
+    return new Response(
+      JSON.stringify({
+        session_token: data.data.session_token,
+        session_id: data.data.session_id,
+      }),
+      {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   } catch (error) {
     console.error("Error retrieving session token:", error);
-    return new Response(JSON.stringify({ error: (error as Error).message }), {
-      status: 500,
-    });
+    return new Response(
+      JSON.stringify({ error: (error as Error).message }),
+      { status: 500 }
+    );
   }
-
-  if (!session_token) {
-    return new Response("Failed to retrieve session token", {
-      status: 500,
-    });
-  }
-  return new Response(JSON.stringify({ session_token, session_id }), {
-    status: 200,
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
 }
