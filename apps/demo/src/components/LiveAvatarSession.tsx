@@ -9,12 +9,12 @@ import {
 import { SessionState } from "@heygen/liveavatar-web-sdk";
 import "./avatar-styles.css";
 
-// 💬 Bileşen: Chat + Video + State
 const LiveAvatarSessionComponent: React.FC<{
   session_id: string | null;
   onSessionStopped: () => void;
 }> = ({ session_id, onSessionStopped }) => {
   const [message, setMessage] = useState("");
+
   const {
     sessionState,
     isStreamReady,
@@ -22,34 +22,45 @@ const LiveAvatarSessionComponent: React.FC<{
     stopSession,
     attachElement,
   } = useSession();
+
   const { sendMessage } = useTextChat("FULL");
+
   const videoRef = useRef<HTMLVideoElement>(null);
-  const isSending = useRef(false);
-
-  // 🔒 onSessionStopped sadece 1 kez çağrılsın
+  const isSendingRef = useRef(false);
   const stoppedRef = useRef(false);
+  const startedRef = useRef(false);
 
+  /* ---------------- SESSION STOP (TEK KEZ) ---------------- */
   useEffect(() => {
-    if (sessionState === SessionState.DISCONNECTED && !stoppedRef.current) {
+    if (
+      sessionState === SessionState.DISCONNECTED &&
+      !stoppedRef.current
+    ) {
       stoppedRef.current = true;
       onSessionStopped();
     }
   }, [sessionState, onSessionStopped]);
 
+  /* ---------------- STREAM ATTACH ---------------- */
   useEffect(() => {
     if (isStreamReady && videoRef.current) {
       attachElement(videoRef.current);
     }
   }, [isStreamReady, attachElement]);
 
+  /* ---------------- SESSION START (GUARDED) ---------------- */
   useEffect(() => {
-    if (sessionState === SessionState.INACTIVE && videoRef.current) {
+    if (
+      sessionState === SessionState.INACTIVE &&
+      !startedRef.current
+    ) {
+      startedRef.current = true;
       const t = setTimeout(() => startSession(), 150);
       return () => clearTimeout(t);
     }
   }, [sessionState, startSession]);
 
-  // ✅ FORM LEAD + SESSION_ID (SADECE 1 KEZ)
+  /* ---------------- FORM LEAD (SADECE 1 KEZ) ---------------- */
   useEffect(() => {
     if (!session_id) return;
 
@@ -66,7 +77,7 @@ const LiveAvatarSessionComponent: React.FC<{
           firstName,
           lastName,
           email,
-          session_id, // ✅ EKLENDİ
+          session_id,
         }),
       }).catch(() => {});
     } finally {
@@ -74,41 +85,44 @@ const LiveAvatarSessionComponent: React.FC<{
     }
   }, [session_id]);
 
-  // ✅ Mesaj gönder
+  /* ---------------- MESSAGE SEND (RACE SAFE) ---------------- */
   const sendAndLog = async () => {
-    if (!message.trim() || isSending.current) return;
+    if (!message.trim() || isSendingRef.current) return;
 
-    isSending.current = true;
+    isSendingRef.current = true;
     try {
       await sendMessage(message);
       setMessage("");
     } finally {
-      isSending.current = false;
+      isSendingRef.current = false;
     }
   };
 
   return (
     <div className="weya-session-wrapper">
-      {/* Video Area */}
+      {/* VIDEO */}
       <div className="weya-video-frame">
         <video
           ref={videoRef}
           autoPlay
           playsInline
-          muted={false}
           className="weya-video-element"
         />
+
         <button
           className="weya-stop-btn"
           onClick={() => {
-            stopSession();
+            if (!stoppedRef.current) {
+              stoppedRef.current = true;
+              stopSession();
+            }
           }}
         >
           End Session
         </button>
       </div>
 
-      {/* Chat Controls */}
+      {/* CHAT */}
       <div className="weya-chat-controls">
         <input
           type="text"
