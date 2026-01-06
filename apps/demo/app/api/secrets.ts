@@ -53,7 +53,7 @@ export const CONTEXT_ID = CONTEXT_ID_WEYA_LIVE;
 export const LANGUAGE =
   process.env.LIVEAVATAR_LANGUAGE ||
   process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE ||
-  "tr-TR";
+  "";
 
 /*
 export const API_KEY = process.env.API_KEY  || "";
