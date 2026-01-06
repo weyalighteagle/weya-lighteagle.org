@@ -1,15 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { LiveAvatarSession } from "./LiveAvatarSession";
 import "./avatar-styles.css";
-import { useRouter } from "next/navigation";
 
-type Props = {
-  persona?: string;
-};
-
-export const LiveAvatarDemo = ({ persona }: Props) => {
+export const LiveAvatarDemo = () => {
   const [sessionToken, setSessionToken] = useState("");
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,24 +16,11 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
 
-  const router = useRouter();
-
-  // ✅ Route üzerinden persona gelince session otomatik başlar
-  useEffect(() => {
-    if (
-      persona &&
-      !sessionToken &&
-      !isLoading &&
-      !error &&
-      !sessionEndedRef.current
-    ) {
-      startInteraction(persona);
+  const startInteraction = async () => {
+    if (!firstName || !lastName || !email) {
+      setError("Please fill in all fields.");
+      return;
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [persona]);
-
-  const startInteraction = async (forcedPersona?: string) => {
-    const finalPersona = forcedPersona || "weya_live";
 
     setIsLoading(true);
     setError(null);
@@ -48,7 +30,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          persona: finalPersona,
+          persona: "weya_live",
           firstName,
           lastName,
           email,
@@ -56,8 +38,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
       });
 
       if (!res.ok) {
-        const errorData = await res.json();
-        setError(errorData.error);
+        const err = await res.json();
+        setError(err.error || "Failed to start session");
         return;
       }
 
@@ -73,7 +55,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
   return (
     <div className={`weya-app ${sessionToken ? "mode-chat" : "mode-landing"}`}>
-      {sessionToken ? (
+      {/* ================= SESSION ================= */}
+      {sessionToken && (
         <div className="weya-session-container">
           <LiveAvatarSession
             sessionAccessToken={sessionToken}
@@ -95,34 +78,27 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
               setSessionToken("");
               setSessionId(null);
-              router.push("/");
             }}
           />
         </div>
-      ) : persona ? (
-        // ✅ /talk/weya-live açılınca loading ekranı
+      )}
+
+      {/* ================= LOADING ================= */}
+      {!sessionToken && isLoading && (
         <div className="weya-loading-screen">
-          {error ? (
-            <div className="weya-error">{error}</div>
-          ) : (
-            <div className="weya-loading">
-              Connecting to Weya…
-            </div>
-          )}
+          <div className="weya-loading">Connecting to Weya…</div>
         </div>
-      ) : (
+      )}
+
+      {/* ================= LANDING ================= */}
+      {!sessionToken && !isLoading && (
         <>
           <nav className="weya-navbar">
-            <a href="/" className="weya-brand">
-              WEYA
-            </a>
+            <span className="weya-brand">WEYA</span>
 
             <div className="weya-nav-menu">
               <a href="#home" className="weya-nav-link">
                 AI Companion
-              </a>
-              <a href="#about" className="weya-nav-link">
-                About
               </a>
               <a href="#contact" className="weya-nav-link">
                 Contact
@@ -137,7 +113,9 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                   Participate in a foundational interview
                 </h1>
 
-                <p className="weya-hero-text">Fill out the form to start.</p>
+                <p className="weya-hero-text">
+                  Fill out the form to start.
+                </p>
 
                 {error && <div className="weya-error">{error}</div>}
 
@@ -167,25 +145,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
                   <button
                     className="weya-btn-aurora"
-                    disabled={isLoading}
-                    onClick={() => {
-                      if (!firstName || !lastName || !email) {
-                        setError("Please fill in all fields.");
-                        return;
-                      }
-
-                      sessionStorage.setItem(
-                        "form_lead",
-                        JSON.stringify({
-                          firstName,
-                          lastName,
-                          email,
-                        })
-                      );
-
-                      // ✅ URL GÖRÜNECEK — /talk klasörü altında
-                      router.push("/talk/weya-live");
-                    }}
+                    onClick={startInteraction}
                   >
                     Start interview
                   </button>
@@ -217,11 +177,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           <section id="contact" className="weya-section">
             <div className="weya-content-narrow">
               <h2 className="weya-section-title">Contact</h2>
-
-              <p className="weya-hero-text">
-                If you’re interested in learning more or participating beyond the
-                interview, you can reach us at:
-              </p>
 
               <p className="weya-hero-text">
                 <strong>weya@lighteagle.org</strong>

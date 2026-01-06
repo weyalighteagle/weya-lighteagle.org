@@ -9,12 +9,13 @@ import {
 import { SessionState } from "@heygen/liveavatar-web-sdk";
 import "./avatar-styles.css";
 
-// 💬 Bileşen: Chat + Video + State
 const LiveAvatarSessionComponent: React.FC<{
   session_id: string | null;
   onSessionStopped: () => void;
 }> = ({ session_id, onSessionStopped }) => {
   const [message, setMessage] = useState("");
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   const {
     sessionState,
     isStreamReady,
@@ -22,15 +23,22 @@ const LiveAvatarSessionComponent: React.FC<{
     stopSession,
     attachElement,
   } = useSession();
-  const { sendMessage } = useTextChat("FULL");
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const isSending = useRef(false);
 
-  // 🔒 onSessionStopped sadece 1 kez çağrılsın
+  const { sendMessage } = useTextChat("FULL");
+
   const stoppedRef = useRef(false);
+  const isSendingRef = useRef(false);
+  const leadSentRef = useRef(false); // ✅ YENİ
+
+  /* ===============================
+     Session lifecycle
+     =============================== */
 
   useEffect(() => {
-    if (sessionState === SessionState.DISCONNECTED && !stoppedRef.current) {
+    if (
+      sessionState === SessionState.DISCONNECTED &&
+      !stoppedRef.current
+    ) {
       stoppedRef.current = true;
       onSessionStopped();
     }
@@ -43,15 +51,24 @@ const LiveAvatarSessionComponent: React.FC<{
   }, [isStreamReady, attachElement]);
 
   useEffect(() => {
-    if (sessionState === SessionState.INACTIVE && videoRef.current) {
+    if (sessionState === SessionState.INACTIVE) {
       const t = setTimeout(() => startSession(), 150);
       return () => clearTimeout(t);
     }
   }, [sessionState, startSession]);
 
-  // ✅ FORM LEAD + SESSION_ID (SADECE 1 KEZ)
+  /* ===============================
+     Form lead → backend (1 kez, ACTIVE olunca)
+     =============================== */
+
   useEffect(() => {
-    if (!session_id) return;
+    if (
+      leadSentRef.current ||
+      !session_id ||
+      sessionState !== SessionState.ACTIVE
+    ) {
+      return;
+    }
 
     const raw = sessionStorage.getItem("form_lead");
     if (!raw) return;
@@ -66,30 +83,33 @@ const LiveAvatarSessionComponent: React.FC<{
           firstName,
           lastName,
           email,
-          session_id, // ✅ EKLENDİ
+          session_id,
         }),
       }).catch(() => {});
     } finally {
+      leadSentRef.current = true;
       sessionStorage.removeItem("form_lead");
     }
-  }, [session_id]);
+  }, [session_id, sessionState]);
 
-  // ✅ Mesaj gönder
-  const sendAndLog = async () => {
-    if (!message.trim() || isSending.current) return;
+  /* ===============================
+     Chat
+     =============================== */
 
-    isSending.current = true;
+  const sendAndClear = async () => {
+    if (!message.trim() || isSendingRef.current) return;
+
+    isSendingRef.current = true;
     try {
       await sendMessage(message);
       setMessage("");
     } finally {
-      isSending.current = false;
+      isSendingRef.current = false;
     }
   };
 
   return (
     <div className="weya-session-wrapper">
-      {/* Video Area */}
       <div className="weya-video-frame">
         <video
           ref={videoRef}
@@ -100,15 +120,12 @@ const LiveAvatarSessionComponent: React.FC<{
         />
         <button
           className="weya-stop-btn"
-          onClick={() => {
-            stopSession();
-          }}
+          onClick={() => stopSession()}
         >
           End Session
         </button>
       </div>
 
-      {/* Chat Controls */}
       <div className="weya-chat-controls">
         <input
           type="text"
@@ -119,17 +136,24 @@ const LiveAvatarSessionComponent: React.FC<{
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.repeat) {
               e.preventDefault();
-              sendAndLog();
+              sendAndClear();
             }
           }}
         />
-        <button className="weya-send-btn" onClick={sendAndLog}>
+        <button
+          className="weya-send-btn"
+          onClick={sendAndClear}
+        >
           Send
         </button>
       </div>
     </div>
   );
 };
+
+/* ===============================
+   Provider Wrapper (değişmedi)
+   =============================== */
 
 export const LiveAvatarSession: React.FC<{
   sessionAccessToken: string;
