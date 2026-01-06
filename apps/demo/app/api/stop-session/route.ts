@@ -15,12 +15,12 @@ export async function POST(request: Request) {
     const res = await fetch(`${API_URL}/v1/sessions/stop`, {
       method: "POST",
       headers: {
-        "X-API-KEY": session_token, // LiveAvatar docs
+        "X-API-KEY": session_token,
         "Content-Type": "application/json",
         accept: "application/json",
       },
       body: JSON.stringify({
-        session_id: session_id ?? null, // token ile geliyorsa null olabilir
+        session_id: session_id ?? null,
         reason: reason ?? "user_stopped",
       }),
     });
@@ -40,10 +40,7 @@ export async function POST(request: Request) {
     const data = await res.json();
 
     return new Response(
-      JSON.stringify({
-        success: true,
-        data,
-      }),
+      JSON.stringify({ success: true, data }),
       { status: 200, headers: { "Content-Type": "application/json" } }
     );
   } catch (error) {
