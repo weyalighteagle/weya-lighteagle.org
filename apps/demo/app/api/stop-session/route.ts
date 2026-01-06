@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     }
 
     const res = await fetch(`${API_URL}/v1/sessions`, {
-      method: "POST",
+      method: "DELETE",
       headers: {
         Authorization: `Bearer ${session_token}`,
         "Content-Type": "application/json",
