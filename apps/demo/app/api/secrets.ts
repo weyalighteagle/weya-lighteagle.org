@@ -48,7 +48,6 @@ export const CONTEXT_ID_LIGHT_EAGLE =
   process.env.NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID_LIGHT_EAGLE ||
   "";
 
-export const CONTEXT_ID = CONTEXT_ID_WEYA_LIVE;
 
 export const LANGUAGE =
   process.env.LIVEAVATAR_LANGUAGE ||
