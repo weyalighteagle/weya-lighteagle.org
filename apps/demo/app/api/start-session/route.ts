@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     }
 
     const body = await request.json().catch(() => ({}));
-    const { persona, firstName, lastName, email } = body;
+    const { persona, sender, input_type } = body;
 
     let selectedContextId = "";
 
@@ -77,19 +77,15 @@ export async function POST(request: Request) {
       .from("chat_transcripts")
       .insert({
         session_id: sessionId,
-        sender: "user",
-        input_type: "session",
+        sender: typeof sender === "string" ? sender : "unknown",
+        input_type: typeof input_type === "string" ? input_type : "session",
         message: "__SESSION_META__",
         client_timestamp: Date.now(),
-        user_name:
-          firstName || lastName
-            ? `${firstName || ""} ${lastName || ""}`.trim()
-            : null,
-        user_email: email || null,
       });
 
     if (metaError) {
       console.error("❌ Session meta insert failed:", metaError);
+      // DB patlasa bile avatar açılmaya devam eder
     }
 
     return NextResponse.json({
