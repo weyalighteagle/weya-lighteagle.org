@@ -1,13 +1,13 @@
-import { API_URL } from "../secrets";
+import { API_URL, LIVEAVATAR_API_KEY } from "../secrets";
 
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { session_token, session_id, reason } = body;
+    const { session_id, reason } = body;
 
-    if (!session_token) {
+    if (!session_id) {
       return new Response(
-        JSON.stringify({ error: "session_token is required" }),
+        JSON.stringify({ error: "session_id is required" }),
         { status: 400, headers: { "Content-Type": "application/json" } }
       );
     }
@@ -15,12 +15,12 @@ export async function POST(request: Request) {
     const res = await fetch(`${API_URL}/v1/sessions/stop`, {
       method: "POST",
       headers: {
-        "X-API-KEY": session_token,
+        "X-API-KEY": LIVEAVATAR_API_KEY, // ✅ GERÇEK API KEY
         "Content-Type": "application/json",
         accept: "application/json",
       },
       body: JSON.stringify({
-        session_id: session_id ?? null,
+        session_id,
         reason: reason ?? "user_stopped",
       }),
     });
