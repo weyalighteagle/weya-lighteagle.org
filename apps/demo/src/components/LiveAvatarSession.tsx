@@ -28,7 +28,7 @@ const LiveAvatarSessionComponent: React.FC<{
 
   const stoppedRef = useRef(false);
   const isSendingRef = useRef(false);
-  const leadSentRef = useRef(false); // ✅ YENİ
+  const leadSentRef = useRef(false);
 
   /* ===============================
      Session lifecycle
@@ -58,7 +58,7 @@ const LiveAvatarSessionComponent: React.FC<{
   }, [sessionState, startSession]);
 
   /* ===============================
-     Form lead → backend (1 kez, ACTIVE olunca)
+     Form lead → backend (1 kez)
      =============================== */
 
   useEffect(() => {
@@ -70,8 +70,13 @@ const LiveAvatarSessionComponent: React.FC<{
       return;
     }
 
+    if (typeof window === "undefined") return;
+
     const raw = sessionStorage.getItem("form_lead");
-    if (!raw) return;
+    if (!raw) {
+      leadSentRef.current = true;
+      return;
+    }
 
     try {
       const { firstName, lastName, email } = JSON.parse(raw);
@@ -120,7 +125,12 @@ const LiveAvatarSessionComponent: React.FC<{
         />
         <button
           className="weya-stop-btn"
-          onClick={() => stopSession()}
+          onClick={() => {
+            if (!stoppedRef.current) {
+              stoppedRef.current = true;
+              stopSession();
+            }
+          }}
         >
           End Session
         </button>
@@ -152,7 +162,7 @@ const LiveAvatarSessionComponent: React.FC<{
 };
 
 /* ===============================
-   Provider Wrapper (değişmedi)
+   Provider Wrapper
    =============================== */
 
 export const LiveAvatarSession: React.FC<{
