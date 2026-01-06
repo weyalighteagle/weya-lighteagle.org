@@ -9,6 +9,7 @@ import {
 import { SessionState } from "@heygen/liveavatar-web-sdk";
 import "./avatar-styles.css";
 
+// 💬 Bileşen: Chat + Video + State
 const LiveAvatarSessionComponent: React.FC<{
   session_id: string | null;
   onSessionStopped: () => void;
@@ -21,13 +22,13 @@ const LiveAvatarSessionComponent: React.FC<{
     stopSession,
     attachElement,
   } = useSession();
-
   const { sendMessage } = useTextChat("FULL");
   const videoRef = useRef<HTMLVideoElement>(null);
-  const stoppedRef = useRef(false);
   const isSending = useRef(false);
 
-  // session kapandıysa FE reset
+  // 🔒 onSessionStopped sadece 1 kez çağrılsın
+  const stoppedRef = useRef(false);
+
   useEffect(() => {
     if (sessionState === SessionState.DISCONNECTED && !stoppedRef.current) {
       stoppedRef.current = true;
@@ -35,21 +36,20 @@ const LiveAvatarSessionComponent: React.FC<{
     }
   }, [sessionState, onSessionStopped]);
 
-  // video bağla
   useEffect(() => {
     if (isStreamReady && videoRef.current) {
       attachElement(videoRef.current);
     }
   }, [isStreamReady, attachElement]);
 
-  // session başlat (SDK kontrolünde)
   useEffect(() => {
-    if (sessionState === SessionState.INACTIVE) {
-      startSession();
+    if (sessionState === SessionState.INACTIVE && videoRef.current) {
+      const t = setTimeout(() => startSession(), 150);
+      return () => clearTimeout(t);
     }
   }, [sessionState, startSession]);
 
-  // form lead + session_id (1 kez)
+  // ✅ FORM LEAD + SESSION_ID (SADECE 1 KEZ)
   useEffect(() => {
     if (!session_id) return;
 
@@ -66,7 +66,7 @@ const LiveAvatarSessionComponent: React.FC<{
           firstName,
           lastName,
           email,
-          session_id,
+          session_id, // ✅ EKLENDİ
         }),
       }).catch(() => {});
     } finally {
@@ -74,8 +74,10 @@ const LiveAvatarSessionComponent: React.FC<{
     }
   }, [session_id]);
 
+  // ✅ Mesaj gönder
   const sendAndLog = async () => {
     if (!message.trim() || isSending.current) return;
+
     isSending.current = true;
     try {
       await sendMessage(message);
@@ -87,18 +89,26 @@ const LiveAvatarSessionComponent: React.FC<{
 
   return (
     <div className="weya-session-wrapper">
+      {/* Video Area */}
       <div className="weya-video-frame">
         <video
           ref={videoRef}
           autoPlay
           playsInline
+          muted={false}
           className="weya-video-element"
         />
-        <button className="weya-stop-btn" onClick={stopSession}>
+        <button
+          className="weya-stop-btn"
+          onClick={() => {
+            stopSession();
+          }}
+        >
           End Session
         </button>
       </div>
 
+      {/* Chat Controls */}
       <div className="weya-chat-controls">
         <input
           type="text"
@@ -127,7 +137,10 @@ export const LiveAvatarSession: React.FC<{
   onSessionStopped: () => void;
 }> = ({ sessionAccessToken, session_id, onSessionStopped }) => {
   return (
-    <LiveAvatarContextProvider sessionAccessToken={sessionAccessToken}>
+    <LiveAvatarContextProvider
+      sessionAccessToken={sessionAccessToken}
+      session_id={session_id}
+    >
       <LiveAvatarSessionComponent
         session_id={session_id}
         onSessionStopped={onSessionStopped}
