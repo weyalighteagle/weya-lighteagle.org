@@ -1875,13 +1875,38 @@ body::after {
   padding-top: 32px;
 }
 
-.weya-brand {
-  font-size: 30px;          /* sadece burayı büyüttüm */
-  font-weight: 700;
-  letter-spacing: 0.08em;   /* opsiyonel: daha “logo” gibi dursun */
-  text-decoration: none;
+.weya-navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 20px 48px;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  position: relative;
 }
 
-.weya-nav-link.active {
+.weya-brand {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  color: inherit;
+}
+
+.weya-nav-menu {
+  display: flex;
+  gap: 32px;
+}
+
+.weya-nav-link {
+  text-decoration: none;
+  font-size: 14px;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.weya-nav-link:hover {
   opacity: 1;
 }
