@@ -15,7 +15,7 @@ export async function POST(request: Request) {
     const res = await fetch(`${API_URL}/v1/sessions/stop`, {
       method: "POST",
       headers: {
-        "X-API-KEY": LIVEAVATAR_API_KEY, // ✅ GERÇEK API KEY
+        "X-API-KEY": API_KEY, // ✅ GERÇEK API KEY
         "Content-Type": "application/json",
         accept: "application/json",
       },
