@@ -38,7 +38,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
   }, [persona]);
 
   const startInteraction = async (forcedPersona?: string) => {
-    const finalPersona = forcedPersona || "weya_live";
+    const finalPersona = forcedPersona || "weya_startup";
 
     setIsLoading(true);
     setError(null);
