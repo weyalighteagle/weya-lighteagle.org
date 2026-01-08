@@ -52,7 +52,8 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
           firstName,
           lastName,
           email,
-          language: "en-US", // 👈 EKLENEN TEK SATIR
+          // ✅ ENG env yapısını kullanır
+          language: process.env.NEXT_PUBLIC_APP_LANG || "eng",
         }),
       });
 

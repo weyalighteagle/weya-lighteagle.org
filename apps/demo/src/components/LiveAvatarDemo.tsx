@@ -52,6 +52,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           firstName,
           lastName,
           email,
+          // ✅ TR env yapısını kullanır
+          language: process.env.NEXT_PUBLIC_APP_LANG || "tr",
         }),
       });
 
@@ -100,14 +102,11 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           />
         </div>
       ) : persona ? (
-        // ✅ /talk/weya-live açılınca loading ekranı
         <div className="weya-loading-screen">
           {error ? (
             <div className="weya-error">{error}</div>
           ) : (
-            <div className="weya-loading">
-              Connecting to Weya…
-            </div>
+            <div className="weya-loading">Connecting to Weya…</div>
           )}
         </div>
       ) : (
@@ -183,7 +182,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         })
                       );
 
-                      // ✅ URL GÖRÜNECEK — /talk klasörü altında
                       router.push("/talk/weya-live");
                     }}
                   >
