@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     const body = await request.json().catch(() => ({}));
     const { persona, firstName, lastName, email, language } = body;
 
-    /* ---------------- CONTEXT ---------------- */
+    /* ---------------- CONTEXT (AYNI) ---------------- */
 
     let selectedContextId = "";
 
@@ -51,9 +51,14 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
-    /* ---------------- LANGUAGE ---------------- */
-    // client'tan gelen neyse direkt kullan
-    const resolvedLanguage = language;
+    /* ---------------- LANGUAGE (ASIL DÜZELTME) ---------------- */
+    // Frontend ne gönderirse onu kullan
+    // Göndermezse default: en-US
+
+    const resolvedLanguage =
+      typeof language === "string" && language.trim().length > 0
+        ? language
+        : "en-US";
 
     /* ---------------- API CALL ---------------- */
 
@@ -99,13 +104,15 @@ export async function POST(request: Request) {
           ? `${firstName || ""} ${lastName || ""}`.trim()
           : null,
       user_email: email || null,
+      language: resolvedLanguage,
     });
 
     return NextResponse.json({
       session_token: data.data.session_token,
       session_id: sessionId,
     });
-  } catch {
+  } catch (err) {
+    console.error(err);
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
