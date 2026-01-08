@@ -10,8 +10,6 @@ import {
   CONTEXT_ID_FUND_BUILDERS,
   CONTEXT_ID_IMPACT_STARTUPS,
   CONTEXT_ID_LIGHT_EAGLE,
-  LANGUAGE_TR,
-  LANGUAGE_ENG,
 } from "../secrets";
 import { supabase } from "../../../src/utils/supabase";
 
@@ -54,22 +52,8 @@ export async function POST(request: Request) {
     }
 
     /* ---------------- LANGUAGE ---------------- */
-    // client: "tr" | "eng"
-    // env: tr-TR | en-US
-
-    let resolvedLanguage: string;
-
-    switch (language) {
-      case "tr":
-        resolvedLanguage = LANGUAGE_TR;
-        break;
-      case "eng":
-        resolvedLanguage = LANGUAGE_ENG;
-        break;
-      default:
-        // güvenli fallback
-        resolvedLanguage = LANGUAGE_ENG;
-    }
+    // client'tan gelen neyse direkt kullan
+    const resolvedLanguage = language;
 
     /* ---------------- API CALL ---------------- */
 
@@ -121,7 +105,7 @@ export async function POST(request: Request) {
       session_token: data.data.session_token,
       session_id: sessionId,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
