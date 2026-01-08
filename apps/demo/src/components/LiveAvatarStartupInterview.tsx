@@ -52,7 +52,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
           firstName,
           lastName,
           email,
-          language: "en-US",
+          language: "en",
         }),
       });
 
