@@ -1,7 +1,7 @@
 "use client";
 
-import { LiveAvatarDemo } from "../../../src/components/LiveAvatarStartupInterview";
+import LiveAvatarStartupInterview from "../../../src/components/LiveAvatarStartupInterview";
 
 export default function WeyaStartupPage() {
-  return <LiveAvatarDemo persona="weya_startup" />;
+  return <LiveAvatarStartupInterview persona="weya_startup" />;
 }
