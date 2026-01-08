@@ -10,7 +10,8 @@ import {
   CONTEXT_ID_FUND_BUILDERS,
   CONTEXT_ID_IMPACT_STARTUPS,
   CONTEXT_ID_LIGHT_EAGLE,
-  LANGUAGE,
+  LANGUAGE_TR,
+  LANGUAGE_ENG,
 } from "../secrets";
 import { supabase } from "../../../src/utils/supabase";
 
@@ -24,6 +25,8 @@ export async function POST(request: Request) {
 
     const body = await request.json().catch(() => ({}));
     const { persona, firstName, lastName, email, language } = body;
+
+    /* ---------------- CONTEXT ---------------- */
 
     let selectedContextId = "";
 
@@ -50,9 +53,25 @@ export async function POST(request: Request) {
         return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
 
-    // 👉 Dil çözümleme:
-    // body.language > secrets.ts LANGUAGE (suffix'li env)
-    const resolvedLanguage = language || LANGUAGE;
+    /* ---------------- LANGUAGE ---------------- */
+    // client: "tr" | "eng"
+    // env: tr-TR | en-US
+
+    let resolvedLanguage: string;
+
+    switch (language) {
+      case "tr":
+        resolvedLanguage = LANGUAGE_TR;
+        break;
+      case "eng":
+        resolvedLanguage = LANGUAGE_ENG;
+        break;
+      default:
+        // güvenli fallback
+        resolvedLanguage = LANGUAGE_ENG;
+    }
+
+    /* ---------------- API CALL ---------------- */
 
     const res = await fetch(`${API_URL}/v1/sessions/token`, {
       method: "POST",
@@ -80,6 +99,8 @@ export async function POST(request: Request) {
         { status: res.status },
       );
     }
+
+    /* ---------------- DB ---------------- */
 
     const sessionId = data.data.session_id;
 

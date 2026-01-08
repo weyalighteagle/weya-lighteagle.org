@@ -23,7 +23,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
 
   const router = useRouter();
 
-  // ✅ Route üzerinden persona gelince session otomatik başlar
+  // Persona gelince otomatik başlat
   useEffect(() => {
     if (
       persona &&
@@ -52,8 +52,8 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
           firstName,
           lastName,
           email,
-          // ✅ ENG env yapısını kullanır
-          language: process.env.NEXT_PUBLIC_APP_LANG || "eng",
+          // 🇺🇸 BU COMPONENT HER ZAMAN ENGLISH
+          language: "eng",
         }),
       });
 

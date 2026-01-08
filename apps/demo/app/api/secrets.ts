@@ -1,3 +1,5 @@
+/* ================== API ================== */
+
 export const API_KEY =
   process.env.LIVEAVATAR_API_KEY ||
   process.env.NEXT_PUBLIC_LIVEAVATAR_API_KEY ||
@@ -18,7 +20,7 @@ export const VOICE_ID =
   process.env.NEXT_PUBLIC_LIVEAVATAR_VOICE_ID ||
   "";
 
-/* ---------------- CONTEXTLER ---------------- */
+/* ================= CONTEXTLER ================= */
 
 export const CONTEXT_ID_WEYA_LIVE =
   process.env.LIVEAVATAR_CONTEXT_ID_WEYA_LIVE ||
@@ -50,20 +52,22 @@ export const CONTEXT_ID_LIGHT_EAGLE =
   process.env.NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID_LIGHT_EAGLE ||
   "";
 
-/* ---------------- LANGUAGE ---------------- */
+/* ================= LANGUAGE ================= */
 
-// hangi dil aktif?
+// ❌ LANG YOK
+// ✅ Build-safe, persona bazlı çözüm start-session'da yapılır
 
-export const LANGUAGE =
-  LANG === "eng"
-    ? process.env.LIVEAVATAR_LANGUAGE_eng ||
-      process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE_eng ||
-      "en-US"
-    : process.env.LIVEAVATAR_LANGUAGE_tr ||
-      process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE_tr ||
-      "tr";
+export const LANGUAGE_ENG =
+  process.env.LIVEAVATAR_LANGUAGE_eng ||
+  process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE_eng ||
+  "en-US";
 
-/* ---------------- CUSTOM MODE ---------------- */
+export const LANGUAGE_TR =
+  process.env.LIVEAVATAR_LANGUAGE_tr ||
+  process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE_tr ||
+  "tr-TR";
+
+/* ================= CUSTOM MODE ================= */
 
 export const ELEVENLABS_API_KEY = process.env.ELEVENLABS_API_KEY || "";
 export const OPENAI_API_KEY = process.env.OPENAI_API_KEY || "";

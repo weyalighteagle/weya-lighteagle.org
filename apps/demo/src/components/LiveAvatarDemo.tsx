@@ -23,7 +23,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
   const router = useRouter();
 
-  // ✅ Route üzerinden persona gelince session otomatik başlar
+  // Persona gelince otomatik başlat
   useEffect(() => {
     if (
       persona &&
@@ -52,8 +52,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           firstName,
           lastName,
           email,
-          // ✅ TR env yapısını kullanır
-          language: process.env.NEXT_PUBLIC_APP_LANG || "tr",
+          // 🇹🇷 BU COMPONENT HER ZAMAN TÜRKÇE
+          language: "tr",
         }),
       });
 
