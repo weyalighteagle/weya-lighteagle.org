@@ -56,16 +56,16 @@ export const CONTEXT_ID_LIGHT_EAGLE =
 
 // ❌ LANG YOK
 // ✅ Build-safe, persona bazlı çözüm start-session'da yapılır
+//
+//export const LANGUAGE_ENG =
+//  process.env.LIVEAVATAR_LANGUAGE_eng ||
+//  process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE_eng ||
+//  "en-US";
 
-export const LANGUAGE_ENG =
-  process.env.LIVEAVATAR_LANGUAGE_eng ||
-  process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE_eng ||
-  "en-US";
-
-export const LANGUAGE_TR =
-  process.env.LIVEAVATAR_LANGUAGE_tr ||
-  process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE_tr ||
-  "tr-TR";
+//export const LANGUAGE_TR =
+//  process.env.LIVEAVATAR_LANGUAGE_tr ||
+//  process.env.NEXT_PUBLIC_LIVEAVATAR_LANGUAGE_tr ||
+//  "tr-TR";
 
 /* ================= CUSTOM MODE ================= */
 

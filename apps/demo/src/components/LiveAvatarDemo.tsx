@@ -52,7 +52,6 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           firstName,
           lastName,
           email,
-          // 🇹🇷 BU COMPONENT HER ZAMAN TÜRKÇE
           language: "tr",
         }),
       });
