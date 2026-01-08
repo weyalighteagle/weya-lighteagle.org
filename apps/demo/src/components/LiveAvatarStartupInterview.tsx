@@ -53,7 +53,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
           lastName,
           email,
           // 🇺🇸 BU COMPONENT HER ZAMAN ENGLISH
-          language: "eng",
+          language: "en-US",
         }),
       });
 
