@@ -32,13 +32,13 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
       !error &&
       !sessionEndedRef.current
     ) {
-      startInteraction();
+      startInteraction(persona);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [persona]);
 
-  const startInteraction = async () => {
-    const finalPersona = "weya_live"; // 🇹🇷 BU AVATAR HER ZAMAN TÜRKÇE VE WEYA_LIVE
+  const startInteraction = async (forcedPersona?: string) => {
+    const finalPersona = forcedPersona || "weya_live";
 
     setIsLoading(true);
     setError(null);
@@ -52,7 +52,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           firstName,
           lastName,
           email,
-          language: "tr", // 🇹🇷 SABİT TÜRKÇE
+          // 🇹🇷 BU COMPONENT HER ZAMAN TÜRKÇE
+          language: "tr",
         }),
       });
 
