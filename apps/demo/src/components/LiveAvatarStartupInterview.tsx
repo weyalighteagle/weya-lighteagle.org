@@ -180,7 +180,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
                         })
                       );
 
-                      router.push("/talk/weya-live");
+                      router.push("/talk/weya-startup");
                     }}
                   >
                     Start interview
