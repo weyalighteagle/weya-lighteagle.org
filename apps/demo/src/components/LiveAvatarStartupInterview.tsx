@@ -52,6 +52,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
           firstName,
           lastName,
           email,
+          language: "en", // 👈 EKLENEN TEK SATIR
         }),
       });
 
