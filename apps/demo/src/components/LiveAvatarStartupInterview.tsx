@@ -32,13 +32,13 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
       !error &&
       !sessionEndedRef.current
     ) {
-      startInteraction(persona);
+      startInteraction();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [persona]);
 
-  const startInteraction = async (forcedPersona?: string) => {
-    const finalPersona = forcedPersona || "weya_startup";
+  const startInteraction = async () => {
+    const finalPersona = "weya_startup"; // 🇺🇸 HER ZAMAN WEYA_STARTUP
 
     setIsLoading(true);
     setError(null);
@@ -53,7 +53,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
           lastName,
           email,
           // 🇺🇸 BU COMPONENT HER ZAMAN ENGLISH
-          language: "en-US",
+          language: "eng",
         }),
       });
 

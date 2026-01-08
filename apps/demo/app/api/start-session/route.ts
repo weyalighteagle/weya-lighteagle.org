@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
     /* ---------------- LANGUAGE ---------------- */
     // client: "tr" | "eng"
-    // env: tr-TR | en-US
+    // env: "tr-TR" | "en-US"
 
     let resolvedLanguage: string;
 
@@ -67,7 +67,6 @@ export async function POST(request: Request) {
         resolvedLanguage = LANGUAGE_ENG;
         break;
       default:
-        // güvenli fallback
         resolvedLanguage = LANGUAGE_ENG;
     }
 
@@ -121,7 +120,7 @@ export async function POST(request: Request) {
       session_token: data.data.session_token,
       session_id: sessionId,
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { error: "Internal server error" },
       { status: 500 },
