@@ -22,7 +22,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const [email, setEmail] = useState("");
 
   const router = useRouter();
-
+  const LANGUAGE = "tr";
   // Persona gelince otomatik başlat
   useEffect(() => {
     if (
@@ -52,7 +52,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           firstName,
           lastName,
           email,
-          language: "tr",
+          language: LANGUAGE, // ← SADECE BURASI NETLEŞTİ
         }),
       });
 

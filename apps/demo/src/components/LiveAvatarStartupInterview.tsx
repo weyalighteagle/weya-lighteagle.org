@@ -22,6 +22,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
   const [email, setEmail] = useState("");
 
   const router = useRouter();
+  const LANGUAGE = "en";
 
   // Persona gelince otomatik başlat
   useEffect(() => {
@@ -52,7 +53,7 @@ export default function LiveAvatarStartupInterview({ persona }: Props) {
           firstName,
           lastName,
           email,
-          language: "en",
+          language: LANGUAGE, // ← SADECE BURASI NETLEŞTİ
         }),
       });
 

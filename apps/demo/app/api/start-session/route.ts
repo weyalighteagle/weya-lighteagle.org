@@ -58,7 +58,7 @@ export async function POST(request: Request) {
     const resolvedLanguage =
       typeof language === "string" && language.trim().length > 0
         ? language
-        : "en";
+        : "en-US";
 
     /* ---------------- API CALL ---------------- */
 
