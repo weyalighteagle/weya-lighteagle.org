@@ -1,6 +1,17 @@
 import "./globals.css";
 import { IntercomProvider } from "../src/components/IntercomProvider";
 
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Weya",
+  description: "A system-intelligence layer for capital, trust, and coordination.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{

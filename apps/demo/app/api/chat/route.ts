@@ -26,44 +26,82 @@ export async function POST(request: Request) {
       )
     }
 
-    // Load Knowledge Base
+    // Load Knowledge Base (Keeping existing logic for context)
     let knowledgeContext = ""
     let targetPersonaId = personaId || "impact_startups"
-
-    try {
-      // 1. Try Supabase
-      const { supabase } = await import("@/lib/supabase")
-      const { data } = await supabase
-        .from("weya_voicechat_kb")
-        .select("content")
-        .eq("persona_id", targetPersonaId)
-        .single()
-
-      if (data && data.content) {
-        knowledgeContext = data.content
-      } else {
-        throw new Error("No data in Supabase")
-      }
-    } catch (dbError) {
-      console.warn(`Knowledge not found in DB for ${targetPersonaId}, falling back to file.`)
-      // 2. Fallback to file
-      try {
-        const knowledgePath = path.join(process.cwd(), "data", "knowledge", `${targetPersonaId}.md`)
-        knowledgeContext = await readFile(knowledgePath, "utf-8")
-      } catch (err) {
-        console.warn(`Could not load knowledge file, using default fallback.`)
-        try {
-          const defaultPath = path.join(process.cwd(), "data", "knowledge", "impact_startups.md")
-          knowledgeContext = await readFile(defaultPath, "utf-8")
-        } catch (fallbackErr) {
-          knowledgeContext = ""
-        }
-      }
-    }
+    // ... existing knowledge fetch logic ...
 
     // Construct System Prompt
     const basePrompt = basePrompts[targetPersonaId] || basePrompts["impact_startups"]
-    const systemPrompt = `${basePrompt}\n\n--- KNOWLEDGE BASE (persona-specific, authoritative) ---\n${knowledgeContext}\n--- END KNOWLEDGE BASE ---\n`
+
+    // Check for Interview Mode
+    const { nextQuestion, isInterviewMode } = body
+
+    let systemPrompt = ""
+
+    if (isInterviewMode) {
+      // INTERVIEW AGENT PROTOCOL
+      systemPrompt = `
+You are Weya, a professional and neutral interviewer.
+You are currently conducting a structured interview.
+
+CRITICAL RULES:
+1. You must ONLY ask the "NEXT QUESTION" provided below.
+2. Acknowledge the user's previous answer using professional, varied, and neutral phrases (e.g. "I understand, thank you for sharing that," "Clear, let's move forward," "Got it, thank you for the insight").
+3. PERMISSION TO SPEAK FREELY IS DENIED. You are a script reader.
+4. Do NOT judge or evaluate the answer (e.g. avoid "That's a great strategy"). Be strictly neutral.
+5. If the user asks a question, politely deflect and ask the NEXT QUESTION.
+
+NEXT QUESTION TO ASK: "${nextQuestion || 'Thank you for your time. The interview is complete.'}"
+
+If "nextQuestion" is null or empty, thank the user and wrap up.
+`.trim()
+    } else {
+      // Standard Chat Mode (Fetch RAG)
+
+      // Load Knowledge Base
+      let knowledgeContext = ""
+      let targetPersonaId = personaId || "impact_startups"
+
+      try {
+        console.log(`[RAG] Fetching knowledge for persona: ${targetPersonaId}`)
+        // 1. Try Supabase
+        const { supabase } = await import("@/lib/supabase")
+        const { data } = await supabase
+          .from("weya_voicechat_kb")
+          .select("content")
+          .eq("persona_id", targetPersonaId)
+          .single()
+
+        if (data && data.content) {
+          knowledgeContext = data.content
+          console.log(`[RAG] Found context in DB. Length: ${knowledgeContext.length}`)
+        } else {
+          console.log(`[RAG] No context found in DB for ${targetPersonaId}`)
+          throw new Error("No data in Supabase")
+        }
+      } catch (dbError) {
+        console.warn(`Knowledge not found in DB for ${targetPersonaId}, falling back to file.`)
+        // 2. Fallback to file
+        try {
+          const knowledgePath = path.join(process.cwd(), "data", "knowledge", `${targetPersonaId}.md`)
+          knowledgeContext = await readFile(knowledgePath, "utf-8")
+          console.log(`[RAG] Found context in File. Length: ${knowledgeContext.length}`)
+        } catch (err) {
+          console.warn(`Could not load knowledge file, using default fallback.`)
+          try {
+            const defaultPath = path.join(process.cwd(), "data", "knowledge", "impact_startups.md")
+            knowledgeContext = await readFile(defaultPath, "utf-8")
+          } catch (fallbackErr) {
+            knowledgeContext = ""
+          }
+        }
+      }
+
+      // Standard Prompt Construction
+      systemPrompt = `${basePrompt}\n\n--- KNOWLEDGE BASE (persona-specific, authoritative) ---\n${knowledgeContext}\n--- END KNOWLEDGE BASE ---\n`
+      // console.log("[RAG] System Prompt Preview:", systemPrompt.substring(0, 200))
+    }
 
     // Call OpenAI API
     const completion = await openai.chat.completions.create({

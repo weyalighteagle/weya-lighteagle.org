@@ -28,11 +28,26 @@ export default function VoiceChatPage() {
     const [micPermissionGranted, setMicPermissionGranted] = useState(false)
     const [isListening, setIsListening] = useState(false)
     const [liveCaption, setLiveCaption] = useState("")
+    const [isSessionActive, setIsSessionActive] = useState(false)
+
+    // Interview State
+    const [questions, setQuestions] = useState<string[]>([])
+    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
+
+    // Refs to avoid stale closures in callbacks
+    const questionsRef = useRef<string[]>([])
+    const currentQuestionIndexRef = useRef(0)
 
     const statusRef = useRef<ChatStatus>(status)
     const audioRef = useRef<HTMLAudioElement | null>(null)
     const abortControllerRef = useRef<AbortController | null>(null)
     const shouldListenRef = useRef(false)
+
+    // Sync UI state to Refs
+    useEffect(() => {
+        questionsRef.current = questions
+        currentQuestionIndexRef.current = currentQuestionIndex
+    }, [questions, currentQuestionIndex])
 
     const mediaRecorderRef = useRef<any>(null)
     const audioChunksRef = useRef<any[]>([])
@@ -48,31 +63,25 @@ export default function VoiceChatPage() {
     }, [status])
 
     useEffect(() => {
-        // PREVIOUSLY: We defaulted to Guest.
-        // NOW: We check session, if empty we show form (interviewData remains null).
+        // Check permissions on load
+        navigator.mediaDevices.getUserMedia({ audio: true })
+            .then(stream => {
+                stream.getTracks().forEach(t => t.stop())
+                setMicPermissionGranted(true)
+            })
+            .catch(() => setMicPermissionGranted(false))
+
         const stored = sessionStorage.getItem("interviewData")
         if (stored) {
             setInterviewData(JSON.parse(stored))
         }
-        // If not stored, we stay at null => render form
     }, [])
 
     useEffect(() => {
-        // Only start greeting if we have data (joined chat)
-        if (interviewData && messages.length === 0) {
-            const initialGreeting: Message = {
-                id: "init-greeting",
-                role: "assistant",
-                content: "Hi! I am Weya the digital member of Light Eagle. How can I assist you?",
-                timestamp: new Date(),
-            }
-            setMessages([initialGreeting])
-        }
-
         return () => {
             stopEverything()
         }
-    }, [interviewData])
+    }, [])
 
     const selectedPersona = personas.find((p) => p.id === interviewData?.personaId) || personas[0]
 
@@ -153,7 +162,12 @@ export default function VoiceChatPage() {
                         firstName: interviewData?.firstName,
                         lastName: interviewData?.lastName,
                         email: interviewData?.email
-                    }
+                    },
+                    // Dynamic Interview Logic (Use Refs)
+                    isInterviewMode: questionsRef.current.length > 0,
+                    nextQuestion: (questionsRef.current.length > 0 && currentQuestionIndexRef.current < questionsRef.current.length)
+                        ? questionsRef.current[currentQuestionIndexRef.current]
+                        : null // signal end
                 }),
                 signal: ac.signal,
             })
@@ -214,25 +228,61 @@ export default function VoiceChatPage() {
             } else {
                 setStatus("listening")
             }
+
+
+
+            // Increment Question Index (Refs + State)
+            if (questionsRef.current.length > 0 && currentQuestionIndexRef.current < questionsRef.current.length) {
+                const nextIndex = currentQuestionIndexRef.current + 1
+                setCurrentQuestionIndex(nextIndex)
+                currentQuestionIndexRef.current = nextIndex
+            }
         } catch (error: any) {
             if (error.name !== 'AbortError') setStatus("idle")
         }
     }
 
-    async function playGreeting() {
+    async function startSession() {
         if (hasGreetedRef.current) return
-        const greetingText = "Hi! I am Weya the digital member of Light Eagle. How can I assist you?"
         hasGreetedRef.current = true
-        stopListening()
+        setIsSessionActive(true) // Switch to chat view
         setStatus("speaking")
 
+        // Fetch intro
+        const personaId = interviewData?.personaId || selectedPersona?.id
+        let introText = "Hi! I am Weya. How can I assist you?" // Fallback
+
+        try {
+            const res = await fetch(`/api/intro?personaId=${personaId}`)
+            const data = await res.json()
+            if (data.intro) introText = data.intro
+            if (data.questions && Array.isArray(data.questions)) {
+                setQuestions(data.questions)
+                questionsRef.current = data.questions // Direct sync for immediate use
+
+                setCurrentQuestionIndex(0)
+                currentQuestionIndexRef.current = 0 // Direct sync
+            }
+        } catch (e) {
+            console.error("Failed to fetch intro", e)
+        }
+
+        const introMessage: Message = {
+            id: "init-greeting",
+            role: "assistant",
+            content: introText,
+            timestamp: new Date(),
+        }
+        setMessages([introMessage])
+
+        // TTS
         try {
             const ttsResponse = await fetch("/api/tts", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({
-                    text: greetingText,
-                    personaId: interviewData?.personaId || selectedPersona?.id
+                    text: introText,
+                    personaId: personaId
                 }),
             })
 
@@ -265,16 +315,12 @@ export default function VoiceChatPage() {
             // Just check permission
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true })
             stream.getTracks().forEach(track => track.stop())
-
             setMicPermissionGranted(true)
-            shouldListenRef.current = true
-            if (!hasGreetedRef.current) playGreeting()
-            else startListening()
+            // Do NOT start session yet. Wait for "Ready to Start" click.
         } catch (error: any) {
             alert("Microphone access failed: " + error.message)
-            setMicPermissionGranted(true)
-            shouldListenRef.current = true
-            // Proceed even if mic fails, maybe text only?
+            // If failed, we might still want to let them in for text only?
+            // For now, assume they need to grant it.
         }
     }
 
@@ -430,6 +476,7 @@ export default function VoiceChatPage() {
         setMessages([])
         // Also cleanup media state
         setMicPermissionGranted(false)
+        setIsSessionActive(false)
         hasGreetedRef.current = false
     }
 
@@ -556,7 +603,13 @@ export default function VoiceChatPage() {
                     </Button>
                     <div>
                         <h1 className="text-lg font-semibold text-gray-900">{selectedPersona?.label}</h1>
-                        <p className="text-xs text-gray-500">Weya Voice Chat</p>
+                        {isSessionActive && questions.length > 0 ? (
+                            <p className="text-xs font-medium text-[#7B8FD8]">
+                                Step {Math.min(currentQuestionIndex + 1, questions.length)} of {questions.length}
+                            </p>
+                        ) : (
+                            <p className="text-xs text-gray-500">Weya Voice Chat</p>
+                        )}
                     </div>
                 </div>
                 <div className="flex items-center gap-4">
@@ -571,71 +624,114 @@ export default function VoiceChatPage() {
             </header>
 
             <main className="relative flex flex-1 flex-col overflow-hidden">
-                <div className="absolute inset-0 z-0 pb-32">
-                    <ChatTranscript messages={messages} />
-                </div>
-
-                <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-end bg-gradient-to-t from-[#F5E8EB] via-[#F5E8EB]/80 to-transparent pb-12 pt-24">
-                    <div className="mb-4">
-                        {liveCaption && (
-                            <div className="rounded-lg bg-black/5 px-4 py-2 text-sm font-medium text-gray-700 backdrop-blur-sm">
-                                {liveCaption}
+                {!isSessionActive ? (
+                    <div className="flex h-full flex-col items-center justify-center p-8 text-center animate-in fade-in duration-500">
+                        {!micPermissionGranted ? (
+                            <div className="max-w-md space-y-8 rounded-3xl bg-white/50 p-12 shadow-xl backdrop-blur-sm">
+                                <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-indigo-50">
+                                    <Mic className="h-10 w-10 text-[#7B8FD8]" />
+                                </div>
+                                <div className="space-y-2">
+                                    <h2 className="text-3xl font-medium tracking-tight text-gray-900">Enable Microphone</h2>
+                                    <p className="text-lg text-gray-600">
+                                        Weya needs access to your microphone to conduct the interview.
+                                    </p>
+                                </div>
+                                <Button
+                                    size="lg"
+                                    onClick={handleEnableMicrophone}
+                                    className="w-full h-14 rounded-2xl bg-[#7B8FD8] text-lg font-medium hover:bg-[#6B7FC8] shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                                >
+                                    Enable Access
+                                </Button>
+                            </div>
+                        ) : (
+                            <div className="max-w-md space-y-8 animate-in zoom-in-95 duration-300">
+                                <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
+                                    <div className="h-[500px] w-[500px] rounded-full bg-gradient-to-r from-[#7B8FD8] to-purple-400 blur-3xl" />
+                                </div>
+                                <div className="relative z-10 space-y-8 rounded-3xl bg-white/40 p-12 shadow-xl backdrop-blur-md border border-white/50">
+                                    <h2 className="text-4xl font-medium tracking-tight text-gray-900">Ready to Start?</h2>
+                                    <p className="text-xl text-gray-600">
+                                        Weya is ready to begin the interview.
+                                    </p>
+                                    <Button
+                                        size="lg"
+                                        onClick={startSession}
+                                        className="w-full h-16 rounded-2xl bg-[#1A1A2E] text-xl font-medium text-white hover:bg-[#2A2A4E] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                                    >
+                                        Start Interview
+                                    </Button>
+                                    <p className="text-sm text-gray-500">
+                                        Tap to begin the conversation
+                                    </p>
+                                </div>
                             </div>
                         )}
                     </div>
-
-                    <div className="pointer-events-none absolute bottom-32 left-0 right-0 z-0 mx-auto flex justify-center">
-                        <VoiceOrb status={status} />
-                    </div>
-
-                    <div className="pointer-events-auto flex w-full max-w-3xl items-center gap-4 px-4">
-                        <div className="relative flex-1">
-                            <Input
-                                value={inputValue}
-                                onChange={(e) => setInputValue(e.target.value)}
-                                onKeyDown={handleKeyDown}
-                                placeholder="Type a message..."
-                                className="h-14 rounded-2xl border-white/50 bg-white/50 pl-6 pr-14 text-base shadow-sm backdrop-blur-sm transition-all focus:bg-white focus:ring-2 focus:ring-[#7B8FD8]/20"
-                            />
-                            <Button
-                                size="icon"
-                                onClick={handleSendMessage}
-                                disabled={!inputValue.trim()}
-                                className="absolute right-2 top-2 h-10 w-10 rounded-xl bg-[#7B8FD8] hover:bg-[#6B7FC8] disabled:opacity-50"
-                            >
-                                <Send className="h-4 w-4 text-white" />
-                            </Button>
+                ) : (
+                    <>
+                        <div className="absolute inset-0 z-0 pb-32">
+                            <ChatTranscript messages={messages} />
                         </div>
 
-                        {!micPermissionGranted ? (
-                            <Button size="lg" onClick={handleEnableMicrophone} className="h-14 w-14 rounded-2xl bg-white shadow-sm hover:bg-gray-50">
-                                <Mic className="h-6 w-6 text-gray-700" />
-                            </Button>
-                        ) : (
-                            <Button
-                                variant={isListening ? "destructive" : "secondary"}
-                                size="lg"
-                                onClick={() => {
-                                    if (isListening) {
-                                        shouldListenRef.current = false
-                                        if (recognitionRef.current) recognitionRef.current.stop()
-                                        setIsListening(false)
-                                    } else {
-                                        shouldListenRef.current = true
-                                        startListening()
-                                    }
-                                }}
-                                className={`h-14 w-14 rounded-2xl shadow-sm transition-all ${isListening ? "bg-red-50 text-red-600 hover:bg-red-100 ring-2 ring-red-100" : "bg-white text-gray-700 hover:bg-gray-50"}`}
-                            >
-                                {isListening ? (
-                                    <div className="h-3 w-3 rounded-sm bg-current" />
-                                ) : (
-                                    <Mic className="h-6 w-6" />
+                        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-end bg-gradient-to-t from-[#F5E8EB] via-[#F5E8EB]/80 to-transparent pb-12 pt-24">
+                            <div className="mb-4">
+                                {liveCaption && (
+                                    <div className="rounded-lg bg-black/5 px-4 py-2 text-sm font-medium text-gray-700 backdrop-blur-sm">
+                                        {liveCaption}
+                                    </div>
                                 )}
-                            </Button>
-                        )}
-                    </div>
-                </div>
+                            </div>
+
+                            <div className="pointer-events-none absolute bottom-32 left-0 right-0 z-0 mx-auto flex justify-center">
+                                <VoiceOrb status={status} />
+                            </div>
+
+                            <div className="pointer-events-auto flex w-full max-w-3xl items-center gap-4 px-4">
+                                <div className="relative flex-1">
+                                    <Input
+                                        value={inputValue}
+                                        onChange={(e) => setInputValue(e.target.value)}
+                                        onKeyDown={handleKeyDown}
+                                        placeholder="Type a message..."
+                                        className="h-14 rounded-2xl border-white/50 bg-white/50 pl-6 pr-14 text-base shadow-sm backdrop-blur-sm transition-all focus:bg-white focus:ring-2 focus:ring-[#7B8FD8]/20"
+                                    />
+                                    <Button
+                                        size="icon"
+                                        onClick={handleSendMessage}
+                                        disabled={!inputValue.trim()}
+                                        className="absolute right-2 top-2 h-10 w-10 rounded-xl bg-[#7B8FD8] hover:bg-[#6B7FC8] disabled:opacity-50"
+                                    >
+                                        <Send className="h-4 w-4 text-white" />
+                                    </Button>
+                                </div>
+
+                                <Button
+                                    variant={isListening ? "destructive" : "secondary"}
+                                    size="lg"
+                                    onClick={() => {
+                                        if (isListening) {
+                                            shouldListenRef.current = false
+                                            if (recognitionRef.current) recognitionRef.current.stop()
+                                            setIsListening(false)
+                                        } else {
+                                            shouldListenRef.current = true
+                                            startListening()
+                                        }
+                                    }}
+                                    className={`h-14 w-14 rounded-2xl shadow-sm transition-all ${isListening ? "bg-red-50 text-red-600 hover:bg-red-100 ring-2 ring-red-100" : "bg-white text-gray-700 hover:bg-gray-50"}`}
+                                >
+                                    {isListening ? (
+                                        <div className="h-3 w-3 rounded-sm bg-current" />
+                                    ) : (
+                                        <Mic className="h-6 w-6" />
+                                    )}
+                                </Button>
+                            </div>
+                        </div>
+                    </>
+                )}
             </main>
         </div>
     )
