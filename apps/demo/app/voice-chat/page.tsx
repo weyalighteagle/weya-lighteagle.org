@@ -546,11 +546,13 @@ export default function VoiceChatPage() {
                                         required
                                     >
                                         <option value="">Choose a model...</option>
-                                        {personas.map((persona) => (
-                                            <option key={persona.id} value={persona.id}>
-                                                {persona.label}
-                                            </option>
-                                        ))}
+                                        {personas
+                                            .filter(p => ["impact_startups", "light_eagle"].includes(p.id))
+                                            .map((persona) => (
+                                                <option key={persona.id} value={persona.id}>
+                                                    {persona.label}
+                                                </option>
+                                            ))}
                                     </select>
                                 </div>
                                 {formData.personaId && (
