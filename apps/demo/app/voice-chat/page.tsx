@@ -653,9 +653,9 @@ export default function VoiceChatPage() {
                 </div>
             </header>
 
-            <main className="relative flex flex-1 flex-col overflow-hidden">
+            <main className="relative flex flex-1 flex-col overflow-y-auto">
                 {!isSessionActive ? (
-                    <div className="flex h-full flex-col items-center justify-center p-8 text-center animate-in fade-in duration-500">
+                    <div className="flex min-h-full flex-col items-center justify-center p-4 md:p-8 text-center animate-in fade-in duration-500 py-12">
                         {!micPermissionGranted ? (
                             <div className="max-w-md space-y-8 rounded-3xl bg-white/50 p-12 shadow-xl backdrop-blur-sm">
                                 <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-indigo-50">
