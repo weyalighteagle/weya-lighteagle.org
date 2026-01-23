@@ -12,6 +12,18 @@ import { VoiceOrb } from "@/components/voice-orb"
 import { ChatTranscript } from "@/components/chat-transcript"
 import { StatusBadge } from "@/components/status-badge"
 
+import { InteractiveBackground } from "@/components/InteractiveBackground"
+
+const LIGHT_EAGLE_QUESTIONS = [
+    "What is Light Eagle and why does it exist?",
+    "How is Light Eagle different from traditional investors?",
+    "What does impact investing mean to you?",
+    "How does the Invest, Co-create, Build model work?",
+    "What is systemic collaboration and multi-capital thinking?",
+    "Who founded Light Eagle and what is the vision?",
+    "What does being a B Corp reflect about your values?",
+]
+
 export default function VoiceChatPage() {
     const router = useRouter()
     const [interviewData, setInterviewData] = useState<InterviewData | null>(null)
@@ -37,6 +49,7 @@ export default function VoiceChatPage() {
     // Refs to avoid stale closures in callbacks
     const questionsRef = useRef<string[]>([])
     const currentQuestionIndexRef = useRef(0)
+    const messagesRef = useRef<Message[]>([])
 
     const statusRef = useRef<ChatStatus>(status)
     const audioRef = useRef<HTMLAudioElement | null>(null)
@@ -47,7 +60,8 @@ export default function VoiceChatPage() {
     useEffect(() => {
         questionsRef.current = questions
         currentQuestionIndexRef.current = currentQuestionIndex
-    }, [questions, currentQuestionIndex])
+        messagesRef.current = messages
+    }, [questions, currentQuestionIndex, messages])
 
     const mediaRecorderRef = useRef<any>(null)
     const audioChunksRef = useRef<any[]>([])
@@ -157,6 +171,7 @@ export default function VoiceChatPage() {
                     personaId: interviewData?.personaId || selectedPersona?.id,
                     sessionId: sessionId,
                     userMessage: content,
+                    messages: messagesRef.current, // Use Ref here!
                     mode: mode,
                     userData: {
                         firstName: interviewData?.firstName,
@@ -466,6 +481,13 @@ export default function VoiceChatPage() {
         }
     }
 
+    const handleQuickStart = (question: string) => {
+        if (hasGreetedRef.current) return
+        hasGreetedRef.current = true
+        setIsSessionActive(true)
+        addUserMessage(question, "text")
+    }
+
     const handleEndInterview = () => {
         stopEverything()
         // Clear session and go back to form
@@ -482,13 +504,14 @@ export default function VoiceChatPage() {
 
     if (!interviewData) {
         return (
-            <div className="min-h-screen bg-[#F3E8F0]">
-                <div className="flex min-h-screen items-center justify-center p-6 lg:p-12">
+            <div className="min-h-screen relative">
+                <InteractiveBackground />
+                <div className="relative z-10 flex min-h-screen items-center justify-center p-6 lg:p-12">
                     <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
                         {/* Left Column: Form */}
                         <div className="w-full rounded-3xl bg-white p-8 shadow-xl md:p-12">
                             <h1 className="mb-3 text-3xl font-medium tracking-tight text-gray-900">
-                                Participate in a foundational interview
+                                Begin a conversation with Weya
                             </h1>
                             <p className="mb-10 text-base text-gray-500">Fill out the form to start.</p>
 
@@ -536,8 +559,12 @@ export default function VoiceChatPage() {
                                 </div>
                                 <div>
                                     <label htmlFor="personaSelect" className="mb-3 block text-base font-medium text-gray-800">
-                                        Select the model for your interview
+                                        Select a session mode
                                     </label>
+                                    <div className="mb-4 rounded-lg bg-gray-50 p-4 text-sm text-gray-600 space-y-1">
+                                        <p><span className="font-semibold text-gray-900">Impact Startups:</span> Take part in a structured interview focused on your startup, context, and impact.</p>
+                                        <p><span className="font-semibold text-gray-900">Learn about Light Eagle:</span> Have an open, informative conversation to learn about Light Eagle’s mission, values, and approach.</p>
+                                    </div>
                                     <select
                                         id="personaSelect"
                                         value={formData.personaId}
@@ -596,8 +623,9 @@ export default function VoiceChatPage() {
     }
 
     return (
-        <div className="flex h-screen flex-col bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
-            <header className="flex items-center justify-between border-b border-white/40 bg-white/30 px-6 py-4 backdrop-blur-md">
+        <div className="flex h-screen flex-col relative">
+            <InteractiveBackground />
+            <header className="relative z-10 flex items-center justify-between border-b border-white/40 bg-white/30 px-6 py-4 backdrop-blur-md">
                 <div className="flex items-center gap-4">
                     <Button variant="ghost" onClick={handleEndInterview} className="group flex items-center gap-2 rounded-full px-4 hover:bg-white/50">
                         <ArrowLeft className="h-5 w-5 text-gray-700 transition-transform group-hover:-translate-x-1" />
@@ -619,7 +647,7 @@ export default function VoiceChatPage() {
                         onClick={handleEndInterview}
                         className="rounded-full bg-red-500 px-6 font-medium text-white hover:bg-red-600 shadow-md transition-all hover:scale-105"
                     >
-                        End Interview
+                        End Session
                     </Button>
                     <StatusBadge status={status} />
                 </div>
@@ -648,25 +676,53 @@ export default function VoiceChatPage() {
                                 </Button>
                             </div>
                         ) : (
-                            <div className="max-w-md space-y-8 animate-in zoom-in-95 duration-300">
+                            <div className="w-full max-w-3xl space-y-8 animate-in zoom-in-95 duration-300">
                                 <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
                                     <div className="h-[500px] w-[500px] rounded-full bg-gradient-to-r from-[#7B8FD8] to-purple-400 blur-3xl" />
                                 </div>
-                                <div className="relative z-10 space-y-8 rounded-3xl bg-white/40 p-12 shadow-xl backdrop-blur-md border border-white/50">
-                                    <h2 className="text-4xl font-medium tracking-tight text-gray-900">Ready to Start?</h2>
-                                    <p className="text-xl text-gray-600">
-                                        Weya is ready to begin the interview.
-                                    </p>
+                                <div className="relative z-10 flex flex-col items-center space-y-8 rounded-3xl bg-white/40 p-8 md:p-12 shadow-xl backdrop-blur-md border border-white/50">
+                                    <div className="text-center space-y-2">
+                                        <h2 className="text-4xl font-medium tracking-tight text-gray-900">Ready to Start?</h2>
+                                        <p className="text-xl text-gray-600">
+                                            Weya is ready to begin.
+                                        </p>
+                                    </div>
+
                                     <Button
                                         size="lg"
                                         onClick={startSession}
-                                        className="w-full h-16 rounded-2xl bg-[#1A1A2E] text-xl font-medium text-white hover:bg-[#2A2A4E] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                                        className="w-full max-w-md h-16 rounded-2xl bg-[#1A1A2E] text-xl font-medium text-white hover:bg-[#2A2A4E] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
                                     >
-                                        Start Interview
+                                        {selectedPersona?.id === 'light_eagle' ? "Start Conversation" : "Start Interview"}
                                     </Button>
-                                    <p className="text-sm text-gray-500">
-                                        Tap to begin the conversation
-                                    </p>
+
+                                    {selectedPersona && selectedPersona.id === 'light_eagle' && (
+                                        <div className="w-full pt-6 border-t border-gray-200/50">
+                                            <p className="mb-6 text-center text-sm font-medium text-gray-500 uppercase tracking-widest">
+                                                Or start with a topic
+                                            </p>
+                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
+                                                {LIGHT_EAGLE_QUESTIONS.map((q, i) => (
+                                                    <button
+                                                        key={i}
+                                                        onClick={() => handleQuickStart(q)}
+                                                        className="group relative flex w-full items-center rounded-xl bg-white/60 px-5 py-4 text-left text-sm font-medium text-gray-700 transition-all hover:bg-white hover:text-indigo-600 hover:shadow-md hover:-translate-y-0.5 border border-white/50 hover:border-indigo-100"
+                                                    >
+                                                        <span className="flex-1">{q}</span>
+                                                        <span className="ml-2 opacity-0 -translate-x-2 transition-all group-hover:opacity-100 group-hover:translate-x-0">
+                                                            →
+                                                        </span>
+                                                    </button>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+
+                                    {(!selectedPersona || selectedPersona.id !== 'light_eagle') && (
+                                        <p className="text-sm text-gray-500">
+                                            Tap to begin the conversation
+                                        </p>
+                                    )}
                                 </div>
                             </div>
                         )}
