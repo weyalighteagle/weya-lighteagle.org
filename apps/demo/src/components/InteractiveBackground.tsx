@@ -74,6 +74,8 @@ export function InteractiveBackground() {
             orbs.length = 0
             for (let i = 0; i < numOrbs; i++) {
                 const pairIndex = i % colorPairs.length
+                // Fallback to first pair or a default black pair to satisfy TypeScript
+                const pair = colorPairs[pairIndex] || colorPairs[0] || [{ r: 0, g: 0, b: 0 }, { r: 255, g: 255, b: 255 }]
                 orbs.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height,
@@ -81,8 +83,8 @@ export function InteractiveBackground() {
                     vx: 0.8 + Math.random() * 0.5, // Faster drift for visible flow
                     vy: (Math.random() - 0.5) * 0.5, // Vertical mix
                     radius: Math.random() * 500 + 500, // 500-1000px
-                    color: colorPairs[pairIndex][0], // Initial value
-                    colorPair: colorPairs[pairIndex],
+                    color: pair[0], // Initial value
+                    colorPair: pair,
                     phase: Math.random() * Math.PI * 2, // Random starting phase
                 })
             }
