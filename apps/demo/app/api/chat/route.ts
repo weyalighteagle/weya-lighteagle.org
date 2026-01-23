@@ -103,16 +103,19 @@ If "nextQuestion" is null or empty, thank the user and wrap up.
       // console.log("[RAG] System Prompt Preview:", systemPrompt.substring(0, 200))
     }
 
+    // Construct Messages for OpenAI
+    const openAIMessages = [
+      { role: "system", content: systemPrompt },
+      ...(messages ? messages.map((m: any) => ({ role: m.role, content: m.content })) : []),
+      ...(!messages || messages.length === 0 || messages[messages.length - 1].content !== currentMessage
+        ? [{ role: "user" as const, content: currentMessage }]
+        : [])
+    ]
+
     // Call OpenAI API
     const completion = await openai.chat.completions.create({
       model: "gpt-4o-mini",
-      messages: [
-        { role: "system", content: systemPrompt },
-        ...(messages ? messages.map((m: any) => ({ role: m.role, content: m.content })) : []),
-        ...(!messages || messages.length === 0 || messages[messages.length - 1].content !== currentMessage
-          ? [{ role: "user" as const, content: currentMessage }]
-          : [])
-      ],
+      messages: openAIMessages as any,
       temperature: 0.7,
     })
 
