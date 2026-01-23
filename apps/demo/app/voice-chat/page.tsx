@@ -625,29 +625,31 @@ export default function VoiceChatPage() {
     return (
         <div className="flex h-screen flex-col relative">
             <InteractiveBackground />
-            <header className="relative z-10 flex items-center justify-between border-b border-white/40 bg-white/30 px-6 py-4 backdrop-blur-md">
-                <div className="flex items-center gap-4">
-                    <Button variant="ghost" onClick={handleEndInterview} className="group flex items-center gap-2 rounded-full px-4 hover:bg-white/50">
+            <header className="relative z-10 flex items-center justify-between border-b border-white/40 bg-white/30 px-3 py-3 md:px-6 md:py-4 backdrop-blur-md">
+                <div className="flex items-center gap-2 md:gap-4 flex-1">
+                    <Button variant="ghost" onClick={handleEndInterview} className="group flex items-center gap-2 rounded-full px-2 md:px-4 hover:bg-white/50 shrink-0">
                         <ArrowLeft className="h-5 w-5 text-gray-700 transition-transform group-hover:-translate-x-1" />
-                        <span className="text-sm font-medium text-gray-700">Go Back</span>
+                        <span className="hidden md:inline text-sm font-medium text-gray-700">Go Back</span>
                     </Button>
-                    <div>
-                        <h1 className="text-lg font-semibold text-gray-900">{selectedPersona?.label}</h1>
+                    <div className="min-w-0 flex-1">
+                        <h1 className="text-sm md:text-lg font-semibold text-gray-900 truncate leading-tight">{selectedPersona?.label?.split(" – ")[0]}</h1>
                         {isSessionActive && questions.length > 0 ? (
-                            <p className="text-xs font-medium text-[#7B8FD8]">
+                            <p className="text-xs font-medium text-[#7B8FD8] truncate">
                                 Step {Math.min(currentQuestionIndex + 1, questions.length)} of {questions.length}
                             </p>
                         ) : (
-                            <p className="text-xs text-gray-500">Weya Voice Chat</p>
+                            <p className="text-xs text-gray-500 truncate">Weya Voice Chat</p>
                         )}
                     </div>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-2 md:gap-4 shrink-0">
                     <Button
                         onClick={handleEndInterview}
-                        className="rounded-full bg-red-500 px-6 font-medium text-white hover:bg-red-600 shadow-md transition-all hover:scale-105"
+                        size={undefined}
+                        className="rounded-full bg-red-500 px-3 py-1.5 md:px-6 md:py-2 h-auto text-xs md:text-sm font-medium text-white hover:bg-red-600 shadow-md transition-all hover:scale-105 whitespace-nowrap"
                     >
-                        End Session
+                        <span className="hidden sm:inline">End Session</span>
+                        <span className="sm:hidden">End</span>
                     </Button>
                     <StatusBadge status={status} />
                 </div>
@@ -733,7 +735,7 @@ export default function VoiceChatPage() {
                             <ChatTranscript messages={messages} />
                         </div>
 
-                        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-end bg-gradient-to-t from-[#F5E8EB] via-[#F5E8EB]/80 to-transparent pb-12 pt-24">
+                        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-10 flex flex-col items-center justify-end bg-gradient-to-t from-[#F5E8EB] via-[#F5E8EB]/80 to-transparent pb-6 md:pb-12 pt-24">
                             <div className="mb-4">
                                 {liveCaption && (
                                     <div className="rounded-lg bg-black/5 px-4 py-2 text-sm font-medium text-gray-700 backdrop-blur-sm">
@@ -791,6 +793,6 @@ export default function VoiceChatPage() {
                     </>
                 )}
             </main>
-        </div>
+        </div >
     )
 }
