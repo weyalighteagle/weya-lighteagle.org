@@ -26,19 +26,9 @@ export function InteractiveBackground() {
     const canvasRef = useRef<HTMLCanvasElement>(null)
     const mouseRef = useRef({ x: 0, y: 0 })
     const requestRef = useRef<number>(0)
-    const [isMobile, setIsMobile] = useState(false)
 
     useEffect(() => {
-        const checkMobile = () => {
-            setIsMobile(window.innerWidth < 768 || window.matchMedia("(hover: none)").matches)
-        }
-        checkMobile()
-        window.addEventListener("resize", checkMobile)
-        return () => window.removeEventListener("resize", checkMobile)
-    }, [])
 
-    useEffect(() => {
-        if (isMobile) return
 
         const canvas = canvasRef.current
         if (!canvas) return
@@ -212,20 +202,9 @@ export function InteractiveBackground() {
             window.removeEventListener("mousemove", handleMouseMove)
             if (requestRef.current) cancelAnimationFrame(requestRef.current)
         }
-    }, [isMobile])
+    }, [])
 
-    if (isMobile) {
-        return (
-            <div className="fixed inset-0 z-0 pointer-events-none w-full h-full bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50">
-                <div
-                    className="absolute inset-0 opacity-[0.05]"
-                    style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-                    }}
-                />
-            </div>
-        )
-    }
+
 
     return (
         <div className="fixed inset-0 z-0 pointer-events-none w-full h-full bg-[#F8F7FC]">
