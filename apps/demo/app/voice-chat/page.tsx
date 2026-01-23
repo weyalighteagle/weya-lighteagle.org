@@ -506,11 +506,11 @@ export default function VoiceChatPage() {
         return (
             <div className="min-h-screen relative">
                 <InteractiveBackground />
-                <div className="relative z-10 flex min-h-screen items-center justify-center p-6 lg:p-12">
-                    <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
+                <div className="relative z-10 flex min-h-screen items-center justify-center p-4 lg:p-12">
+                    <div className="grid w-full max-w-7xl grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-24">
                         {/* Left Column: Form */}
                         <div className="w-full rounded-3xl bg-white p-8 shadow-xl md:p-12">
-                            <h1 className="mb-3 text-3xl font-medium tracking-tight text-gray-900">
+                            <h1 className="mb-3 text-2xl md:text-3xl font-medium tracking-tight text-gray-900">
                                 Begin a conversation with Weya
                             </h1>
                             <p className="mb-10 text-base text-gray-500">Fill out the form to start.</p>
@@ -597,9 +597,9 @@ export default function VoiceChatPage() {
                         </div>
 
                         {/* Right Column: Text Content */}
-                        <div className="flex flex-col justify-center text-center">
-                            <h2 className="mb-8 text-6xl font-medium tracking-tight text-[#1A1A2E]">Weya</h2>
-                            <p className="mb-12 text-2xl font-medium leading-relaxed text-[#4A4A6A]">
+                        <div className="flex flex-col justify-center text-center order-first lg:order-last">
+                            <h2 className="mb-6 md:mb-8 text-4xl md:text-6xl font-medium tracking-tight text-[#1A1A2E]">Weya</h2>
+                            <p className="mb-8 md:mb-12 text-lg md:text-2xl font-medium leading-relaxed text-[#4A4A6A]">
                                 A system-intelligence layer for capital, trust, and coordination.
                             </p>
                             <div className="space-y-10 text-lg leading-relaxed text-[#5A5A7A]">
@@ -680,10 +680,10 @@ export default function VoiceChatPage() {
                                 <div className="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none">
                                     <div className="h-[500px] w-[500px] rounded-full bg-gradient-to-r from-[#7B8FD8] to-purple-400 blur-3xl" />
                                 </div>
-                                <div className="relative z-10 flex flex-col items-center space-y-8 rounded-3xl bg-white/40 p-8 md:p-12 shadow-xl backdrop-blur-md border border-white/50">
+                                <div className="relative z-10 flex flex-col items-center space-y-6 md:space-y-8 rounded-3xl bg-white/40 p-6 md:p-12 shadow-xl backdrop-blur-md border border-white/50">
                                     <div className="text-center space-y-2">
-                                        <h2 className="text-4xl font-medium tracking-tight text-gray-900">Ready to Start?</h2>
-                                        <p className="text-xl text-gray-600">
+                                        <h2 className="text-3xl md:text-4xl font-medium tracking-tight text-gray-900">Ready to Start?</h2>
+                                        <p className="text-lg md:text-xl text-gray-600">
                                             Weya is ready to begin.
                                         </p>
                                     </div>
