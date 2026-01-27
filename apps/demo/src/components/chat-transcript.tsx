@@ -34,8 +34,8 @@ export function ChatTranscript({ messages }: ChatTranscriptProps) {
                   </p>
                   <div
                     className={`rounded-2xl px-5 py-3.5 shadow-sm text-base leading-relaxed ${message.role === "user"
-                        ? "bg-[#7B8FD8] text-white rounded-br-none"
-                        : "bg-white/90 text-gray-800 backdrop-blur-sm rounded-bl-none border border-gray-100"
+                      ? "bg-[#B69DF8] text-white rounded-br-none"
+                      : "bg-white/90 text-gray-800 backdrop-blur-sm rounded-bl-none border border-gray-100"
                       }`}
                   >
                     {message.content}

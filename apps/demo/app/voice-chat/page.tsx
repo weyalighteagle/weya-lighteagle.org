@@ -77,14 +77,6 @@ export default function VoiceChatPage() {
     }, [status])
 
     useEffect(() => {
-        // Check permissions on load
-        navigator.mediaDevices.getUserMedia({ audio: true })
-            .then(stream => {
-                stream.getTracks().forEach(t => t.stop())
-                setMicPermissionGranted(true)
-            })
-            .catch(() => setMicPermissionGranted(false))
-
         const stored = sessionStorage.getItem("interviewData")
         if (stored) {
             setInterviewData(JSON.parse(stored))
@@ -587,7 +579,7 @@ export default function VoiceChatPage() {
                                         <button
                                             type="submit"
                                             disabled={!isFormValid}
-                                            className="w-full rounded-xl bg-[#7B8FD8] px-6 py-4 text-base font-medium text-white shadow-lg transition-all hover:bg-[#6B7FC8] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-[#7B8FD8] disabled:hover:shadow-lg"
+                                            className="w-full rounded-xl bg-[#B69DF8] px-6 py-4 text-base font-medium text-white shadow-lg transition-all hover:bg-[#9F85F7] hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:bg-[#B69DF8] disabled:hover:shadow-lg"
                                         >
                                             Start Voice Chat
                                         </button>
@@ -661,7 +653,7 @@ export default function VoiceChatPage() {
                         {!micPermissionGranted ? (
                             <div className="max-w-md space-y-8 rounded-3xl bg-white/50 p-12 shadow-xl backdrop-blur-sm">
                                 <div className="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-indigo-50">
-                                    <Mic className="h-10 w-10 text-[#7B8FD8]" />
+                                    <Mic className="h-10 w-10 text-[#9F85F7]" />
                                 </div>
                                 <div className="space-y-2">
                                     <h2 className="text-3xl font-medium tracking-tight text-gray-900">Enable Microphone</h2>
@@ -672,7 +664,7 @@ export default function VoiceChatPage() {
                                 <Button
                                     size="lg"
                                     onClick={handleEnableMicrophone}
-                                    className="w-full h-14 rounded-2xl bg-[#7B8FD8] text-lg font-medium hover:bg-[#6B7FC8] shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                                    className="w-full h-14 rounded-2xl bg-[#B69DF8] text-lg font-medium hover:bg-[#9F85F7] shadow-lg hover:shadow-xl transition-all hover:scale-105"
                                 >
                                     Enable Access
                                 </Button>
@@ -693,7 +685,7 @@ export default function VoiceChatPage() {
                                     <Button
                                         size="lg"
                                         onClick={startSession}
-                                        className="w-full max-w-md h-16 rounded-2xl bg-[#1A1A2E] text-xl font-medium text-white hover:bg-[#2A2A4E] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+                                        className="w-full max-w-md h-16 rounded-2xl bg-[#B69DF8] text-xl font-medium text-white hover:bg-[#9F85F7] shadow-xl hover:shadow-2xl transition-all hover:scale-105"
                                     >
                                         {selectedPersona?.id === 'light_eagle' ? "Start Conversation" : "Start Interview"}
                                     </Button>
@@ -761,14 +753,14 @@ export default function VoiceChatPage() {
                                         size="icon"
                                         onClick={handleSendMessage}
                                         disabled={!inputValue.trim()}
-                                        className="absolute right-2 top-2 h-10 w-10 rounded-xl bg-[#7B8FD8] hover:bg-[#6B7FC8] disabled:opacity-50"
+                                        className="absolute right-2 top-2 h-10 w-10 rounded-xl bg-[#B69DF8] hover:bg-[#9F85F7] disabled:opacity-50"
                                     >
                                         <Send className="h-4 w-4 text-white" />
                                     </Button>
                                 </div>
 
                                 <Button
-                                    variant={isListening ? "destructive" : "secondary"}
+                                    variant="ghost"
                                     size="lg"
                                     onClick={() => {
                                         if (isListening) {
@@ -780,12 +772,15 @@ export default function VoiceChatPage() {
                                             startListening()
                                         }
                                     }}
-                                    className={`h-14 w-14 rounded-2xl shadow-sm transition-all ${isListening ? "bg-red-50 text-red-600 hover:bg-red-100 ring-2 ring-red-100" : "bg-white text-gray-700 hover:bg-gray-50"}`}
+                                    className={`relative z-20 h-20 w-20 rounded-full shadow-lg transition-all duration-300 flex items-center justify-center border-4 ${isListening
+                                        ? "bg-white border-[#B69DF8] shadow-[0_0_20px_rgba(182,157,248,0.4)] scale-110"
+                                        : "bg-white/80 border-white/50 hover:bg-white hover:border-[#E0CCF8]"
+                                        }`}
                                 >
                                     {isListening ? (
-                                        <div className="h-3 w-3 rounded-sm bg-current" />
+                                        <div className="h-6 w-6 rounded bg-[#B69DF8] animate-pulse" />
                                     ) : (
-                                        <Mic className="h-6 w-6" />
+                                        <Mic className="h-8 w-8 text-[#9F85F7]" />
                                     )}
                                 </Button>
                             </div>

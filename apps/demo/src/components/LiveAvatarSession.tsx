@@ -68,7 +68,7 @@ const LiveAvatarSessionComponent: React.FC<{
           email,
           session_id, // ✅ EKLENDİ
         }),
-      }).catch(() => {});
+      }).catch(() => { });
     } finally {
       sessionStorage.removeItem("form_lead");
     }
