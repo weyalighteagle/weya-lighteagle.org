@@ -1,0 +1,129 @@
+
+
+> demo@0.1.0 build /Users/gulfemsolak/Desktop/interview-ui-build/apps/demo
+> next build
+
+   [1m[38;2;173;127;168m▲ Next.js 15.4.8[39m[22m
+   - Environments: .env.local
+
+ [37m[1m [22m[39m Creating an optimized production build ...
+ [32m[1m✓[22m[39m Compiled successfully in 9.0s
+[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G[?25h
+./app/admin/knowledge/page.tsx
+8:5  Warning: 'Save' is defined but never used.  @typescript-eslint/no-unused-vars
+34:8  Warning: React Hook useEffect has a missing dependency: 'fetchContent'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+79:25  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+110:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/api/admin/knowledge/route.ts
+24:23  Warning: 'error' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+39:18  Warning: 'fsError' is defined but never used.  @typescript-eslint/no-unused-vars
+82:22  Warning: 'fsError' is defined but never used.  @typescript-eslint/no-unused-vars
+104:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/api/chat/route.ts
+17:24  Warning: 'sessionId' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+30:9  Warning: 'knowledgeContext' is never reassigned. Use 'const' instead.  prefer-const
+31:9  Warning: 'targetPersonaId' is never reassigned. Use 'const' instead.  prefer-const
+64:11  Warning: 'targetPersonaId' is never reassigned. Use 'const' instead.  prefer-const
+83:16  Warning: 'dbError' is defined but never used.  @typescript-eslint/no-unused-vars
+90:18  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+95:20  Warning: 'fallbackErr' is defined but never used.  @typescript-eslint/no-unused-vars
+109:39  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+118:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+171:19  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/api/intro/route.ts
+30:41  Warning: 'qError' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+55:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/api/log-message/route.ts
+40:17  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/api/secrets.ts
+36:3  Warning: LIVEAVATAR_CONTEXT_ID_FAMILY_OFFICES is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+41:3  Warning: LIVEAVATAR_CONTEXT_ID_FUND_BUILDERS is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+46:3  Warning: LIVEAVATAR_CONTEXT_ID_IMPACT_STARTUPS is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+51:3  Warning: LIVEAVATAR_CONTEXT_ID_LIGHT_EAGLE is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+
+./app/api/session/route.ts
+29:18  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+36:22  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+69:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/api/stt/route.ts
+30:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./app/api/tts/route.ts
+5:19  Warning: 'personaId' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./app/voice-chat/page.tsx
+28:11  Warning: 'router' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+66:37  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+67:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+70:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+98:8  Warning: React Hook useEffect has a missing dependency: 'stopEverything'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
+118:59  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+118:62  Warning: Empty block statement.  no-empty
+240:36  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+255:25  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+322:18  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
+335:25  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+351:59  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+351:62  Warning: Empty block statement.  no-empty
+360:46  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+360:83  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+391:40  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+438:30  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+456:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+496:18  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
+496:21  Warning: Empty block statement.  no-empty
+614:91  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+
+./src/components/InteractiveBackground.tsx
+64:13  Warning: 'cursorOrb' is never reassigned. Use 'const' instead.  prefer-const
+
+./src/components/LiveAvatarDemo.tsx
+114:13  Warning: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+./src/components/LiveAvatarStartupInterview.tsx
+115:13  Warning: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+
+./src/components/ui/calendar.tsx
+128:18  Warning: 'className' is missing in props validation  react/prop-types
+128:29  Warning: 'rootRef' is missing in props validation  react/prop-types
+138:21  Warning: 'className' is missing in props validation  react/prop-types
+138:32  Warning: 'orientation' is missing in props validation  react/prop-types
+
+./src/components/ui/chart.tsx
+128:15  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+129:13  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+130:22  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+131:22  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+132:17  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+133:13  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+188:29  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+269:15  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+285:27  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+
+./src/components/voice-orb.tsx
+14:9  Warning: 'radius' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+
+./src/hooks/use-toast.ts
+18:7  Warning: 'actionTypes' is assigned a value but only used as a type.  @typescript-eslint/no-unused-vars
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
+[?25l [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m [2K[1G [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m [2K[1G [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m [2K[1G [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m [2K[1G [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m Failed to compile.
+
+./src/components/InteractiveBackground.tsx:84:28
+Type error: Object is possibly 'undefined'.
+
+[0m [90m 82 |[39m                     vy[33m:[39m ([33mMath[39m[33m.[39mrandom() [33m-[39m [35m0.5[39m) [33m*[39m [35m0.5[39m[33m,[39m [90m// Vertical mix[39m
+ [90m 83 |[39m                     radius[33m:[39m [33mMath[39m[33m.[39mrandom() [33m*[39m [35m500[39m [33m+[39m [35m500[39m[33m,[39m [90m// 500-1000px[39m
+[31m[1m>[22m[39m[90m 84 |[39m                     color[33m:[39m colorPairs[pairIndex][[35m0[39m][33m,[39m [90m// Initial value[39m
+ [90m    |[39m                            [31m[1m^[22m[39m
+ [90m 85 |[39m                     colorPair[33m:[39m colorPairs[pairIndex][33m,[39m
+ [90m 86 |[39m                     phase[33m:[39m [33mMath[39m[33m.[39mrandom() [33m*[39m [33mMath[39m[33m.[39m[33mPI[39m [33m*[39m [35m2[39m[33m,[39m [90m// Random starting phase[39m
+ [90m 87 |[39m                 })[0m
+[2K[1G[?25hNext.js build worker exited with code: 1 and signal: null
+[?25l [36m.[39m [?25h[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m

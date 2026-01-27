@@ -1,124 +1,123 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, type Variants } from "framer-motion"
 import type { ChatStatus } from "@/lib/types"
-import { Loader2 } from "lucide-react"
 
 interface VoiceOrbProps {
   status: ChatStatus
 }
 
 export function VoiceOrb({ status }: VoiceOrbProps) {
-  // Generate ticks for the spectrum ring
-  const tickCount = 80
-  const radius = 100 // SVG radius
-  const ticks = Array.from({ length: tickCount }).map((_, i) => {
-    const angle = (i / tickCount) * 360
-    return {
-      angle,
-      // Randomize length slightly for "audio" feel, or keep uniform
-      length: 10 + Math.random() * 5
-    }
-  })
+  // Container: Breathing and floating (Same effect, smaller scale)
+  const containerVariants: Variants = {
+    idle: {
+      scale: 1,
+      opacity: 0.9,
+      y: [0, -4, 0],
+      filter: "brightness(1) blur(0px)",
+      transition: {
+        scale: { duration: 4, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" },
+        y: { duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "easeInOut" }
+      }
+    },
+    listening: {
+      scale: 1.1,
+      opacity: 1,
+      y: 0,
+      filter: "brightness(1.1)",
+      transition: { duration: 2, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse", ease: "easeInOut" }
+    },
+    speaking: {
+      scale: 1.2,
+      opacity: 1,
+      y: 0,
+      filter: "brightness(1.2) contrast(1.1)",
+      transition: { duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse", ease: "easeOut" }
+    },
+    processing: { scale: 0.95, opacity: 0.8 },
+  }
+
+  // Inner Swirls: Fluid light movement
+  const swirlVariants: Variants = {
+    idle: { rotate: 360, scale: [1, 1.1, 1], transition: { rotate: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" }, scale: { duration: 5, repeat: Number.POSITIVE_INFINITY } } },
+    listening: { rotate: 360, scale: [1, 1.2, 1], transition: { rotate: { duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" }, scale: { duration: 2, repeat: Number.POSITIVE_INFINITY } } },
+    speaking: { rotate: 360, scale: [1, 1.3, 1], transition: { rotate: { duration: 5, repeat: Number.POSITIVE_INFINITY, ease: "linear" }, scale: { duration: 1, repeat: Number.POSITIVE_INFINITY } } }
+  }
+
+  const counterSwirlVariants: Variants = {
+    idle: { rotate: -360, scale: [1, 1.2, 1], transition: { rotate: { duration: 25, repeat: Number.POSITIVE_INFINITY, ease: "linear" }, scale: { duration: 6, repeat: Number.POSITIVE_INFINITY } } },
+    listening: { rotate: -360, scale: [1, 1.3, 1], transition: { rotate: { duration: 10, repeat: Number.POSITIVE_INFINITY, ease: "linear" }, scale: { duration: 2.5, repeat: Number.POSITIVE_INFINITY } } },
+    speaking: { rotate: -360, scale: [1, 1.4, 1], transition: { rotate: { duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "linear" }, scale: { duration: 1.5, repeat: Number.POSITIVE_INFINITY } } }
+  }
 
   return (
-    <div className="relative flex items-center justify-center">
-      {/* Main Gradient Orb (Inner) */}
+    // Reduced container size
+    <div className="relative flex items-center justify-center h-64 w-64">
+      {/* 1. Ambient Background Glow (Softer, Lavender) */}
       <motion.div
-        className="relative z-20 h-32 w-32 rounded-full bg-gradient-to-br from-[#7B8FD8] via-[#CBA6F7] to-[#F5E8EB] shadow-2xl shadow-purple-500/30"
-        animate={
-          status === "idle"
-            ? { scale: [1, 1.02, 1], opacity: 0.9 }
-            : status === "listening"
-              ? { scale: [1, 1.05, 1], opacity: 1 }
-              : status === "speaking"
-                ? { scale: [1, 1.1, 1], opacity: 1 }
-                : { scale: 1, opacity: 0.8 }
-        }
-        transition={{
-          duration: status === "listening" ? 2 : 1.5,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
+        className="absolute inset-0 bg-purple-300/20 blur-[50px] rounded-full"
+        animate={status === "speaking" ? { opacity: [0.3, 0.5, 0.3], scale: 1.1 } : { opacity: 0.2, scale: 1 }}
+        transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+      />
+
+      {/* 2. Main Orb Composition */}
+      <motion.div
+        className="relative h-32 w-32 rounded-full z-10" // Reduced size from h-48 w-48
+        variants={containerVariants}
+        animate={status}
       >
-        {status === "processing" && (
-          <div className="absolute inset-0 flex items-center justify-center">
-            <Loader2 className="h-8 w-8 animate-spin text-white/80" />
-          </div>
-        )}
-      </motion.div>
+        {/* Mask Container */}
+        <div className="absolute inset-0 rounded-full overflow-hidden bg-transparent isolate">
 
-      {/* SVG Spectrum Ring - Only visible when Active */}
-      {(status === "listening" || status === "speaking") && (
-        <motion.div
-          className="absolute z-10 flex items-center justify-center"
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1, rotate: 360 }}
-          transition={{
-            rotate: { duration: 20, repeat: Number.POSITIVE_INFINITY, ease: "linear" },
-            scale: { duration: 0.4 }
-          }}
-        >
-          <svg width="300" height="300" viewBox="0 0 300 300" className="overflow-visible">
-            <defs>
-              <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#A78BFA" />
-                <stop offset="100%" stopColor="#3B82F6" />
-              </linearGradient>
-            </defs>
-            {ticks.map((tick, i) => (
-              <line
-                key={i}
-                x1="150"
-                y1="150" // Start from center (will offset with transform)
-                x2="150"
-                y2={150 - 130} // Outer radius
-                stroke="url(#ringGradient)"
-                strokeWidth="2"
-                strokeLinecap="round"
-                transform={`rotate(${tick.angle} 150 150) translate(0 ${80})`} // Shift out to create hole
-              // The translate pushes the line start away from center to create the ring
-              // Actually, simpler logic:
-              // x1 = 150 + innerR * cos, y1 = 150 + innerR * sin
-              // x2 = 150 + outerR * cos, y2 = 150 + outerR * sin
-              />
-            ))}
-            {/* Let's try a better approach with explicit coordinates for cleaner rendering */}
-            {ticks.map((tick, i) => {
-              const angleRad = (tick.angle * Math.PI) / 180
-              const innerR = 75 // Gap from orb
-              const outerR = innerR + 15 + (i % 2 === 0 ? 5 : 0) // Alternating lengths
-              const x1 = 150 + innerR * Math.cos(angleRad)
-              const y1 = 150 + innerR * Math.sin(angleRad)
-              const x2 = 150 + outerR * Math.cos(angleRad)
-              const y2 = 150 + outerR * Math.sin(angleRad)
+          {/* Base Light (Very Soft Lavender/White) */}
+          <div className="absolute inset-0 bg-gradient-radial from-white/30 via-purple-100/10 to-transparent opacity-60" />
 
-              return (
-                <line
-                  key={i}
-                  x1={x1} y1={y1}
-                  x2={x2} y2={y2}
-                  stroke="url(#ringGradient)"
-                  strokeWidth="3"
-                  strokeLinecap="round"
-                  opacity={0.6}
-                />
-              )
-            })}
-          </svg>
-        </motion.div>
-      )}
+          {/* Swirl Layer 1: Soft Lavender/White Gases */}
+          <motion.div
+            className="absolute -inset-[100%] opacity-80 mix-blend-plus-lighter"
+            style={{
+              // Colors closer to image: White, Soft Violet, Transparent
+              background: "conic-gradient(from 0deg, transparent 0%, #E9D5FF 20%, transparent 40%, #F3E8FF 60%, transparent 100%)",
+              filter: "blur(20px)",
+            }}
+            variants={swirlVariants}
+            animate={status}
+          />
 
-      {/* Secondary faint pulse ring for depth */}
-      {(status === "listening") && (
-        <motion.div
-          className="absolute inset-0 rounded-full border border-purple-400/20"
-          style={{ width: '22rem', height: '22rem' }}
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1.1, opacity: 0.4 }}
-          transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY, repeatType: "reverse" }}
+          {/* Swirl Layer 2: Counter-flow Light (Subtle Purple) */}
+          <motion.div
+            className="absolute -inset-[100%] opacity-70 mix-blend-plus-lighter"
+            style={{
+              // Removing Strong Cyan/Pink - sticking to monochromatic purple spectrum
+              background: "conic-gradient(from 180deg, transparent 0%, #D8B4FE 30%, transparent 50%, #E9D5FF 70%, transparent 100%)",
+              filter: "blur(18px)",
+            }}
+            variants={counterSwirlVariants}
+            animate={status}
+          />
+
+          {/* Inner Core Glow (Bright center) */}
+          <motion.div
+            className="absolute inset-[15%] rounded-full bg-white/50 blur-lg mix-blend-overlay"
+            animate={{ scale: [1, 1.1, 1], opacity: [0.5, 0.8, 0.5] }}
+            transition={{ duration: 3, repeat: Number.POSITIVE_INFINITY }}
+          />
+        </div>
+
+        {/* 3. Surface Effects (Glass/Highlight) - Tuned for scale */}
+
+        {/* Rim Light */}
+        <div className="absolute inset-0 rounded-full border border-white/30 shadow-[0_0_10px_rgba(255,255,255,0.3),inset_0_0_15px_rgba(255,255,255,0.2)]" />
+
+        {/* Top-Left Specular Refection (Clean White) */}
+        <div className="absolute top-3 left-5 h-8 w-14 -rotate-12 rounded-[100%] bg-gradient-to-b from-white/90 to-transparent blur-md opacity-90" />
+
+        {/* Subtle sparkle texture */}
+        <div className="absolute inset-0 rounded-full opacity-20 mix-blend-overlay"
+          style={{ backgroundImage: "radial-gradient(1px 1px at 50% 50%, white, transparent)" }}
         />
-      )}
+
+      </motion.div>
     </div>
   )
 }
