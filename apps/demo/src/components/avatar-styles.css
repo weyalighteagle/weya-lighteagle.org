@@ -709,7 +709,7 @@ body::after {
 }
 
 /* Error message styling – subtle, not aggressive */
-.weya-hero-text-side > div[style*="color: #ef4444"] {
+.weya-hero-text-side>div[style*="color: #ef4444"] {
   background: rgba(220, 38, 38, 0.12);
   border: 1px solid rgba(220, 38, 38, 0.3);
   padding: 0.75rem 1rem;
@@ -728,6 +728,7 @@ body::after {
     padding: 1rem;
   }
 }
+
 /* =========================================================
    HERO FORM – INLINE / FLOW STYLE
    ========================================================= */
@@ -795,7 +796,7 @@ body::after {
 }
 
 /* Error mesajı formun parçası gibi */
-.weya-hero-text-side > div[style*="color: #ef4444"] {
+.weya-hero-text-side>div[style*="color: #ef4444"] {
   background: transparent;
   border: none;
   padding: 0;
@@ -814,17 +815,16 @@ body::after {
     align-self: center;
   }
 }
+
 /* =========================================================
    NAVBAR – SUBTLE PREMIUM POLISH
    ========================================================= */
 
 /* Navbar daha “layered” hissetsin */
 .weya-navbar {
-  background: linear-gradient(
-    180deg,
-    rgba(2, 11, 9, 0.85),
-    rgba(2, 11, 9, 0.65)
-  );
+  background: linear-gradient(180deg,
+      rgba(2, 11, 9, 0.85),
+      rgba(2, 11, 9, 0.65));
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(52, 211, 153, 0.15);
   box-shadow:
@@ -863,12 +863,10 @@ body::after {
 .weya-nav-link::after {
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--brand-primary),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--brand-primary),
+      transparent);
   opacity: 0.8;
 }
 
@@ -893,11 +891,9 @@ body::after {
 /* Mobile menu – daha temiz */
 @media (max-width: 1024px) {
   .weya-nav-menu {
-    background: linear-gradient(
-      180deg,
-      rgba(2, 11, 9, 0.98),
-      rgba(2, 11, 9, 0.95)
-    );
+    background: linear-gradient(180deg,
+        rgba(2, 11, 9, 0.98),
+        rgba(2, 11, 9, 0.95));
   }
 
   .weya-nav-link {
@@ -905,6 +901,7 @@ body::after {
     letter-spacing: 0.12em;
   }
 }
+
 /* =========================================================
    BRAINTRUST-LIKE PRODUCT FORM LAYOUT
    (logic untouched, brand preserved)
@@ -992,7 +989,7 @@ body::after {
 }
 
 /* Error = inline validation like Braintrust */
-.weya-hero-text-side > div[style*="color: #ef4444"] {
+.weya-hero-text-side>div[style*="color: #ef4444"] {
   background: none;
   border: none;
   padding: 0;
@@ -1028,6 +1025,7 @@ body::after {
     opacity: 0;
     transform: translateY(12px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -1056,11 +1054,9 @@ body::after {
   left: -15%;
   width: 60%;
   height: 80%;
-  background: radial-gradient(
-    circle,
-    rgba(52, 211, 153, 0.12),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(52, 211, 153, 0.12),
+      transparent 70%);
   filter: blur(80px);
   z-index: 0;
 }
@@ -1069,11 +1065,9 @@ body::after {
 
 .weya-hero-text-side .weya-form-box {
   position: relative;
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.015)
-  );
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.015));
   border: 1px solid rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(14px);
   border-radius: 18px;
@@ -1120,12 +1114,10 @@ body::after {
   left: -30%;
   width: 60%;
   height: 200%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.35),
-    transparent
-  );
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent);
   transform: rotate(12deg);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1140,6 +1132,7 @@ body::after {
   from {
     transform: translateX(-120%) rotate(12deg);
   }
+
   to {
     transform: translateX(220%) rotate(12deg);
   }
@@ -1180,12 +1173,10 @@ body::after {
   left: 50%;
   width: 70%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.08),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent);
   transform: translateX(-50%);
 }
 
@@ -1540,9 +1531,11 @@ body::after {
 }
 
 .weya-brand {
-  font-size: 22px;          /* sadece burayı büyüttüm */
+  font-size: 22px;
+  /* sadece burayı büyüttüm */
   font-weight: 700;
-  letter-spacing: 0.08em;   /* opsiyonel: daha “logo” gibi dursun */
+  letter-spacing: 0.08em;
+  /* opsiyonel: daha “logo” gibi dursun */
   text-decoration: none;
 }
 
@@ -1711,8 +1704,10 @@ body::after {
 
 .weya-btn-aurora {
   display: block;
-  margin: 12px auto 0; /* yatayda ortalar */
+  margin: 12px auto 0;
+  /* yatayda ortalar */
 }
+
 /* BUTON YAZISI ORTADA (yatay + dikey) */
 
 .weya-btn-aurora {
@@ -1801,6 +1796,7 @@ body::after {
     grid-template-columns: 1fr;
   }
 }
+
 .weya-hero-subtitle {
   margin-top: 40px;
 }
@@ -1828,8 +1824,10 @@ body::after {
 /* Kart */
 .weya-form-box {
   position: relative;
-  margin-top: -72px; /* başlığı kartın içine çeker */
-  padding-top: 96px; /* başlık için içeride yer açar */
+  margin-top: -72px;
+  /* başlığı kartın içine çeker */
+  padding-top: 96px;
+  /* başlık için içeride yer açar */
 }
 
 /* Başlık kart içi hizalama */
@@ -1849,6 +1847,7 @@ body::after {
     padding-top: 72px;
   }
 }
+
 /* =====================================
    BRAINTRUST GİBİ: FORM BAŞLIĞIN ALTINA GİRER
    ===================================== */
@@ -1865,20 +1864,23 @@ body::after {
   margin-bottom: 8px;
 }
 
-.weya-hero-left > .weya-hero-text {
+.weya-hero-left>.weya-hero-text {
   margin-bottom: 24px;
 }
 
 /* FORM kartı yukarı alınır */
 .weya-form-box {
-  margin-top: -12px; /* kritik nokta */
+  margin-top: -12px;
+  /* kritik nokta */
   padding-top: 32px;
 }
 
 .weya-brand {
-  font-size: 30px;          /* sadece burayı büyüttüm */
+  font-size: 30px;
+  /* sadece burayı büyüttüm */
   font-weight: 700;
-  letter-spacing: 0.08em;   /* opsiyonel: daha “logo” gibi dursun */
+  letter-spacing: 0.08em;
+  /* opsiyonel: daha “logo” gibi dursun */
   text-decoration: none;
 }
 
