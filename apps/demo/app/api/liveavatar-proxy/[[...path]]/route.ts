@@ -71,36 +71,41 @@ async function proxyRequest(
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { path?: string[] } }
+  context: { params: Promise<{ path?: string[] }> }
 ) {
+  const params = await context.params;
   return proxyRequest(request, "POST", params);
 }
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { path?: string[] } }
+  context: { params: Promise<{ path?: string[] }> }
 ) {
+  const params = await context.params;
   return proxyRequest(request, "DELETE", params);
 }
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: { path?: string[] } }
+  context: { params: Promise<{ path?: string[] }> }
 ) {
+  const params = await context.params;
   return proxyRequest(request, "GET", params);
 }
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { path?: string[] } }
+  context: { params: Promise<{ path?: string[] }> }
 ) {
+  const params = await context.params;
   return proxyRequest(request, "PUT", params);
 }
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: { path?: string[] } }
+  context: { params: Promise<{ path?: string[] }> }
 ) {
+  const params = await context.params;
   return proxyRequest(request, "PATCH", params);
 }
 
