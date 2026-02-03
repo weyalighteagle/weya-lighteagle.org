@@ -12,7 +12,7 @@ const nextConfig = {
       process.env.STORAGE_SUPABASE_SERVICE_ROLE_KEY,
   },
   
-  // Security Headers
+  // Security Headers - Optimized for HeyGen Live Avatar
   async headers() {
     return [
       {
@@ -20,7 +20,7 @@ const nextConfig = {
         headers: [
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://resource.heygen.com; style-src 'self' 'unsafe-inline'; img-src 'self' data: https: blob:; media-src 'self' https: blob:; font-src 'self' data: https:; connect-src 'self' https: wss:; frame-ancestors 'none'; worker-src 'self' blob:;"
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.jsdelivr.net https://unpkg.com https://resource.heygen.com https://*.heygen.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https: blob:; media-src 'self' https: blob: data:; font-src 'self' data: https://fonts.gstatic.com; connect-src 'self' https: wss: https://api.liveavatar.com https://*.heygen.com; frame-ancestors 'none'; worker-src 'self' blob:; child-src 'self' blob:;"
           },
           {
             key: 'X-Frame-Options',
