@@ -7,20 +7,14 @@ import { API_KEY, LIVEAVATAR_BACKEND_API_URL } from "../../secrets";
  * The SDK appends its paths to the apiUrl, so we capture them here
  */
 
-interface RouteContext {
-  params: {
-    path?: string[];
-  };
-}
-
 async function proxyRequest(
   request: NextRequest,
   method: string,
-  context: RouteContext
+  params: { path?: string[] }
 ) {
   try {
     // Extract the path segments from the catch-all route
-    const pathSegments = context.params.path || [];
+    const pathSegments = params.path || [];
     const sdkPath = pathSegments.length > 0 ? `/${pathSegments.join("/")}` : "/v1/sessions";
     
     console.log(`[LiveAvatar Proxy] ${method} request to: ${sdkPath}`);
@@ -75,22 +69,38 @@ async function proxyRequest(
   }
 }
 
-export async function POST(request: NextRequest, context: RouteContext) {
-  return proxyRequest(request, "POST", context);
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { path?: string[] } }
+) {
+  return proxyRequest(request, "POST", params);
 }
 
-export async function DELETE(request: NextRequest, context: RouteContext) {
-  return proxyRequest(request, "DELETE", context);
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: { path?: string[] } }
+) {
+  return proxyRequest(request, "DELETE", params);
 }
 
-export async function GET(request: NextRequest, context: RouteContext) {
-  return proxyRequest(request, "GET", context);
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { path?: string[] } }
+) {
+  return proxyRequest(request, "GET", params);
 }
 
-export async function PUT(request: NextRequest, context: RouteContext) {
-  return proxyRequest(request, "PUT", context);
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: { path?: string[] } }
+) {
+  return proxyRequest(request, "PUT", params);
 }
 
-export async function PATCH(request: NextRequest, context: RouteContext) {
-  return proxyRequest(request, "PATCH", context);
+export async function PATCH(
+  request: NextRequest,
+  { params }: { params: { path?: string[] } }
+) {
+  return proxyRequest(request, "PATCH", params);
 }
+
