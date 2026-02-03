@@ -68,9 +68,10 @@ export const LiveAvatarContextProvider = ({
   sessionAccessToken,
   session_id,
 }: LiveAvatarContextProviderProps) => {
+  // SDK configuration - API_URL now points to backend proxy to avoid CORS
   const config = {
     voiceChat: true,
-    apiUrl: API_URL,
+    apiUrl: API_URL, // Points to /api/liveavatar-proxy (backend proxy)
   };
 
   const sessionRef = useRef<LiveAvatarSession>(

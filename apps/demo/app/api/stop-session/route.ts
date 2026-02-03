@@ -1,4 +1,4 @@
-import { API_URL } from "../secrets";
+import { LIVEAVATAR_BACKEND_API_URL } from "../secrets";
 
 export async function POST(request: Request) {
   try {
@@ -17,7 +17,7 @@ export async function POST(request: Request) {
       );
     }
 
-    const res = await fetch(`${API_URL}/v1/sessions`, {
+    const res = await fetch(`${LIVEAVATAR_BACKEND_API_URL}/v1/sessions`, {
       method: "DELETE",
       headers: {
         Authorization: `Bearer ${session_token}`,
@@ -62,4 +62,18 @@ export async function POST(request: Request) {
       },
     });
   }
+}
+
+// Handle non-POST requests
+export async function GET() {
+  return new Response(
+    JSON.stringify({ error: "Method not allowed. Use POST." }),
+    {
+      status: 405,
+      headers: {
+        "Content-Type": "application/json",
+        Allow: "POST",
+      },
+    },
+  );
 }

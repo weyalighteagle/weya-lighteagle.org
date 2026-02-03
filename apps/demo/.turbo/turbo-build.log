@@ -1,129 +1,351 @@
+[?9001h[?1004h[?25l[2J[m[2;1H> demo@0.1.0 build C:\Users\heval\Masaüstü\Lighteagle AG\weya-website\weya-lighteagle.org\apps\demo
+> next build[8;1H]0;C:\WINDOWS\system32\cmd.exe[?25h   [38;2;173;127;168m[1m▲ Next.js 15.4.8[m
 
-
-> demo@0.1.0 build /Users/gulfemsolak/Desktop/interview-ui-build/apps/demo
-> next build
+ [37m[1m [m Creating an optimized product
+[7;32Htion build ...
+Browserslist: browsers data (can
+[7;32Hniuse-lite) is 6 months old. Plea
+[7;32Hase run:
+  npx update-browserslist-db@lat
+[7;32Htest
+  Why you should do it regularly
+[7;32Hy: https://github.com/browserslis
+[7;32Hst/update-db#readme
+ [32m[1m✓[m Compiled successfully in 11.0
+[7;32H0s
+ [37m[1m [m Linting and checking validity[?25l
+[7;32Hy of types  [36m.[K[20C[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m.[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m.[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m.[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m.[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m.[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m.[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m.[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m.[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m..[m[K[32C[7;1H [37m[1m [m Linting and checking validity of types  [36m...[m[K[32C[7;1H[K
+./app/admin/knowledge/page.tsx[?25h
+8:5  Warning: 'Save' is defined 
+[7;32H but never used.  @typescript-esl
+[7;32Hlint/no-unused-vars
+34:8  Warning: React Hook useEff
+[7;32Hfect has a missing dependency: 'f
+[7;32HfetchContent'. Either include it 
+[7;32H or remove the dependency array. 
+[7;32H  react-hooks/exhaustive-deps    
+79:25  Warning: Unexpected any. 
+[7;32H Specify a different type.  @type
+[7;32Hescript-eslint/no-explicit-any   
+110:21  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
 
-   [1m[38;2;173;127;168m▲ Next.js 15.4.8[39m[22m
-   - Environments: .env.local
-
- [37m[1m [22m[39m Creating an optimized production build ...
- [32m[1m✓[22m[39m Compiled successfully in 9.0s
-[?25l [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m..[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m...[39m[2K[1G[1A[2K[1G[1A[2K[1G [37m[1m [22m[39m Linting and checking validity of types  [36m.[39m[2K[1G[1A[2K[1G[1A[2K[1G[?25h
-./app/admin/knowledge/page.tsx
-8:5  Warning: 'Save' is defined but never used.  @typescript-eslint/no-unused-vars
-34:8  Warning: React Hook useEffect has a missing dependency: 'fetchContent'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
-79:25  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-110:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-
-./app/api/admin/knowledge/route.ts
-24:23  Warning: 'error' is assigned a value but never used.  @typescript-eslint/no-unused-vars
-39:18  Warning: 'fsError' is defined but never used.  @typescript-eslint/no-unused-vars
-82:22  Warning: 'fsError' is defined but never used.  @typescript-eslint/no-unused-vars
-104:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+./app/api/admin/knowledge/route.
+[7;32H.ts
+24:23  Warning: 'error' is assig
+[7;32Hgned a value but never used.  @ty
+[7;32Hypescript-eslint/no-unused-vars  
+39:18  Warning: 'fsError' is def
+[7;32Hfined but never used.  @typescrip
+[7;32Hpt-eslint/no-unused-vars
+82:22  Warning: 'fsError' is def
+[7;32Hfined but never used.  @typescrip
+[7;32Hpt-eslint/no-unused-vars
+104:21  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
 
 ./app/api/chat/route.ts
-17:24  Warning: 'sessionId' is assigned a value but never used.  @typescript-eslint/no-unused-vars
-30:9  Warning: 'knowledgeContext' is never reassigned. Use 'const' instead.  prefer-const
-31:9  Warning: 'targetPersonaId' is never reassigned. Use 'const' instead.  prefer-const
-64:11  Warning: 'targetPersonaId' is never reassigned. Use 'const' instead.  prefer-const
-83:16  Warning: 'dbError' is defined but never used.  @typescript-eslint/no-unused-vars
-90:18  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
-95:20  Warning: 'fallbackErr' is defined but never used.  @typescript-eslint/no-unused-vars
-109:39  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-118:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-171:19  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+17:24  Warning: 'sessionId' is a
+[7;32Hassigned a value but never used. 
+[7;32H  @typescript-eslint/no-unused-va
+[7;32Hars
+30:9  Warning: 'knowledgeContext
+[7;32Ht' is never reassigned. Use 'cons
+[7;32Hst' instead.  prefer-const       
+31:9  Warning: 'targetPersonaId'
+[7;32H' is never reassigned. Use 'const
+[7;32Ht' instead.  prefer-const        
+64:11  Warning: 'targetPersonaId
+[7;32Hd' is never reassigned. Use 'cons
+[7;32Hst' instead.  prefer-const       
+83:16  Warning: 'dbError' is def
+[7;32Hfined but never used.  @typescrip
+[7;32Hpt-eslint/no-unused-vars
+90:18  Warning: 'err' is defined
+[7;32Hd but never used.  @typescript-es
+[7;32Hslint/no-unused-vars
+95:20  Warning: 'fallbackErr' is
+[7;32Hs defined but never used.  @types
+[7;32Hscript-eslint/no-unused-vars     
+109:39  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+118:35  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+171:19  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
 
-./app/api/intro/route.ts
-30:41  Warning: 'qError' is assigned a value but never used.  @typescript-eslint/no-unused-vars
-55:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+./app/api/intro/route.ts        
+30:41  Warning: 'qError' is assi
+[7;32Higned a value but never used.  @t
+[7;32Htypescript-eslint/no-unused-vars [8;1H
+55:21  Warning: Unexpected any. 
+[7;32H Specify a different type.  @type
+[7;32Hescript-eslint/no-explicit-any   
 
-./app/api/log-message/route.ts
-40:17  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+./app/api/log-message/route.ts  
+40:17  Warning: Unexpected any. 
+[7;32H Specify a different type.  @type
+[7;32Hescript-eslint/no-explicit-any   
 
 ./app/api/secrets.ts
-36:3  Warning: LIVEAVATAR_CONTEXT_ID_FAMILY_OFFICES is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
-41:3  Warning: LIVEAVATAR_CONTEXT_ID_FUND_BUILDERS is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
-46:3  Warning: LIVEAVATAR_CONTEXT_ID_IMPACT_STARTUPS is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
-51:3  Warning: LIVEAVATAR_CONTEXT_ID_LIGHT_EAGLE is not listed as a dependency in turbo.json  turbo/no-undeclared-env-vars
+53:3  Warning: LIVEAVATAR_CONTEX
+[7;32HXT_ID_FAMILY_OFFICES is not liste
+[7;32Hed as a dependency in turbo.json 
+[7;32H  turbo/no-undeclared-env-vars   
+58:3  Warning: LIVEAVATAR_CONTEX
+[7;32HXT_ID_FUND_BUILDERS is not listed
+[7;32Hd as a dependency in turbo.json  
+[7;32H turbo/no-undeclared-env-vars    
+63:3  Warning: LIVEAVATAR_CONTEX
+[7;32HXT_ID_IMPACT_STARTUPS is not list
+[7;32Hted as a dependency in turbo.json
+[7;32Hn  turbo/no-undeclared-env-vars  
+68:3  Warning: LIVEAVATAR_CONTEX
+[7;32HXT_ID_LIGHT_EAGLE is not listed a
+[7;32Has a dependency in turbo.json  tu
+[7;32Hurbo/no-undeclared-env-vars      
 
-./app/api/session/route.ts
-29:18  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
-36:22  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
-69:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+./app/api/session/route.ts      
+29:18  Warning: 'e' is defined b
+[7;32Hbut never used.  @typescript-esli
+[7;32Hint/no-unused-vars
+36:22  Warning: 'err' is defined
+[7;32Hd but never used.  @typescript-es
+[7;32Hslint/no-unused-vars
+69:21  Warning: Unexpected any. 
+[7;32H Specify a different type.  @type
+[7;32Hescript-eslint/no-explicit-any   
 
 ./app/api/stt/route.ts
-30:21  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+30:21  Warning: Unexpected any. 
+[7;32H Specify a different type.  @type
+[7;32Hescript-eslint/no-explicit-any   
 
 ./app/api/tts/route.ts
-5:19  Warning: 'personaId' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+5:19  Warning: 'personaId' is as
+[7;32Hssigned a value but never used.  
+[7;32H @typescript-eslint/no-unused-var
+[7;32Hrs
 
-./app/voice-chat/page.tsx
-28:11  Warning: 'router' is assigned a value but never used.  @typescript-eslint/no-unused-vars
-66:37  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-67:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-70:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-98:8  Warning: React Hook useEffect has a missing dependency: 'stopEverything'. Either include it or remove the dependency array.  react-hooks/exhaustive-deps
-118:59  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
-118:62  Warning: Empty block statement.  no-empty
-240:36  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-255:25  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-322:18  Warning: 'err' is defined but never used.  @typescript-eslint/no-unused-vars
-335:25  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-351:59  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
-351:62  Warning: Empty block statement.  no-empty
-360:46  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-360:83  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-391:40  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-438:30  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
-456:35  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-496:18  Warning: 'e' is defined but never used.  @typescript-eslint/no-unused-vars
-496:21  Warning: Empty block statement.  no-empty
-614:91  Warning: `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`.  react/no-unescaped-entities
+./app/voice-chat/page.tsx       
+28:11  Warning: 'router' is assi
+[7;32Higned a value but never used.  @t
+[7;32Htypescript-eslint/no-unused-vars [8;1H
+66:37  Warning: Unexpected any. 
+[7;32H Specify a different type.  @type
+[7;32Hescript-eslint/no-explicit-any   
+67:35  Warning: Unexpected any. 
+[7;32H Specify a different type.  @type
+[7;32Hescript-eslint/no-explicit-any   
+70:35  Warning: Unexpected any. 
+[7;32H Specify a different type.  @type
+[7;32Hescript-eslint/no-explicit-any   
+90:8  Warning: React Hook useEff
+[7;32Hfect has a missing dependency: 's
+[7;32HstopEverything'. Either include i
+[7;32Hit or remove the dependency array
+[7;32Hy.  react-hooks/exhaustive-deps  
+110:59  Warning: 'e' is defined 
+[7;32H but never used.  @typescript-esl
+[7;32Hlint/no-unused-vars
+110:62  Warning: Empty block sta
+[7;32Hatement.  no-empty
+232:36  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+247:25  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+314:18  Warning: 'err' is define
+[7;32Hed but never used.  @typescript-e
+[7;32Heslint/no-unused-vars
+327:25  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+343:59  Warning: 'e' is defined 
+[7;32H but never used.  @typescript-esl
+[7;32Hlint/no-unused-vars
+343:62  Warning: Empty block sta
+[7;32Hatement.  no-empty
+352:46  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+352:83  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+383:40  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+430:30  Warning: 'e' is defined 
+[7;32H but never used.  @typescript-esl
+[7;32Hlint/no-unused-vars
+448:35  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+488:18  Warning: 'e' is defined 
+[7;32H but never used.  @typescript-esl
+[7;32Hlint/no-unused-vars
+488:21  Warning: Empty block sta
+[7;32Hatement.  no-empty
+606:91  Warning: `'` can be esca
+[7;32Haped with `&apos;`, `&lsquo;`, `&
+[7;32H&#39;`, `&rsquo;`.  react/no-unes
+[7;32Hscaped-entities
 
-./src/components/InteractiveBackground.tsx
-64:13  Warning: 'cursorOrb' is never reassigned. Use 'const' instead.  prefer-const
+./src/components/LiveAvatarDemo.
+[7;32H.tsx
+114:13  Warning: Do not use an `
+[7;32H`<a>` element to navigate to `/`.
+[7;32H. Use `<Link />` from `next/link`
+[7;32H` instead. See: https://nextjs.or
+[7;32Hrg/docs/messages/no-html-link-for
+[7;32Hr-pages  @next/next/no-html-link-
+[7;32H-for-pages
 
-./src/components/LiveAvatarDemo.tsx
-114:13  Warning: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+./src/components/LiveAvatarStart
+[7;32HtupInterview.tsx
+115:13  Warning: Do not use an `
+[7;32H`<a>` element to navigate to `/`.
+[7;32H. Use `<Link />` from `next/link`
+[7;32H` instead. See: https://nextjs.or
+[7;32Hrg/docs/messages/no-html-link-for
+[7;32Hr-pages  @next/next/no-html-link-
+[7;32H-for-pages
 
-./src/components/LiveAvatarStartupInterview.tsx
-115:13  Warning: Do not use an `<a>` element to navigate to `/`. Use `<Link />` from `next/link` instead. See: https://nextjs.org/docs/messages/no-html-link-for-pages  @next/next/no-html-link-for-pages
+./src/components/ui/calendar.tsx[8;1H
+128:18  Warning: 'className' is 
+[7;32H missing in props validation  rea
+[7;32Hact/prop-types
+128:29  Warning: 'rootRef' is mi
+[7;32Hissing in props validation  react
+[7;32Ht/prop-types
+138:21  Warning: 'className' is 
+[7;32H missing in props validation  rea
+[7;32Hact/prop-types
+138:32  Warning: 'orientation' i
+[7;32His missing in props validation  r
+[7;32Hreact/prop-types
 
-./src/components/ui/calendar.tsx
-128:18  Warning: 'className' is missing in props validation  react/prop-types
-128:29  Warning: 'rootRef' is missing in props validation  react/prop-types
-138:21  Warning: 'className' is missing in props validation  react/prop-types
-138:32  Warning: 'orientation' is missing in props validation  react/prop-types
+./src/components/ui/chart.tsx   
+128:15  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+129:13  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+130:22  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+131:22  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+132:17  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+133:13  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+188:29  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+269:15  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
+285:27  Warning: Unexpected any.
+[7;32H. Specify a different type.  @typ
+[7;32Hpescript-eslint/no-explicit-any  
 
-./src/components/ui/chart.tsx
-128:15  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-129:13  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-130:22  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-131:22  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-132:17  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-133:13  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-188:29  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-269:15  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
-285:27  Warning: Unexpected any. Specify a different type.  @typescript-eslint/no-explicit-any
+./src/hooks/use-toast.ts        
+18:7  Warning: 'actionTypes' is 
+[7;32H assigned a value but only used a
+[7;32Has a type.  @typescript-eslint/no
+[7;32Ho-unused-vars
 
-./src/components/voice-orb.tsx
-14:9  Warning: 'radius' is assigned a value but never used.  @typescript-eslint/no-unused-vars
+info  - Need to disable some ESL
+[7;32HLint rules? Learn more here: http
+[7;32Hps://nextjs.org/docs/app/api-refe
+[7;32Herence/config/eslint#disabling-ru
+[7;32Hules
+ [36m.[K[?25l[30C[m[K[32C [36m.. [m[K[32C [36m... [m[K[32C [36m. [m[K[32C [36m.. [m[K[32C [36m... [m[K[32C [36m. [m[K[32C [36m.. [m[K[32C [36m... [m[K[32C [36m. [m[K[32C [36m.. [m[K[32C [36m... [m[K[32C [36m. [m[K[32C [36m.. [m[K[32C [32m[1m✓[m Linting and checking validity[?25h
+[7;32Hy of types
+ [37m[1m [m Collecting page data  [36m.      [?25l[m[8;1H[K[32C[7;1H[K[32C [37m[1m [m Collecting page data  [36m..[m[K[32C[6;1H [37m[1m [m Collecting page data  [36m...    [m[6;1H                                [6;65H[5;1H [37m[1m [m Collecting page data  [36m.      [m[5;1H[K[32C[4;1H                                [4;65H[3;1H [37m[1m [m Collecting page data  [36m...    [m                                [4;65H[3;1H                                [3;65H[2;1H [37m[1m [m Collecting page data  [36m.      [m[2;1H                                [2;65H[H [32m[1m✓[m Collecting page data[K
+[?25h[?25l [37m[1m [m Generating static pages (0/22)  [36m[    ][m                                [3;65H[2;1H [37m[1m [m Generating static pages (0/22)  [36m[=   ][m                                [3;65H[2;1H [37m[1m [m Generating static pages (0/22)  [36m[==  ][m                                [3;65H[2;1H [37m[1m [m Generating static pages (0/22)  [36m[=== ][m                                [3;65H[2;1H [37m[1m [m Generating static pages (3/22)  [36m[ ===][m                                [3;65H[2;1H [37m[1m [m Generating static pages (11/22)  [36m[  ==][m                                [3;65H[2;1H [37m[1m [m Generating static pages (17/22)  [36m[   =][m                                [3;65H[2;1H [32m[1m✓[m Generating static pages (22/22)
+[?25h[?25l [37m[1m [m Finalizing page optimization  [36m. [37m[1m [m Collecting build traces  [36m.[m[5;1H[K[32C[4;1H [37m[1m [m Collecting build traces  [36m..  [m
+[K[32C[4;1H                                [4;65H[3;1H [37m[1m [m Collecting build traces  [36m... [m                                [4;65H[3;1H                                [3;65H[2;1H [37m[1m [m Collecting build traces  [36m.   [m                                [3;65H[2;1H                                [2;65H[H [37m[1m [m Collecting build traces  [36m..  [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m... [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m.   [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m..  [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m... [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m.   [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m..  [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m... [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m.   [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m..  [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m... [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m.   [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m..  [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m... [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m.   [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m..  [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m... [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m.   [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m..  [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m... [m                                [2;65H[H                                [1;65H[H [37m[1m [m Finalizing page optimization  [36m.[m[H [37m[1m [m Collecting build traces  [36m.   [m                                [2;65H[H                                [1;65H[H [37m[1m [m Collecting build traces  [36m..  [m                                [2;65H[H                                [1;65H[H [37m[1m [m Finalizing page optimization  [32m[1m✓[m Finalizing page optimization [4m[4;1HRoute (app)[24m                                 [12X[4mSize[24m  [4mFirst Load JS[24m    
+┌ ○ /                                    1.65 kB[9X[37m[1m[9C217 kB[8;1H[?25h[m
+├ ○ /_not-found                 [8;50H
+           993 B[37m[1m[9C101 kB[m [8;1H
+├ ○ /admin/knowledge            [8;45H
+         3.72 kB[37m[1m[9C113 kB[m [8;1H
+├ ƒ /api/admin/knowledge        
+[7;32H            160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/chat                   [8;52H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/elevenlabs-text-to-spee
+[7;32Hech         160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/form-lead              [8;47H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/intro                  [8;51H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/keep-session-alive     
+[7;32H            160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/liveavatar-proxy       
+[7;32H            160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/log-message            [8;45H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/openai-chat-complete   
+[7;32H            160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/save-message           [8;44H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/session                [8;49H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/start-custom-session   
+[7;32H            160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/start-session          [8;43H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/stop-session           [8;44H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/stt                    [8;53H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ƒ /api/tts                    [8;53H
+           160 B[37m[1m[9C100 kB[m [8;1H
+├ ○ /icon.png                   [8;52H
+             0 B[37m[1m[12C0 B[m [8;1H
+├ ○ /interview/family-offices   
+[7;32H          1.72 kB[37m[1m[9C217 kB[m [8;1H
+├ ○ /interview/fund-builders    
+[7;32H          1.71 kB[37m[1m[9C217 kB[m [8;1H
+├ ○ /interview/impact-startups  
+[7;32H          1.71 kB[37m[1m[9C217 kB[m [8;1H
+├ ○ /interview/light-eagle      
+[7;32H          1.71 kB[37m[1m[9C217 kB[m [8;1H
+├ ○ /interview/startup-interview
+[7;32Hw          1.7 kB[37m[1m[9C217 kB[m [8;1H
+├ ○ /talk/weya-live             [8;46H
+         1.71 kB[37m[1m[9C217 kB[m [8;1H
+├ ○ /talk/weya-startup          [8;43H
+          1.7 kB[37m[1m[9C217 kB[m [8;1H
+└ ○ /voice-chat                 [8;50H
+         44.9 kB[37m[1m[9C154 kB[m [8;1H
++ First Load JS shared by all   
+[7;32H 
+[37m[1m[10C100 kB[m[K
+  ├ chunks/674-56abcda98e9c3ff1.
+[7;32H.js       43.9 kB
+  ├ chunks/cf4bf725-58b4b12719bd
+[7;32Hd5c54.js  54.1 kB
+  └ other shared chunks (total) 
+[7;32H             2 kB
 
-./src/hooks/use-toast.ts
-18:7  Warning: 'actionTypes' is assigned a value but only used as a type.  @typescript-eslint/no-unused-vars
 
-info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/app/api-reference/config/eslint#disabling-rules
-[?25l [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m [2K[1G [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m [2K[1G [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m [2K[1G [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m [2K[1G [36m.[39m [2K[1G [36m..[39m [2K[1G [36m...[39m Failed to compile.
+○  (Static)   prerendered as sta
+[7;32Hatic content
+ƒ  (Dynamic)  server-rendered on
+[7;32Hn demand
 
-./src/components/InteractiveBackground.tsx:84:28
-Type error: Object is possibly 'undefined'.
-
-[0m [90m 82 |[39m                     vy[33m:[39m ([33mMath[39m[33m.[39mrandom() [33m-[39m [35m0.5[39m) [33m*[39m [35m0.5[39m[33m,[39m [90m// Vertical mix[39m
- [90m 83 |[39m                     radius[33m:[39m [33mMath[39m[33m.[39mrandom() [33m*[39m [35m500[39m [33m+[39m [35m500[39m[33m,[39m [90m// 500-1000px[39m
-[31m[1m>[22m[39m[90m 84 |[39m                     color[33m:[39m colorPairs[pairIndex][[35m0[39m][33m,[39m [90m// Initial value[39m
- [90m    |[39m                            [31m[1m^[22m[39m
- [90m 85 |[39m                     colorPair[33m:[39m colorPairs[pairIndex][33m,[39m
- [90m 86 |[39m                     phase[33m:[39m [33mMath[39m[33m.[39mrandom() [33m*[39m [33mMath[39m[33m.[39m[33mPI[39m [33m*[39m [35m2[39m[33m,[39m [90m// Random starting phase[39m
- [90m 87 |[39m                 })[0m
-[2K[1G[?25hNext.js build worker exited with code: 1 and signal: null
-[?25l [36m.[39m [?25h[41m[30m ELIFECYCLE [39m[49m [31mCommand failed with exit code 1.[39m
+[?9001l[?1004l
