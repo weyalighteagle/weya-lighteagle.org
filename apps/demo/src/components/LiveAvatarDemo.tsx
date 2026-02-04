@@ -105,7 +105,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           {error ? (
             <div className="weya-error">{error}</div>
           ) : (
-            <div className="weya-loading">Connecting to Weya…</div>
+            <div className="weya-loading">Weya'ya bağlanılıyor…</div>
           )}
         </div>
       ) : (
@@ -117,25 +117,22 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
             <div className="weya-nav-menu">
               <a href="#home" className="weya-nav-link">
-                AI Companion
-              </a>
-              <a href="#about" className="weya-nav-link">
-                About
+                AI Weya
               </a>
               <a href="#contact" className="weya-nav-link">
-                Contact
+                İLETİŞİM
               </a>
             </div>
           </nav>
 
           <section id="home" className="weya-section">
             <div className="weya-hero-grid">
-              <div className="weya-hero-left">
-                <h1 className="weya-hero-title">
-                  Participate in a foundational interview
+              <div className="weya-hero-left" style={{ textAlign: "left" }}>
+                <h1 className="weya-hero-title" style={{ textAlign: "left" }}>
+                  Yüz Yüze Görüşme Öncesi Weya ile Hazırlık Görüşmesi
                 </h1>
 
-                <p className="weya-hero-text">Fill out the form to start.</p>
+                <p className="weya-hero-text" style={{ textAlign: "left" }}>Formu doldurun ve başlayın.</p>
 
                 {error && <div className="weya-error">{error}</div>}
 
@@ -143,13 +140,13 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                   <div className="weya-form-row">
                     <input
                       className="weya-input"
-                      placeholder="First name"
+                      placeholder="Ad"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
                     />
                     <input
                       className="weya-input"
-                      placeholder="Last name"
+                      placeholder="Soyad"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
                     />
@@ -157,7 +154,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
                   <input
                     className="weya-input"
-                    placeholder="Email"
+                    placeholder="E-posta"
                     type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
@@ -168,7 +165,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                     disabled={isLoading}
                     onClick={() => {
                       if (!firstName || !lastName || !email) {
-                        setError("Please fill in all fields.");
+                        setError("Lütfen tüm alanları doldurun.");
                         return;
                       }
 
@@ -184,28 +181,18 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                       router.push("/talk/weya-live");
                     }}
                   >
-                    Start interview
+                    GÖRÜŞMEYİ BAŞLAT
                   </button>
                 </div>
               </div>
 
               <div className="weya-hero-right">
-                <h2 className="weya-hero-subtitle">
-                  Weya
-                  <br />
-                  A system-intelligence layer for capital, trust, and coordination.
-                </h2>
-
                 <p className="weya-hero-text">
-                  Weya is an AI-enabled system that listens, learns, and connects —
-                  transforming conversations into shared intelligence for
-                  impact-driven capital.
+                  Başvurusu değerlendirilen projeleri, yüz yüze görüşmeler öncesinde <strong>Weya</strong> ile kısa bir hazırlık görüşmesi yapmaya davet ediyoruz. <strong>Weya</strong>, dinleyen, öğrenen ve bağlantılar kuran yapay zekâ destekli bir sistemdir. Başvuruları değerlendirme kriterleri doğrultusunda ele alarak, projelerin güçlü yönlerini daha net ifade etmelerine ve etki odaklı anlatılarını güçlendirmelerine yardımcı olur.
                 </p>
 
                 <p className="weya-hero-text">
-                  We are inviting a small group of capital allocators and ecosystem
-                  builders to participate in foundational interviews shaping
-                  Weya’s next phase.
+                  Bu görüşme yaklaşık <strong>15 dakika</strong> sürecek; Weya, başvuru değerlendirme kriterleri doğrultusunda size sorular yöneltecektir. Görüşmenin amacı, yüz yüze yapılacak değerlendirme toplantısına daha hazırlıklı girmenizi desteklemektir. Görüşme sonrasında, paylaşılan bilgiler doğrultusunda <strong>kısa bir değerlendirme ve geri bildirim raporu</strong> hazırlanacaktır. Bu rapor, projenizin <strong>değerlendirme kriterleri</strong> çerçevesinde güçlü yönlerini ve geliştirmeye açık alanlarını özetlemeyi amaçlar ve yüz yüze görüşmeye hazırlık sürecinizi destekleyici bir araç olarak kullanılacaktır.
                 </p>
               </div>
             </div>
@@ -213,11 +200,10 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
           <section id="contact" className="weya-section">
             <div className="weya-content-narrow">
-              <h2 className="weya-section-title">Contact</h2>
+              <h2 className="weya-section-title">İletişim</h2>
 
               <p className="weya-hero-text">
-                If you’re interested in learning more or participating beyond the
-                interview, you can reach us at:
+                Daha fazla bilgi almak veya görüşme dışında katılım sağlamak isterseniz bize şuradan ulaşabilirsiniz:
               </p>
 
               <p className="weya-hero-text">
@@ -225,7 +211,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               </p>
 
               <p className="weya-hero-text" style={{ opacity: 0.6 }}>
-                © 2025 Light Eagle. All rights reserved.
+                © 2025 Light Eagle. Tüm hakları saklıdır.
               </p>
             </div>
           </section>

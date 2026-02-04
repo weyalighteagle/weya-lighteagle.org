@@ -40,10 +40,20 @@ export async function POST(request: Request) {
 
     if (!response.ok) {
       const errorText = await response.text()
+      let errorData = { message: errorText }
+      try {
+        errorData = JSON.parse(errorText)
+      } catch (e) { }
+
       console.error("ElevenLabs API Error:", errorText)
+
+      const status = response.status
+      const isQuotaError = errorText.includes("quota_exceeded") || status === 401
+
       return NextResponse.json({
-        error: "TTS generation failed",
-        details: errorText
+        error: isQuotaError ? "TTS Quota Exceeded. Please top up your ElevenLabs account." : "TTS generation failed",
+        details: errorData,
+        code: isQuotaError ? "QUOTA_EXCEEDED" : "TTS_FAILED"
       }, { status: response.status })
     }
 

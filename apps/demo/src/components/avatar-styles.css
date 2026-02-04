@@ -12,6 +12,12 @@
   --font-body: 'Inter', sans-serif;
 }
 
+/* Global Readability Improvements */
+.weya-hero-text {
+  color: #e2e8f0 !important;
+  font-weight: 300 !important;
+}
+
 html {
   scroll-behavior: smooth;
 }
@@ -294,9 +300,11 @@ body::after {
   max-width: 680px;
   font-size: 1.3rem;
   line-height: 1.7;
-  color: var(--text-muted);
+  color: #e2e8f0;
+  /* Brighter color */
   margin-bottom: 3.5rem;
-  font-weight: 300;
+  font-weight: 400;
+  /* More readable weight */
 }
 
 .weya-btn-aurora {
@@ -921,7 +929,7 @@ body::after {
 .weya-hero-text {
   font-size: 1rem;
   margin-bottom: 2rem;
-  color: var(--text-muted);
+  color: #e2e8f0;
 }
 
 /* FORM = primary surface */
