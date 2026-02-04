@@ -29,13 +29,26 @@ export async function POST(request: Request) {
         return NextResponse.json({ text: transcription.text })
     } catch (error: any) {
         console.error("STT API Critical Error:", error)
-        // Check for specific OpenAI errors
-        if (error.response) {
-            console.error(error.response.status, error.response.data);
+
+        let errorMessage = error.message || "STT Failed"
+        let errorCode = "STT_FAILED"
+
+        // Handle OpenAI specific errors
+        if (error.status === 401) {
+            errorMessage = "Invalid OpenAI API Key"
+            errorCode = "INVALID_API_KEY"
+        } else if (error.status === 429) {
+            errorMessage = "OpenAI Rate Limit or Quota Exceeded. Please check your billing."
+            errorCode = "QUOTA_EXCEEDED"
+        } else if (error.message && error.message.includes("quota")) {
+            errorMessage = "OpenAI Quota Exceeded. Please check your billing."
+            errorCode = "QUOTA_EXCEEDED"
         }
+
         return NextResponse.json({
-            error: error.message || "STT Failed",
+            error: errorMessage,
+            code: errorCode,
             details: error.toString()
-        }, { status: 500 })
+        }, { status: error.status || 500 })
     }
 }
