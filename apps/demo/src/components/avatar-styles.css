@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap");
 
 :root {
   --bg-deep: #020b09;
@@ -8,8 +8,8 @@
   --brand-primary: #34d399;
   --brand-glow: rgba(52, 211, 153, 0.4);
   --nav-height: 80px;
-  --font-heading: 'Playfair Display', serif;
-  --font-body: 'Inter', sans-serif;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Inter", sans-serif;
 }
 
 /* Global Readability Improvements */
@@ -29,34 +29,48 @@ body {
   color: var(--text-main);
   overflow-x: hidden;
   background-color: var(--bg-deep);
-  background-image: radial-gradient(circle at 50% 0%, var(--bg-gradient) 0%, var(--bg-deep) 60%);
+  background-image: radial-gradient(
+    circle at 50% 0%,
+    var(--bg-gradient) 0%,
+    var(--bg-deep) 60%
+  );
   min-height: 100vh;
 }
 
 body::before {
-  content: '';
+  content: "";
   position: fixed;
   top: -10%;
   left: -10%;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(circle, rgba(52, 211, 153, 0.15) 0%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(52, 211, 153, 0.15) 0%,
+    transparent 70%
+  );
   filter: blur(100px);
   z-index: -2;
   animation: pulseGlow 10s infinite alternate;
+  pointer-events: none;
 }
 
 body::after {
-  content: '';
+  content: "";
   position: fixed;
   bottom: -10%;
   right: -10%;
   width: 70vw;
   height: 70vw;
-  background: radial-gradient(circle, rgba(16, 185, 129, 0.1) 0%, transparent 60%);
+  background: radial-gradient(
+    circle,
+    rgba(16, 185, 129, 0.1) 0%,
+    transparent 60%
+  );
   filter: blur(120px);
   z-index: -2;
   animation: pulseGlow 15s infinite alternate-reverse;
+  pointer-events: none;
 }
 
 @keyframes pulseGlow {
@@ -143,7 +157,7 @@ body::after {
 }
 
 .weya-nav-link::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: -4px;
   left: 0;
@@ -208,16 +222,22 @@ body::after {
 }
 
 .weya-hero-visual-side::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 50%;
   left: 50%;
   width: 120%;
   height: 80%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(234, 179, 8, 0.2) 0%, rgba(52, 211, 153, 0.1) 50%, transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(234, 179, 8, 0.2) 0%,
+    rgba(52, 211, 153, 0.1) 50%,
+    transparent 70%
+  );
   filter: blur(60px);
   z-index: 1;
+  pointer-events: none;
 }
 
 @keyframes floatAvatar {
@@ -255,7 +275,7 @@ body::after {
 
 .hamburger::before,
 .hamburger::after {
-  content: '';
+  content: "";
   position: absolute;
   width: 24px;
   height: 2px;
@@ -346,7 +366,9 @@ body::after {
 
 .weya-btn-aurora:hover {
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 0 30px var(--brand-primary), 0 0 60px rgba(52, 211, 153, 0.5);
+  box-shadow:
+    0 0 30px var(--brand-primary),
+    0 0 60px rgba(52, 211, 153, 0.5);
   color: black;
 }
 
@@ -409,13 +431,19 @@ body::after {
 }
 
 .weya-card::after {
-  content: '';
+  content: "";
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(90deg, transparent, #34d399, #10b981, transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #34d399,
+    #10b981,
+    transparent
+  );
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.5s ease;
@@ -651,7 +679,6 @@ body::after {
   }
 }
 
-
 /* =========================================================
    PRE-CHAT FORM – EXISTING WEYA STYLE EXTENSION
    (Does NOT override brand colors or animations)
@@ -706,8 +733,7 @@ body::after {
   padding: 1.1rem;
   font-size: 0.9rem;
   letter-spacing: 0.12em;
-  box-shadow:
-    0 0 25px rgba(16, 185, 129, 0.35);
+  box-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
 }
 
 .weya-hero-text-side .weya-btn-aurora:hover {
@@ -717,7 +743,7 @@ body::after {
 }
 
 /* Error message styling – subtle, not aggressive */
-.weya-hero-text-side>div[style*="color: #ef4444"] {
+.weya-hero-text-side > div[style*="color: #ef4444"] {
   background: rgba(220, 38, 38, 0.12);
   border: 1px solid rgba(220, 38, 38, 0.3);
   padding: 0.75rem 1rem;
@@ -804,7 +830,7 @@ body::after {
 }
 
 /* Error mesajı formun parçası gibi */
-.weya-hero-text-side>div[style*="color: #ef4444"] {
+.weya-hero-text-side > div[style*="color: #ef4444"] {
   background: transparent;
   border: none;
   padding: 0;
@@ -830,13 +856,14 @@ body::after {
 
 /* Navbar daha “layered” hissetsin */
 .weya-navbar {
-  background: linear-gradient(180deg,
-      rgba(2, 11, 9, 0.85),
-      rgba(2, 11, 9, 0.65));
+  background: linear-gradient(
+    180deg,
+    rgba(2, 11, 9, 0.85),
+    rgba(2, 11, 9, 0.65)
+  );
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(52, 211, 153, 0.15);
-  box-shadow:
-    0 10px 30px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
 }
 
 /* Brand: daha sakin ama premium */
@@ -844,7 +871,9 @@ body::after {
   font-size: 1.9rem;
   letter-spacing: 0.08em;
   filter: drop-shadow(0 0 8px rgba(52, 211, 153, 0.35));
-  transition: transform 0.25s ease, filter 0.25s ease;
+  transition:
+    transform 0.25s ease,
+    filter 0.25s ease;
 }
 
 .weya-brand:hover {
@@ -871,10 +900,12 @@ body::after {
 .weya-nav-link::after {
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(90deg,
-      transparent,
-      var(--brand-primary),
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--brand-primary),
+    transparent
+  );
   opacity: 0.8;
 }
 
@@ -899,9 +930,11 @@ body::after {
 /* Mobile menu – daha temiz */
 @media (max-width: 1024px) {
   .weya-nav-menu {
-    background: linear-gradient(180deg,
-        rgba(2, 11, 9, 0.98),
-        rgba(2, 11, 9, 0.95));
+    background: linear-gradient(
+      180deg,
+      rgba(2, 11, 9, 0.98),
+      rgba(2, 11, 9, 0.95)
+    );
   }
 
   .weya-nav-link {
@@ -997,7 +1030,7 @@ body::after {
 }
 
 /* Error = inline validation like Braintrust */
-.weya-hero-text-side>div[style*="color: #ef4444"] {
+.weya-hero-text-side > div[style*="color: #ef4444"] {
   background: none;
   border: none;
   padding: 0;
@@ -1062,20 +1095,26 @@ body::after {
   left: -15%;
   width: 60%;
   height: 80%;
-  background: radial-gradient(circle,
-      rgba(52, 211, 153, 0.12),
-      transparent 70%);
+  background: radial-gradient(
+    circle,
+    rgba(52, 211, 153, 0.12),
+    transparent 70%
+  );
   filter: blur(80px);
-  z-index: 0;
+  z-index: -1;
+  pointer-events: none;
 }
 
 /* ---------- FORM = GLASS SURFACE ---------- */
 
 .weya-hero-text-side .weya-form-box {
   position: relative;
-  background: linear-gradient(180deg,
-      rgba(255, 255, 255, 0.06),
-      rgba(255, 255, 255, 0.015));
+  z-index: 10; /* Ensure form is above decorative elements */
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.015)
+  );
   border: 1px solid rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(14px);
   border-radius: 18px;
@@ -1122,10 +1161,12 @@ body::after {
   left: -30%;
   width: 60%;
   height: 200%;
-  background: linear-gradient(120deg,
-      transparent,
-      rgba(255, 255, 255, 0.35),
-      transparent);
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
   transform: rotate(12deg);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1164,8 +1205,7 @@ body::after {
 /* ---------- NAVBAR DEPTH ---------- */
 
 .weya-navbar {
-  box-shadow:
-    0 10px 40px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
 }
 
 /* ---------- SECTION TRANSITION FEEL ---------- */
@@ -1181,10 +1221,12 @@ body::after {
   left: 50%;
   width: 70%;
   height: 1px;
-  background: linear-gradient(90deg,
-      transparent,
-      rgba(255, 255, 255, 0.08),
-      transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
   transform: translateX(-50%);
 }
 
@@ -1195,7 +1237,6 @@ body::after {
     transform: none;
   }
 }
-
 
 .weya-hero-grid {
   max-width: 1200px;
@@ -1238,7 +1279,6 @@ body::after {
     gap: 2.5rem;
   }
 }
-
 
 /* =========================
    LAYOUT DENGE AYARLARI
@@ -1348,7 +1388,6 @@ body::after {
     padding: 48px 24px;
   }
 }
-
 
 /* avatar-styles.css */
 /* SADECE ŞEKİL – DÜZEN – BOYUT – HİYERARŞİ */
@@ -1725,7 +1764,6 @@ body::after {
   text-align: center;
 }
 
-
 /* ================================
    LAYOUT FIX — RENKLERİNE DOKUNMADAN
    ================================ */
@@ -1832,6 +1870,7 @@ body::after {
 /* Kart */
 .weya-form-box {
   position: relative;
+  z-index: 3; /* Above title/text z-index:2 */
   margin-top: -72px;
   /* başlığı kartın içine çeker */
   padding-top: 96px;
@@ -1872,7 +1911,7 @@ body::after {
   margin-bottom: 8px;
 }
 
-.weya-hero-left>.weya-hero-text {
+.weya-hero-left > .weya-hero-text {
   margin-bottom: 24px;
 }
 
@@ -1881,6 +1920,7 @@ body::after {
   margin-top: -12px;
   /* kritik nokta */
   padding-top: 32px;
+  z-index: 3; /* Must stay above title/text z-index:2 */
 }
 
 .weya-brand {

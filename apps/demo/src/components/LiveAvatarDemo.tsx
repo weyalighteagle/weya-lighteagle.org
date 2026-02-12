@@ -132,67 +132,128 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                   Yüz Yüze Görüşme Öncesi Weya ile Hazırlık Görüşmesi
                 </h1>
 
-                <p className="weya-hero-text" style={{ textAlign: "left" }}>Formu doldurun ve başlayın.</p>
+                <p className="weya-hero-text" style={{ textAlign: "left" }}>
+                  Formu doldurun ve başlayın.
+                </p>
 
                 {error && <div className="weya-error">{error}</div>}
 
-                <div className="weya-form-box">
-                  <div className="weya-form-row">
-                    <input
-                      className="weya-input"
-                      placeholder="Ad"
-                      value={firstName}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
-                    <input
-                      className="weya-input"
-                      placeholder="Soyad"
-                      value={lastName}
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </div>
-
-                  <input
-                    className="weya-input"
-                    placeholder="E-posta"
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  />
-
-                  <button
-                    className="weya-btn-aurora"
-                    disabled={isLoading}
-                    onClick={() => {
-                      if (!firstName || !lastName || !email) {
-                        setError("Lütfen tüm alanları doldurun.");
-                        return;
-                      }
-
-                      sessionStorage.setItem(
-                        "form_lead",
-                        JSON.stringify({
-                          firstName,
-                          lastName,
-                          email,
-                        })
-                      );
-
-                      router.push("/talk/weya-live");
-                    }}
+                <div
+                  className="weya-form-box"
+                  style={{ position: "relative", zIndex: 5 }}
+                >
+                  <form
+                    onSubmit={(e) => e.preventDefault()}
+                    style={{ position: "relative", zIndex: 5 }}
                   >
-                    GÖRÜŞMEYİ BAŞLAT
-                  </button>
+                    <div className="weya-form-row">
+                      <input
+                        id="firstName"
+                        name="firstName"
+                        type="text"
+                        autoComplete="given-name"
+                        className="weya-input"
+                        placeholder="Ad"
+                        value={firstName}
+                        onChange={(e) => setFirstName(e.target.value)}
+                        style={{
+                          position: "relative",
+                          zIndex: 5,
+                          pointerEvents: "auto",
+                        }}
+                      />
+                      <input
+                        id="lastName"
+                        name="lastName"
+                        type="text"
+                        autoComplete="family-name"
+                        className="weya-input"
+                        placeholder="Soyad"
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                        style={{
+                          position: "relative",
+                          zIndex: 5,
+                          pointerEvents: "auto",
+                        }}
+                      />
+                    </div>
+
+                    <input
+                      id="email"
+                      name="email"
+                      className="weya-input"
+                      placeholder="E-posta"
+                      type="email"
+                      autoComplete="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      style={{
+                        position: "relative",
+                        zIndex: 5,
+                        pointerEvents: "auto",
+                      }}
+                    />
+
+                    <button
+                      className="weya-btn-aurora"
+                      disabled={isLoading}
+                      style={{
+                        position: "relative",
+                        zIndex: 5,
+                        pointerEvents: "auto",
+                      }}
+                      onClick={() => {
+                        if (!firstName || !lastName || !email) {
+                          setError("Lütfen tüm alanları doldurun.");
+                          return;
+                        }
+
+                        sessionStorage.setItem(
+                          "form_lead",
+                          JSON.stringify({
+                            firstName,
+                            lastName,
+                            email,
+                          }),
+                        );
+
+                        router.push("/talk/weya-live");
+                      }}
+                    >
+                      GÖRÜŞMEYİ BAŞLAT
+                    </button>
+                  </form>
                 </div>
               </div>
 
               <div className="weya-hero-right">
                 <p className="weya-hero-text">
-                  Başvurusu değerlendirilen projeleri, yüz yüze görüşmeler öncesinde <strong>Weya</strong> ile kısa bir hazırlık görüşmesi yapmaya davet ediyoruz. <strong>Weya</strong>, dinleyen, öğrenen ve bağlantılar kuran yapay zekâ destekli bir sistemdir. Başvuruları değerlendirme kriterleri doğrultusunda ele alarak, projelerin güçlü yönlerini daha net ifade etmelerine ve etki odaklı anlatılarını güçlendirmelerine yardımcı olur.
+                  Başvurusu değerlendirilen projeleri, yüz yüze görüşmeler
+                  öncesinde <strong>Weya</strong> ile kısa bir hazırlık
+                  görüşmesi yapmaya davet ediyoruz. <strong>Weya</strong>,
+                  dinleyen, öğrenen ve bağlantılar kuran yapay zekâ destekli bir
+                  sistemdir. Başvuruları değerlendirme kriterleri doğrultusunda
+                  ele alarak, projelerin güçlü yönlerini daha net ifade
+                  etmelerine ve etki odaklı anlatılarını güçlendirmelerine
+                  yardımcı olur.
                 </p>
 
                 <p className="weya-hero-text">
-                  Bu görüşme yaklaşık <strong>15 dakika</strong> sürecek; Weya, başvuru değerlendirme kriterleri doğrultusunda size sorular yöneltecektir. Görüşmenin amacı, yüz yüze yapılacak değerlendirme toplantısına daha hazırlıklı girmenizi desteklemektir. Görüşme sonrasında, paylaşılan bilgiler doğrultusunda <strong>kısa bir değerlendirme ve geri bildirim raporu</strong> hazırlanacaktır. Bu rapor, projenizin <strong>değerlendirme kriterleri</strong> çerçevesinde güçlü yönlerini ve geliştirmeye açık alanlarını özetlemeyi amaçlar ve yüz yüze görüşmeye hazırlık sürecinizi destekleyici bir araç olarak kullanılacaktır.
+                  Bu görüşme yaklaşık <strong>15 dakika</strong> sürecek; Weya,
+                  başvuru değerlendirme kriterleri doğrultusunda size sorular
+                  yöneltecektir. Görüşmenin amacı, yüz yüze yapılacak
+                  değerlendirme toplantısına daha hazırlıklı girmenizi
+                  desteklemektir. Görüşme sonrasında, paylaşılan bilgiler
+                  doğrultusunda{" "}
+                  <strong>
+                    kısa bir değerlendirme ve geri bildirim raporu
+                  </strong>{" "}
+                  hazırlanacaktır. Bu rapor, projenizin{" "}
+                  <strong>değerlendirme kriterleri</strong> çerçevesinde güçlü
+                  yönlerini ve geliştirmeye açık alanlarını özetlemeyi amaçlar
+                  ve yüz yüze görüşmeye hazırlık sürecinizi destekleyici bir
+                  araç olarak kullanılacaktır.
                 </p>
               </div>
             </div>
@@ -203,7 +264,8 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
               <h2 className="weya-section-title">İletişim</h2>
 
               <p className="weya-hero-text">
-                Daha fazla bilgi almak veya görüşme dışında katılım sağlamak isterseniz bize şuradan ulaşabilirsiniz:
+                Daha fazla bilgi almak veya görüşme dışında katılım sağlamak
+                isterseniz bize şuradan ulaşabilirsiniz:
               </p>
 
               <p className="weya-hero-text">
