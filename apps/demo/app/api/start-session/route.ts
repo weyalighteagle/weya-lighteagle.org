@@ -89,32 +89,35 @@ export async function POST(request: Request) {
       );
     }
 
-    /* ---------------- DB ---------------- */
-
+    /* ---------------- DB (RESILIENT) ---------------- */
     const sessionId = data.data.session_id;
 
-    await supabase.from("chat_transcripts").insert({
-      session_id: sessionId,
-      sender: "user",
-      input_type: "session",
-      message: "__SESSION_META__",
-      client_timestamp: Date.now(),
-      user_name:
-        firstName || lastName
-          ? `${firstName || ""} ${lastName || ""}`.trim()
-          : null,
-      user_email: email || null,
-      language: resolvedLanguage,
-    });
+    try {
+      await supabase.from("chat_transcripts").insert({
+        session_id: sessionId,
+        sender: "user",
+        input_type: "session",
+        message: "__SESSION_META__",
+        client_timestamp: Date.now(),
+        user_name:
+          firstName || lastName
+            ? `${firstName || ""} ${lastName || ""}`.trim()
+            : null,
+        user_email: email || null,
+        language: resolvedLanguage,
+      });
+    } catch (dbErr) {
+      console.error("Database logging failed (non-blocking):", dbErr);
+    }
 
     return NextResponse.json({
       session_token: data.data.session_token,
       session_id: sessionId,
     });
   } catch (err) {
-    console.error(err);
+    console.error("Critical error in start-session:", err);
     return NextResponse.json(
-      { error: "Internal server error" },
+      { error: err instanceof Error ? err.message : "Internal server error" },
       { status: 500 },
     );
   }

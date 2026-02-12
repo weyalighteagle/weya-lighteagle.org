@@ -25,6 +25,19 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
   const LANGUAGE = "tr";
   // Persona gelince otomatik başlat
   useEffect(() => {
+    // Restore form data if it exists in sessionStorage
+    const savedData = sessionStorage.getItem("form_lead");
+    if (savedData) {
+      try {
+        const { firstName: f, lastName: l, email: e } = JSON.parse(savedData);
+        if (f) setFirstName(f);
+        if (l) setLastName(l);
+        if (e) setEmail(e);
+      } catch (err) {
+        console.error("Failed to parse saved form data:", err);
+      }
+    }
+
     if (
       persona &&
       !sessionToken &&

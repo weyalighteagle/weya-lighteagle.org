@@ -95,7 +95,7 @@ const LiveAvatarSessionComponent: React.FC<{
           ref={videoRef}
           autoPlay
           playsInline
-          muted={false}
+          muted={true}
           className="weya-video-element"
         />
         <button

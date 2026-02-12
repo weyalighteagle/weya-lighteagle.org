@@ -29,12 +29,11 @@ body {
   color: var(--text-main);
   overflow-x: hidden;
   background-color: var(--bg-deep);
-  background-image: radial-gradient(
-    circle at 50% 0%,
-    var(--bg-gradient) 0%,
-    var(--bg-deep) 60%
-  );
+  background-image: radial-gradient(circle at 50% 0%,
+      var(--bg-gradient) 0%,
+      var(--bg-deep) 60%);
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 body::before {
@@ -44,11 +43,9 @@ body::before {
   left: -10%;
   width: 60vw;
   height: 60vw;
-  background: radial-gradient(
-    circle,
-    rgba(52, 211, 153, 0.15) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(52, 211, 153, 0.15) 0%,
+      transparent 70%);
   filter: blur(100px);
   z-index: -2;
   animation: pulseGlow 10s infinite alternate;
@@ -62,11 +59,9 @@ body::after {
   right: -10%;
   width: 70vw;
   height: 70vw;
-  background: radial-gradient(
-    circle,
-    rgba(16, 185, 129, 0.1) 0%,
-    transparent 60%
-  );
+  background: radial-gradient(circle,
+      rgba(16, 185, 129, 0.1) 0%,
+      transparent 60%);
   filter: blur(120px);
   z-index: -2;
   animation: pulseGlow 15s infinite alternate-reverse;
@@ -103,6 +98,7 @@ body::after {
 
 .weya-app.mode-chat {
   height: 100vh;
+  height: 100dvh;
   overflow: hidden;
   background: black;
 }
@@ -174,6 +170,7 @@ body::after {
 .weya-section {
   width: 100%;
   min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -229,12 +226,10 @@ body::after {
   width: 120%;
   height: 80%;
   transform: translate(-50%, -50%);
-  background: radial-gradient(
-    circle,
-    rgba(234, 179, 8, 0.2) 0%,
-    rgba(52, 211, 153, 0.1) 50%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(234, 179, 8, 0.2) 0%,
+      rgba(52, 211, 153, 0.1) 50%,
+      transparent 70%);
   filter: blur(60px);
   z-index: 1;
   pointer-events: none;
@@ -437,13 +432,11 @@ body::after {
   left: 0;
   width: 100%;
   height: 3px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    #34d399,
-    #10b981,
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      #34d399,
+      #10b981,
+      transparent);
   transform: scaleX(0);
   transform-origin: center;
   transition: transform 0.5s ease;
@@ -487,6 +480,7 @@ body::after {
   left: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background: black;
   display: flex;
   justify-content: center;
@@ -590,6 +584,7 @@ body::after {
     left: 0;
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     background: rgba(2, 11, 9, 0.98);
     flex-direction: column;
     align-items: center;
@@ -743,7 +738,7 @@ body::after {
 }
 
 /* Error message styling – subtle, not aggressive */
-.weya-hero-text-side > div[style*="color: #ef4444"] {
+.weya-hero-text-side>div[style*="color: #ef4444"] {
   background: rgba(220, 38, 38, 0.12);
   border: 1px solid rgba(220, 38, 38, 0.3);
   padding: 0.75rem 1rem;
@@ -830,7 +825,7 @@ body::after {
 }
 
 /* Error mesajı formun parçası gibi */
-.weya-hero-text-side > div[style*="color: #ef4444"] {
+.weya-hero-text-side>div[style*="color: #ef4444"] {
   background: transparent;
   border: none;
   padding: 0;
@@ -856,11 +851,9 @@ body::after {
 
 /* Navbar daha “layered” hissetsin */
 .weya-navbar {
-  background: linear-gradient(
-    180deg,
-    rgba(2, 11, 9, 0.85),
-    rgba(2, 11, 9, 0.65)
-  );
+  background: linear-gradient(180deg,
+      rgba(2, 11, 9, 0.85),
+      rgba(2, 11, 9, 0.65));
   backdrop-filter: blur(18px);
   border-bottom: 1px solid rgba(52, 211, 153, 0.15);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
@@ -900,12 +893,10 @@ body::after {
 .weya-nav-link::after {
   height: 2px;
   border-radius: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    var(--brand-primary),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      var(--brand-primary),
+      transparent);
   opacity: 0.8;
 }
 
@@ -930,11 +921,9 @@ body::after {
 /* Mobile menu – daha temiz */
 @media (max-width: 1024px) {
   .weya-nav-menu {
-    background: linear-gradient(
-      180deg,
-      rgba(2, 11, 9, 0.98),
-      rgba(2, 11, 9, 0.95)
-    );
+    background: linear-gradient(180deg,
+        rgba(2, 11, 9, 0.98),
+        rgba(2, 11, 9, 0.95));
   }
 
   .weya-nav-link {
@@ -1030,7 +1019,7 @@ body::after {
 }
 
 /* Error = inline validation like Braintrust */
-.weya-hero-text-side > div[style*="color: #ef4444"] {
+.weya-hero-text-side>div[style*="color: #ef4444"] {
   background: none;
   border: none;
   padding: 0;
@@ -1095,11 +1084,9 @@ body::after {
   left: -15%;
   width: 60%;
   height: 80%;
-  background: radial-gradient(
-    circle,
-    rgba(52, 211, 153, 0.12),
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      rgba(52, 211, 153, 0.12),
+      transparent 70%);
   filter: blur(80px);
   z-index: -1;
   pointer-events: none;
@@ -1109,12 +1096,11 @@ body::after {
 
 .weya-hero-text-side .weya-form-box {
   position: relative;
-  z-index: 10; /* Ensure form is above decorative elements */
-  background: linear-gradient(
-    180deg,
-    rgba(255, 255, 255, 0.06),
-    rgba(255, 255, 255, 0.015)
-  );
+  z-index: 10;
+  /* Ensure form is above decorative elements */
+  background: linear-gradient(180deg,
+      rgba(255, 255, 255, 0.06),
+      rgba(255, 255, 255, 0.015));
   border: 1px solid rgba(255, 255, 255, 0.18);
   backdrop-filter: blur(14px);
   border-radius: 18px;
@@ -1161,12 +1147,10 @@ body::after {
   left: -30%;
   width: 60%;
   height: 200%;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(255, 255, 255, 0.35),
-    transparent
-  );
+  background: linear-gradient(120deg,
+      transparent,
+      rgba(255, 255, 255, 0.35),
+      transparent);
   transform: rotate(12deg);
   opacity: 0;
   transition: opacity 0.3s ease;
@@ -1221,12 +1205,10 @@ body::after {
   left: 50%;
   width: 70%;
   height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 255, 255, 0.08),
-    transparent
-  );
+  background: linear-gradient(90deg,
+      transparent,
+      rgba(255, 255, 255, 0.08),
+      transparent);
   transform: translateX(-50%);
 }
 
@@ -1536,6 +1518,7 @@ body::after {
 /* CHAT MODE */
 .mode-chat {
   height: 100vh;
+  height: 100dvh;
 }
 
 .weya-session-container {
@@ -1708,6 +1691,7 @@ body::after {
 /* CHAT MODE */
 .mode-chat {
   height: 100vh;
+  height: 100dvh;
 }
 
 .weya-session-container {
@@ -1865,11 +1849,9 @@ body::after {
 /* Kart */
 .weya-form-box {
   position: relative;
-  z-index: 3; /* Above title/text z-index:2 */
-  margin-top: -72px;
-  /* başlığı kartın içine çeker */
-  padding-top: 96px;
-  /* başlık için içeride yer açar */
+  z-index: 3;
+  margin-top: 24px;
+  padding-top: 32px;
 }
 
 /* Başlık kart içi hizalama */
@@ -1885,8 +1867,8 @@ body::after {
 /* Mobilde daha az bindir */
 @media (max-width: 640px) {
   .weya-form-box {
-    margin-top: -48px;
-    padding-top: 72px;
+    margin-top: 16px;
+    padding-top: 24px;
   }
 }
 
@@ -1906,16 +1888,15 @@ body::after {
   margin-bottom: 8px;
 }
 
-.weya-hero-left > .weya-hero-text {
+.weya-hero-left>.weya-hero-text {
   margin-bottom: 24px;
 }
 
-/* FORM kartı yukarı alınır */
+/* FORM kartı normal akışta */
 .weya-form-box {
-  margin-top: -12px;
-  /* kritik nokta */
-  padding-top: 32px;
-  z-index: 3; /* Must stay above title/text z-index:2 */
+  margin-top: 16px;
+  padding-top: 24px;
+  z-index: 3;
 }
 
 .weya-brand {
