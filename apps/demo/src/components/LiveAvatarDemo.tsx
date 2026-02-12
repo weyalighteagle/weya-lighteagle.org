@@ -140,12 +140,9 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
 
                 <div
                   className="weya-form-box"
-                  style={{ position: "relative", zIndex: 5 }}
+                  style={{ pointerEvents: "auto" }}
                 >
-                  <form
-                    onSubmit={(e) => e.preventDefault()}
-                    style={{ position: "relative", zIndex: 5 }}
-                  >
+                  <form onSubmit={(e) => e.preventDefault()}>
                     <div className="weya-form-row">
                       <input
                         id="firstName"
@@ -156,11 +153,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         placeholder="Ad"
                         value={firstName}
                         onChange={(e) => setFirstName(e.target.value)}
-                        style={{
-                          position: "relative",
-                          zIndex: 5,
-                          pointerEvents: "auto",
-                        }}
+                        style={{ pointerEvents: "auto" }}
                       />
                       <input
                         id="lastName"
@@ -171,11 +164,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                         placeholder="Soyad"
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
-                        style={{
-                          position: "relative",
-                          zIndex: 5,
-                          pointerEvents: "auto",
-                        }}
+                        style={{ pointerEvents: "auto" }}
                       />
                     </div>
 
@@ -188,21 +177,13 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
                       autoComplete="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      style={{
-                        position: "relative",
-                        zIndex: 5,
-                        pointerEvents: "auto",
-                      }}
+                      style={{ pointerEvents: "auto" }}
                     />
 
                     <button
                       className="weya-btn-aurora"
                       disabled={isLoading}
-                      style={{
-                        position: "relative",
-                        zIndex: 5,
-                        pointerEvents: "auto",
-                      }}
+                      style={{ pointerEvents: "auto" }}
                       onClick={() => {
                         if (!firstName || !lastName || !email) {
                           setError("Lütfen tüm alanları doldurun.");
