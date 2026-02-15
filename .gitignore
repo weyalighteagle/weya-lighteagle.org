@@ -1,0 +1,41 @@
+# dependencies
+node_modules
+
+# env files (secrets)
+.env
+.env.*
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# turbo
+.turbo/
+
+# build outputs
+dist/
+build/
+out/
+
+# next.js
+.next/
+
+# misc
+.DS_Store
+*.pem
+*.log
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# typescript
+*.tsbuildinfo
+
+# vercel
+.vercel
+
+# IDE
+.vscode/
+.idea/
