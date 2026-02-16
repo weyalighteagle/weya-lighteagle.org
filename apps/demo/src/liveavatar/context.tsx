@@ -53,7 +53,7 @@ export const LiveAvatarContext = createContext<LiveAvatarContextProps>({
   isUserTalking: false,
   isAvatarTalking: false,
   messages: [],
-  addMessage: () => {},
+  addMessage: () => { },
 });
 
 // 🎯 Provider props
@@ -61,12 +61,14 @@ type LiveAvatarContextProviderProps = {
   children: React.ReactNode;
   sessionAccessToken: string;
   session_id?: string | null;
+  saveMessageEndpoint?: string;
 };
 
 export const LiveAvatarContextProvider = ({
   children,
   sessionAccessToken,
   session_id,
+  saveMessageEndpoint = "/api/save-message",
 }: LiveAvatarContextProviderProps) => {
   const config = {
     voiceChat: true,
@@ -203,7 +205,7 @@ export const LiveAvatarContextProvider = ({
       const apiSender = sender === MessageSender.USER ? "user" : "avatar";
 
       try {
-        await fetch("/api/save-message", {
+        await fetch(saveMessageEndpoint, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -219,7 +221,7 @@ export const LiveAvatarContextProvider = ({
         console.error("Failed to save message:", err);
       }
     },
-    [sessionId],
+    [sessionId, saveMessageEndpoint],
   );
 
   // ----- auto transcript logging -----

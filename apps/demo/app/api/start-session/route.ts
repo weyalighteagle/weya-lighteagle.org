@@ -97,18 +97,23 @@ export async function POST(request: Request) {
 
     const sessionId = data.data.session_id;
 
-    await supabase.from("chat_transcripts").insert({
+    // Save session metadata to the appropriate table
+    const tableName = persona === "weya_internship" ? "internship_chat_history" : "chat_transcripts";
+
+    await supabase.from(tableName).insert({
       session_id: sessionId,
       sender: "user",
       input_type: "session",
       message: "__SESSION_META__",
       client_timestamp: Date.now(),
-      user_name:
-        firstName || lastName
-          ? `${firstName || ""} ${lastName || ""}`.trim()
-          : null,
-      user_email: email || null,
-      language: resolvedLanguage,
+      ...(tableName === "chat_transcripts" ? {
+        user_name:
+          firstName || lastName
+            ? `${firstName || ""} ${lastName || ""}`.trim()
+            : null,
+        user_email: email || null,
+        language: resolvedLanguage,
+      } : {}),
     });
 
     return NextResponse.json({

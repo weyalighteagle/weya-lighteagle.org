@@ -135,11 +135,13 @@ export const LiveAvatarSession: React.FC<{
   sessionAccessToken: string;
   session_id: string | null;
   onSessionStopped: () => void;
-}> = ({ sessionAccessToken, session_id, onSessionStopped }) => {
+  saveMessageEndpoint?: string;
+}> = ({ sessionAccessToken, session_id, onSessionStopped, saveMessageEndpoint }) => {
   return (
     <LiveAvatarContextProvider
       sessionAccessToken={sessionAccessToken}
       session_id={session_id}
+      saveMessageEndpoint={saveMessageEndpoint}
     >
       <LiveAvatarSessionComponent
         session_id={session_id}
