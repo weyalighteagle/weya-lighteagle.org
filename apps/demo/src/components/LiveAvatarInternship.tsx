@@ -22,7 +22,7 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
     const [email, setEmail] = useState("");
 
     const router = useRouter();
-    const LANGUAGE = "en";
+    const LANGUAGE = "tr";
 
     // Auto-start when persona is provided
     useEffect(() => {
@@ -107,7 +107,7 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
                     {error ? (
                         <div className="weya-error">{error}</div>
                     ) : (
-                        <div className="weya-loading">Connecting to Weya…</div>
+                        <div className="weya-loading">Weya'ya bağlanılıyor…</div>
                     )}
                 </div>
             ) : (
@@ -122,7 +122,7 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
                                 AI Weya
                             </a>
                             <a href="#contact" className="weya-nav-link">
-                                CONTACT
+                                İLETİŞİM
                             </a>
                         </div>
                     </nav>
@@ -131,10 +131,10 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
                         <div className="weya-hero-grid">
                             <div className="weya-hero-left" style={{ textAlign: "left" }}>
                                 <h1 className="weya-hero-title" style={{ textAlign: "left" }}>
-                                    Internship Application – Pre-Interview with Weya
+                                    Staj Başvurusu – Weya ile Ön Görüşme
                                 </h1>
 
-                                <p className="weya-hero-text" style={{ textAlign: "left" }}>Fill in the form and get started.</p>
+                                <p className="weya-hero-text" style={{ textAlign: "left" }}>Formu doldurun ve başlayın.</p>
 
                                 {error && <div className="weya-error">{error}</div>}
 
@@ -142,13 +142,13 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
                                     <div className="weya-form-row">
                                         <input
                                             className="weya-input"
-                                            placeholder="First Name"
+                                            placeholder="Ad"
                                             value={firstName}
                                             onChange={(e) => setFirstName(e.target.value)}
                                         />
                                         <input
                                             className="weya-input"
-                                            placeholder="Last Name"
+                                            placeholder="Soyad"
                                             value={lastName}
                                             onChange={(e) => setLastName(e.target.value)}
                                         />
@@ -156,7 +156,7 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
 
                                     <input
                                         className="weya-input"
-                                        placeholder="Email"
+                                        placeholder="E-posta"
                                         type="email"
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
@@ -167,7 +167,7 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
                                         disabled={isLoading}
                                         onClick={() => {
                                             if (!firstName || !lastName || !email) {
-                                                setError("Please fill in all fields.");
+                                                setError("Lütfen tüm alanları doldurun.");
                                                 return;
                                             }
 
@@ -183,26 +183,18 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
                                             router.push("/talk/weya-internship");
                                         }}
                                     >
-                                        START INTERVIEW
+                                        GÖRÜŞMEYİ BAŞLAT
                                     </button>
                                 </div>
                             </div>
 
                             <div className="weya-hero-right">
                                 <p className="weya-hero-text">
-                                    We invite internship candidates to have a brief preparatory conversation with <strong>Weya</strong> before
-                                    the face-to-face interview. <strong>Weya</strong> is an AI-powered system that listens, learns, and builds
-                                    connections. It helps candidates articulate their strengths and refine their impact-focused narratives
-                                    in line with the evaluation criteria.
+                                    Staj başvurusu yapan adayları, yüz yüze görüşmeler öncesinde <strong>Weya</strong> ile kısa bir hazırlık görüşmesi yapmaya davet ediyoruz. <strong>Weya</strong>, dinleyen, öğrenen ve bağlantılar kuran yapay zekâ destekli bir sistemdir. Adayların güçlü yönlerini daha net ifade etmelerine ve etki odaklı anlatılarını güçlendirmelerine yardımcı olur.
                                 </p>
 
                                 <p className="weya-hero-text">
-                                    This conversation will take approximately <strong>15 minutes</strong>; Weya will ask you questions based on
-                                    the application evaluation criteria. The aim is to help you prepare more effectively for the in-person
-                                    assessment meeting. After the conversation, a <strong>brief evaluation and feedback report</strong> will
-                                    be prepared based on the information shared. This report aims to summarize your project&apos;s strengths
-                                    and areas for improvement within the framework of the <strong>evaluation criteria</strong>, and will
-                                    serve as a supportive tool in your preparation for the face-to-face interview.
+                                    Bu görüşme yaklaşık <strong>15 dakika</strong> sürecek; Weya, değerlendirme kriterleri doğrultusunda size sorular yöneltecektir. Görüşmenin amacı, yüz yüze yapılacak değerlendirme toplantısına daha hazırlıklı girmenizi desteklemektir. Görüşme sonrasında, paylaşılan bilgiler doğrultusunda <strong>kısa bir değerlendirme ve geri bildirim raporu</strong> hazırlanacaktır. Bu rapor, <strong>değerlendirme kriterleri</strong> çerçevesinde güçlü yönlerinizi ve geliştirmeye açık alanlarınızı özetlemeyi amaçlar ve yüz yüze görüşmeye hazırlık sürecinizi destekleyici bir araç olarak kullanılacaktır.
                                 </p>
                             </div>
                         </div>
@@ -210,10 +202,10 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
 
                     <section id="contact" className="weya-section">
                         <div className="weya-content-narrow">
-                            <h2 className="weya-section-title">Contact</h2>
+                            <h2 className="weya-section-title">İletişim</h2>
 
                             <p className="weya-hero-text">
-                                For more information or to participate outside of the interview, please reach out to us at:
+                                Daha fazla bilgi almak veya görüşme dışında katılım sağlamak isterseniz bize şuradan ulaşabilirsiniz:
                             </p>
 
                             <p className="weya-hero-text">
@@ -221,7 +213,7 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
                             </p>
 
                             <p className="weya-hero-text" style={{ opacity: 0.6 }}>
-                                © 2025 Light Eagle. All rights reserved.
+                                © 2025 Light Eagle. Tüm hakları saklıdır.
                             </p>
                         </div>
                     </section>
