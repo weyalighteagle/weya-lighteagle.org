@@ -52,6 +52,11 @@ export const CONTEXT_ID_LIGHT_EAGLE =
   process.env.NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID_LIGHT_EAGLE ||
   "";
 
+export const CONTEXT_ID_WEYA_INTERNSHIP =
+  process.env.LIVEAVATAR_CONTEXT_ID_WEYA_INTERNSHIP ||
+  process.env.NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID_WEYA_INTERNSHIP ||
+  "";
+
 /* ================= LANGUAGE ================= */
 
 // ❌ LANG YOK
