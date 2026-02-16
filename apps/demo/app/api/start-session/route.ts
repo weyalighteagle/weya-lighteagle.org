@@ -66,6 +66,10 @@ export async function POST(request: Request) {
 
     /* ---------------- API CALL ---------------- */
 
+    console.log(`[start-session] persona=${persona}, contextId=${selectedContextId ? selectedContextId.substring(0, 8) + '...' : 'EMPTY'}, language=${resolvedLanguage}`);
+    console.log(`[start-session] AVATAR_ID=${AVATAR_ID ? 'set' : 'EMPTY'}, VOICE_ID=${VOICE_ID ? 'set' : 'EMPTY'}, API_KEY=${API_KEY ? 'set' : 'EMPTY'}`);
+    console.log(`[start-session] BACKEND_URL=${LIVEAVATAR_BACKEND_API_URL}`);
+
     const res = await fetch(`${LIVEAVATAR_BACKEND_API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
@@ -85,6 +89,9 @@ export async function POST(request: Request) {
     });
 
     const data = await res.json();
+
+    console.log(`[start-session] HeyGen response status: ${res.status}`);
+    console.log(`[start-session] HeyGen response:`, JSON.stringify(data).substring(0, 500));
 
     if (!res.ok) {
       return NextResponse.json(

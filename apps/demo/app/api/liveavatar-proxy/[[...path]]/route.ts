@@ -58,6 +58,9 @@ async function proxyRequest(
         const data = await response.json().catch(() => ({}));
 
         console.log(`[LiveAvatar Proxy] Response status: ${response.status}`);
+        console.log(`[LiveAvatar Proxy] Response body:`, JSON.stringify(data));
+        console.log(`[LiveAvatar Proxy] Backend URL used: ${LIVEAVATAR_BACKEND_API_URL}`);
+        console.log(`[LiveAvatar Proxy] Auth header present: ${!!authHeader}`);
 
         return NextResponse.json(data, { status: response.status });
     } catch (error) {
