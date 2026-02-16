@@ -5,10 +5,27 @@ export const API_KEY =
   process.env.NEXT_PUBLIC_LIVEAVATAR_API_KEY ||
   "";
 
-export const API_URL =
+/**
+ * LIVEAVATAR_BACKEND_API_URL: The actual LiveAvatar API endpoint
+ * Used by backend routes to make server-side requests to LiveAvatar
+ * Example: https://api.liveavatar.com
+ */
+export const LIVEAVATAR_BACKEND_API_URL =
   process.env.LIVEAVATAR_API_URL ||
   process.env.NEXT_PUBLIC_LIVEAVATAR_API_URL ||
-  "";
+  "https://api.liveavatar.com";
+
+/**
+ * API_URL: The frontend SDK API endpoint (should be your backend proxy)
+ * Used by the LiveAvatar SDK in the browser to avoid CORS issues
+ * Development: http://localhost:3099/api/liveavatar-proxy
+ * Production: https://www.weya-lighteagle.org/api/liveavatar-proxy
+ */
+export const API_URL =
+  process.env.NEXT_PUBLIC_LIVEAVATAR_SDK_API_URL ||
+  (typeof window !== "undefined"
+    ? `${window.location.origin}/api/liveavatar-proxy`
+    : "/api/liveavatar-proxy");
 
 export const AVATAR_ID =
   process.env.LIVEAVATAR_AVATAR_ID ||

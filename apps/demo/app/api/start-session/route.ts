@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import {
   API_KEY,
-  API_URL,
+  LIVEAVATAR_BACKEND_API_URL,
   AVATAR_ID,
   VOICE_ID,
   CONTEXT_ID_WEYA_LIVE,
@@ -66,7 +66,7 @@ export async function POST(request: Request) {
 
     /* ---------------- API CALL ---------------- */
 
-    const res = await fetch(`${API_URL}/v1/sessions/token`, {
+    const res = await fetch(`${LIVEAVATAR_BACKEND_API_URL}/v1/sessions/token`, {
       method: "POST",
       headers: {
         "X-Api-Key": API_KEY,
