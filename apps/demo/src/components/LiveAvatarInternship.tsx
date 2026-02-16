@@ -22,7 +22,7 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
     const [email, setEmail] = useState("");
 
     const router = useRouter();
-    const LANGUAGE = "en-US";
+    const LANGUAGE = "en";
 
     // Auto-start when persona is provided
     useEffect(() => {
