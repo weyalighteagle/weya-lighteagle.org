@@ -10,6 +10,7 @@ import {
   CONTEXT_ID_FUND_BUILDERS,
   CONTEXT_ID_IMPACT_STARTUPS,
   CONTEXT_ID_LIGHT_EAGLE,
+  CONTEXT_ID_WEYA_INTERNSHIP,
 } from "../secrets";
 import { supabase } from "../../../src/utils/supabase";
 
@@ -46,6 +47,9 @@ export async function POST(request: Request) {
         break;
       case "light_eagle":
         selectedContextId = CONTEXT_ID_LIGHT_EAGLE;
+        break;
+      case "weya_internship":
+        selectedContextId = CONTEXT_ID_WEYA_INTERNSHIP;
         break;
       default:
         return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
