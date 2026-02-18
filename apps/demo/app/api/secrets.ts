@@ -74,6 +74,12 @@ export const CONTEXT_ID_WEYA_INTERNSHIP =
   process.env.NEXT_PUBLIC_LIVEAVATAR_CONTEXT_ID_WEYA_INTERNSHIP ||
   "";
 
+export const FBN_AVATAR_ID =
+  process.env.LIVEAVATAR_FBN_AVATAR_ID || "";
+
+export const CONTEXT_ID_FBN_IMPACT =
+  process.env.LIVEAVATAR_CONTEXT_ID_FBN_IMPACT || "";
+
 /* ================= LANGUAGE ================= */
 
 // ❌ LANG YOK

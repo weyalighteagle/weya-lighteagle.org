@@ -11,6 +11,8 @@ import {
   CONTEXT_ID_IMPACT_STARTUPS,
   CONTEXT_ID_LIGHT_EAGLE,
   CONTEXT_ID_WEYA_INTERNSHIP,
+  FBN_AVATAR_ID,
+  CONTEXT_ID_FBN_IMPACT,
 } from "../secrets";
 import { supabase } from "../../../src/utils/supabase";
 
@@ -51,6 +53,9 @@ export async function POST(request: Request) {
       case "weya_internship":
         selectedContextId = CONTEXT_ID_WEYA_INTERNSHIP;
         break;
+      case "fbn_impact":
+        selectedContextId = CONTEXT_ID_FBN_IMPACT;
+        break;
       default:
         return NextResponse.json({ error: "Invalid persona" }, { status: 400 });
     }
@@ -78,9 +83,9 @@ export async function POST(request: Request) {
       },
       body: JSON.stringify({
         mode: "FULL",
-        avatar_id: AVATAR_ID,
+        avatar_id: persona === "fbn_impact" ? FBN_AVATAR_ID : AVATAR_ID,
         avatar_persona: {
-          avatar_id: AVATAR_ID,
+          avatar_id: persona === "fbn_impact" ? FBN_AVATAR_ID : AVATAR_ID,
           voice_id: VOICE_ID,
           context_id: selectedContextId,
           language: resolvedLanguage,
@@ -105,23 +110,33 @@ export async function POST(request: Request) {
     const sessionId = data.data.session_id;
 
     // Save session metadata to the appropriate table
-    const tableName = persona === "weya_internship" ? "internship_chat_history" : "chat_transcripts";
+    let tableName: string;
+    if (persona === "weya_internship") {
+      tableName = "internship_chat_history";
+    } else if (persona === "fbn_impact") {
+      tableName = "fbnimpact_chat_history";
+    } else {
+      tableName = "chat_transcripts";
+    }
 
-    await supabase.from(tableName).insert({
+    const insertData: Record<string, unknown> = {
       session_id: sessionId,
       sender: "user",
       input_type: "session",
       message: "__SESSION_META__",
       client_timestamp: Date.now(),
-      ...(tableName === "chat_transcripts" ? {
-        user_name:
-          firstName || lastName
-            ? `${firstName || ""} ${lastName || ""}`.trim()
-            : null,
-        user_email: email || null,
-        language: resolvedLanguage,
-      } : {}),
-    });
+    };
+
+    // Add user info for tables that support it
+    if (tableName === "chat_transcripts" || tableName === "fbnimpact_chat_history") {
+      insertData.user_name = firstName || lastName
+        ? `${firstName || ""} ${lastName || ""}`.trim()
+        : null;
+      insertData.user_email = email || null;
+      insertData.language = resolvedLanguage;
+    }
+
+    await supabase.from(tableName).insert(insertData);
 
     return NextResponse.json({
       session_token: data.data.session_token,
