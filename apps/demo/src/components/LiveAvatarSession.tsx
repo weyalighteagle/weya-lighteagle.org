@@ -13,7 +13,8 @@ import "./avatar-styles.css";
 const LiveAvatarSessionComponent: React.FC<{
   session_id: string | null;
   onSessionStopped: () => void;
-}> = ({ session_id, onSessionStopped }) => {
+  formLeadEndpoint?: string;
+}> = ({ session_id, onSessionStopped, formLeadEndpoint }) => {
   const [message, setMessage] = useState("");
   const {
     sessionState,
@@ -56,10 +57,14 @@ const LiveAvatarSessionComponent: React.FC<{
     const raw = sessionStorage.getItem("form_lead");
     if (!raw) return;
 
+    const submittedKey = `form_lead_submitted_${session_id}`;
+    if (sessionStorage.getItem(submittedKey)) return;
+
     try {
       const { firstName, lastName, email } = JSON.parse(raw);
 
-      fetch("/api/form-lead", {
+      const endpoint = formLeadEndpoint || "/api/form-lead";
+      fetch(endpoint, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -69,10 +74,12 @@ const LiveAvatarSessionComponent: React.FC<{
           session_id, // ✅ EKLENDİ
         }),
       }).catch(() => { });
-    } finally {
-      sessionStorage.removeItem("form_lead");
+
+      sessionStorage.setItem(submittedKey, "true");
+    } catch (e) {
+      console.error(e);
     }
-  }, [session_id]);
+  }, [session_id, formLeadEndpoint]);
 
   // ✅ Mesaj gönder
   const sendAndLog = async () => {
@@ -136,7 +143,8 @@ export const LiveAvatarSession: React.FC<{
   session_id: string | null;
   onSessionStopped: () => void;
   saveMessageEndpoint?: string;
-}> = ({ sessionAccessToken, session_id, onSessionStopped, saveMessageEndpoint }) => {
+  formLeadEndpoint?: string;
+}> = ({ sessionAccessToken, session_id, onSessionStopped, saveMessageEndpoint, formLeadEndpoint }) => {
   return (
     <LiveAvatarContextProvider
       sessionAccessToken={sessionAccessToken}
@@ -146,6 +154,7 @@ export const LiveAvatarSession: React.FC<{
       <LiveAvatarSessionComponent
         session_id={session_id}
         onSessionStopped={onSessionStopped}
+        formLeadEndpoint={formLeadEndpoint}
       />
     </LiveAvatarContextProvider>
   );

@@ -1,0 +1,11 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/admin/knowledge/page": "/admin/knowledge",
+  "/api/admin/knowledge/route": "/api/admin/knowledge",
+  "/api/chat/route": "/api/chat",
+  "/api/stt/route": "/api/stt",
+  "/api/tts/route": "/api/tts",
+  "/interview/page": "/interview",
+  "/page": "/"
+}

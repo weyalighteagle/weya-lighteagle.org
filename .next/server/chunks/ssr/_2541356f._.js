@@ -1,0 +1,3 @@
+module.exports=[64781,(a,b,c)=>{"use strict";b.exports=a.r(75411).vendored["react-ssr"].ReactJsxRuntime},19028,a=>{"use strict";a.s(["personas",0,[{id:"family_offices",label:"Family offices and LPs – seeking to place capital with clarity, timing, and systemic leverage"},{id:"fund_builders",label:"Fund builders and conveners – seeking to scale trust, alignment, and momentum"},{id:"impact_startups",label:"Impact startups – seeking capital that understands their context"},{id:"light_eagle",label:"Learn about Light Eagle"}]])}];
+
+//# sourceMappingURL=_2541356f._.js.map

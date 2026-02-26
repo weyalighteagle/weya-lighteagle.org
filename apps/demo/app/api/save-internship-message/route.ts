@@ -13,6 +13,9 @@ export async function POST(request: Request) {
             timestamp,
             session_id,
             input_type,
+            first_name,
+            last_name,
+            email,
         } = body;
 
         if (!sender || !message || !session_id) {
@@ -31,6 +34,9 @@ export async function POST(request: Request) {
             message,
             input_type: input_type || "text",
             client_timestamp: finalTimestamp,
+            first_name: first_name ?? null,
+            last_name: last_name ?? null,
+            email: email ?? null,
         });
 
         if (error) {

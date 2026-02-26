@@ -1,0 +1,230 @@
+module.exports = [
+"[externals]/next/dist/compiled/next-server/app-route-turbo.runtime.dev.js [external] (next/dist/compiled/next-server/app-route-turbo.runtime.dev.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/compiled/next-server/app-route-turbo.runtime.dev.js", () => require("next/dist/compiled/next-server/app-route-turbo.runtime.dev.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/compiled/@opentelemetry/api [external] (next/dist/compiled/@opentelemetry/api, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/compiled/@opentelemetry/api", () => require("next/dist/compiled/@opentelemetry/api"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/compiled/next-server/app-page-turbo.runtime.dev.js [external] (next/dist/compiled/next-server/app-page-turbo.runtime.dev.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/compiled/next-server/app-page-turbo.runtime.dev.js", () => require("next/dist/compiled/next-server/app-page-turbo.runtime.dev.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/server/app-render/work-unit-async-storage.external.js [external] (next/dist/server/app-render/work-unit-async-storage.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/server/app-render/work-unit-async-storage.external.js", () => require("next/dist/server/app-render/work-unit-async-storage.external.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/server/app-render/work-async-storage.external.js [external] (next/dist/server/app-render/work-async-storage.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/server/app-render/work-async-storage.external.js", () => require("next/dist/server/app-render/work-async-storage.external.js"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/shared/lib/no-fallback-error.external.js [external] (next/dist/shared/lib/no-fallback-error.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/shared/lib/no-fallback-error.external.js", () => require("next/dist/shared/lib/no-fallback-error.external.js"));
+
+module.exports = mod;
+}),
+"[externals]/fs/promises [external] (fs/promises, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("fs/promises", () => require("fs/promises"));
+
+module.exports = mod;
+}),
+"[externals]/path [external] (path, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}),
+"[externals]/next/dist/server/app-render/after-task-async-storage.external.js [external] (next/dist/server/app-render/after-task-async-storage.external.js, cjs)", ((__turbopack_context__, module, exports) => {
+
+const mod = __turbopack_context__.x("next/dist/server/app-render/after-task-async-storage.external.js", () => require("next/dist/server/app-render/after-task-async-storage.external.js"));
+
+module.exports = mod;
+}),
+"[project]/app/api/chat/prompts.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "basePrompts",
+    ()=>basePrompts
+]);
+const VOICE_RULES = `
+RESPONSE FORMATTING RULES (STRICT):
+- You are a VOICE-FIRST assistant. Users will HEAR your response, not read it.
+- Use natural, conversational spoken English.
+- Keep sentences short and punchy.
+- NO Markdown, NO bold, NO italics, NO bullet points (unless asking to list).
+- NO emojis.
+- NO internal system references or "As an AI".
+- If the Knowledge Base has the answer, USE IT. It is the SINGLE SOURCE OF TRUTH.
+- If the answer is not in the Knowledge Base, clearly state you don't know. DO NOT HALLUCINATE.
+`;
+const basePrompts = {
+    family_offices: `You are conducting a thoughtful interview with a representative of a family office or LP. ${VOICE_RULES} Ask clear, strategic follow-up questions about capital allocation, timing, and systemic leverage.`,
+    fund_builders: `You are interviewing a fund builder or convener. ${VOICE_RULES} Ask about trust, alignment between stakeholders, and how they scale momentum.`,
+    impact_startups: `You are interviewing an impact startup founder. ${VOICE_RULES} Ask about their mission, business model, and how capital can understand their context.`,
+    light_eagle: `You are explaining Light Eagle. ${VOICE_RULES} Answer questions clearly and invite curiosity. Be calm and informative.`
+};
+}),
+"[project]/app/api/chat/route.ts [app-route] (ecmascript)", ((__turbopack_context__) => {
+"use strict";
+
+__turbopack_context__.s([
+    "POST",
+    ()=>POST
+]);
+var __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/fs/promises [external] (fs/promises, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/path [external] (path, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/next@16.0.10_react-dom@19.2.0_react@19.2.0__react@19.2.0/node_modules/next/server.js [app-route] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$openai$40$6$2e$15$2e$0_ws$40$8$2e$18$2e$3_zod$40$3$2e$25$2e$76$2f$node_modules$2f$openai$2f$index$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$locals$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/openai@6.15.0_ws@8.18.3_zod@3.25.76/node_modules/openai/index.mjs [app-route] (ecmascript) <locals>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$openai$40$6$2e$15$2e$0_ws$40$8$2e$18$2e$3_zod$40$3$2e$25$2e$76$2f$node_modules$2f$openai$2f$client$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__OpenAI__as__default$3e$__ = __turbopack_context__.i("[project]/node_modules/.pnpm/openai@6.15.0_ws@8.18.3_zod@3.25.76/node_modules/openai/client.mjs [app-route] (ecmascript) <export OpenAI as default>");
+var __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$api$2f$chat$2f$prompts$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/app/api/chat/prompts.ts [app-route] (ecmascript)");
+;
+;
+;
+;
+;
+// Initialize OpenAI client
+const openai = new __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$openai$40$6$2e$15$2e$0_ws$40$8$2e$18$2e$3_zod$40$3$2e$25$2e$76$2f$node_modules$2f$openai$2f$client$2e$mjs__$5b$app$2d$route$5d$__$28$ecmascript$29$__$3c$export__OpenAI__as__default$3e$__["default"]({
+    apiKey: process.env.OPENAI_API_KEY
+});
+async function POST(request) {
+    try {
+        const startTime = Date.now();
+        const body = await request.json();
+        const { personaId, sessionId, userMessage, messages } = body;
+        // Determine the actual message to send (userMessage or last from messages)
+        const currentMessage = userMessage || (messages && messages.length > 0 ? messages[messages.length - 1].content : "");
+        if (!currentMessage) {
+            return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+                error: "Missing userMessage"
+            }, {
+                status: 400
+            });
+        }
+        // Load Knowledge Base
+        let knowledgeContext = "";
+        let targetPersonaId = personaId || "impact_startups";
+        try {
+            // 1. Try Supabase
+            const { supabase } = await __turbopack_context__.A("[project]/lib/supabase.ts [app-route] (ecmascript, async loader)");
+            const { data } = await supabase.from("weya_voicechat_kb").select("content").eq("persona_id", targetPersonaId).single();
+            if (data && data.content) {
+                knowledgeContext = data.content;
+            } else {
+                throw new Error("No data in Supabase");
+            }
+        } catch (dbError) {
+            console.warn(`Knowledge not found in DB for ${targetPersonaId}, falling back to file.`);
+            // 2. Fallback to file
+            try {
+                const knowledgePath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "data", "knowledge", `${targetPersonaId}.md`);
+                knowledgeContext = await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["readFile"])(knowledgePath, "utf-8");
+            } catch (err) {
+                console.warn(`Could not load knowledge file, using default fallback.`);
+                try {
+                    const defaultPath = __TURBOPACK__imported__module__$5b$externals$5d2f$path__$5b$external$5d$__$28$path$2c$__cjs$29$__["default"].join(process.cwd(), "data", "knowledge", "impact_startups.md");
+                    knowledgeContext = await (0, __TURBOPACK__imported__module__$5b$externals$5d2f$fs$2f$promises__$5b$external$5d$__$28$fs$2f$promises$2c$__cjs$29$__["readFile"])(defaultPath, "utf-8");
+                } catch (fallbackErr) {
+                    knowledgeContext = "";
+                }
+            }
+        }
+        // Construct System Prompt
+        const basePrompt = __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$api$2f$chat$2f$prompts$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["basePrompts"][targetPersonaId] || __TURBOPACK__imported__module__$5b$project$5d2f$app$2f$api$2f$chat$2f$prompts$2e$ts__$5b$app$2d$route$5d$__$28$ecmascript$29$__["basePrompts"]["impact_startups"];
+        const systemPrompt = `${basePrompt}\n\n--- KNOWLEDGE BASE (persona-specific, authoritative) ---\n${knowledgeContext}\n--- END KNOWLEDGE BASE ---\n`;
+        // Call OpenAI API
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o-mini",
+            messages: [
+                {
+                    role: "system",
+                    content: systemPrompt
+                },
+                ...messages ? messages.map((m)=>({
+                        role: m.role,
+                        content: m.content
+                    })) : [],
+                ...!messages || messages.length === 0 || messages[messages.length - 1].content !== currentMessage ? [
+                    {
+                        role: "user",
+                        content: currentMessage
+                    }
+                ] : []
+            ],
+            temperature: 0.7
+        });
+        const assistantText = completion.choices[0].message.content || "I'm sorry, I couldn't generate a response.";
+        // --- LOGGING TO SUPABASE ---
+        const endTime = Date.now();
+        const latencyMs = endTime - startTime;
+        try {
+            const { supabase } = await __turbopack_context__.A("[project]/lib/supabase.ts [app-route] (ecmascript, async loader)");
+            const { userData, sessionId, mode } = body // Extract mode
+            ;
+            const metadata = {
+                mode: mode || "text",
+                tts_provider: "ElevenLabs",
+                voice_id: process.env.ELEVENLABS_VOICE_ID || "unknown",
+                latency_ms: latencyMs,
+                // KB IDs are deeper to extract, but we can log that we used Supabase or File
+                kb_source: knowledgeContext ? "Supabase/File" : "None"
+            };
+            // Log User Message
+            await supabase.from("voice_chat_logs").insert({
+                session_id: sessionId || "unknown",
+                persona_id: targetPersonaId,
+                user_email: userData?.email || "anonymous",
+                user_name: ((userData?.firstName || "") + " " + (userData?.lastName || "")).trim(),
+                role: "user",
+                content: currentMessage,
+                metadata: {
+                    ...metadata,
+                    role: "user"
+                }
+            });
+            // Log Assistant Message
+            await supabase.from("voice_chat_logs").insert({
+                session_id: sessionId || "unknown",
+                persona_id: targetPersonaId,
+                user_email: userData?.email || "anonymous",
+                user_name: ((userData?.firstName || "") + " " + (userData?.lastName || "")).trim(),
+                role: "assistant",
+                content: assistantText,
+                metadata: {
+                    ...metadata,
+                    role: "assistant"
+                }
+            });
+        } catch (logError) {
+            console.error("Failed to log chat to Supabase:", logError);
+        // Don't block the response if logging fails
+        }
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            assistantText: assistantText
+        });
+    } catch (error) {
+        console.error("Error in chat route:", error);
+        return __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f2e$pnpm$2f$next$40$16$2e$0$2e$10_react$2d$dom$40$19$2e$2$2e$0_react$40$19$2e$2$2e$0_$5f$react$40$19$2e$2$2e$0$2f$node_modules$2f$next$2f$server$2e$js__$5b$app$2d$route$5d$__$28$ecmascript$29$__["NextResponse"].json({
+            error: error.message || "Internal Server Error"
+        }, {
+            status: 500
+        });
+    }
+}
+}),
+];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__f6c8fe70._.js.map

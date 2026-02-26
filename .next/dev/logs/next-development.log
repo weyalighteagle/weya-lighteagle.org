@@ -1,0 +1,1347 @@
+[00:00:02.071] Server  LOG      ✓ Ready in 1636ms
+[00:00:10.445] Server  LOG      ○ Compiling / ...
+[00:00:16.610] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:16.756] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:16.756] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:16.756] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766670571642}
+[00:17:51.091] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:17:51.221] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:17:51.221] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:17:51.221] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766671626164}
+[00:18:42.453] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:18:42.453] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:18:42.453] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:18:42.453] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766671675370}
+[00:18:45.268] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:18:45.377] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:18:45.377] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:18:45.377] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766671680320}
+[00:18:53.875] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/interview color: rgb(120, 120, 120) color: inherit {"dp":"/interview","o":"http://localhost:3000/interview","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766671688800}
+[00:19:06.557] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:19:06.698] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:19:06.698] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/interview","route":"/interview"}
+[00:19:06.698] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/interview color: rgb(120, 120, 120) color: inherit {"dp":"/interview","o":"http://localhost:3000/interview","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766671701641}
+[00:19:57.374] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:19:57.374] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:19:57.374] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:19:57.374] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766671750731}
+[00:20:10.343] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/interview color: rgb(120, 120, 120) color: inherit {"dp":"/interview","o":"http://localhost:3000/interview","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766671765268}
+[00:20:24.800] Browser LOG     Recognition ended
+[00:20:24.800] Browser LOG     Recognition started
+[00:20:25.306] Browser ERROR   Speech error aborted
+[00:20:25.306] Browser LOG     Recognition started
+[00:20:25.306] Browser LOG     Recognition ended
+[00:20:25.813] Browser ERROR   Speech error aborted
+[00:20:25.813] Browser LOG     Recognition started
+[00:20:25.813] Browser LOG     Recognition ended
+[00:20:26.316] Browser ERROR   Speech error aborted
+[00:20:26.316] Browser LOG     Recognition ended
+[00:20:26.316] Browser LOG     Recognition started
+[00:20:26.833] Browser ERROR   Speech error aborted
+[00:20:26.833] Browser LOG     Recognition ended
+[00:20:26.833] Browser LOG     Recognition started
+[00:20:27.337] Browser ERROR   Speech error aborted
+[00:20:27.337] Browser LOG     Recognition ended
+[00:20:27.337] Browser LOG     Recognition started
+[00:20:27.834] Browser ERROR   Speech error aborted
+[00:20:27.834] Browser LOG     Recognition ended
+[00:20:27.834] Browser LOG     Recognition started
+[00:20:28.329] Browser ERROR   Speech error aborted
+[00:20:28.329] Browser LOG     Recognition ended
+[00:20:28.329] Browser LOG     Recognition started
+[00:20:28.841] Browser ERROR   Speech error aborted
+[00:20:28.841] Browser LOG     Recognition ended
+[00:20:28.841] Browser LOG     Recognition started
+[00:20:29.343] Browser ERROR   Speech error aborted
+[00:20:29.343] Browser LOG     Recognition ended
+[00:20:29.343] Browser LOG     Recognition started
+[00:20:29.846] Browser ERROR   Speech error aborted
+[00:20:29.846] Browser LOG     Recognition ended
+[00:20:29.846] Browser LOG     Recognition started
+[00:20:30.349] Browser ERROR   Speech error aborted
+[00:20:30.349] Browser LOG     Recognition ended
+[00:20:30.349] Browser LOG     Recognition started
+[00:20:30.845] Browser ERROR   Speech error aborted
+[00:20:30.845] Browser LOG     Recognition ended
+[00:20:30.845] Browser LOG     Recognition started
+[00:20:31.355] Browser ERROR   Speech error aborted
+[00:20:31.355] Browser LOG     Recognition ended
+[00:20:31.355] Browser LOG     Recognition started
+[00:20:31.862] Browser ERROR   Speech error aborted
+[00:20:31.862] Browser LOG     Recognition ended
+[00:20:31.862] Browser LOG     Recognition started
+[00:20:32.361] Browser ERROR   Speech error aborted
+[00:20:32.361] Browser LOG     Recognition ended
+[00:20:32.361] Browser LOG     Recognition started
+[00:20:32.867] Browser ERROR   Speech error aborted
+[00:20:32.867] Browser LOG     Recognition ended
+[00:20:32.867] Browser LOG     Recognition started
+[00:20:33.365] Browser ERROR   Speech error aborted
+[00:20:33.365] Browser LOG     Recognition ended
+[00:20:33.365] Browser LOG     Recognition started
+[00:20:33.866] Browser ERROR   Speech error aborted
+[00:20:33.866] Browser LOG     Recognition ended
+[00:20:33.866] Browser LOG     Recognition started
+[00:20:34.364] Browser ERROR   Speech error aborted
+[00:20:34.364] Browser LOG     Recognition started
+[00:20:34.364] Browser LOG     Recognition ended
+[00:20:34.870] Browser ERROR   Speech error aborted
+[00:20:34.870] Browser LOG     Recognition ended
+[00:20:34.870] Browser LOG     Recognition started
+[00:20:35.379] Browser ERROR   Speech error aborted
+[00:20:35.379] Browser LOG     Recognition ended
+[00:20:35.379] Browser LOG     Recognition started
+[00:20:35.888] Browser ERROR   Speech error aborted
+[00:20:35.888] Browser LOG     Recognition ended
+[00:20:35.888] Browser LOG     Recognition started
+[00:20:36.391] Browser ERROR   Speech error aborted
+[00:20:36.391] Browser LOG     Recognition ended
+[00:20:36.391] Browser LOG     Recognition started
+[00:20:36.889] Browser ERROR   Speech error aborted
+[00:20:36.889] Browser LOG     Recognition ended
+[00:20:36.889] Browser LOG     Recognition started
+[00:20:37.388] Browser ERROR   Speech error aborted
+[00:20:37.388] Browser LOG     Recognition ended
+[00:20:37.388] Browser LOG     Recognition started
+[00:20:37.896] Browser ERROR   Speech error aborted
+[00:20:37.896] Browser LOG     Recognition ended
+[00:20:37.896] Browser LOG     Recognition started
+[00:20:38.403] Browser ERROR   Speech error aborted
+[00:20:38.403] Browser LOG     Recognition ended
+[00:20:38.403] Browser LOG     Recognition started
+[00:20:38.920] Browser ERROR   Speech error aborted
+[00:20:38.920] Browser LOG     Recognition ended
+[00:20:38.920] Browser LOG     Recognition started
+[00:20:39.415] Browser LOG     Recognition ended
+[00:20:39.415] Browser LOG     Recognition started
+[00:20:39.901] Browser LOG     Recognition ended
+[00:20:40.013] Browser LOG     Recognition started
+[00:20:40.410] Browser ERROR   Speech error aborted
+[00:20:40.410] Browser LOG     Recognition ended
+[00:20:40.410] Browser LOG     Recognition started
+[00:20:40.911] Browser ERROR   Speech error aborted
+[00:20:40.911] Browser LOG     Recognition ended
+[00:20:40.911] Browser LOG     Recognition started
+[00:20:41.415] Browser ERROR   Speech error aborted
+[00:20:41.415] Browser LOG     Recognition ended
+[00:20:41.416] Browser LOG     Recognition started
+[00:20:41.927] Browser ERROR   Speech error aborted
+[00:20:41.927] Browser LOG     Recognition ended
+[00:20:41.927] Browser LOG     Recognition started
+[00:20:42.438] Browser ERROR   Speech error aborted
+[00:20:42.438] Browser LOG     Recognition ended
+[00:20:42.438] Browser LOG     Recognition started
+[00:20:42.917] Browser ERROR   Speech error aborted
+[00:20:42.917] Browser LOG     Recognition ended
+[00:20:42.917] Browser LOG     Recognition started
+[00:20:45.340] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:20:45.971] Browser ERROR   Speech error aborted
+[00:20:45.971] Browser LOG     Recognition ended
+[00:20:45.971] Browser LOG     Recognition started
+[00:20:46.462] Browser ERROR   Speech error aborted
+[00:20:46.462] Browser LOG     Recognition ended
+[00:20:46.462] Browser LOG     Recognition started
+[00:20:46.967] Browser ERROR   Speech error aborted
+[00:20:46.967] Browser LOG     Recognition ended
+[00:20:46.967] Browser LOG     Recognition started
+[00:20:47.467] Browser ERROR   Speech error aborted
+[00:20:47.467] Browser LOG     Recognition ended
+[00:20:47.467] Browser LOG     Recognition started
+[00:20:47.967] Browser ERROR   Speech error aborted
+[00:20:47.967] Browser LOG     Recognition ended
+[00:20:47.967] Browser LOG     Recognition started
+[00:20:48.474] Browser ERROR   Speech error aborted
+[00:20:48.474] Browser LOG     Recognition ended
+[00:20:48.474] Browser LOG     Recognition started
+[00:20:48.977] Browser ERROR   Speech error aborted
+[00:20:48.977] Browser LOG     Recognition ended
+[00:20:48.977] Browser LOG     Recognition started
+[00:20:49.482] Browser ERROR   Speech error aborted
+[00:20:49.482] Browser LOG     Recognition ended
+[00:20:49.482] Browser LOG     Recognition started
+[00:20:49.982] Browser ERROR   Speech error aborted
+[00:20:49.982] Browser LOG     Recognition ended
+[00:20:49.982] Browser LOG     Recognition started
+[00:20:50.486] Browser ERROR   Speech error aborted
+[00:20:50.486] Browser LOG     Recognition ended
+[00:20:50.486] Browser LOG     Recognition started
+[00:20:50.988] Browser ERROR   Speech error aborted
+[00:20:50.988] Browser LOG     Recognition ended
+[00:20:50.988] Browser LOG     Recognition started
+[00:20:51.490] Browser ERROR   Speech error aborted
+[00:20:51.490] Browser LOG     Recognition ended
+[00:20:51.490] Browser LOG     Recognition started
+[00:20:51.612] Browser LOG     Requesting TTS for: Hi Onur Eren! Yes, I can hear you. How can I help ...
+[00:20:51.612] Browser ERROR   Speech error aborted
+[00:20:51.612] Browser LOG     Recognition ended
+[00:20:52.113] Browser LOG     Recognition started
+[00:20:57.063] Browser LOG     Playing audio...
+[00:20:57.063] Browser ERROR   Speech error aborted
+[00:20:57.063] Browser LOG     Recognition ended
+[00:20:57.565] Browser LOG     Recognition started
+[00:21:00.945] Browser LOG     Audio ended naturally
+[00:21:00.945] Browser ERROR   Speech error aborted
+[00:21:00.945] Browser LOG     Recognition ended
+[00:21:00.945] Browser LOG     Recognition started
+[00:21:01.447] Browser ERROR   Speech error aborted
+[00:21:01.447] Browser LOG     Recognition ended
+[00:21:01.447] Browser LOG     Recognition started
+[00:21:01.949] Browser ERROR   Speech error aborted
+[00:21:01.950] Browser LOG     Recognition ended
+[00:21:01.950] Browser LOG     Recognition started
+[00:21:02.444] Browser ERROR   Speech error aborted
+[00:21:02.444] Browser LOG     Recognition ended
+[00:21:02.444] Browser LOG     Recognition started
+[00:21:02.956] Browser ERROR   Speech error aborted
+[00:21:02.956] Browser LOG     Recognition ended
+[00:21:02.956] Browser LOG     Recognition started
+[00:21:03.458] Browser ERROR   Speech error aborted
+[00:21:03.458] Browser LOG     Recognition ended
+[00:21:03.458] Browser LOG     Recognition started
+[00:21:03.961] Browser ERROR   Speech error aborted
+[00:21:03.961] Browser LOG     Recognition ended
+[00:21:03.961] Browser LOG     Recognition started
+[00:21:04.465] Browser ERROR   Speech error aborted
+[00:21:04.465] Browser LOG     Recognition ended
+[00:21:04.465] Browser LOG     Recognition started
+[00:21:04.970] Browser ERROR   Speech error aborted
+[00:21:04.970] Browser LOG     Recognition ended
+[00:21:04.970] Browser LOG     Recognition started
+[00:21:05.471] Browser ERROR   Speech error aborted
+[00:21:05.471] Browser LOG     Recognition ended
+[00:21:05.471] Browser LOG     Recognition started
+[00:21:05.972] Browser ERROR   Speech error aborted
+[00:21:05.972] Browser LOG     Recognition ended
+[00:21:05.972] Browser LOG     Recognition started
+[00:21:06.476] Browser ERROR   Speech error aborted
+[00:21:06.477] Browser LOG     Recognition ended
+[00:21:06.477] Browser LOG     Recognition started
+[00:21:06.977] Browser ERROR   Speech error aborted
+[00:21:06.977] Browser LOG     Recognition ended
+[00:21:06.977] Browser LOG     Recognition started
+[00:21:07.478] Browser ERROR   Speech error aborted
+[00:21:07.478] Browser LOG     Recognition ended
+[00:21:07.478] Browser LOG     Recognition started
+[00:21:07.974] Browser ERROR   Speech error aborted
+[00:21:07.974] Browser LOG     Recognition ended
+[00:21:07.974] Browser LOG     Recognition started
+[00:21:08.494] Browser ERROR   Speech error aborted
+[00:21:08.494] Browser LOG     Recognition ended
+[00:21:08.494] Browser LOG     Recognition started
+[00:21:08.989] Browser ERROR   Speech error aborted
+[00:21:08.989] Browser LOG     Recognition ended
+[00:21:08.990] Browser LOG     Recognition started
+[00:21:09.491] Browser ERROR   Speech error aborted
+[00:21:09.492] Browser LOG     Recognition ended
+[00:21:09.492] Browser LOG     Recognition started
+[00:21:09.993] Browser ERROR   Speech error aborted
+[00:21:09.993] Browser LOG     Recognition ended
+[00:21:09.993] Browser LOG     Recognition started
+[00:21:10.498] Browser ERROR   Speech error aborted
+[00:21:10.498] Browser LOG     Recognition ended
+[00:21:10.498] Browser LOG     Recognition started
+[00:21:11.003] Browser ERROR   Speech error aborted
+[00:21:11.003] Browser LOG     Recognition ended
+[00:21:11.003] Browser LOG     Recognition started
+[00:21:11.496] Browser ERROR   Speech error aborted
+[00:21:11.496] Browser LOG     Recognition ended
+[00:21:11.496] Browser LOG     Recognition started
+[00:21:12.008] Browser ERROR   Speech error aborted
+[00:21:12.008] Browser LOG     Recognition ended
+[00:21:12.008] Browser LOG     Recognition started
+[00:21:12.510] Browser ERROR   Speech error aborted
+[00:21:12.510] Browser LOG     Recognition ended
+[00:21:12.511] Browser LOG     Recognition started
+[00:21:13.015] Browser ERROR   Speech error aborted
+[00:21:13.015] Browser LOG     Recognition ended
+[00:21:13.015] Browser LOG     Recognition started
+[00:21:13.515] Browser ERROR   Speech error aborted
+[00:21:13.516] Browser LOG     Recognition ended
+[00:21:13.516] Browser LOG     Recognition started
+[00:21:14.021] Browser ERROR   Speech error aborted
+[00:21:14.021] Browser LOG     Recognition ended
+[00:21:14.021] Browser LOG     Recognition started
+[00:21:14.526] Browser ERROR   Speech error aborted
+[00:21:14.526] Browser LOG     Recognition ended
+[00:21:14.527] Browser LOG     Recognition started
+[00:21:15.025] Browser ERROR   Speech error aborted
+[00:21:15.025] Browser LOG     Recognition ended
+[00:21:15.025] Browser LOG     Recognition started
+[00:21:15.526] Browser ERROR   Speech error aborted
+[00:21:15.526] Browser LOG     Recognition ended
+[00:21:15.526] Browser LOG     Recognition started
+[00:21:16.028] Browser ERROR   Speech error aborted
+[00:21:16.028] Browser LOG     Recognition ended
+[00:21:16.028] Browser LOG     Recognition started
+[00:21:16.532] Browser ERROR   Speech error aborted
+[00:21:16.532] Browser LOG     Recognition ended
+[00:21:16.532] Browser LOG     Recognition started
+[00:21:17.034] Browser ERROR   Speech error aborted
+[00:21:17.034] Browser LOG     Recognition ended
+[00:21:17.034] Browser LOG     Recognition started
+[00:21:17.537] Browser ERROR   Speech error aborted
+[00:21:17.537] Browser LOG     Recognition ended
+[00:21:17.537] Browser LOG     Recognition started
+[00:21:18.029] Browser ERROR   Speech error aborted
+[00:21:18.029] Browser LOG     Recognition ended
+[00:21:18.029] Browser LOG     Recognition started
+[00:21:18.540] Browser ERROR   Speech error aborted
+[00:21:18.540] Browser LOG     Recognition ended
+[00:21:18.540] Browser LOG     Recognition started
+[00:21:19.045] Browser ERROR   Speech error aborted
+[00:21:19.045] Browser LOG     Recognition ended
+[00:21:19.045] Browser LOG     Recognition started
+[00:21:19.548] Browser ERROR   Speech error aborted
+[00:21:19.548] Browser LOG     Recognition ended
+[00:21:19.548] Browser LOG     Recognition started
+[00:21:20.048] Browser ERROR   Speech error aborted
+[00:21:20.048] Browser LOG     Recognition ended
+[00:21:20.048] Browser LOG     Recognition started
+[00:21:20.550] Browser ERROR   Speech error aborted
+[00:21:20.550] Browser LOG     Recognition ended
+[00:21:20.550] Browser LOG     Recognition started
+[00:21:21.061] Browser ERROR   Speech error aborted
+[00:21:21.061] Browser LOG     Recognition ended
+[00:21:21.061] Browser LOG     Recognition started
+[00:21:21.564] Browser ERROR   Speech error aborted
+[00:21:21.564] Browser LOG     Recognition ended
+[00:21:21.564] Browser LOG     Recognition started
+[00:21:22.067] Browser ERROR   Speech error aborted
+[00:21:22.067] Browser LOG     Recognition ended
+[00:21:22.067] Browser LOG     Recognition started
+[00:21:22.568] Browser ERROR   Speech error aborted
+[00:21:22.568] Browser LOG     Recognition ended
+[00:21:22.568] Browser LOG     Recognition started
+[00:21:23.062] Browser ERROR   Speech error aborted
+[00:21:23.062] Browser LOG     Recognition ended
+[00:21:23.062] Browser LOG     Recognition started
+[00:21:23.575] Browser ERROR   Speech error aborted
+[00:21:23.575] Browser LOG     Recognition ended
+[00:21:23.575] Browser LOG     Recognition started
+[00:21:24.075] Browser ERROR   Speech error aborted
+[00:21:24.076] Browser LOG     Recognition ended
+[00:21:24.076] Browser LOG     Recognition started
+[00:21:24.577] Browser ERROR   Speech error aborted
+[00:21:24.577] Browser LOG     Recognition ended
+[00:21:24.577] Browser LOG     Recognition started
+[00:21:25.080] Browser ERROR   Speech error aborted
+[00:21:25.080] Browser LOG     Recognition ended
+[00:21:25.080] Browser LOG     Recognition started
+[00:21:25.576] Browser ERROR   Speech error aborted
+[00:21:25.576] Browser LOG     Recognition ended
+[00:21:25.576] Browser LOG     Recognition started
+[00:21:26.082] Browser ERROR   Speech error aborted
+[00:21:26.082] Browser LOG     Recognition ended
+[00:21:26.082] Browser LOG     Recognition started
+[00:21:26.581] Browser ERROR   Speech error aborted
+[00:21:26.581] Browser LOG     Recognition ended
+[00:21:26.581] Browser LOG     Recognition started
+[00:21:27.085] Browser ERROR   Speech error aborted
+[00:21:27.085] Browser LOG     Recognition ended
+[00:21:27.085] Browser LOG     Recognition started
+[00:21:27.582] Browser ERROR   Speech error aborted
+[00:21:27.582] Browser LOG     Recognition ended
+[00:21:27.582] Browser LOG     Recognition started
+[00:21:28.091] Browser ERROR   Speech error aborted
+[00:21:28.091] Browser LOG     Recognition ended
+[00:21:28.091] Browser LOG     Recognition started
+[00:21:28.600] Browser ERROR   Speech error aborted
+[00:21:28.601] Browser LOG     Recognition ended
+[00:21:28.601] Browser LOG     Recognition started
+[00:21:29.230] Browser ERROR   Speech error aborted
+[00:21:29.230] Browser LOG     Recognition started
+[00:21:29.230] Browser LOG     Recognition ended
+[00:21:29.749] Browser LOG     Recognition ended
+[00:21:29.749] Browser LOG     Recognition started
+[00:21:30.305] Browser LOG     Recognition ended
+[00:21:30.306] Browser LOG     Recognition started
+[00:21:30.774] Browser LOG     Recognition ended
+[00:21:30.774] Browser LOG     Recognition started
+[00:21:31.251] Browser LOG     Recognition ended
+[00:21:31.251] Browser LOG     Recognition started
+[00:21:31.755] Browser ERROR   Speech error aborted
+[00:21:31.755] Browser LOG     Recognition ended
+[00:21:31.755] Browser LOG     Recognition started
+[00:21:32.244] Browser ERROR   Speech error aborted
+[00:21:32.244] Browser LOG     Recognition ended
+[00:21:32.244] Browser LOG     Recognition started
+[00:21:32.759] Browser ERROR   Speech error aborted
+[00:21:32.759] Browser LOG     Recognition ended
+[00:21:32.759] Browser LOG     Recognition started
+[00:21:33.259] Browser ERROR   Speech error aborted
+[00:21:33.259] Browser LOG     Recognition ended
+[00:21:33.259] Browser LOG     Recognition started
+[00:21:33.775] Browser ERROR   Speech error aborted
+[00:21:33.775] Browser LOG     Recognition ended
+[00:21:33.775] Browser LOG     Recognition started
+[00:21:34.264] Browser ERROR   Speech error aborted
+[00:21:34.264] Browser LOG     Recognition ended
+[00:21:34.264] Browser LOG     Recognition started
+[00:21:34.767] Browser ERROR   Speech error aborted
+[00:21:34.767] Browser LOG     Recognition ended
+[00:21:34.767] Browser LOG     Recognition started
+[00:21:35.268] Browser ERROR   Speech error aborted
+[00:21:35.268] Browser LOG     Recognition ended
+[00:21:35.268] Browser LOG     Recognition started
+[00:21:35.762] Browser ERROR   Speech error aborted
+[00:21:35.762] Browser LOG     Recognition started
+[00:21:35.762] Browser LOG     Recognition ended
+[00:21:36.269] Browser ERROR   Speech error aborted
+[00:21:36.269] Browser LOG     Recognition ended
+[00:21:36.270] Browser LOG     Recognition started
+[00:21:36.698] Browser LOG     Requesting TTS for: Hi Onur Eren! Light Eagle is all about creating a ...
+[00:21:36.698] Browser ERROR   Speech error aborted
+[00:21:36.698] Browser LOG     Recognition ended
+[00:21:37.194] Browser LOG     Recognition started
+[00:21:39.141] Browser LOG     Recognition ended
+[00:21:41.634] Browser LOG     Playing audio...
+[00:22:03.307] Browser LOG     Audio ended naturally
+[00:22:03.307] Browser LOG     Recognition started
+[00:22:06.256] Browser LOG     Recognition ended
+[00:22:06.894] Browser LOG     Recognition started
+[00:22:10.550] Browser LOG     Recognition ended
+[00:22:12.610] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:22:12.714] Browser LOG     Whisper empty, using fallback: what do you mean Finance
+[00:22:17.715] Browser LOG     Requesting TTS for: Hi Onur Eren! When we talk about finance in the co...
+[00:22:23.733] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766671898675}
+[00:24:47.092] Server  LOG      ✓ Compiled in 153ms
+[00:25:09.103] Server  LOG      ✓ Compiled in 84ms
+[00:26:58.001] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:26:58.175] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:26:58.175] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/knowledge","route":"/admin/knowledge"}
+[00:26:58.175] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/knowledge color: rgb(120, 120, 120) color: inherit {"dp":"/admin/knowledge","o":"http://localhost:3000/admin/knowledge","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672173118}
+[00:27:23.399] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:27:23.552] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:27:23.552] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:27:23.552] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672198496}
+[00:27:31.137] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672206079}
+[00:29:34.923] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:29:35.035] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:29:35.035] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:29:35.035] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672329979}
+[00:29:35.661] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:29:35.771] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:29:35.771] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:29:35.771] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672330715}
+[00:29:43.985] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/interview color: rgb(120, 120, 120) color: inherit {"dp":"/interview","o":"http://localhost:3000/interview","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672338913}
+[00:29:53.264] Browser LOG     Recognition started
+[00:29:58.014] Server  ERROR   TTS API Error: TypeError: fetch failed
+[00:29:58.134] Browser ERROR   Greeting TTS failed: 500 {"error":"Internal Server Error"}
+[00:29:58.135] Browser ERROR   Speech error aborted
+[00:29:58.135] Browser LOG     Recognition ended
+[00:29:58.135] Browser LOG     Recognition started
+[00:29:58.649] Browser ERROR   Speech error aborted
+[00:29:58.649] Browser LOG     Recognition ended
+[00:29:58.649] Browser LOG     Recognition started
+[00:29:59.151] Browser ERROR   Speech error aborted
+[00:29:59.151] Browser LOG     Recognition ended
+[00:29:59.151] Browser LOG     Recognition started
+[00:29:59.647] Browser ERROR   Speech error aborted
+[00:29:59.647] Browser LOG     Recognition started
+[00:29:59.647] Browser LOG     Recognition ended
+[00:30:00.153] Browser ERROR   Speech error aborted
+[00:30:00.153] Browser LOG     Recognition ended
+[00:30:00.153] Browser LOG     Recognition started
+[00:30:00.662] Browser ERROR   Speech error aborted
+[00:30:00.662] Browser LOG     Recognition ended
+[00:30:00.662] Browser LOG     Recognition started
+[00:30:01.218] Browser ERROR   Speech error aborted
+[00:30:01.218] Browser LOG     Recognition ended
+[00:30:01.218] Browser LOG     Recognition started
+[00:30:01.661] Browser ERROR   Speech error aborted
+[00:30:01.661] Browser LOG     Recognition ended
+[00:30:01.661] Browser LOG     Recognition started
+[00:30:02.163] Browser ERROR   Speech error aborted
+[00:30:02.163] Browser LOG     Recognition ended
+[00:30:02.163] Browser LOG     Recognition started
+[00:30:02.672] Browser ERROR   Speech error aborted
+[00:30:02.672] Browser LOG     Recognition ended
+[00:30:02.672] Browser LOG     Recognition started
+[00:30:03.178] Browser ERROR   Speech error aborted
+[00:30:03.178] Browser LOG     Recognition ended
+[00:30:03.178] Browser LOG     Recognition started
+[00:30:03.678] Browser ERROR   Speech error aborted
+[00:30:03.678] Browser LOG     Recognition ended
+[00:30:03.678] Browser LOG     Recognition started
+[00:30:04.182] Browser ERROR   Speech error aborted
+[00:30:04.182] Browser LOG     Recognition ended
+[00:30:04.182] Browser LOG     Recognition started
+[00:30:04.685] Browser ERROR   Speech error aborted
+[00:30:04.685] Browser LOG     Recognition ended
+[00:30:04.685] Browser LOG     Recognition started
+[00:30:05.188] Browser ERROR   Speech error aborted
+[00:30:05.188] Browser LOG     Recognition ended
+[00:30:05.188] Browser LOG     Recognition started
+[00:30:05.681] Browser ERROR   Speech error aborted
+[00:30:05.681] Browser LOG     Recognition ended
+[00:30:05.681] Browser LOG     Recognition started
+[00:30:06.194] Browser ERROR   Speech error aborted
+[00:30:06.194] Browser LOG     Recognition ended
+[00:30:06.194] Browser LOG     Recognition started
+[00:30:06.695] Browser ERROR   Speech error aborted
+[00:30:06.695] Browser LOG     Recognition ended
+[00:30:06.695] Browser LOG     Recognition started
+[00:30:07.195] Browser ERROR   Speech error aborted
+[00:30:07.195] Browser LOG     Recognition ended
+[00:30:07.195] Browser LOG     Recognition started
+[00:30:07.705] Browser ERROR   Speech error aborted
+[00:30:07.705] Browser LOG     Recognition ended
+[00:30:07.705] Browser LOG     Recognition started
+[00:30:08.201] Browser ERROR   Speech error aborted
+[00:30:08.201] Browser LOG     Recognition ended
+[00:30:08.201] Browser LOG     Recognition started
+[00:30:08.698] Browser LOG     Recognition started
+[00:30:08.698] Browser ERROR   Speech error aborted
+[00:30:08.698] Browser LOG     Recognition ended
+[00:30:09.203] Browser ERROR   Speech error aborted
+[00:30:09.203] Browser LOG     Recognition ended
+[00:30:09.203] Browser LOG     Recognition started
+[00:30:09.712] Browser ERROR   Speech error aborted
+[00:30:09.712] Browser LOG     Recognition ended
+[00:30:09.712] Browser LOG     Recognition started
+[00:30:10.212] Browser ERROR   Speech error aborted
+[00:30:10.212] Browser LOG     Recognition ended
+[00:30:10.212] Browser LOG     Recognition started
+[00:30:10.712] Browser ERROR   Speech error aborted
+[00:30:10.712] Browser LOG     Recognition ended
+[00:30:10.712] Browser LOG     Recognition started
+[00:30:11.215] Browser ERROR   Speech error aborted
+[00:30:11.215] Browser LOG     Recognition ended
+[00:30:11.215] Browser LOG     Recognition started
+[00:30:11.714] Browser ERROR   Speech error aborted
+[00:30:11.714] Browser LOG     Recognition ended
+[00:30:11.714] Browser LOG     Recognition started
+[00:30:12.219] Browser ERROR   Speech error aborted
+[00:30:12.219] Browser LOG     Recognition ended
+[00:30:12.219] Browser LOG     Recognition started
+[00:30:12.723] Browser ERROR   Speech error aborted
+[00:30:12.723] Browser LOG     Recognition ended
+[00:30:12.723] Browser LOG     Recognition started
+[00:30:13.223] Browser ERROR   Speech error aborted
+[00:30:13.223] Browser LOG     Recognition ended
+[00:30:13.223] Browser LOG     Recognition started
+[00:30:13.730] Browser ERROR   Speech error aborted
+[00:30:13.730] Browser LOG     Recognition ended
+[00:30:13.730] Browser LOG     Recognition started
+[00:30:14.230] Browser ERROR   Speech error aborted
+[00:30:14.230] Browser LOG     Recognition ended
+[00:30:14.230] Browser LOG     Recognition started
+[00:30:14.731] Browser LOG     Recognition started
+[00:30:14.731] Browser ERROR   Speech error aborted
+[00:30:14.731] Browser LOG     Recognition ended
+[00:30:15.235] Browser ERROR   Speech error aborted
+[00:30:15.235] Browser LOG     Recognition ended
+[00:30:15.235] Browser LOG     Recognition started
+[00:30:15.738] Browser ERROR   Speech error aborted
+[00:30:15.738] Browser LOG     Recognition ended
+[00:30:15.738] Browser LOG     Recognition started
+[00:30:16.243] Browser ERROR   Speech error aborted
+[00:30:16.243] Browser LOG     Recognition ended
+[00:30:16.243] Browser LOG     Recognition started
+[00:30:16.744] Browser ERROR   Speech error aborted
+[00:30:16.744] Browser LOG     Recognition ended
+[00:30:16.744] Browser LOG     Recognition started
+[00:30:17.248] Browser ERROR   Speech error aborted
+[00:30:17.249] Browser LOG     Recognition started
+[00:30:17.249] Browser LOG     Recognition ended
+[00:30:17.750] Browser ERROR   Speech error aborted
+[00:30:17.750] Browser LOG     Recognition ended
+[00:30:17.750] Browser LOG     Recognition started
+[00:30:18.255] Browser ERROR   Speech error aborted
+[00:30:18.255] Browser LOG     Recognition ended
+[00:30:18.255] Browser LOG     Recognition started
+[00:30:18.754] Browser ERROR   Speech error aborted
+[00:30:18.754] Browser LOG     Recognition ended
+[00:30:18.754] Browser LOG     Recognition started
+[00:30:19.260] Browser ERROR   Speech error aborted
+[00:30:19.260] Browser LOG     Recognition ended
+[00:30:19.260] Browser LOG     Recognition started
+[00:30:19.761] Browser ERROR   Speech error aborted
+[00:30:19.761] Browser LOG     Recognition ended
+[00:30:19.761] Browser LOG     Recognition started
+[00:30:20.267] Browser ERROR   Speech error aborted
+[00:30:20.268] Browser LOG     Recognition ended
+[00:30:20.268] Browser LOG     Recognition started
+[00:30:20.278] Server  WARN    Knowledge not found in DB for family_offices, falling back to file.
+[00:30:20.764] Browser ERROR   Speech error aborted
+[00:30:20.764] Browser LOG     Recognition ended
+[00:30:20.764] Browser LOG     Recognition started
+[00:30:21.270] Browser ERROR   Speech error aborted
+[00:30:21.270] Browser LOG     Recognition ended
+[00:30:21.270] Browser LOG     Recognition started
+[00:30:21.771] Browser ERROR   Speech error aborted
+[00:30:21.771] Browser LOG     Recognition ended
+[00:30:21.771] Browser LOG     Recognition started
+[00:30:22.113] Browser LOG     Recognition ended
+[00:30:22.269] Browser LOG     Recognition started
+[00:30:26.687] Browser LOG     Requesting TTS for: Hello! How can I assist you today?...
+[00:30:26.687] Browser ERROR   Speech error aborted
+[00:30:26.687] Browser LOG     Recognition ended
+[00:30:27.330] Browser LOG     Playing audio...
+[00:30:29.825] Browser LOG     Audio ended naturally
+[00:30:29.826] Browser LOG     Recognition started
+[00:30:34.189] Browser LOG     Recognition ended
+[00:30:35.552] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:30:36.161] Browser LOG     Recognition started
+[00:30:42.143] Browser LOG     Recognition ended
+[00:30:44.345] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:30:44.450] Browser LOG     Whisper empty, using fallback: what is light ego
+[00:30:47.995] Browser LOG     Requesting TTS for: I don't know what "light ego" refers to. Can you c...
+[00:30:49.909] Browser LOG     Playing audio...
+[00:30:58.001] Browser LOG     Audio ended naturally
+[00:30:58.001] Browser LOG     Recognition started
+[00:31:00.999] Browser LOG     Recognition ended
+[00:31:02.487] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:31:02.590] Browser LOG     Whisper empty, using fallback: I mean light ego
+[00:31:06.808] Browser LOG     Requesting TTS for: Hello Family. Could you clarify what you mean by "...
+[00:31:09.492] Browser LOG     Playing audio...
+[00:31:21.469] Browser LOG     Requesting TTS for: Hello Family. I’m here to discuss capital placemen...
+[00:31:23.695] Browser LOG     Playing audio...
+[00:31:30.099] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672445044}
+[00:31:49.025] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:49.155] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:31:49.155] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:31:49.155] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672464096}
+[00:31:49.282] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:49.355] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:31:49.355] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:31:49.355] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672464339}
+[00:31:49.482] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:49.523] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:31:49.523] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:31:49.523] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672464549}
+[00:31:49.659] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:49.672] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:31:49.672] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:31:49.672] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672464715}
+[00:31:49.783] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:49.855] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:31:49.855] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:31:49.855] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672464840}
+[00:31:49.962] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:31:50.076] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:31:50.076] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:31:50.076] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672465020}
+[00:31:59.101] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/interview color: rgb(120, 120, 120) color: inherit {"dp":"/interview","o":"http://localhost:3000/interview","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672474028}
+[00:32:15.255] Browser LOG     Recognition ended
+[00:32:15.255] Browser LOG     Recognition started
+[00:32:15.762] Browser ERROR   Speech error aborted
+[00:32:15.762] Browser LOG     Recognition ended
+[00:32:15.762] Browser LOG     Recognition started
+[00:32:16.276] Browser ERROR   Speech error aborted
+[00:32:16.276] Browser LOG     Recognition ended
+[00:32:16.276] Browser LOG     Recognition started
+[00:32:16.777] Browser ERROR   Speech error aborted
+[00:32:16.777] Browser LOG     Recognition ended
+[00:32:16.777] Browser LOG     Recognition started
+[00:32:17.268] Browser ERROR   Speech error aborted
+[00:32:17.268] Browser LOG     Recognition ended
+[00:32:17.268] Browser LOG     Recognition started
+[00:32:17.781] Browser ERROR   Speech error aborted
+[00:32:17.781] Browser LOG     Recognition ended
+[00:32:17.781] Browser LOG     Recognition started
+[00:32:18.281] Browser ERROR   Speech error aborted
+[00:32:18.281] Browser LOG     Recognition ended
+[00:32:18.281] Browser LOG     Recognition started
+[00:32:18.784] Browser ERROR   Speech error aborted
+[00:32:18.784] Browser LOG     Recognition ended
+[00:32:18.784] Browser LOG     Recognition started
+[00:32:19.282] Browser LOG     Recognition started
+[00:32:19.282] Browser ERROR   Speech error aborted
+[00:32:19.282] Browser LOG     Recognition ended
+[00:32:19.788] Browser ERROR   Speech error aborted
+[00:32:19.788] Browser LOG     Recognition ended
+[00:32:19.788] Browser LOG     Recognition started
+[00:32:20.296] Browser ERROR   Speech error aborted
+[00:32:20.296] Browser LOG     Recognition ended
+[00:32:20.297] Browser LOG     Recognition started
+[00:32:20.796] Browser ERROR   Speech error aborted
+[00:32:20.796] Browser LOG     Recognition ended
+[00:32:20.797] Browser LOG     Recognition started
+[00:32:21.299] Browser ERROR   Speech error aborted
+[00:32:21.299] Browser LOG     Recognition ended
+[00:32:21.299] Browser LOG     Recognition started
+[00:32:21.804] Browser ERROR   Speech error aborted
+[00:32:21.804] Browser LOG     Recognition ended
+[00:32:21.804] Browser LOG     Recognition started
+[00:32:22.309] Browser ERROR   Speech error aborted
+[00:32:22.309] Browser LOG     Recognition ended
+[00:32:22.309] Browser LOG     Recognition started
+[00:32:22.800] Browser ERROR   Speech error aborted
+[00:32:22.800] Browser LOG     Recognition ended
+[00:32:22.800] Browser LOG     Recognition started
+[00:32:23.312] Browser ERROR   Speech error aborted
+[00:32:23.312] Browser LOG     Recognition ended
+[00:32:23.312] Browser LOG     Recognition started
+[00:32:23.815] Browser ERROR   Speech error aborted
+[00:32:23.815] Browser LOG     Recognition ended
+[00:32:23.815] Browser LOG     Recognition started
+[00:32:24.319] Browser ERROR   Speech error aborted
+[00:32:24.320] Browser LOG     Recognition ended
+[00:32:24.320] Browser LOG     Recognition started
+[00:32:24.815] Browser LOG     Recognition started
+[00:32:24.815] Browser ERROR   Speech error aborted
+[00:32:24.815] Browser LOG     Recognition ended
+[00:32:25.321] Browser ERROR   Speech error aborted
+[00:32:25.321] Browser LOG     Recognition ended
+[00:32:25.321] Browser LOG     Recognition started
+[00:32:25.830] Browser ERROR   Speech error aborted
+[00:32:25.830] Browser LOG     Recognition ended
+[00:32:25.830] Browser LOG     Recognition started
+[00:32:26.330] Browser ERROR   Speech error aborted
+[00:32:26.330] Browser LOG     Recognition ended
+[00:32:26.330] Browser LOG     Recognition started
+[00:32:26.841] Browser ERROR   Speech error aborted
+[00:32:26.841] Browser LOG     Recognition ended
+[00:32:26.841] Browser LOG     Recognition started
+[00:32:27.339] Browser ERROR   Speech error aborted
+[00:32:27.339] Browser LOG     Recognition ended
+[00:32:27.339] Browser LOG     Recognition started
+[00:32:27.839] Browser ERROR   Speech error aborted
+[00:32:27.839] Browser LOG     Recognition ended
+[00:32:27.839] Browser LOG     Recognition started
+[00:32:28.333] Browser ERROR   Speech error aborted
+[00:32:28.333] Browser LOG     Recognition ended
+[00:32:28.333] Browser LOG     Recognition started
+[00:32:28.845] Browser ERROR   Speech error aborted
+[00:32:28.845] Browser LOG     Recognition ended
+[00:32:28.845] Browser LOG     Recognition started
+[00:32:29.346] Browser ERROR   Speech error aborted
+[00:32:29.346] Browser LOG     Recognition ended
+[00:32:29.346] Browser LOG     Recognition started
+[00:32:29.849] Browser ERROR   Speech error aborted
+[00:32:29.849] Browser LOG     Recognition ended
+[00:32:29.849] Browser LOG     Recognition started
+[00:32:30.353] Browser ERROR   Speech error aborted
+[00:32:30.353] Browser LOG     Recognition ended
+[00:32:30.353] Browser LOG     Recognition started
+[00:32:30.849] Browser LOG     Recognition started
+[00:32:30.849] Browser ERROR   Speech error aborted
+[00:32:30.849] Browser LOG     Recognition ended
+[00:32:31.353] Browser ERROR   Speech error aborted
+[00:32:31.353] Browser LOG     Recognition ended
+[00:32:31.353] Browser LOG     Recognition started
+[00:32:31.862] Browser ERROR   Speech error aborted
+[00:32:31.862] Browser LOG     Recognition ended
+[00:32:31.862] Browser LOG     Recognition started
+[00:32:32.366] Browser ERROR   Speech error aborted
+[00:32:32.366] Browser LOG     Recognition ended
+[00:32:32.366] Browser LOG     Recognition started
+[00:32:32.870] Browser ERROR   Speech error aborted
+[00:32:32.870] Browser LOG     Recognition ended
+[00:32:32.870] Browser LOG     Recognition started
+[00:32:33.366] Browser LOG     Recognition started
+[00:32:33.366] Browser ERROR   Speech error aborted
+[00:32:33.366] Browser LOG     Recognition ended
+[00:32:33.871] Browser ERROR   Speech error aborted
+[00:32:33.871] Browser LOG     Recognition ended
+[00:32:33.871] Browser LOG     Recognition started
+[00:32:34.378] Browser ERROR   Speech error aborted
+[00:32:34.378] Browser LOG     Recognition ended
+[00:32:34.378] Browser LOG     Recognition started
+[00:32:34.879] Browser ERROR   Speech error aborted
+[00:32:34.879] Browser LOG     Recognition ended
+[00:32:34.879] Browser LOG     Recognition started
+[00:32:35.382] Browser ERROR   Speech error aborted
+[00:32:35.382] Browser LOG     Recognition ended
+[00:32:35.382] Browser LOG     Recognition started
+[00:32:35.885] Browser ERROR   Speech error aborted
+[00:32:35.885] Browser LOG     Recognition ended
+[00:32:35.885] Browser LOG     Recognition started
+[00:32:36.383] Browser LOG     Recognition started
+[00:32:36.383] Browser ERROR   Speech error aborted
+[00:32:36.383] Browser LOG     Recognition ended
+[00:32:36.888] Browser ERROR   Speech error aborted
+[00:32:36.888] Browser LOG     Recognition ended
+[00:32:36.888] Browser LOG     Recognition started
+[00:32:37.396] Browser ERROR   Speech error aborted
+[00:32:37.396] Browser LOG     Recognition ended
+[00:32:37.396] Browser LOG     Recognition started
+[00:32:37.898] Browser ERROR   Speech error aborted
+[00:32:37.899] Browser LOG     Recognition ended
+[00:32:37.899] Browser LOG     Recognition started
+[00:32:38.400] Browser ERROR   Speech error aborted
+[00:32:38.400] Browser LOG     Recognition ended
+[00:32:38.400] Browser LOG     Recognition started
+[00:32:38.551] Browser LOG     Recognition ended
+[00:32:38.891] Browser LOG     Recognition started
+[00:32:42.248] Browser LOG     Recognition ended
+[00:32:56.864] Browser LOG     Recognition started
+[00:33:00.315] Browser LOG     Recognition ended
+[00:33:01.799] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:33:01.903] Browser LOG     Whisper empty, using fallback: what is digital member
+[00:33:06.115] Browser LOG     Requesting TTS for: I don't know what "digital member" refers to. Can ...
+[00:33:07.083] Browser LOG     Playing audio...
+[00:33:13.270] Browser LOG     Audio ended naturally
+[00:33:13.270] Browser LOG     Recognition started
+[00:33:13.655] Browser ERROR   Speech error aborted
+[00:33:13.655] Browser LOG     Recognition ended
+[00:33:13.655] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672548597}
+[00:33:19.302] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/interview color: rgb(120, 120, 120) color: inherit {"dp":"/interview","o":"http://localhost:3000/interview","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672554242}
+[00:33:26.949] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:33:27.107] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:33:27.107] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/interview","route":"/interview"}
+[00:33:27.107] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/interview color: rgb(120, 120, 120) color: inherit {"dp":"/interview","o":"http://localhost:3000/interview","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672562050}
+[00:33:30.293] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672565238}
+[00:35:02.280] Server  LOG      ✓ Compiled in 119ms
+[00:35:50.809] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:35:50.932] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:35:50.932] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:35:50.932] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672705875}
+[00:35:51.095] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:35:51.125] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:35:51.125] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:35:51.125] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672706160}
+[00:35:51.348] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:35:51.480] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:35:51.480] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:35:51.480] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672706425}
+[00:36:04.188] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/interview color: rgb(120, 120, 120) color: inherit {"dp":"/interview","o":"http://localhost:3000/interview","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672719115}
+[00:36:14.069] Browser LOG     Recognition ended
+[00:36:14.069] Browser LOG     Recognition started
+[00:36:14.574] Browser ERROR   Speech error aborted
+[00:36:14.574] Browser LOG     Recognition ended
+[00:36:14.574] Browser LOG     Recognition started
+[00:36:15.086] Browser ERROR   Speech error aborted
+[00:36:15.086] Browser LOG     Recognition ended
+[00:36:15.086] Browser LOG     Recognition started
+[00:36:15.589] Browser ERROR   Speech error aborted
+[00:36:15.589] Browser LOG     Recognition ended
+[00:36:15.589] Browser LOG     Recognition started
+[00:36:16.091] Browser ERROR   Speech error aborted
+[00:36:16.091] Browser LOG     Recognition ended
+[00:36:16.091] Browser LOG     Recognition started
+[00:36:16.582] Browser ERROR   Speech error aborted
+[00:36:16.582] Browser LOG     Recognition ended
+[00:36:16.582] Browser LOG     Recognition started
+[00:36:17.094] Browser ERROR   Speech error aborted
+[00:36:17.094] Browser LOG     Recognition ended
+[00:36:17.094] Browser LOG     Recognition started
+[00:36:17.596] Browser ERROR   Speech error aborted
+[00:36:17.596] Browser LOG     Recognition ended
+[00:36:17.596] Browser LOG     Recognition started
+[00:36:18.097] Browser ERROR   Speech error aborted
+[00:36:18.097] Browser LOG     Recognition ended
+[00:36:18.097] Browser LOG     Recognition started
+[00:36:18.597] Browser ERROR   Speech error aborted
+[00:36:18.597] Browser LOG     Recognition ended
+[00:36:18.597] Browser LOG     Recognition started
+[00:36:19.100] Browser ERROR   Speech error aborted
+[00:36:19.100] Browser LOG     Recognition ended
+[00:36:19.100] Browser LOG     Recognition started
+[00:36:19.607] Browser ERROR   Speech error aborted
+[00:36:19.607] Browser LOG     Recognition ended
+[00:36:19.607] Browser LOG     Recognition started
+[00:36:20.109] Browser ERROR   Speech error aborted
+[00:36:20.109] Browser LOG     Recognition ended
+[00:36:20.109] Browser LOG     Recognition started
+[00:36:20.612] Browser ERROR   Speech error aborted
+[00:36:20.612] Browser LOG     Recognition ended
+[00:36:20.612] Browser LOG     Recognition started
+[00:36:21.113] Browser ERROR   Speech error aborted
+[00:36:21.113] Browser LOG     Recognition ended
+[00:36:21.113] Browser LOG     Recognition started
+[00:36:21.613] Browser ERROR   Speech error aborted
+[00:36:21.613] Browser LOG     Recognition ended
+[00:36:21.613] Browser LOG     Recognition started
+[00:36:22.117] Browser ERROR   Speech error aborted
+[00:36:22.117] Browser LOG     Recognition ended
+[00:36:22.117] Browser LOG     Recognition started
+[00:36:22.619] Browser ERROR   Speech error aborted
+[00:36:22.619] Browser LOG     Recognition ended
+[00:36:22.619] Browser LOG     Recognition started
+[00:36:23.123] Browser ERROR   Speech error aborted
+[00:36:23.123] Browser LOG     Recognition ended
+[00:36:23.123] Browser LOG     Recognition started
+[00:36:23.624] Browser ERROR   Speech error aborted
+[00:36:23.624] Browser LOG     Recognition ended
+[00:36:23.624] Browser LOG     Recognition started
+[00:36:24.127] Browser ERROR   Speech error aborted
+[00:36:24.127] Browser LOG     Recognition ended
+[00:36:24.127] Browser LOG     Recognition started
+[00:36:24.629] Browser ERROR   Speech error aborted
+[00:36:24.629] Browser LOG     Recognition ended
+[00:36:24.629] Browser LOG     Recognition started
+[00:36:25.131] Browser ERROR   Speech error aborted
+[00:36:25.131] Browser LOG     Recognition ended
+[00:36:25.131] Browser LOG     Recognition started
+[00:36:25.632] Browser ERROR   Speech error aborted
+[00:36:25.632] Browser LOG     Recognition ended
+[00:36:25.632] Browser LOG     Recognition started
+[00:36:26.135] Browser ERROR   Speech error aborted
+[00:36:26.135] Browser LOG     Recognition ended
+[00:36:26.135] Browser LOG     Recognition started
+[00:36:26.637] Browser ERROR   Speech error aborted
+[00:36:26.637] Browser LOG     Recognition ended
+[00:36:26.638] Browser LOG     Recognition started
+[00:36:27.138] Browser ERROR   Speech error aborted
+[00:36:27.138] Browser LOG     Recognition ended
+[00:36:27.138] Browser LOG     Recognition started
+[00:36:27.633] Browser LOG     Recognition started
+[00:36:27.633] Browser ERROR   Speech error aborted
+[00:36:27.633] Browser LOG     Recognition ended
+[00:36:28.137] Browser ERROR   Speech error aborted
+[00:36:28.137] Browser LOG     Recognition ended
+[00:36:28.137] Browser LOG     Recognition started
+[00:36:28.646] Browser ERROR   Speech error aborted
+[00:36:28.646] Browser LOG     Recognition ended
+[00:36:28.646] Browser LOG     Recognition started
+[00:36:29.148] Browser ERROR   Speech error aborted
+[00:36:29.148] Browser LOG     Recognition ended
+[00:36:29.148] Browser LOG     Recognition started
+[00:36:29.651] Browser ERROR   Speech error aborted
+[00:36:29.651] Browser LOG     Recognition ended
+[00:36:29.651] Browser LOG     Recognition started
+[00:36:30.154] Browser ERROR   Speech error aborted
+[00:36:30.154] Browser LOG     Recognition ended
+[00:36:30.154] Browser LOG     Recognition started
+[00:36:30.657] Browser ERROR   Speech error aborted
+[00:36:30.657] Browser LOG     Recognition ended
+[00:36:30.657] Browser LOG     Recognition started
+[00:36:31.160] Browser ERROR   Speech error aborted
+[00:36:31.160] Browser LOG     Recognition ended
+[00:36:31.160] Browser LOG     Recognition started
+[00:36:31.664] Browser ERROR   Speech error aborted
+[00:36:31.664] Browser LOG     Recognition ended
+[00:36:31.664] Browser LOG     Recognition started
+[00:36:32.165] Browser ERROR   Speech error aborted
+[00:36:32.166] Browser LOG     Recognition ended
+[00:36:32.166] Browser LOG     Recognition started
+[00:36:32.668] Browser ERROR   Speech error aborted
+[00:36:32.668] Browser LOG     Recognition ended
+[00:36:32.668] Browser LOG     Recognition started
+[00:36:33.171] Browser ERROR   Speech error aborted
+[00:36:33.171] Browser LOG     Recognition ended
+[00:36:33.171] Browser LOG     Recognition started
+[00:36:33.665] Browser LOG     Recognition started
+[00:36:33.665] Browser ERROR   Speech error aborted
+[00:36:33.666] Browser LOG     Recognition ended
+[00:36:34.170] Browser LOG     Recognition started
+[00:36:34.170] Browser ERROR   Speech error aborted
+[00:36:34.170] Browser LOG     Recognition ended
+[00:36:34.678] Browser ERROR   Speech error aborted
+[00:36:34.678] Browser LOG     Recognition ended
+[00:36:34.678] Browser LOG     Recognition started
+[00:36:35.188] Browser ERROR   Speech error aborted
+[00:36:35.188] Browser LOG     Recognition ended
+[00:36:35.188] Browser LOG     Recognition started
+[00:36:35.684] Browser LOG     Recognition ended
+[00:36:35.684] Browser LOG     Recognition started
+[00:36:39.829] Browser LOG     Recognition ended
+[00:36:45.500] Browser LOG     Recognition started
+[00:36:48.651] Browser LOG     Recognition ended
+[00:36:49.438] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:36:49.545] Browser LOG     Whisper empty, using fallback: how can you assist me
+[00:36:51.697] Browser LOG     Requesting TTS for: Hi! Give me more detail about your startup?...
+[00:36:52.452] Browser LOG     Playing audio...
+[00:36:55.139] Browser LOG     Audio ended naturally
+[00:36:55.139] Browser LOG     Recognition started
+[00:36:57.749] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:36:57.872] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:36:57.872] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:36:57.872] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766672772817}
+[00:43:58.067] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:43:58.217] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:43:58.217] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:43:58.218] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673193121}
+[00:44:04.804] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:44:04.929] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:44:04.929] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:44:04.929] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673199835}
+[00:44:50.499] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:46:15.826] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:46:15.826] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:46:15.826] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:46:15.826] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673330503}
+[00:48:01.928] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:48:02.051] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:48:02.051] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:48:02.051] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673436958}
+[00:48:02.838] Server  LOG      ✓ Compiled in 144ms
+[00:48:02.942] Browser ERROR   ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:48:10.359] Server  ERROR    ⨯ ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+
+
+[00:48:10.474] Browser ERROR   ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:48:11.085] Browser ERROR   ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:48:11.085] Browser ERROR   ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:48:11.302] Browser ERROR   ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:48:11.519] Browser ERROR   uncaughtError: Error: ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+
+
+[00:48:11.736] Browser ERROR   ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:48:11.736] Browser ERROR   ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:48:11.736] Browser ERROR   ./app/voice-chat/page.tsx:438:5
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |     if (!interviewData) {
+      |     ^^
+  439 |             return (
+  440 |                 <div className="min-h-screen bg-gradient-to-br from-[#E8E5F5] via-[#F3E8F0] to-[#F5E8EB]">
+  441 |                     <div className="grid min-h-screen lg:grid-cols-2">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:49:09.840] Server  LOG      ✓ Compiled in 126ms
+[00:49:10.398] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:49:10.522] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:49:10.522] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:49:10.522] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673505428}
+[00:49:35.845] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:37.571] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:39.842] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:41.612] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:44.095] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:45.203] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:48.156] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:49.527] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:52.497] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:53.246] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:53.820] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:54.752] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:58.297] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:49:59.637] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:50:09.104] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:50:09.234] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:50:09.234] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:50:09.234] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673564139}
+[00:50:24.795] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:50:24.918] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:50:24.918] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:50:24.918] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673579825}
+[00:50:43.990] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:50:44.371] Server  WARN    Knowledge not found in DB for fund_builders, falling back to file.
+[00:52:27.841] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:52:28.002] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:52:28.002] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:52:28.002] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673702907}
+[00:53:53.904] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:53:54.031] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:53:54.031] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:53:54.031] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673788938}
+[00:55:57.166] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:55:57.286] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:55:57.286] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:55:57.286] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673912193}
+[00:56:04.116] Server  LOG      ✓ Compiled in 212ms
+[00:56:04.225] Browser ERROR   ./app/voice-chat/page.tsx:438:9
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |         return (
+      |         ^^^^^^
+  439 |             <div className="min-h-screen bg-[#F3E8F0]">
+  440 |                 <div className="flex min-h-screen items-center justify-center p-6 lg:p-12">
+  441 |                     <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:56:08.372] Server  ERROR    ⨯ ./app/voice-chat/page.tsx:438:9
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |         return (
+      |         ^^^^^^
+  439 |             <div className="min-h-screen bg-[#F3E8F0]">
+  440 |                 <div className="flex min-h-screen items-center justify-center p-6 lg:p-12">
+  441 |                     <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+
+
+[00:56:08.519] Browser ERROR   uncaughtError: Error: ./app/voice-chat/page.tsx:438:9
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |         return (
+      |         ^^^^^^
+  439 |             <div className="min-h-screen bg-[#F3E8F0]">
+  440 |                 <div className="flex min-h-screen items-center justify-center p-6 lg:p-12">
+  441 |                     <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+
+
+[00:56:08.683] Browser ERROR   ./app/voice-chat/page.tsx:438:9
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |         return (
+      |         ^^^^^^
+  439 |             <div className="min-h-screen bg-[#F3E8F0]">
+  440 |                 <div className="flex min-h-screen items-center justify-center p-6 lg:p-12">
+  441 |                     <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:56:08.683] Browser ERROR   ./app/voice-chat/page.tsx:438:9
+Parsing ecmascript source code failed
+  436 |     if (!interviewData) {
+  437 |         return (
+> 438 |         return (
+      |         ^^^^^^
+  439 |             <div className="min-h-screen bg-[#F3E8F0]">
+  440 |                 <div className="flex min-h-screen items-center justify-center p-6 lg:p-12">
+  441 |                     <div className="grid w-full max-w-7xl grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-24">
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:56:57.556] Browser ERROR   ./app/voice-chat/page.tsx:546:9
+Parsing ecmascript source code failed
+  544 |             </div>
+  545 |         )
+> 546 |         )
+      |         ^
+  547 |     }
+  548 |
+  549 |     return (
+
+Expression expected
+
+Import traces:
+  Client Component Browser:
+    ./app/voice-chat/page.tsx [Client Component Browser]
+    ./app/voice-chat/page.tsx [Server Component]
+
+  Client Component SSR:
+    ./app/voice-chat/page.tsx [Client Component SSR]
+    ./app/voice-chat/page.tsx [Server Component]
+[00:57:17.783] Server  LOG      ✓ Compiled in 97ms
+[00:57:18.544] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:57:18.684] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:57:18.684] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/voice-chat","route":"/voice-chat"}
+[00:57:18.684] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/voice-chat color: rgb(120, 120, 120) color: inherit {"dp":"/voice-chat","o":"http://localhost:3000/voice-chat","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766673993583}
+[00:57:51.479] Server  ERROR   STT API Critical Error: Error: 400 Invalid file format. Supported formats: ['flac', 'm4a', 'mp3', 'mp4', 'mpeg', 'mpga', 'oga', 'ogg', 'wav', 'webm']
+[00:58:32.242] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:58:32.242] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:58:32.242] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/admin/knowledge","route":"/admin/knowledge"}
+[00:58:32.242] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/admin/knowledge color: rgb(120, 120, 120) color: inherit {"dp":"/admin/knowledge","o":"http://localhost:3000/admin/knowledge","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.3.1","sv":"0.1.3","ts":1766674060467}
+[01:43:08.652] Server  ERROR   Error: ENOENT: no such file or directory, scandir '/Users/gulfemsolak/Desktop/interview-ui-build/app'
+[01:43:08.671] Server  ERROR    ⨯ "unhandledRejection:" Error: ENOENT: no such file or directory, scandir '/Users/gulfemsolak/Desktop/interview-ui-build/app'
+[01:43:08.688] Server  ERROR    ⨯ "unhandledRejection: " Error: ENOENT: no such file or directory, scandir '/Users/gulfemsolak/Desktop/interview-ui-build/app'
+[01:43:08.815] Server  LOG      ✓ Compiled in 1106ms
+[01:46:12.279] Server  ERROR   Error: ENOENT: no such file or directory, scandir '/Users/gulfemsolak/Desktop/interview-ui-build/app'
+[01:46:12.291] Server  ERROR    ⨯ "unhandledRejection:" Error: ENOENT: no such file or directory, scandir '/Users/gulfemsolak/Desktop/interview-ui-build/app'
+[01:46:12.294] Server  ERROR    ⨯ "unhandledRejection: " Error: ENOENT: no such file or directory, scandir '/Users/gulfemsolak/Desktop/interview-ui-build/app'

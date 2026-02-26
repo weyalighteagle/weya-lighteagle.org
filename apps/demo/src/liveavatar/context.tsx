@@ -204,6 +204,17 @@ export const LiveAvatarContextProvider = ({
 
       const apiSender = sender === MessageSender.USER ? "user" : "avatar";
 
+      let firstName, lastName, email;
+      try {
+        const raw = sessionStorage.getItem("form_lead");
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          firstName = parsed.firstName;
+          lastName = parsed.lastName;
+          email = parsed.email;
+        }
+      } catch (e) { }
+
       try {
         await fetch(saveMessageEndpoint, {
           method: "POST",
@@ -215,6 +226,9 @@ export const LiveAvatarContextProvider = ({
             session_id: sessionId,
             input_type: inputType,
             request_id: Math.random().toString(36).substring(7),
+            first_name: firstName || null,
+            last_name: lastName || null,
+            email: email || null,
           }),
         });
       } catch (err) {

@@ -1,0 +1,10 @@
+{
+  "/admin/knowledge/page": "app/admin/knowledge/page.js",
+  "/api/admin/knowledge/route": "app/api/admin/knowledge/route.js",
+  "/api/chat/route": "app/api/chat/route.js",
+  "/api/stt/route": "app/api/stt/route.js",
+  "/api/tts/route": "app/api/tts/route.js",
+  "/interview/page": "app/interview/page.js",
+  "/page": "app/page.js",
+  "/voice-chat/page": "app/voice-chat/page.js"
+}
