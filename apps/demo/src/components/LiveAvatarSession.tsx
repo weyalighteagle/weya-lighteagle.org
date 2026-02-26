@@ -14,7 +14,8 @@ const LiveAvatarSessionComponent: React.FC<{
   session_id: string | null;
   onSessionStopped: () => void;
   formLeadEndpoint?: string;
-}> = ({ session_id, onSessionStopped, formLeadEndpoint }) => {
+  userDetails?: { firstName: string; lastName: string; email: string };
+}> = ({ session_id, onSessionStopped, formLeadEndpoint, userDetails }) => {
   const [message, setMessage] = useState("");
   const {
     sessionState,
@@ -54,14 +55,24 @@ const LiveAvatarSessionComponent: React.FC<{
   useEffect(() => {
     if (!session_id) return;
 
-    const raw = sessionStorage.getItem("form_lead");
-    if (!raw) return;
+    // Fallback to testing sessionStorage ONLY IF PROPS ARE EMPTY 
+    // Usually it shouldn't hit this anymore.
+    const leadData = userDetails || (() => {
+      try {
+        const raw = sessionStorage.getItem("form_lead");
+        return raw ? JSON.parse(raw) : null;
+      } catch (e) {
+        return null;
+      }
+    })();
+
+    if (!leadData) return;
 
     const submittedKey = `form_lead_submitted_${session_id}`;
     if (sessionStorage.getItem(submittedKey)) return;
 
     try {
-      const { firstName, lastName, email } = JSON.parse(raw);
+      const { firstName, lastName, email } = leadData;
 
       const endpoint = formLeadEndpoint || "/api/form-lead";
       fetch(endpoint, {
@@ -79,7 +90,7 @@ const LiveAvatarSessionComponent: React.FC<{
     } catch (e) {
       console.error(e);
     }
-  }, [session_id, formLeadEndpoint]);
+  }, [session_id, formLeadEndpoint, userDetails]);
 
   // ✅ Mesaj gönder
   const sendAndLog = async () => {
@@ -144,17 +155,20 @@ export const LiveAvatarSession: React.FC<{
   onSessionStopped: () => void;
   saveMessageEndpoint?: string;
   formLeadEndpoint?: string;
-}> = ({ sessionAccessToken, session_id, onSessionStopped, saveMessageEndpoint, formLeadEndpoint }) => {
+  userDetails?: { firstName: string; lastName: string; email: string };
+}> = ({ sessionAccessToken, session_id, onSessionStopped, saveMessageEndpoint, formLeadEndpoint, userDetails }) => {
   return (
     <LiveAvatarContextProvider
       sessionAccessToken={sessionAccessToken}
       session_id={session_id}
       saveMessageEndpoint={saveMessageEndpoint}
+      userDetails={userDetails}
     >
       <LiveAvatarSessionComponent
         session_id={session_id}
         onSessionStopped={onSessionStopped}
         formLeadEndpoint={formLeadEndpoint}
+        userDetails={userDetails}
       />
     </LiveAvatarContextProvider>
   );

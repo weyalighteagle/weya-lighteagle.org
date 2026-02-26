@@ -82,6 +82,7 @@ export const LiveAvatarInternship = ({ persona }: Props) => {
                         session_id={sessionId}
                         saveMessageEndpoint="/api/save-internship-message"
                         formLeadEndpoint="/api/form-lead-internship"
+                        userDetails={{ firstName, lastName, email }}
                         onSessionStopped={async () => {
                             sessionEndedRef.current = true;
 

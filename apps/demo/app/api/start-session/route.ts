@@ -134,6 +134,10 @@ export async function POST(request: Request) {
         : null;
       insertData.user_email = email || null;
       insertData.language = resolvedLanguage;
+    } else if (tableName === "internship_chat_history") {
+      insertData.first_name = firstName || null;
+      insertData.last_name = lastName || null;
+      insertData.email = email || null;
     }
 
     await supabase.from(tableName).insert(insertData);

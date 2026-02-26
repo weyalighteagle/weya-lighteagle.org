@@ -79,6 +79,7 @@ export const LiveAvatarDemo = ({ persona }: Props) => {
           <LiveAvatarSession
             sessionAccessToken={sessionToken}
             session_id={sessionId}
+            userDetails={{ firstName, lastName, email }}
             onSessionStopped={async () => {
               sessionEndedRef.current = true;
 

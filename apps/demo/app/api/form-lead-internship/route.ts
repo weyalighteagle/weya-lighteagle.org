@@ -7,12 +7,15 @@ export async function POST(request: Request) {
     try {
         const body = await request.json();
 
+        console.log("[api/form-lead-internship] Received:", body);
+
         const { firstName, lastName, email, session_id } = body;
 
         // 🔒 Zorunlu alanlar (session_id opsiyonel)
         if (!firstName || !lastName || !email) {
+            console.error("[api/form-lead-internship] Missing fields:", { firstName, lastName, email });
             return NextResponse.json(
-                { error: "Missing required fields" },
+                { error: "Missing required fields", received: { firstName, lastName, email } },
                 { status: 400 }
             );
         }

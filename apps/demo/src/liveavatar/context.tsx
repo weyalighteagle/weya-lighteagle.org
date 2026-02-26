@@ -62,6 +62,7 @@ type LiveAvatarContextProviderProps = {
   sessionAccessToken: string;
   session_id?: string | null;
   saveMessageEndpoint?: string;
+  userDetails?: { firstName: string; lastName: string; email: string };
 };
 
 export const LiveAvatarContextProvider = ({
@@ -69,6 +70,7 @@ export const LiveAvatarContextProvider = ({
   sessionAccessToken,
   session_id,
   saveMessageEndpoint = "/api/save-message",
+  userDetails,
 }: LiveAvatarContextProviderProps) => {
   const config = {
     voiceChat: true,
@@ -204,16 +206,21 @@ export const LiveAvatarContextProvider = ({
 
       const apiSender = sender === MessageSender.USER ? "user" : "avatar";
 
-      let firstName, lastName, email;
-      try {
-        const raw = sessionStorage.getItem("form_lead");
-        if (raw) {
-          const parsed = JSON.parse(raw);
-          firstName = parsed.firstName;
-          lastName = parsed.lastName;
-          email = parsed.email;
+      const leadData = userDetails || (() => {
+        try {
+          const raw = sessionStorage.getItem("form_lead");
+          return raw ? JSON.parse(raw) : null;
+        } catch (e) {
+          return null;
         }
-      } catch (e) { }
+      })();
+
+      let firstName, lastName, email;
+      if (leadData) {
+        firstName = leadData.firstName;
+        lastName = leadData.lastName;
+        email = leadData.email;
+      }
 
       try {
         await fetch(saveMessageEndpoint, {
@@ -235,7 +242,7 @@ export const LiveAvatarContextProvider = ({
         console.error("Failed to save message:", err);
       }
     },
-    [sessionId, saveMessageEndpoint],
+    [sessionId, saveMessageEndpoint, userDetails],
   );
 
   // ----- auto transcript logging -----
